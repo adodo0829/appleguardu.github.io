@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python基础篇之循环判断 | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.条件判断Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础篇之循环判断">
+<meta property="og:url" content="http://yoursite.com/2018/07/20/python基础篇之循环判断/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="1.条件判断Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/V3zhCzN.jpg">
+<meta property="og:image" content="https://i.imgur.com/CPZaEmA.png">
+<meta property="og:image" content="https://i.imgur.com/Xd2JDRY.png">
+<meta property="og:updated_time" content="2018-07-21T14:47:54.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础篇之循环判断">
+<meta name="twitter:description" content="1.条件判断Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:">
+<meta name="twitter:image" content="https://i.imgur.com/V3zhCzN.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python基础篇之循环判断" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/20/python基础篇之循环判断/" class="article-date">
+  <time datetime="2018-07-20T08:35:25.000Z" itemprop="datePublished">2018-07-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python基础篇之循环判断
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-条件判断"><a href="#1-条件判断" class="headerlink" title="1.条件判断"></a>1.条件判断</h2><p>Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:<br><a id="more"></a><br><img src="https://i.imgur.com/V3zhCzN.jpg" alt=""><br>下面举个实例简要说一下其功能：<br>a = float(input(‘请输入成绩：’))<br>if a &gt;= 90:<br>print(‘等级为A’)<br>elif a &gt;=80:<br>print(‘等级为B’)<br>elif a &gt;= 70:<br>print(‘等级为C’)<br>else:<br>print(‘等级为D’)<br>注意：<br>1、每个条件后面要使用冒号 :，表示接下来是满足条件后要执行的语句块。2、使用缩进来划分语句块，相同缩进数的语句在一起组成一个语句块。<br>另外还要注意if的嵌套，if语句中在执行一次if，只有在满足第1个条件和第2个条件时才能执行2中的内容。<br><!-- more -->  </p>
+<h2 id="2-循环"><a href="#2-循环" class="headerlink" title="2.循环"></a>2.循环</h2><p>为了让计算机能计算成千上万次的重复运算，我们就需要循环语句。<br>Python的循环有两种，一种是for…in循环，第二种循环是while循环，只要条件满足，就不断循环，条件不满足时退出循环。<br>1.while循环<br>Python中while语句的一般形式：先判断条件是否满足，满足后就执行，插入一个实例<br><img src="https://i.imgur.com/CPZaEmA.png" alt=""><br>2.for循环<br>Python中 for循环可以遍历任何序列的项目，如一个列表或者一个字符串。<br><img src="https://i.imgur.com/Xd2JDRY.png" alt=""><br>3.break 和 continue<br>break用于结束整个循环; continue结束本次循环，紧接着继续下一循环,且只对最近的一层循环起作用。<br>另外，也需注意while和for循环的嵌套使用，上面第一个例子已有while的示范；for循环嵌套一般用于多重遍历，比如列表里嵌套其他序列，那么我用两重遍历即可取到内层值了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/20/python基础篇之循环判断/" data-id="cjjvj3fz10001csszcqks7lau" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/20/Python基础篇之数据类型/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python基础篇之数据类型</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/20/python基础篇之循环判断/">python基础篇之循环判断</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/20/Python基础篇之数据类型/">Python基础篇之数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
