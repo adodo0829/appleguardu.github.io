@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Python基础篇之函数,文件操作 | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础篇之函数,文件操作">
+<meta property="og:url" content="http://yoursite.com/2018/07/22/Python基础篇之函数,文件操作/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/fqu38vt.png">
+<meta property="og:image" content="https://i.imgur.com/soDny72.png">
+<meta property="og:image" content="https://i.imgur.com/YLjiiBr.png">
+<meta property="og:image" content="https://i.imgur.com/KAQbNEg.png">
+<meta property="og:image" content="https://i.imgur.com/FUdn5Xe.png">
+<meta property="og:image" content="https://i.imgur.com/TaFM81R.png">
+<meta property="og:image" content="https://i.imgur.com/DxtQgpV.png">
+<meta property="og:image" content="https://i.imgur.com/Ee6pDY7.png">
+<meta property="og:updated_time" content="2018-07-23T06:14:51.483Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础篇之函数,文件操作">
+<meta name="twitter:description" content="关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。">
+<meta name="twitter:image" content="https://i.imgur.com/fqu38vt.png">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Python基础篇之函数,文件操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/22/Python基础篇之函数,文件操作/" class="article-date">
+  <time datetime="2018-07-22T09:24:25.000Z" itemprop="datePublished">2018-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python基础篇之函数,文件操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。</strong>  </p>
+<a id="more"></a>
+<hr>
+<h2 id="函数的定义和调用"><a href="#函数的定义和调用" class="headerlink" title="函数的定义和调用"></a>函数的定义和调用</h2><p><strong>定义格式:</strong>  </p>
+<pre><code>def 函数名():
+    pass 
+</code></pre><p><img src="https://i.imgur.com/fqu38vt.png" alt=""><br><strong>调用函数</strong><br>定义了函数之后，就相当于有了一个具有某些功能的代码，想要让这些代码能够执行，需要调用它,调用函数很简单的，通过 函数名() 即可完成调用。<br>    <code>printinfo()</code>  # 完成调用  </p>
+<h2 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h2><p>有时候为了让一个函数更通用，假设想让它随便计算两个数的和，就让它计算哪两个数的和，在定义函数的时候可以让函数接收数据，就解决了这个问题，这就是 <strong>函数的参数</strong>。<br><img src="https://i.imgur.com/soDny72.png" alt=""><br>在调用时直接传入参数，<code>add2num(11,22)</code>,调用函数时参数的顺序需要注意，还有就是定义函数时小括号中的参数，是用来接收参数用的，称为 “形参”；调用时小括号中的参数，用来传递给函数用的，称为 “实参”。<br><strong>缺省参数</strong><br>调用函数时，缺省参数的值如果没有传入，则被认为是默认值。比如def printinfo( name, age = 35 ):如果age未传入，函数中代码会默认使用age=35这个值。注意：带有默认值的参数一定要位于参数列表的最后面。<br><strong>不定长参数</strong><br>有时可能需要一个函数能处理比当初声明时更多的参数。这些参数叫做不定长参数，声明时不会命名。<br><img src="https://i.imgur.com/YLjiiBr.png" alt=""><br>加了星号（*）的变量args会存放所有未命名的变量参数，args为元组；而加<strong>的变量kwargs会存放命名参数，即形如key=value的参数， kwargs为字典。  
+</strong>引用传参**<br>Python中函数参数是引用传递（注意不是值传递）。对于不可变类型，因变量不能修改，所以运算不会影响到变量自身而是生成一个新变量，指向一个新内存（new id）；而对于可变类型来说，函数体中的运算有可能会更改传入的参数变量，其内存地址不变，直接在自身值上做出改变。  </p>
+<h2 id="局部变量，全局变量"><a href="#局部变量，全局变量" class="headerlink" title="局部变量，全局变量"></a>局部变量，全局变量</h2><p>局部变量，就是在函数内部定义的变量不同的函数，可以定义相同的名字的局部变量，但是各用个的不会产生影响局部变量的作用，为了临时保存数据需要在函数中定义变量来进行存储，这就是它的作用。<br>如果一个变量，既能在一个函数中使用，也能在其他的函数中使用，这样的变量就是全局变量<br><img src="https://i.imgur.com/KAQbNEg.png" alt=""><br>在函数外边定义的变量叫做全局变量，全局变量能够在所有的函数中进行访问，如果在函数中修改全局变量，那么就需要使用global进行声明，否则出错，如果全局变量的名字和局部变量的名字相同，那么使用的是局部变量的。<br>另外，<br>在函数中不使用global声明全局变量时不能修改全局变量的本质是不能修改全局变量的指向，即不能将全局变量指向新的数据。<br>对于不可变类型的全局变量来说，因其指向的数据不能修改，所以不使用global时无法修改全局变量。<br>对于可变类型的全局变量来说，因其指向的数据可以修改，所以不使用global时也可修改全局变量。</p>
+<h2 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h2><p>所谓函数的“返回值”，就是程序中函数完成一件事情后，最后给调用者的结果。如果我们想要在函数中把结果返回给调用者，需要在函数中使用<strong>return</strong>。<br><img src="https://i.imgur.com/FUdn5Xe.png" alt=""><br>如果一个函数返回了一个数据，那么想要用这个数据，那么就需要保存，可以定义一个变量来保存，如<code>result = add2num(11, 22)</code>   </p>
+<h2 id="4种函数类型"><a href="#4种函数类型" class="headerlink" title="4种函数类型"></a>4种函数类型</h2><p>函数根据有没有参数，有没有返回值，可以相互组合，一共有4种：<br>1.无参数，无返回值的函数：此类函数，不能接收参数，也没有返回值，一般情况下，打印提示灯类似的功能，使用这类的函数。<br>2.无参数，有返回值的函数:此类函数，不能接收参数，但是可以返回某个数据，一般情况下，像采集数据，用此类函数<br>3.有参数，无返回值的函数:此类函数，能接收参数，但不可以返回数据，一般情况下，对某些变量设置数据而不需结果时，用此类函数<br>4.有参数，有返回值的函数:此类函数，不仅能接收参数，还可以返回某个数据，一般情况下，像数据处理并需要结果的应用，用此类函数  </p>
+<h2 id="函数的嵌套"><a href="#函数的嵌套" class="headerlink" title="函数的嵌套"></a>函数的嵌套</h2><p>一个函数里面又调用了另外一个函数，这就是所谓的函数嵌套调用。<br><img src="https://i.imgur.com/TaFM81R.png" alt=""><br>如果函数A中，调用了另外一个函数B，那么先把函数B中的任务都执行完毕之后才会回到上次 函数A执行的位置。<br><strong>递归函数</strong><br>如果一个函数在内部不调用其它的函数，而是自己本身的话，这个函数就是递归函数。<br> 举个例子，我们来计算阶乘 n! = 1 <em> 2 </em> 3 <em> … </em> n<br><img src="https://i.imgur.com/DxtQgpV.png" alt=""><br><strong>匿名函数</strong><br>用lambda关键词能创建小型匿名函数。这种函数得名于省略了用def声明函数的标准步骤。<br>lambda函数的语法只包含一个语句，如下：  </p>
+<blockquote>
+<pre><code>lambda [arg1 [,arg2,.....argn]]:expression  
+</code></pre></blockquote>
+<p>Lambda函数能接收任何数量的参数但只能返回一个表达式的值；匿名函数不能直接调用print，因为lambda需要一个表达式。<br>应用场景：函数作为参数传递 ，1.自己定义函数 2.作为内置函数的参数</p>
+<h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p><strong>使用文件的目的，就是把一些存储存放起来，可以让程序下一次执行的时候直接使用，而不必重新制作一份，省时省力。</strong><br><strong>1.打开文件</strong><br>在python，使用open函数，可以打开一个已经存在的文件，或者创建一个新文件  </p>
+<blockquote>
+<pre><code>open(&apos;文件名&apos;，&apos;访问模式&apos;)  
+f.open(&apos;test.txt&apos;, &apos;w&apos;) 
+</code></pre><p>访问模式:<br><img src="https://i.imgur.com/Ee6pDY7.png" alt="">  </p>
+</blockquote>
+<p><strong>2.关闭文件</strong>  </p>
+<blockquote>
+<pre><code>f.close()  
+</code></pre></blockquote>
+<p><strong>3.文件的读写</strong><br>写数据：write()  </p>
+<blockquote>
+<pre><code>f = open(&apos;test.txt&apos;, &apos;w&apos;)
+f.write(&apos;hello world, i am here!&apos;)
+f.close()  
+</code></pre><p>如果文件不存在那么创建，如果存在那么就先清空，然后写入数据.  </p>
+</blockquote>
+<p>读数据：read()<br>使用read(num)可以从文件中读取数据，num表示要从文件中读取的数据的长度（单位是字节），如果没有传入num，那么就表示读取文件中所有的数据。  </p>
+<p>读数据：readlines<br>就像read没有参数时一样，readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中每一行的数据为一个元素。 </p>
+<p><strong>4.文件的随机读写</strong><br>1.获取当前读写的位置，在读写文件的过程中，如果想知道当前的位置，可以使用tell()来获取。<br> 2.定位到某个位置，如果在读写文件的过程中，需要从另外一个位置进行操作的话，可以使用seek()； </p>
+<blockquote>
+<pre><code>seek(offset, from)  
+offset:偏移量
+from:方向
+0:表示文件开头
+1:表示当前位置
+2:表示文件末尾  
+</code></pre></blockquote>
+<p><strong>5.文件的重命名、删除</strong><br>有些时候，需要对文件进行重命名、删除等一些操作，python的os模块中都有这么功能<br>1.文件重命名  </p>
+<blockquote>
+<p>os模块中的rename()可以完成对文件的重命名操作,rename(原文件名, 新文件名)  </p>
+</blockquote>
+<p>2.删除文件  </p>
+<blockquote>
+<p>os模块中的remove()可以完成对文件的删除操作,remove(待删除的文件名)  </p>
+</blockquote>
+<p><strong>文件夹的相关操作</strong>  </p>
+<blockquote>
+<p>1.创建文件夹,   os.mkdir(‘文件夹名’)<br>2.获取当前目录, os.getcwd()<br>3.改变默认目录, os.chdir(“../“)<br>4.获取目录列表, os.listdir(“./“)<br>5.删除文件夹,   os.rmdir(“文件夹名”)  </p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/22/Python基础篇之函数,文件操作/" data-id="cjjxvyfsw0002jksz8rxl6seg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/20/python基础篇之循环判断/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python基础篇之循环判断</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/22/Python基础篇之函数,文件操作/">Python基础篇之函数,文件操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/20/python基础篇之循环判断/">python基础篇之循环判断</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/20/Python基础篇之数据类型/">Python基础篇之数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
