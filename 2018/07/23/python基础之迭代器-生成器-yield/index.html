@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python基础之迭代器,生成器,yield | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python基础之迭代器,生成器,yield">
+<meta property="og:url" content="http://yoursite.com/2018/07/23/python基础之迭代器-生成器-yield/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/Eph73gt.png">
+<meta property="og:image" content="https://i.imgur.com/AKQMlUN.png">
+<meta property="og:image" content="https://i.imgur.com/lH2UoAH.png">
+<meta property="og:image" content="https://i.imgur.com/HdJ6dVz.png">
+<meta property="og:image" content="https://i.imgur.com/YZYz2B8.png">
+<meta property="og:image" content="https://i.imgur.com/DnXjt9v.png">
+<meta property="og:image" content="https://i.imgur.com/S0qXyCM.png">
+<meta property="og:image" content="https://i.imgur.com/OeTnsTo.png">
+<meta property="og:image" content="https://i.imgur.com/xYXE8HK.png">
+<meta property="og:image" content="https://i.imgur.com/jt4QKvJ.png">
+<meta property="og:image" content="https://i.imgur.com/YlrS6Jl.png">
+<meta property="og:updated_time" content="2018-07-23T15:53:59.599Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python基础之迭代器,生成器,yield">
+<meta name="twitter:description" content="迭代器迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。">
+<meta name="twitter:image" content="https://i.imgur.com/Eph73gt.png">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python基础之迭代器-生成器-yield" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/23/python基础之迭代器-生成器-yield/" class="article-date">
+  <time datetime="2018-07-23T11:33:35.000Z" itemprop="datePublished">2018-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python基础之迭代器,生成器,yield
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。<br><a id="more"></a><br><strong>1.可迭代对象</strong><br>以直接作用于for循环的数据类型有以下几种：<br>一类是集合数据类型，如    list、tuple    、dict、    set    、str等；<br>另一类是    generator，包括生成器和带    yield的generator     function。<br>这些可以直接作用于for    循环的对象统称为可迭代对象：Iterable。<br><strong>2.迭代器方法</strong><br>迭代器有两个基本的方法：<strong>iter()</strong> 和<strong>next()</strong>。字符串，列表或元组对象都可用于创建迭代器。  </p>
+<p><img src="https://i.imgur.com/Eph73gt.png" alt="">  </p>
+<p>当然，也可以直接用for循环进行遍历，如下：  </p>
+<p><img src="https://i.imgur.com/AKQMlUN.png" alt="">  </p>
+<p>也可以使用next()方法：  </p>
+<p><img src="https://i.imgur.com/lH2UoAH.png" alt=""></p>
+<h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p><strong>什么是生成器</strong><br>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素 占用的空间都白白浪费了。所以，如果列表元素可以按照某种算法推算出 来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器generator。生成器是一个简单的方式来完成迭代，简单来说，Python的生成器是一个返回可以迭代对象的函数，可以理解为生成器本身也是一个迭代器。<br><strong>创建生成器</strong>  </p>
+<ul>
+<li><strong>1.生成器表达式</strong><br>类似于列表推导，但，生成器返回按需生产结果的一个对象，而不是一次构建一个结果列表。  </li>
+</ul>
+<p><img src="https://i.imgur.com/HdJ6dVz.png" alt="">  </p>
+<p><strong>2.生成器函数</strong><br>在Python中，使用了yield的函数就称为生成器。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，可以理解为：生成器就是一个迭代值。并在下一次执行next方法时，从当前位置继续运行。  </p>
+<p><img src="https://i.imgur.com/YZYz2B8.png" alt=""><br>结论：<br>1、对于生成器，当调用函数next(generator)时，将获得生成器yield后面表达式的值；<br>2、当生成器已经执行完毕时，再次调用next函数，生成器会抛出StopIteration异常。<br>扩展：<br>1、当生成器内部执行到return语句时，自动抛出StopIteration异常，return的值将作为异常的解释；<br>2、外部可以通过generator.close()函数手动关闭生成器，此后调用next或者send方法将抛出异常</p>
+<p><strong>3.生成器的next和send函数</strong><br>next函数与send函数很相似，都能获得生成器的下一个yield后面表达式的值，不同的是send函数可以向生成器传参：  </p>
+<p><img src="https://i.imgur.com/DnXjt9v.png" alt=""><br>输出结果：  </p>
+<p><img src="https://i.imgur.com/S0qXyCM.png" alt=""><br>程序首先调用next函数，使得生成器执行到第4行的时候，把i的值0作为next函数的返回值返回，程序输出main:0，然后生成器暂停。程序往下调用send(777)函数，<br>生成器从第四行继续执行，send函数的参数777作为yield的返回值，并赋值给msg，然后得到gen:777的输出。<br><strong>简单的说，send函数使得yield关键字拥有了返回值返回给它的左值。</strong></p>
+<p>注意：  </p>
+<p><img src="https://i.imgur.com/OeTnsTo.png" alt=""><br>输出结果：  </p>
+<p><img src="https://i.imgur.com/xYXE8HK.png" alt=""><br>程序报错：<strong>不能将一个非None的值传给初始的生成器</strong>。<br>从上面的测试，我们知道，当调用send函数前，生成器内部应该执行到yield所在的语句并暂停。而在这次的测试中，我们从一开始就调用send并传了一个参数，<br>程序报错误。<br>因此，在调用带非空参数的send函数之前，我们应该使用next(generator)或者send(None)使得生成器执行到yield语句并暂停。  </p>
+<p><img src="https://i.imgur.com/jt4QKvJ.png" alt=""><br>输出结果：  </p>
+<p><img src="https://i.imgur.com/YlrS6Jl.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/23/python基础之迭代器-生成器-yield/" data-id="cjjygbq6w0000qwszdkanz3rr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/22/Python基础篇之函数,文件操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python基础篇之函数,文件操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/23/python基础之迭代器-生成器-yield/">python基础之迭代器,生成器,yield</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/22/Python基础篇之函数,文件操作/">Python基础篇之函数,文件操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/21/python基础篇之循环判断/">python基础篇之循环判断</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/20/Python基础篇之数据类型/">Python基础篇之数据类型</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
