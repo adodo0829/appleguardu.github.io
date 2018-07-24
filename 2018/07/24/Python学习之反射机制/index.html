@@ -5,15 +5,23 @@
   
 
   
-  <title>Archives: 2018 | AppleGuardの博客</title>
+  <title>Python学习之反射机制 | AppleGuardの博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="AppleGuardの博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="Python反射机制程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。">
+<meta name="keywords" content="python,reflex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习之反射机制">
+<meta property="og:url" content="http://yoursite.com/2018/07/24/Python学习之反射机制/index.html">
 <meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="Python反射机制程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/MMPbrYr.png">
+<meta property="og:image" content="https://i.imgur.com/ZKFQvtf.png">
+<meta property="og:updated_time" content="2018-07-24T02:44:41.243Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AppleGuardの博客">
+<meta name="twitter:title" content="Python学习之反射机制">
+<meta name="twitter:description" content="Python反射机制程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。">
+<meta name="twitter:image" content="https://i.imgur.com/MMPbrYr.png">
   
     <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
   
@@ -60,116 +68,56 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/24/Python学习之反射机制/" class="archive-article-date">
-  <time datetime="2018-07-24T02:22:11.000Z" itemprop="datePublished">Jul 24</time>
+        <section id="main"><article id="post-Python学习之反射机制" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/24/Python学习之反射机制/" class="article-date">
+  <time datetime="2018-07-24T02:22:11.000Z" itemprop="datePublished">2018-07-24</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/24/Python学习之反射机制/">Python学习之反射机制</a>
+    <h1 class="article-title" itemprop="name">
+      Python学习之反射机制
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/23/python学习之迭代器-生成器-yield/" class="archive-article-date">
-  <time datetime="2018-07-23T11:33:35.000Z" itemprop="datePublished">Jul 23</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/23/python学习之迭代器-生成器-yield/">python学习之迭代器,生成器,yield</a>
-    </h1>
-  
+        <h2 id="Python反射机制"><a href="#Python反射机制" class="headerlink" title="Python反射机制"></a>Python反射机制</h2><p>程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。<br><a id="more"></a><br><strong>hasattr和getattr</strong><br>-<br><img src="https://i.imgur.com/MMPbrYr.png" alt="">  </p>
+<p><strong>setattr和delattr</strong><br>-<br><img src="https://i.imgur.com/ZKFQvtf.png" alt=""></p>
+<p><strong>总结：</strong>反射就是通过字符串的形式，导入对象（或者模块，这里未提到）；通过字符串的形式，去对象中寻找指定函数，并执行。利用字符串的形式去对象（模块）中操作（查找/获取/删除/添加）成员，一种基于字符串的事件驱动。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/22/Python学习之函数,文件操作/" class="archive-article-date">
-  <time datetime="2018-07-22T09:24:25.000Z" itemprop="datePublished">Jul 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/22/Python学习之函数,文件操作/">Python学习之函数,文件操作</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/21/python学习之循环判断/" class="archive-article-date">
-  <time datetime="2018-07-21T08:35:25.000Z" itemprop="datePublished">Jul 21</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/24/Python学习之反射机制/" data-id="cjjz3le4z000064szf71jbc63" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/21/python学习之循环判断/">python学习之循环判断</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/07/20/Python学习之数据类型/" class="archive-article-date">
-  <time datetime="2018-07-20T00:35:25.000Z" itemprop="datePublished">Jul 20</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/20/Python学习之数据类型/">Python学习之数据类型</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-reflex/">python,reflex</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2018/07/23/python学习之迭代器-生成器-yield/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python学习之迭代器,生成器,yield</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
