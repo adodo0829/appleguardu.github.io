@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python面向对象编程(一) | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python面向对象编程(一)">
+<meta property="og:url" content="http://yoursite.com/2018/07/26/python面向对象编程-一/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/d9uD0U9.png">
+<meta property="og:image" content="https://i.imgur.com/R4sOguL.png">
+<meta property="og:image" content="https://i.imgur.com/QPk53yY.png">
+<meta property="og:image" content="https://i.imgur.com/oMjLutm.png">
+<meta property="og:image" content="https://i.imgur.com/my3bgJQ.png">
+<meta property="og:image" content="https://i.imgur.com/Fj6R7Pi.png">
+<meta property="og:updated_time" content="2018-07-26T02:50:15.463Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python面向对象编程(一)">
+<meta name="twitter:description" content="面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。">
+<meta name="twitter:image" content="https://i.imgur.com/d9uD0U9.png">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python面向对象编程-一" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/26/python面向对象编程-一/" class="article-date">
+  <time datetime="2018-07-26T01:48:45.000Z" itemprop="datePublished">2018-07-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python面向对象编程(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。<br><a id="more"></a><br>面向对象编程(Object Oriented Programming-OOP) 是一种解决软件复用的设计和编程方法。 这种方法把软件系统中相近相似的操作逻辑和操作 应用数据、状态,以类的型式描述出来,以对象实例的形式在软件系统中复用,以达到提高软件开发效率的作用。</p>
+<p>##类和对象<br><strong>类</strong><br>类是具有相似内部状态和运动规律的实体的集合(或统称为抽象)；具有相同属性和行为事物的统称。类是抽象的,在使用的时候通常会找到这个类的一个具体的存在,使用这个具体的存在。类的抽象：拥有相同(或者类似)属性和行为的对象都可以抽像出一个类，方法:一般名词都是类(名词提炼法)  </p>
+<p><strong>对象</strong><br>一个类可以找到多个对象，某一个具体事物的存在 ,在现实世界中可以是看得见摸得着的，可以是直接使用的。  </p>
+<p><strong>类的构成</strong></p>
+<blockquote>
+<p>类的名称:类名<br>类的属性:一组数据<br>类的方法:允许对进行操作的方法 (行为)  </p>
+</blockquote>
+<p>举个例子：一个人的类的设计:  </p>
+<blockquote>
+<p>事物名称(类名):人(Person)<br>属性:身高(height)、年龄(age)<br>方法(行为/功能):跑(run)、打架(fight)  </p>
+</blockquote>
+<p><strong>定义一个类</strong><br><img src="https://i.imgur.com/d9uD0U9.png" alt=""><br><strong>创建对象</strong><br><img src="https://i.imgur.com/R4sOguL.png" alt="">  </p>
+<p><strong>类的<strong>init</strong>()方法</strong><br><em>在上面的demo中，我们已经给bm这个对象添加了2个属性，wheel（车的轮胎数量）<br>以及color（车的颜色），试想如果再次创建一个对象的话，肯定也需要进行添加属性，显然这样做很费事，那么有没有办法能够在创建对象的时候，就顺便把车这个对象的属性给设置呢？ 这里就用到了<strong>init</strong>()方法。</em><br><img src="https://i.imgur.com/QPk53yY.png" alt="">  </p>
+<p>既然在创建完对象后<strong>init</strong>()方法已经被默认的执行了，那么能否让对象在调用<strong>init</strong>()方法的时候传递一些参数呢？<br><img src="https://i.imgur.com/oMjLutm.png" alt=""><br><strong>魔法方法</strong><br><img src="https://i.imgur.com/my3bgJQ.png" alt="">  </p>
+<h2 id="关于对类方法中self的理解"><a href="#关于对类方法中self的理解" class="headerlink" title="关于对类方法中self的理解"></a>关于对类方法中self的理解</h2><p>这里我们用一个例子来说明：<br><img src="https://i.imgur.com/Fj6R7Pi.png" alt=""><br>从上面看，两者返回结果都一样，所谓的self，可以理解为对象自己；<br>可以把self当做C++中类里面的this指针一样理解，就是对象自身的意思；<br>某个对象调用其方法时，python解释器会把这个对象作为第一个参数传递给self，所以我们只需要传递后面的参数即可 。  </p>
+<h2 id="多个类之间对象和属性之间的关系"><a href="#多个类之间对象和属性之间的关系" class="headerlink" title="多个类之间对象和属性之间的关系"></a>多个类之间对象和属性之间的关系</h2><p>在程序设计时，我们经常会遇到对象与对象之间相关关联，如果一个类创建一个对象要要引用另一个类中的对象的方法或者属性，那怎么办呢？<br>这里我们得到思路是：在这个对象的类中创建一个属性来解释（或者说指向）另一个对象的引用。下面附上一个我做的小例子，可以帮助理解。<br>当然代码有点长，我这里传一个代码链接：<a href="https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py" title="对象，属性相互关系理解" target="_blank" rel="noopener">https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py</a>    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/26/python面向对象编程-一/" data-id="cjk1za1dn0001kwszp3wka5gn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/24/Python学习之反射机制/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python学习之反射机制</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-data-type/">python,data-type</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-function-file/">python,function,file</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-reflex/">python,reflex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python，yeild-generator/">python，yeild,generator</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python-data-type/" style="font-size: 10px;">python,data-type</a> <a href="/tags/python-function-file/" style="font-size: 10px;">python,function,file</a> <a href="/tags/python-reflex/" style="font-size: 10px;">python,reflex</a> <a href="/tags/python，yeild-generator/" style="font-size: 10px;">python，yeild,generator</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/26/python面向对象编程-一/">python面向对象编程(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/Python学习之反射机制/">Python学习之反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/python学习之迭代器-生成器-yield/">python学习之迭代器,生成器,yield</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/22/Python学习之函数,文件操作/">Python学习之函数,文件操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/21/python学习之循环判断/">python学习之循环判断</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
