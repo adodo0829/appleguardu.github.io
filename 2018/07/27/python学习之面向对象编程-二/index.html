@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python学习之面向对象编程(二) | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习之面向对象编程(二)">
+<meta property="og:url" content="http://yoursite.com/2018/07/27/python学习之面向对象编程-二/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/F3nOc2b.png">
+<meta property="og:image" content="https://i.imgur.com/L8TYDRc.png">
+<meta property="og:image" content="https://i.imgur.com/gI7JiQX.png">
+<meta property="og:image" content="https://i.imgur.com/mPciqJL.png">
+<meta property="og:image" content="https://i.imgur.com/RBriyjs.png">
+<meta property="og:image" content="https://i.imgur.com/Xw9MLTJ.png">
+<meta property="og:image" content="https://i.imgur.com/iTt0LQk.png">
+<meta property="og:image" content="https://i.imgur.com/W0RWIqh.png">
+<meta property="og:image" content="https://i.imgur.com/Ygzz01F.png">
+<meta property="og:image" content="https://i.imgur.com/K21MFnk.png">
+<meta property="og:image" content="https://i.imgur.com/QZUKqJI.png">
+<meta property="og:image" content="https://i.imgur.com/amNxUrW.png">
+<meta property="og:image" content="https://i.imgur.com/dFRTemk.png">
+<meta property="og:image" content="https://i.imgur.com/JP1AbmL.png">
+<meta property="og:image" content="https://i.imgur.com/e01NDfA.png">
+<meta property="og:image" content="https://i.imgur.com/O1VyssQ.png">
+<meta property="og:image" content="https://i.imgur.com/wIFNO2L.png">
+<meta property="og:image" content="https://i.imgur.com/EvHjNW3.png">
+<meta property="og:updated_time" content="2018-07-27T16:24:07.503Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python学习之面向对象编程(二)">
+<meta name="twitter:description" content="因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。">
+<meta name="twitter:image" content="https://i.imgur.com/F3nOc2b.png">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python学习之面向对象编程-二" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/27/python学习之面向对象编程-二/" class="article-date">
+  <time datetime="2018-07-27T14:48:24.000Z" itemprop="datePublished">2018-07-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python学习之面向对象编程(二)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。<br><a id="more"></a>  </p>
+<h2 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h2><p><img src="https://i.imgur.com/F3nOc2b.png" alt=""><br>Python中没有像C++中public和private这些关键字来区别公有属性和私有属性<br>它是以属性命名方式来区分，如果在属性名前面加了2个下划线’__’，则表明该属性是私有属性，否则为公有属性（方法也是一样，<br>方法名前面加了2个下划线的话表示该方法是私有的，否则为公有的）。  </p>
+<h2 id="类的del方法"><a href="#类的del方法" class="headerlink" title="类的del方法"></a>类的del方法</h2><p><img src="https://i.imgur.com/L8TYDRc.png" alt=""><br>注意：<br>当有1个变量保存了对象的引用时，此对象的引用计数就会加1<br>当使用del删除变量指向的对象时，如果对象的引用计数不是1，比如3（比如上述例子中，<code>dog1 = dog; dog2 = dog</code>, 引用两次），那么此时只会让这个引用计数减1，即变为2，<br>当再次调用del时，变为1，如果再调用1次del，此时会真的把对象进行删除。  </p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>在程序中，继承描述的是事物之间的所属关系，例如猫和狗都属于动物，程序中便可以描述为猫和狗继承自动物。<br><img src="https://i.imgur.com/gI7JiQX.png" alt=""><br>虽然子类没有定义<strong>init</strong>方法，但是父类有，所以在子类继承父类的时候这个方法就被继承了，<br>所以只要创建Bosi的对象，就默认执行了那个继承过来的<strong>init</strong>方法。  </p>
+<p><strong>继承中的私有属性和私有方法</strong><br><img src="https://i.imgur.com/mPciqJL.png" alt=""><br>私有的属性，不能通过对象直接访问，但是可以通过方法访问<br>私有的方法，不能通过对象直接访问<br>私有的属性、方法，不会被子类继承，也不能被访问<br>一般情况下，私有的属性、方法都是不对外公布的，往往用来做内部的事情，起到安全的作用。  </p>
+<h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><p>所谓多继承，即子类有多个父类，并且具有它们的特征。<br><img src="https://i.imgur.com/RBriyjs.png" alt=""><br>思考：如果在上面的多继承例子中，如果父类A和父类B中，有一个同名的方法，那么通过子类去调用的时候，调用哪个？<br><img src="https://i.imgur.com/Xw9MLTJ.png" alt=""><br>从上面例子的返回结果可以看出，子类先从自己的类中开始找，紧接着按照父类的继承顺序开始找，最后则是在最开始的超(基)类中找。  </p>
+<h2 id="重写父类方法"><a href="#重写父类方法" class="headerlink" title="重写父类方法"></a>重写父类方法</h2><p>所谓重写，就是子类中，有一个和父类相同名字的方法，在子类中的方法会覆盖掉父类中同名的方法。<br><img src="https://i.imgur.com/iTt0LQk.png" alt="">  </p>
+<h2 id="调用父类的方法"><a href="#调用父类的方法" class="headerlink" title="调用父类的方法"></a>调用父类的方法</h2><p>子类的方法要显示调用父类的方法,不调用系统不会默认调用。<br>调用方法有3种：<br><img src="https://i.imgur.com/W0RWIqh.png" alt=""><br>a方法是传统的调用方法, b是改进后的方法. 区别是: 当基类的名字有改变时, a方法子类的中的相应代码也要改. b就不用改了, 所以b方法要好一些,方便代码的维护。下面是实例：<br><img src="https://i.imgur.com/Ygzz01F.png" alt="">  </p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><strong>所谓多态：定义时的类型和运行时的类型不一样，此时就成为多态</strong>；这里可能说的有点抽象，下面我们通过实例来解释。<br>要理解什么是多态，我们首先要对数据类型再作一点说明。当我们定义一个class的时候，我们实际上就定义了一种数据类型。(这里是参考了廖雪峰的教程对多态的理解)<br>我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样。<br><img src="https://i.imgur.com/K21MFnk.png" alt="">  </p>
+<blockquote>
+<p>a = list()       # a是list类型<br>b = Animal()     # b是Animal类型<br>c = Dog()        # c是Dog类型<br>判断一个变量是否是某个类型isinstance()判断：  </p>
+</blockquote>
+<p>看一下返回结果：  </p>
+<blockquote>
+<p>isinstance(a, list)<br>True<br>isinstance(b, Animal)<br>True<br>isinstance(c, Dog)<br>True  </p>
+</blockquote>
+<p>a、b、c确实对应着list、Animal、Dog这3种类型,我们再来看一下C：  </p>
+<blockquote>
+<p>isinstance(c, Animal)<br>True  </p>
+</blockquote>
+<p>c不仅仅是Dog，c还是Animal！因为Dog是从Animal继承下来的，当我们创建了一个Dog的实例c时，我们认为c的数据类型是Dog没错，但c同时也是Animal也没错，Dog本来就是Animal的一种！在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。但是，反过来就不行。<br>要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个Animal类型的变量：<br><img src="https://i.imgur.com/QZUKqJI.png" alt=""><br>你会发现，新增一个Animal的子类，不必对run_twice()做任何修改，实际上，任何依赖Animal作为参数的函数或者方法都可以不加修改地正常运行，原因就在于多态。<br>多态的好处就是，当我们需要传入Dog、Cat、Tortoise……时，我们只需要接收Animal类型就可以了，因为Dog、Cat、Tortoise……都是Animal类型，然后，按照Animal类型进行操作即可。由于Animal类型有run()方法，因此，传入的任意类型，只要是Animal类或者子类，就会自动调用实际类型的run()方法，这就是多态的意思：对于一个变量，我们只需要知道它是Animal类型，无需确切地知道它的子类型，就可以放心地调用run()方法，而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种Animal的子类时，只要确保run()方法编写正确，不用管原来的代码是如何调用的。这就是著名的“开闭”原则：<br>对扩展开放：允许新增Animal子类；<br>对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。<br>小结：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写；<br>有了继承，才能有多态。在调用类实例方法的时候，尽量把变量视作父类类型，这样，所有子类类型都可以正常被接收。</p>
+<h2 id="类属性、实例属性"><a href="#类属性、实例属性" class="headerlink" title="类属性、实例属性"></a>类属性、实例属性</h2><p><img src="https://i.imgur.com/amNxUrW.png" alt=""><br><strong>通过实例(对象)去修改类属性</strong><br><img src="https://i.imgur.com/dFRTemk.png" alt=""><br>如果需要在类外修改类属性，必须通过类对象去引用然后进行修改。如果通过实例对象去引用，<br>会产生一个同名的实例属性，这种方式修改的是实例属性，不会影响到类属性，并且之后如果<br>通过实例对象去引用该名称的属性，实例属性会强制屏蔽掉类属性，即引用的是实例属性，除非<br>删除了该实例属性。  </p>
+<h2 id="静态方法和类方法"><a href="#静态方法和类方法" class="headerlink" title="静态方法和类方法"></a>静态方法和类方法</h2><p>类方法:是类对象所拥有的方法，需要用修饰器@classmethod来标识其为类方法，对于类方法，第一个参数必须是类对象，一般以cls作为第一个参数。<br><img src="https://i.imgur.com/JP1AbmL.png" alt=""><br>结果显示在用类方法对类属性修改之后，通过类对象和实例对象访问都发生了改变。  </p>
+<p>静态方法:需要通过修饰器@staticmethod来进行修饰，静态方法不需要多定义参数<br><img src="https://i.imgur.com/e01NDfA.png" alt=""><br>从类方法和实例方法以及静态方法的定义形式就可以看出来，类方法的第一个参数是类对象cls，<br>那么通过cls引用的必定是类对象的属性和方法；而实例方法的第一个参数是实例对象self，<br>那么通过self引用的可能是类属性、也有可能是实例属性（这个需要具体分析），不过在存在<br>相同名称的类属性和实例属性的情况下，实例属性优先级更高。静态方法中不需要额外定义参数，<br>因此在静态方法中引用类属性的话，必须通过类对象来引用。  </p>
+<h2 id="init方法和new方法"><a href="#init方法和new方法" class="headerlink" title="init方法和new方法"></a>init方法和new方法</h2><p><img src="https://i.imgur.com/O1VyssQ.png" alt=""></p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><img src="https://i.imgur.com/wIFNO2L.png" alt=""><br><img src="https://i.imgur.com/EvHjNW3.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/27/python学习之面向对象编程-二/" data-id="cjk475wgn0005j4szxu7fzpha" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/26/python面向对象编程-一/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python面向对象编程(一)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-data-type/">python,data-type</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-function-file/">python,function,file</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-reflex/">python,reflex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python，yeild-generator/">python，yeild,generator</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python-data-type/" style="font-size: 10px;">python,data-type</a> <a href="/tags/python-function-file/" style="font-size: 10px;">python,function,file</a> <a href="/tags/python-reflex/" style="font-size: 10px;">python,reflex</a> <a href="/tags/python，yeild-generator/" style="font-size: 10px;">python，yeild,generator</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/27/python学习之面向对象编程-二/">python学习之面向对象编程(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/26/python面向对象编程-一/">python面向对象编程(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/Python学习之反射机制/">Python学习之反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/python学习之迭代器-生成器-yield/">python学习之迭代器,生成器,yield</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/22/Python学习之函数,文件操作/">Python学习之函数,文件操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
