@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>python异常处理和模块 | AppleGuardの博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python异常处理和模块">
+<meta property="og:url" content="http://yoursite.com/2018/07/29/python异常处理和模块/index.html">
+<meta property="og:site_name" content="AppleGuardの博客">
+<meta property="og:description" content="当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/XHWgQn7.png">
+<meta property="og:image" content="https://i.imgur.com/AvFiEJ0.png">
+<meta property="og:image" content="https://i.imgur.com/sUwe9nT.png">
+<meta property="og:image" content="https://i.imgur.com/ZRF87UA.png">
+<meta property="og:image" content="https://i.imgur.com/sg7rRPB.png">
+<meta property="og:image" content="https://i.imgur.com/CClp1gc.png">
+<meta property="og:image" content="https://i.imgur.com/LUkdMYE.png">
+<meta property="og:image" content="https://i.imgur.com/B0DWaaV.png">
+<meta property="og:image" content="https://i.imgur.com/StrmQ2a.png">
+<meta property="og:image" content="https://i.imgur.com/ff6EHAB.png">
+<meta property="og:updated_time" content="2018-07-29T09:36:36.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python异常处理和模块">
+<meta name="twitter:description" content="当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。">
+<meta name="twitter:image" content="https://i.imgur.com/XHWgQn7.png">
+  
+    <link rel="alternate" href="/atom.xml" title="AppleGuardの博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">AppleGuardの博客</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python异常处理和模块" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/29/python异常处理和模块/" class="article-date">
+  <time datetime="2018-07-29T07:35:50.000Z" itemprop="datePublished">2018-07-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python异常处理和模块
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。<br><a id="more"></a></p>
+<h2 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h2><p>通常我们使用try…except语句来进行异常捕捉<br><img src="https://i.imgur.com/XHWgQn7.png" alt=""></p>
+<h2 id="捕捉多个异常"><a href="#捕捉多个异常" class="headerlink" title="捕捉多个异常"></a>捕捉多个异常</h2><p>当捕获多个异常时，可以把要捕获的异常的名字，放到except 后，并使用元组的方式仅进行存储。<br><img src="https://i.imgur.com/AvFiEJ0.png" alt=""><br><strong>as</strong><br>我们可以用as来定义一个变量名，存储异常信息<br><img src="https://i.imgur.com/sUwe9nT.png" alt=""></p>
+<h2 id="捕获所有异常"><a href="#捕获所有异常" class="headerlink" title="捕获所有异常"></a>捕获所有异常</h2><p>使用Exception。<br><img src="https://i.imgur.com/ZRF87UA.png" alt=""></p>
+<h2 id="else子句"><a href="#else子句" class="headerlink" title="else子句"></a>else子句</h2><p>try except 语句还有一个可选的else子句，如果使用这个子句，那么必须放在所有的except子句之后。这个子句将在try子句没有发生任何异常的时候执行。<br><img src="https://i.imgur.com/sg7rRPB.png" alt=""></p>
+<h2 id="try…finally"><a href="#try…finally" class="headerlink" title="try…finally"></a>try…finally</h2><p>try 语句还有另外一个可选的子句，它定义了无论在任何情况下都会执行的清理行为。<br><img src="https://i.imgur.com/CClp1gc.png" alt=""><br>在程序中，如果一个段代码必须要执行，即无论异常是否产生都要执行，那么此时就需要使用finally。<br>比如文件关闭，释放锁，把数据库连接返还给连接池等</p>
+<h2 id="抛出自定义的异常"><a href="#抛出自定义的异常" class="headerlink" title="抛出自定义的异常"></a>抛出自定义的异常</h2><p>你可以用raise语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是Error或Exception类的子类。<br><img src="https://i.imgur.com/LUkdMYE.png" alt=""><br>以上程序中，关于代码#super().<strong>init</strong>()的说明<br>这一行代码，可以调用也可以不调用，建议调用，因为<strong>init</strong>方法往往是用来对创建完的对象进行初始化工作，<br>如果在子类中重写了父类的<strong>init</strong>方法，即意味着父类中的很多初始化工作没有做，这样就不保证程序的稳定了，<br>所以在以后的开发中，如果重写了父类的<strong>init</strong>方法，最好是先调用父类的这个方法，然后再添加自己的功能。</p>
+<h2 id="异常处理中抛出异常"><a href="#异常处理中抛出异常" class="headerlink" title="异常处理中抛出异常"></a>异常处理中抛出异常</h2><p><img src="https://i.imgur.com/B0DWaaV.png" alt=""></p>
+<h2 id="python中的模块"><a href="#python中的模块" class="headerlink" title="python中的模块"></a>python中的模块</h2><p>在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用sqrt函数，<br>必须用import关键字引入math这个模块，下面就来了解一下Python中的模块。<br>说的通俗点：模块就好比是工具包，要想使用这个工具包中的工具(就好比函数)，就需要导入这个模块。  </p>
+<h2 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h2><p>Python中用关键字import来引入某个模块，比如要引用模块math，就可以在文件最开始的地方用import math来引入。<br>当解释器遇到import语句，如果模块在当前的搜索路径就会被导入。<br>在调用math模块中的函数时，必须这样引用：<br>模块名.函数名  比如：<code>import math.sqrt</code></p>
+<h2 id="from…-import语句"><a href="#from…-import语句" class="headerlink" title="from… import语句"></a>from… import语句</h2><p>有时候我们只需要用到模块中的某个函数，只需要引入该函数即可，此时可以用下面方法实现：<br><strong>from 模块名 import 函数名1,函数名2….</strong><br>不仅可以引入函数，还可以引入一些全局变量、类等。</p>
+<h2 id="from…import"><a href="#from…import" class="headerlink" title="from…import *"></a>from…import *</h2><p>把一个模块的所有内容全都导入到当前的命名空间也是可行的，只需使用如下声明：<br>from modname import *<br>这提供了一个简单的方法来导入一个模块中的所有项目，然而这种声明不该被过多地使用。  </p>
+<h2 id="name-属性"><a href="#name-属性" class="headerlink" title="__name__属性"></a>__name__属性</h2><p>一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用__name__属性来使该程序块仅在该模块自身运行时执行。<br><img src="https://i.imgur.com/StrmQ2a.png" alt=""><br>说明： 每个模块都有一个__name__属性，当其值是’__main__’时，表明该模块自身在运行，否则是被引入。  </p>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>包是一种管理 Python 模块命名空间的形式，采用”点模块名称”。</p>
+<p>比如一个模块的名称是 A.B， 那么他表示一个包 A中的子模块 B 。</p>
+<p>就好像使用模块的时候，你不用担心不同模块之间的全局变量相互影响一样，采用点模块名称这种形式也不用担心不同库之间的模块重名的情况。</p>
+<p>这样不同的作者都可以提供 NumPy 模块，或者是 Python 图形库。</p>
+<p>不妨假设你想设计一套统一处理声音文件和数据的模块（或者称之为一个”包”）。</p>
+<p>现存很多种不同的音频文件格式（基本上都是通过后缀名区分的，例如： .wav，:file:.aiff，:file:.au，），所以你需要有一组不断增加的模块，用来在不同的格式之间转换。</p>
+<p>并且针对这些音频数据，还有很多不同的操作（比如混音，添加回声，增加均衡器功能，创建人造立体声效果），所以你还需要一组怎么也写不完的模块来处理这些操作。</p>
+<p>这里给出了一种可能的包结构（在分层的文件系统中）:<br><img src="https://i.imgur.com/ff6EHAB.png" alt=""><br>在导入一个包的时候，Python 会根据 sys.path 中的目录来寻找这个包中包含的子目录。</p>
+<p>目录只有包含一个叫做 __init__.py 的文件才会被认作是一个包，主要是为了避免一些滥俗的名字（比如叫做 string）不小心的影响搜索路径中的有效模块。</p>
+<p>最简单的情况，放一个空的 :file:__init__.py就可以了。当然这个文件中也可以包含一些初始化代码或者为（将在后面介绍的） __all__变量赋值。</p>
+<p>用户可以每次只导入一个包里面的特定模块，比如:</p>
+<pre><code>import sound.effects.echo
+</code></pre><p>这将会导入子模块:sound.effects.echo。 他必须使用全名去访问:</p>
+<pre><code>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)
+</code></pre><p>还有一种导入子模块的方法是:</p>
+<pre><code>from sound.effects import echo
+</code></pre><p>这同样会导入子模块: echo，并且他不需要那些冗长的前缀，所以他可以这样使用:</p>
+<pre><code>echo.echofilter(input, output, delay=0.7, atten=4)
+</code></pre><p>还有一种变化就是直接导入一个函数或者变量:</p>
+<pre><code>from sound.effects.echo import echofilter
+</code></pre><p>同样的，这种方法会导入子模块: echo，并且可以直接使用他的 echofilter() 函数:</p>
+<pre><code>echofilter(input, output, delay=0.7, atten=4)
+</code></pre><p>注意当使用from package import item这种形式的时候，对应的item既可以是包里面的子模块（子包），或者包里面定义的其他名称，比如函数，类或者变量。</p>
+<p>import语法会首先把item当作一个包定义的名称，如果没找到，再试图按照一个模块去导入。如果还没找到，恭喜，一个:exc:ImportError 异常被抛出了。</p>
+<p>反之，如果使用形如<code>import item.subitem.subsubitem</code>这种导入形式，除了最后一项，都必须是包，而最后一项则可以是模块或者是包，但是不可以是类，函数或者变量的名字。  </p>
+<h2 id="从一个包中导入"><a href="#从一个包中导入" class="headerlink" title="从一个包中导入*,"></a>从一个包中导入*,</h2><p>设想一下，如果我们使用 from sound.effects import <em>会发生什么？<br>Python 会进入文件系统，找到这个包里面所有的子模块，一个一个的把它们都导入进来。<br>但是很不幸，这个方法在 Windows平台上工作的就不是非常好，因为Windows是一个大小写不区分的系统。<br>在这类平台上，没有人敢担保一个叫做 ECHO.py 的文件导入为模块 echo 还是 Echo 甚至 ECHO。<br>为了解决这个问题，只能烦劳包作者提供一个精确的包的索引了。<br>导入语句遵循如下规则：如果包定义文件 __init__.py 存在一个叫做 __all__ 的列表变量，那么在使用 `from package import </em> `的时候就把这个列表中的所有名字作为包内容导入。<br>作为包的作者，可别忘了在更新包之后保证 __all__ 也更新了啊。你说我就不这么做，我就不使用导入*这种用法，好吧，没问题，谁让你是老板呢。这里有一个例子，在:file:sounds/effects/__init__.py中包含如下代码:  </p>
+<pre><code>`__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]`
+</code></pre><p>这表示当你使用<code>from sound.effects import *</code>这种用法时，你只会导入包里面这三个子模块。</p>
+<p>如果 __all__ 真的没有定义，那么使用<code>from sound.effects import *</code>这种语法的时候，就不会导入包 sound.effects 里的任何子模块。他只是把包sound.effects和它里面定义的所有内容导入进来（可能运行__init__.py里定义的初始化代码）。</p>
+<p>这会把 __init__.py 里面定义的所有名字导入进来。并且他不会破坏掉我们在这句话之前导入的所有明确指定的模块。看下这部分代码:</p>
+<pre><code>import sound.effects.echo
+import sound.effects.surround
+from sound.effects import *
+</code></pre><p>这个例子中，在执行from…import前，包sound.effects中的echo和surround模块都被导入到当前的命名空间中了。（当然如果定义了__all__就更没问题了）</p>
+<p>通常我们并不主张使用*这种方法来导入模块，因为这种方法经常会导致代码的可读性降低。不过这样倒的确是可以省去不少敲键的功夫，而且一些模块都设计成了只能通过特定的方法导入。</p>
+<p>记住，使用<code>from Package import specific_submodule</code>这种方法永远不会有错。事实上，这也是推荐的方法。除非是你要导入的子模块有可能和其他包的子模块重名。</p>
+<p>如果在结构中包是一个子包（比如这个例子中对于包sound来说），而你又想导入兄弟包（同级别的包）你就得使用导入绝对的路径来导入。比如，如果模块sound.filters.vocoder 要使用包sound.effects中的模块echo，你就要写成 <code>from sound.effects import echo</code>。</p>
+<pre><code>from . import echo
+from .. import formats
+from ..filters import equalizer
+</code></pre><p>无论是隐式的还是显式的相对导入都是从当前模块开始的。主模块的名字永远是”__main__“，一个Python应用程序的主模块，应当总是使用绝对路径引用。</p>
+<p>包还提供一个额外的属性__path__。这是一个目录列表，里面每一个包含的目录都有为这个包服务的__init__.py，你得在其他__init__.py被执行前定义哦。可以修改这个变量，用来影响包含在包里面的模块和子包。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/29/python异常处理和模块/" data-id="cjk6v19cc0009poszm71gspd0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/27/python学习之面向对象编程-二/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">python学习之面向对象编程(二)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-data-type/">python,data-type</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-function-file/">python,function,file</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-reflex/">python,reflex</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python，yeild-generator/">python，yeild,generator</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/python-data-type/" style="font-size: 10px;">python,data-type</a> <a href="/tags/python-function-file/" style="font-size: 10px;">python,function,file</a> <a href="/tags/python-reflex/" style="font-size: 10px;">python,reflex</a> <a href="/tags/python，yeild-generator/" style="font-size: 10px;">python，yeild,generator</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/07/29/python异常处理和模块/">python异常处理和模块</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/27/python学习之面向对象编程-二/">python学习之面向对象编程(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/26/python面向对象编程-一/">python面向对象编程(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/24/Python学习之反射机制/">Python学习之反射机制</a>
+          </li>
+        
+          <li>
+            <a href="/2018/07/23/python学习之迭代器-生成器-yield/">python学习之迭代器,生成器,yield</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 胡华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
