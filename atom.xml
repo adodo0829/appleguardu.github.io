@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>AppleGuard的博客</title>
+  
+  <subtitle>天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-08-01T04:07:17.425Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>huhua</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python标准库和内建函数</title>
+    <link href="http://yoursite.com/2018/07/30/python%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2018/07/30/python标准库和内建函数/</id>
+    <published>2018-07-30T13:12:17.000Z</published>
+    <updated>2018-08-01T04:07:17.425Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。<br><a id="more"></a>  </p><h2 id="常用标准库"><a href="#常用标准库" class="headerlink" title="常用标准库"></a>常用标准库</h2><p><img src="https://i.imgur.com/hn08bjp.png" alt=""></p><h2 id="常用扩展库"><a href="#常用扩展库" class="headerlink" title="常用扩展库"></a>常用扩展库</h2><p><img src="https://i.imgur.com/bWf8wMA.png" alt=""></p><h2 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h2><p>Build-in Function,启动python解释器，输入dir(__builtins__), 可以看到很多python解释器启动后默认加载的属性和函数，这些函数称之为内建函数， 这些函数因为在编程时使用较多，cpython解释器用c语言实现了这些函数，启动解释器 时默认加载。<br>这些函数数量众多，不宜记忆，开发时不是都用到的，待用到时再help(function), 查看如何使用，或结合百度查询即可，在这里介绍些常用的内建函数。  </p><p><strong>1.range函数</strong><br>range(stop) -&gt; list of integers  </p><p>range(start, stop[, step]) -&gt; list of integers  </p><blockquote><pre><code>start:计数从start开始。默认是从0开始。例如range（5）等价于range（0， 5）;stop:到stop结束，但不包括stop.例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5step:每次跳跃的间距，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)</code></pre></blockquote><p>python2中range返回列表，python3中range返回一个迭代值。如果想得到列表,可通过list函数,也可以用列表生成式<code>List = [x for x in range(5)]</code>。  </p><p><strong>2.map函数</strong><br>map函数会根据提供的函数对指定序列做映射。  </p><blockquote><pre><code>map(...)     map(function, sequence[, sequence, ...]) -&gt; list  </code></pre></blockquote><blockquote><pre><code>function:是一个函数sequence:是一个或多个序列,取决于function需要几个参数返回值是一个list</code></pre></blockquote><p>参数序列中的每一个元素分别调用function函数，返回包含每次function函数返回值的list。<br><img src="https://i.imgur.com/xed9Pik.png" alt="">  </p><p><strong>3.filter函数</strong><br>filter函数会对指定序列执行过滤操作  </p><blockquote><pre><code>filter(...)  filter(function or None, sequence) -&gt; list, tuple, or string</code></pre></blockquote><blockquote><pre><code>Return those items of sequence for which function(item) is true.    If function is None, return the items that are true.  If sequence is a tuple or string, return the same type, else return a list.  </code></pre></blockquote><blockquote><pre><code>function:接受一个参数，返回布尔值True或Falsesequence:序列可以是str，tuple，list</code></pre></blockquote><p>filter函数会对序列参数sequence中的每个元素调用function函数，最后返回的结果包含调用结果为True的元素。返回值的类型和参数sequence的类型相同。<br><img src="https://i.imgur.com/xmTfHqc.png" alt=""></p><p><strong>4.reduce函数</strong><br>reduce函数，reduce函数会对参数序列中元素进行累积。  </p><blockquote><pre><code>reduce(...)  reduce(function, sequence[, initial]) -&gt; value</code></pre></blockquote><blockquote><pre><code>Apply a function of two arguments cumulatively to the items of a sequence,  from left to right, so as to reduce the sequence to a single value.  For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates  ((((1+2)+3)+4)+5).  If initial is present, it is placed before the items  of the sequence in the calculation, and serves as a default when the  sequence is empty.</code></pre></blockquote><blockquote><pre><code>function:该函数有两个参数sequence:序列可以是str，tuple，listinitial:固定初始值</code></pre></blockquote><p>reduce依次从sequence中取一个元素，和上一次调用function的结果做参数再次调用function。 第一次调用function时，如果提供initial参数，会以sequence中的第一个元素和initial 作为参数调用function，否则会以序列sequence中的前两个元素做参数调用function。 注意function函数不能为None。另外，在Python3里,reduce函数已经被从全局名字空间里移除了, 它现在被放置在fucntools模块里用的话要先引入： <code>from functools import reduce</code><br><img src="https://i.imgur.com/OJSWUm3.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>python闭包和装饰器</title>
+    <link href="http://yoursite.com/2018/07/30/python%E9%97%AD%E5%8C%85%E5%92%8C%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    <id>http://yoursite.com/2018/07/30/python闭包和装饰器/</id>
+    <published>2018-07-30T06:04:55.000Z</published>
+    <updated>2018-08-01T03:47:34.843Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="理解闭包"><a href="#理解闭包" class="headerlink" title="理解闭包"></a>理解闭包</h2><p>所谓闭包，就是在函数内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包。下面用例子来解释闭包的实现，在理解闭包之前，先看一下函数的引用，在python语言中，一切皆对象，包括函数。<br><a id="more"></a><br><strong>1.函数的引用</strong><br><img src="https://i.imgur.com/YatHsFY.png" alt=""><br>我们在定义一个函数时，系统会给我们开辟一个空间地址用来存放这个函数体，函数名（test）用来指向这片内存；如果将函数名赋值给另一个变量，那么这个变量（ret）也会指向这片空间，也可以调用该函数。  </p><p><strong>2.闭包</strong><br>下面通过一个例子来理解闭包。<br><img src="https://i.imgur.com/42znv16.png" alt=""><br>这里我们定义了一个test()函数，返回的是内层函数test_in()的引用，test_in函数里用到外层函数test传进来的变量num。 我们看一下这个例子的执行顺序，先是<code>ret = test(1)</code>,调用test函数，传入了1，返回一个test_in，然后定义了一个变量ret用来接收test的返回值，此时，ret指向了test_in这个函数。接着我们又调用ret(),并传值100，相当于调用test_in，返回了num和num_in的和，结果为101。这就是例子运行的整个过程。  </p><p><strong>闭包实例</strong><br><img src="https://i.imgur.com/0c1BRhE.png" alt=""><br>这个例子中，函数line与变量a,b构成闭包。在创建闭包的时候，我们通过line_params的参数a,b说明了这两个变量的取值，<br>这样，我们就确定了函数的最终形式(y = x + 1和y = 4x + 5)。我们只需要变换参数a,b，就可以获得不同的直线表达函数。<br>由此，我们可以看到，闭包也具有提高代码可复用性的作用。<br>如果没有闭包，我们需要每次创建直线函数的时候同时说明a,b,x。这样，我们就需要更多的参数传递，也减少了代码的可移植性。<br>闭包思考：<br>1.闭包似优化了变量，原来需要类对象完成的工作，闭包也可以完成<br>2.由于闭包引用了外部函数的局部变量，则外部函数的局部变量没有及时释放，消耗内存  </p><h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。概括的讲，装饰器的作用就是为已经存在的函数或对象添加额外的功能。<br>下面我们以一个小例子来演示<strong>装饰器的原理</strong>。<br><img src="https://i.imgur.com/YNeI5Kr.png" alt=""><br>把这个代码的流程解释一下：<br><strong>从开头看起，定义了三个函数w1,f1,f2 (f2在上图没画出来) 分别指向各自内存空间，下面执行<code>f1 = w1(f1)</code>，w1中传入了f1的引用，此时func指向f1；接下来遇到一个inner函数，inner指向一片空间，执行完w1(f1)后返回inner并又由f1去指向。第二步指向<code>f1()</code>,此时f1指向了inner，执行的便是inner函数，先执行验证部分，在执行func，也就是f1自己。这样便实现了在自己模块上扩展了验证功能</strong>  </p><h2 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h2><p><img src="https://i.imgur.com/0h3Ki8O.png" alt=""><br>@函数名 这是python中的一种语法糖，前面所讲的就是@符号的实现原理，也就是装饰器的原理。</p><h2 id="多个装饰器"><a href="#多个装饰器" class="headerlink" title="多个装饰器"></a>多个装饰器</h2><p>当一个函数遇到多个装饰器，那它的装饰顺序怎么实现呢？<br><img src="https://i.imgur.com/h9eCc8q.png" alt=""><br>从上面的代码可以看出，对多个装饰器顺序，都是从里层开始进行装饰的，调用时从外层往里层调用。</p><h2 id="装饰器的执行"><a href="#装饰器的执行" class="headerlink" title="装饰器的执行"></a>装饰器的执行</h2><p><img src="https://i.imgur.com/ABaTcKl.png" alt=""></p><h2 id="对带有参数的函数进行装饰"><a href="#对带有参数的函数进行装饰" class="headerlink" title="对带有参数的函数进行装饰"></a>对带有参数的函数进行装饰</h2><p><img src="https://i.imgur.com/838ivWa.png" alt=""><br>如果说函数为不定长参数，可以把闭包中的参数改为不定长参数形式，如fn(*args，**kwargs)。</p><h2 id="对带有return的函数进行装饰"><a href="#对带有return的函数进行装饰" class="headerlink" title="对带有return的函数进行装饰"></a>对带有return的函数进行装饰</h2><p><img src="https://i.imgur.com/tK7c7vu.png" alt=""></p><h2 id="通用装饰器"><a href="#通用装饰器" class="headerlink" title="通用装饰器"></a>通用装饰器</h2><p><img src="https://i.imgur.com/8KbOlyx.png" alt=""></p><h2 id="装饰器带参数"><a href="#装饰器带参数" class="headerlink" title="装饰器带参数"></a>装饰器带参数</h2><p><img src="https://i.imgur.com/5lQHBl5.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;理解闭包&quot;&gt;&lt;a href=&quot;#理解闭包&quot; class=&quot;headerlink&quot; title=&quot;理解闭包&quot;&gt;&lt;/a&gt;理解闭包&lt;/h2&gt;&lt;p&gt;所谓闭包，就是在函数内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包。下面用例子来解释闭包的实现，在理解闭包之前，先看一下函数的引用，在python语言中，一切皆对象，包括函数。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python异常处理和模块</title>
+    <link href="http://yoursite.com/2018/07/29/python%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%92%8C%E6%A8%A1%E5%9D%97/"/>
+    <id>http://yoursite.com/2018/07/29/python异常处理和模块/</id>
+    <published>2018-07-29T07:35:50.000Z</published>
+    <updated>2018-08-01T04:08:51.200Z</updated>
+    
+    <content type="html"><![CDATA[<p>当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。<br><a id="more"></a></p><h2 id="捕捉异常"><a href="#捕捉异常" class="headerlink" title="捕捉异常"></a>捕捉异常</h2><p>通常我们使用try…except语句来进行异常捕捉<br><img src="https://i.imgur.com/XHWgQn7.png" alt=""></p><h2 id="捕捉多个异常"><a href="#捕捉多个异常" class="headerlink" title="捕捉多个异常"></a>捕捉多个异常</h2><p>当捕获多个异常时，可以把要捕获的异常的名字，放到except 后，并使用元组的方式仅进行存储。<br><img src="https://i.imgur.com/AvFiEJ0.png" alt=""><br><strong>as</strong><br>我们可以用as来定义一个变量名，存储异常信息<br><img src="https://i.imgur.com/sUwe9nT.png" alt=""></p><h2 id="捕获所有异常"><a href="#捕获所有异常" class="headerlink" title="捕获所有异常"></a>捕获所有异常</h2><p>使用Exception。<br><img src="https://i.imgur.com/ZRF87UA.png" alt=""></p><h2 id="else子句"><a href="#else子句" class="headerlink" title="else子句"></a>else子句</h2><p>try except 语句还有一个可选的else子句，如果使用这个子句，那么必须放在所有的except子句之后。这个子句将在try子句没有发生任何异常的时候执行。<br><img src="https://i.imgur.com/sg7rRPB.png" alt=""></p><h2 id="try…finally"><a href="#try…finally" class="headerlink" title="try…finally"></a>try…finally</h2><p>try 语句还有另外一个可选的子句，它定义了无论在任何情况下都会执行的清理行为。<br><img src="https://i.imgur.com/CClp1gc.png" alt=""><br>在程序中，如果一个段代码必须要执行，即无论异常是否产生都要执行，那么此时就需要使用finally。<br>比如文件关闭，释放锁，把数据库连接返还给连接池等</p><h2 id="抛出自定义的异常"><a href="#抛出自定义的异常" class="headerlink" title="抛出自定义的异常"></a>抛出自定义的异常</h2><p>你可以用raise语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是Error或Exception类的子类。<br><img src="https://i.imgur.com/LUkdMYE.png" alt=""><br>以上程序中，关于代码#super().<strong>init</strong>()的说明<br>这一行代码，可以调用也可以不调用，建议调用，因为<strong>init</strong>方法往往是用来对创建完的对象进行初始化工作，<br>如果在子类中重写了父类的<strong>init</strong>方法，即意味着父类中的很多初始化工作没有做，这样就不保证程序的稳定了，<br>所以在以后的开发中，如果重写了父类的<strong>init</strong>方法，最好是先调用父类的这个方法，然后再添加自己的功能。</p><h2 id="异常处理中抛出异常"><a href="#异常处理中抛出异常" class="headerlink" title="异常处理中抛出异常"></a>异常处理中抛出异常</h2><p><img src="https://i.imgur.com/B0DWaaV.png" alt=""></p><h2 id="python中的模块"><a href="#python中的模块" class="headerlink" title="python中的模块"></a>python中的模块</h2><p>在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用sqrt函数，<br>必须用import关键字引入math这个模块，下面就来了解一下Python中的模块。<br>说的通俗点：模块就好比是工具包，要想使用这个工具包中的工具(就好比函数)，就需要导入这个模块。  </p><h2 id="import语句"><a href="#import语句" class="headerlink" title="import语句"></a>import语句</h2><p>Python中用关键字import来引入某个模块，比如要引用模块math，就可以在文件最开始的地方用import math来引入。<br>当解释器遇到import语句，如果模块在当前的搜索路径就会被导入。<br>在调用math模块中的函数时，必须这样引用：<br>模块名.函数名  比如：<code>import math.sqrt</code></p><h2 id="from…-import语句"><a href="#from…-import语句" class="headerlink" title="from… import语句"></a>from… import语句</h2><p>有时候我们只需要用到模块中的某个函数，只需要引入该函数即可，此时可以用下面方法实现：<br><strong>from 模块名 import 函数名1,函数名2….</strong><br>不仅可以引入函数，还可以引入一些全局变量、类等。</p><h2 id="from…import"><a href="#from…import" class="headerlink" title="from…import *"></a>from…import *</h2><p>把一个模块的所有内容全都导入到当前的命名空间也是可行的，只需使用如下声明：<br>from modname import *<br>这提供了一个简单的方法来导入一个模块中的所有项目，然而这种声明不该被过多地使用。  </p><h2 id="name-属性"><a href="#name-属性" class="headerlink" title="__name__属性"></a>__name__属性</h2><p>一个模块被另一个程序第一次引入时，其主程序将运行。如果我们想在模块被引入时，模块中的某一程序块不执行，我们可以用__name__属性来使该程序块仅在该模块自身运行时执行。<br><img src="https://i.imgur.com/StrmQ2a.png" alt=""><br>说明： 每个模块都有一个__name__属性，当其值是’__main__’时，表明该模块自身在运行，否则是被引入。  </p><h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>包是一种管理 Python 模块命名空间的形式，采用”点模块名称”。</p><p>比如一个模块的名称是 A.B， 那么他表示一个包 A中的子模块 B 。</p><p>就好像使用模块的时候，你不用担心不同模块之间的全局变量相互影响一样，采用点模块名称这种形式也不用担心不同库之间的模块重名的情况。</p><p>这样不同的作者都可以提供 NumPy 模块，或者是 Python 图形库。</p><p>不妨假设你想设计一套统一处理声音文件和数据的模块（或者称之为一个”包”）。</p><p>现存很多种不同的音频文件格式（基本上都是通过后缀名区分的，例如： .wav，:file:.aiff，:file:.au，），所以你需要有一组不断增加的模块，用来在不同的格式之间转换。</p><p>并且针对这些音频数据，还有很多不同的操作（比如混音，添加回声，增加均衡器功能，创建人造立体声效果），所以你还需要一组怎么也写不完的模块来处理这些操作。</p><p>这里给出了一种可能的包结构（在分层的文件系统中）:<br><img src="https://i.imgur.com/ff6EHAB.png" alt=""><br>在导入一个包的时候，Python 会根据 sys.path 中的目录来寻找这个包中包含的子目录。</p><p>目录只有包含一个叫做 __init__.py 的文件才会被认作是一个包，主要是为了避免一些滥俗的名字（比如叫做 string）不小心的影响搜索路径中的有效模块。</p><p>最简单的情况，放一个空的 :file:__init__.py就可以了。当然这个文件中也可以包含一些初始化代码或者为（将在后面介绍的） __all__变量赋值。</p><p>用户可以每次只导入一个包里面的特定模块，比如:</p><pre><code>import sound.effects.echo</code></pre><p>这将会导入子模块:sound.effects.echo。 他必须使用全名去访问:</p><pre><code>sound.effects.echo.echofilter(input, output, delay=0.7, atten=4)</code></pre><p>还有一种导入子模块的方法是:</p><pre><code>from sound.effects import echo</code></pre><p>这同样会导入子模块: echo，并且他不需要那些冗长的前缀，所以他可以这样使用:</p><pre><code>echo.echofilter(input, output, delay=0.7, atten=4)</code></pre><p>还有一种变化就是直接导入一个函数或者变量:</p><pre><code>from sound.effects.echo import echofilter</code></pre><p>同样的，这种方法会导入子模块: echo，并且可以直接使用他的 echofilter() 函数:</p><pre><code>echofilter(input, output, delay=0.7, atten=4)</code></pre><p>注意当使用from package import item这种形式的时候，对应的item既可以是包里面的子模块（子包），或者包里面定义的其他名称，比如函数，类或者变量。</p><p>import语法会首先把item当作一个包定义的名称，如果没找到，再试图按照一个模块去导入。如果还没找到，恭喜，一个:exc:ImportError 异常被抛出了。</p><p>反之，如果使用形如<code>import item.subitem.subsubitem</code>这种导入形式，除了最后一项，都必须是包，而最后一项则可以是模块或者是包，但是不可以是类，函数或者变量的名字。  </p><h2 id="从一个包中导入"><a href="#从一个包中导入" class="headerlink" title="从一个包中导入*,"></a>从一个包中导入*,</h2><p>设想一下，如果我们使用 from sound.effects import <em>会发生什么？<br>Python 会进入文件系统，找到这个包里面所有的子模块，一个一个的把它们都导入进来。<br>但是很不幸，这个方法在 Windows平台上工作的就不是非常好，因为Windows是一个大小写不区分的系统。<br>在这类平台上，没有人敢担保一个叫做 ECHO.py 的文件导入为模块 echo 还是 Echo 甚至 ECHO。<br>为了解决这个问题，只能烦劳包作者提供一个精确的包的索引了。<br>导入语句遵循如下规则：如果包定义文件 __init__.py 存在一个叫做 __all__ 的列表变量，那么在使用 `from package import </em> `的时候就把这个列表中的所有名字作为包内容导入。<br>作为包的作者，可别忘了在更新包之后保证 __all__ 也更新了啊。你说我就不这么做，我就不使用导入*这种用法，好吧，没问题，谁让你是老板呢。这里有一个例子，在:file:sounds/effects/__init__.py中包含如下代码:  </p><pre><code>`__all__ = [&quot;echo&quot;, &quot;surround&quot;, &quot;reverse&quot;]`</code></pre><p>这表示当你使用<code>from sound.effects import *</code>这种用法时，你只会导入包里面这三个子模块。</p><p>如果 __all__ 真的没有定义，那么使用<code>from sound.effects import *</code>这种语法的时候，就不会导入包 sound.effects 里的任何子模块。他只是把包sound.effects和它里面定义的所有内容导入进来（可能运行__init__.py里定义的初始化代码）。</p><p>这会把 __init__.py 里面定义的所有名字导入进来。并且他不会破坏掉我们在这句话之前导入的所有明确指定的模块。看下这部分代码:</p><pre><code>import sound.effects.echoimport sound.effects.surroundfrom sound.effects import *</code></pre><p>这个例子中，在执行from…import前，包sound.effects中的echo和surround模块都被导入到当前的命名空间中了。（当然如果定义了__all__就更没问题了）</p><p>通常我们并不主张使用*这种方法来导入模块，因为这种方法经常会导致代码的可读性降低。不过这样倒的确是可以省去不少敲键的功夫，而且一些模块都设计成了只能通过特定的方法导入。</p><p>记住，使用<code>from Package import specific_submodule</code>这种方法永远不会有错。事实上，这也是推荐的方法。除非是你要导入的子模块有可能和其他包的子模块重名。</p><p>如果在结构中包是一个子包（比如这个例子中对于包sound来说），而你又想导入兄弟包（同级别的包）你就得使用导入绝对的路径来导入。比如，如果模块sound.filters.vocoder 要使用包sound.effects中的模块echo，你就要写成 <code>from sound.effects import echo</code>。</p><pre><code>from . import echofrom .. import formatsfrom ..filters import equalizer</code></pre><p>无论是隐式的还是显式的相对导入都是从当前模块开始的。主模块的名字永远是”__main__“，一个Python应用程序的主模块，应当总是使用绝对路径引用。</p><p>包还提供一个额外的属性__path__。这是一个目录列表，里面每一个包含的目录都有为这个包服务的__init__.py，你得在其他__init__.py被执行前定义哦。可以修改这个变量，用来影响包含在包里面的模块和子包。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="Exception" scheme="http://yoursite.com/tags/Exception/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python学习之面向对象编程(二)</title>
+    <link href="http://yoursite.com/2018/07/27/python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E4%BA%8C/"/>
+    <id>http://yoursite.com/2018/07/27/python学习之面向对象编程-二/</id>
+    <published>2018-07-27T14:48:24.000Z</published>
+    <updated>2018-08-01T04:08:26.174Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。<br><a id="more"></a>  </p><h2 id="类的私有属性"><a href="#类的私有属性" class="headerlink" title="类的私有属性"></a>类的私有属性</h2><p><img src="https://i.imgur.com/F3nOc2b.png" alt=""><br>Python中没有像C++中public和private这些关键字来区别公有属性和私有属性<br>它是以属性命名方式来区分，如果在属性名前面加了2个下划线’__’，则表明该属性是私有属性，否则为公有属性（方法也是一样，<br>方法名前面加了2个下划线的话表示该方法是私有的，否则为公有的）。  </p><h2 id="类的del方法"><a href="#类的del方法" class="headerlink" title="类的del方法"></a>类的del方法</h2><p><img src="https://i.imgur.com/L8TYDRc.png" alt=""><br>注意：<br>当有1个变量保存了对象的引用时，此对象的引用计数就会加1<br>当使用del删除变量指向的对象时，如果对象的引用计数不是1，比如3（比如上述例子中，<code>dog1 = dog; dog2 = dog</code>, 引用两次），那么此时只会让这个引用计数减1，即变为2，<br>当再次调用del时，变为1，如果再调用1次del，此时会真的把对象进行删除。  </p><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>在程序中，继承描述的是事物之间的所属关系，例如猫和狗都属于动物，程序中便可以描述为猫和狗继承自动物。<br><img src="https://i.imgur.com/gI7JiQX.png" alt=""><br>虽然子类没有定义<strong>init</strong>方法，但是父类有，所以在子类继承父类的时候这个方法就被继承了，<br>所以只要创建Bosi的对象，就默认执行了那个继承过来的<strong>init</strong>方法。  </p><p><strong>继承中的私有属性和私有方法</strong><br><img src="https://i.imgur.com/mPciqJL.png" alt=""><br>私有的属性，不能通过对象直接访问，但是可以通过方法访问<br>私有的方法，不能通过对象直接访问<br>私有的属性、方法，不会被子类继承，也不能被访问<br>一般情况下，私有的属性、方法都是不对外公布的，往往用来做内部的事情，起到安全的作用。  </p><h2 id="多继承"><a href="#多继承" class="headerlink" title="多继承"></a>多继承</h2><p>所谓多继承，即子类有多个父类，并且具有它们的特征。<br><img src="https://i.imgur.com/RBriyjs.png" alt=""><br>思考：如果在上面的多继承例子中，如果父类A和父类B中，有一个同名的方法，那么通过子类去调用的时候，调用哪个？<br><img src="https://i.imgur.com/Xw9MLTJ.png" alt=""><br>从上面例子的返回结果可以看出，子类先从自己的类中开始找，紧接着按照父类的继承顺序开始找，最后则是在最开始的超(基)类中找。  </p><h2 id="重写父类方法"><a href="#重写父类方法" class="headerlink" title="重写父类方法"></a>重写父类方法</h2><p>所谓重写，就是子类中，有一个和父类相同名字的方法，在子类中的方法会覆盖掉父类中同名的方法。<br><img src="https://i.imgur.com/iTt0LQk.png" alt="">  </p><h2 id="调用父类的方法"><a href="#调用父类的方法" class="headerlink" title="调用父类的方法"></a>调用父类的方法</h2><p>子类的方法要显示调用父类的方法,不调用系统不会默认调用。<br>调用方法有3种：<br><img src="https://i.imgur.com/W0RWIqh.png" alt=""><br>a方法是传统的调用方法, b是改进后的方法. 区别是: 当基类的名字有改变时, a方法子类的中的相应代码也要改. b就不用改了, 所以b方法要好一些,方便代码的维护。下面是实例：<br><img src="https://i.imgur.com/Ygzz01F.png" alt="">  </p><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p><strong>所谓多态：定义时的类型和运行时的类型不一样，此时就成为多态</strong>；这里可能说的有点抽象，下面我们通过实例来解释。<br>要理解什么是多态，我们首先要对数据类型再作一点说明。当我们定义一个class的时候，我们实际上就定义了一种数据类型。(这里是参考了廖雪峰的教程对多态的理解)<br>我们定义的数据类型和Python自带的数据类型，比如str、list、dict没什么两样。<br><img src="https://i.imgur.com/K21MFnk.png" alt="">  </p><blockquote><p>a = list()       # a是list类型<br>b = Animal()     # b是Animal类型<br>c = Dog()        # c是Dog类型<br>判断一个变量是否是某个类型isinstance()判断：  </p></blockquote><p>看一下返回结果：  </p><blockquote><p>isinstance(a, list)<br>True<br>isinstance(b, Animal)<br>True<br>isinstance(c, Dog)<br>True  </p></blockquote><p>a、b、c确实对应着list、Animal、Dog这3种类型,我们再来看一下C：  </p><blockquote><p>isinstance(c, Animal)<br>True  </p></blockquote><p>c不仅仅是Dog，c还是Animal！因为Dog是从Animal继承下来的，当我们创建了一个Dog的实例c时，我们认为c的数据类型是Dog没错，但c同时也是Animal也没错，Dog本来就是Animal的一种！在继承关系中，如果一个实例的数据类型是某个子类，那它的数据类型也可以被看做是父类。但是，反过来就不行。<br>要理解多态的好处，我们还需要再编写一个函数，这个函数接受一个Animal类型的变量：<br><img src="https://i.imgur.com/QZUKqJI.png" alt=""><br>你会发现，新增一个Animal的子类，不必对run_twice()做任何修改，实际上，任何依赖Animal作为参数的函数或者方法都可以不加修改地正常运行，原因就在于多态。<br>多态的好处就是，当我们需要传入Dog、Cat、Tortoise……时，我们只需要接收Animal类型就可以了，因为Dog、Cat、Tortoise……都是Animal类型，然后，按照Animal类型进行操作即可。由于Animal类型有run()方法，因此，传入的任意类型，只要是Animal类或者子类，就会自动调用实际类型的run()方法，这就是多态的意思：对于一个变量，我们只需要知道它是Animal类型，无需确切地知道它的子类型，就可以放心地调用run()方法，而具体调用的run()方法是作用在Animal、Dog、Cat还是Tortoise对象上，由运行时该对象的确切类型决定，这就是多态真正的威力：调用方只管调用，不管细节，而当我们新增一种Animal的子类时，只要确保run()方法编写正确，不用管原来的代码是如何调用的。这就是著名的“开闭”原则：<br>对扩展开放：允许新增Animal子类；<br>对修改封闭：不需要修改依赖Animal类型的run_twice()等函数。<br>小结：<br>继承可以把父类的所有功能都直接拿过来，这样就不必重零做起，子类只需要新增自己特有的方法，也可以把父类不适合的方法覆盖重写；<br>有了继承，才能有多态。在调用类实例方法的时候，尽量把变量视作父类类型，这样，所有子类类型都可以正常被接收。</p><h2 id="类属性、实例属性"><a href="#类属性、实例属性" class="headerlink" title="类属性、实例属性"></a>类属性、实例属性</h2><p><img src="https://i.imgur.com/amNxUrW.png" alt=""><br><strong>通过实例(对象)去修改类属性</strong><br><img src="https://i.imgur.com/dFRTemk.png" alt=""><br>如果需要在类外修改类属性，必须通过类对象去引用然后进行修改。如果通过实例对象去引用，<br>会产生一个同名的实例属性，这种方式修改的是实例属性，不会影响到类属性，并且之后如果<br>通过实例对象去引用该名称的属性，实例属性会强制屏蔽掉类属性，即引用的是实例属性，除非<br>删除了该实例属性。  </p><h2 id="静态方法和类方法"><a href="#静态方法和类方法" class="headerlink" title="静态方法和类方法"></a>静态方法和类方法</h2><p>类方法:是类对象所拥有的方法，需要用修饰器@classmethod来标识其为类方法，对于类方法，第一个参数必须是类对象，一般以cls作为第一个参数。<br><img src="https://i.imgur.com/JP1AbmL.png" alt=""><br>结果显示在用类方法对类属性修改之后，通过类对象和实例对象访问都发生了改变。  </p><p>静态方法:需要通过修饰器@staticmethod来进行修饰，静态方法不需要多定义参数<br><img src="https://i.imgur.com/e01NDfA.png" alt=""><br>从类方法和实例方法以及静态方法的定义形式就可以看出来，类方法的第一个参数是类对象cls，<br>那么通过cls引用的必定是类对象的属性和方法；而实例方法的第一个参数是实例对象self，<br>那么通过self引用的可能是类属性、也有可能是实例属性（这个需要具体分析），不过在存在<br>相同名称的类属性和实例属性的情况下，实例属性优先级更高。静态方法中不需要额外定义参数，<br>因此在静态方法中引用类属性的话，必须通过类对象来引用。  </p><h2 id="init方法和new方法"><a href="#init方法和new方法" class="headerlink" title="init方法和new方法"></a>init方法和new方法</h2><p><img src="https://i.imgur.com/O1VyssQ.png" alt=""></p><h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p><img src="https://i.imgur.com/wIFNO2L.png" alt=""><br><img src="https://i.imgur.com/EvHjNW3.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;因为面向对象的内容比较多，所以分了两个部分学习；上一篇记录了python面向对象编程的第一部分，下面还有这两天学习的剩下部分。例子部分我都用图片进行截图的形式上传，没用图床。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>python面向对象编程(一)</title>
+    <link href="http://yoursite.com/2018/07/26/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E4%B8%80/"/>
+    <id>http://yoursite.com/2018/07/26/python面向对象编程-一/</id>
+    <published>2018-07-26T01:48:45.000Z</published>
+    <updated>2018-08-01T04:07:44.383Z</updated>
+    
+    <content type="html"><![CDATA[<p>面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。<br><a id="more"></a><br>面向对象编程(Object Oriented Programming-OOP) 是一种解决软件复用的设计和编程方法。 这种方法把软件系统中相近相似的操作逻辑和操作 应用数据、状态,以类的型式描述出来,以对象实例的形式在软件系统中复用,以达到提高软件开发效率的作用。</p><p>##类和对象<br><strong>类</strong><br>类是具有相似内部状态和运动规律的实体的集合(或统称为抽象)；具有相同属性和行为事物的统称。类是抽象的,在使用的时候通常会找到这个类的一个具体的存在,使用这个具体的存在。类的抽象：拥有相同(或者类似)属性和行为的对象都可以抽像出一个类，方法:一般名词都是类(名词提炼法)  </p><p><strong>对象</strong><br>一个类可以找到多个对象，某一个具体事物的存在 ,在现实世界中可以是看得见摸得着的，可以是直接使用的。  </p><p><strong>类的构成</strong>  </p><blockquote><p>类的名称:类名<br>类的属性:一组数据<br>类的方法:允许对进行操作的方法 (行为)  </p></blockquote><p>举个例子：一个人的类的设计:  </p><blockquote><p>事物名称(类名):人(Person)<br>属性:身高(height)、年龄(age)<br>方法(行为/功能):跑(run)、打架(fight)  </p></blockquote><p><strong>定义一个类</strong><br><img src="https://i.imgur.com/d9uD0U9.png" alt=""><br><strong>创建对象</strong><br><img src="https://i.imgur.com/R4sOguL.png" alt="">  </p><p><strong>类的<strong>init</strong>()方法</strong><br><em>在上面的demo中，我们已经给bm这个对象添加了2个属性，wheel（车的轮胎数量）<br>以及color（车的颜色），试想如果再次创建一个对象的话，肯定也需要进行添加属性，显然这样做很费事，那么有没有办法能够在创建对象的时候，就顺便把车这个对象的属性给设置呢？ 这里就用到了<strong>init</strong>()方法。</em><br><img src="https://i.imgur.com/QPk53yY.png" alt="">  </p><p>既然在创建完对象后<strong>init</strong>()方法已经被默认的执行了，那么能否让对象在调用<strong>init</strong>()方法的时候传递一些参数呢？<br><img src="https://i.imgur.com/oMjLutm.png" alt=""><br><strong>魔法方法</strong><br><img src="https://i.imgur.com/my3bgJQ.png" alt="">  </p><h2 id="关于对类方法中self的理解"><a href="#关于对类方法中self的理解" class="headerlink" title="关于对类方法中self的理解"></a>关于对类方法中self的理解</h2><p>这里我们用一个例子来说明：<br><img src="https://i.imgur.com/Fj6R7Pi.png" alt=""><br>从上面看，两者返回结果都一样，所谓的self，可以理解为对象自己；<br>可以把self当做C++中类里面的this指针一样理解，就是对象自身的意思；<br>某个对象调用其方法时，python解释器会把这个对象作为第一个参数传递给self，所以我们只需要传递后面的参数即可 。  </p><h2 id="多个类之间对象和属性之间的关系"><a href="#多个类之间对象和属性之间的关系" class="headerlink" title="多个类之间对象和属性之间的关系"></a>多个类之间对象和属性之间的关系</h2><p>在程序设计时，我们经常会遇到对象与对象之间相关关联，如果一个类创建一个对象要要引用另一个类中的对象的方法或者属性，那怎么办呢？<br>这里我们得到思路是：在这个对象的类中创建一个属性来解释（或者说指向）另一个对象的引用。下面附上一个我做的小例子，可以帮助理解。<br>当然代码有点长，我这里传一个代码链接：<a href="https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py" title="对象，属性相互关系理解" target="_blank" rel="noopener">https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py</a>    </p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习之反射机制</title>
+    <link href="http://yoursite.com/2018/07/24/Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2018/07/24/Python学习之反射机制/</id>
+    <published>2018-07-24T02:22:11.000Z</published>
+    <updated>2018-08-01T04:08:06.120Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Python反射机制"><a href="#Python反射机制" class="headerlink" title="Python反射机制"></a>Python反射机制</h2><p>程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。<br><a id="more"></a><br><strong>hasattr和getattr</strong><br>-<br><img src="https://i.imgur.com/MMPbrYr.png" alt="">  </p><p><strong>setattr和delattr</strong><br>-<br><img src="https://i.imgur.com/ZKFQvtf.png" alt=""></p><p><strong>总结：</strong>反射就是通过字符串的形式，导入对象（或者模块，这里未提到）；通过字符串的形式，去对象中寻找指定函数，并执行。利用字符串的形式去对象（模块）中操作（查找/获取/删除/添加）成员，一种基于字符串的事件驱动。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Python反射机制&quot;&gt;&lt;a href=&quot;#Python反射机制&quot; class=&quot;headerlink&quot; title=&quot;Python反射机制&quot;&gt;&lt;/a&gt;Python反射机制&lt;/h2&gt;&lt;p&gt;程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="反射" scheme="http://yoursite.com/tags/%E5%8F%8D%E5%B0%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python学习之迭代器,生成器,yield</title>
+    <link href="http://yoursite.com/2018/07/23/python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%BF%AD%E4%BB%A3%E5%99%A8-%E7%94%9F%E6%88%90%E5%99%A8-yield/"/>
+    <id>http://yoursite.com/2018/07/23/python学习之迭代器-生成器-yield/</id>
+    <published>2018-07-23T11:33:35.000Z</published>
+    <updated>2018-08-01T04:16:01.450Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。<br><a id="more"></a><br><strong>1.可迭代对象</strong><br>以直接作用于for循环的数据类型有以下几种：<br>一类是集合数据类型，如    list、tuple    、dict、    set    、str等；<br>另一类是    generator，包括生成器和带    yield的generator     function。<br>这些可以直接作用于for    循环的对象统称为可迭代对象：Iterable。<br><strong>2.迭代器方法</strong><br>迭代器有两个基本的方法：<strong>iter()</strong> 和<strong>next()</strong>。字符串，列表或元组对象都可用于创建迭代器。  </p><p><img src="https://i.imgur.com/Eph73gt.png" alt="">  </p><p>当然，也可以直接用for循环进行遍历，如下：  </p><p><img src="https://i.imgur.com/AKQMlUN.png" alt="">  </p><p>也可以使用next()方法：  </p><p><img src="https://i.imgur.com/lH2UoAH.png" alt=""></p><h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p><strong>什么是生成器</strong><br>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素 占用的空间都白白浪费了。所以，如果列表元素可以按照某种算法推算出 来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器generator。生成器是一个简单的方式来完成迭代，简单来说，Python的生成器是一个返回可以迭代对象的函数，可以理解为生成器本身也是一个迭代器。<br><strong>创建生成器</strong>  </p><ul><li><strong>1.生成器表达式</strong><br>类似于列表推导，但，生成器返回按需生产结果的一个对象，而不是一次构建一个结果列表。  </li></ul><p><img src="https://i.imgur.com/HdJ6dVz.png" alt="">  </p><p><strong>2.生成器函数</strong><br>在Python中，使用了yield的函数就称为生成器。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，可以理解为：生成器就是一个迭代值。并在下一次执行next方法时，从当前位置继续运行。  </p><p><img src="https://i.imgur.com/YZYz2B8.png" alt=""><br>结论：<br>1、对于生成器，当调用函数next(generator)时，将获得生成器yield后面表达式的值；<br>2、当生成器已经执行完毕时，再次调用next函数，生成器会抛出StopIteration异常。<br>扩展：<br>1、当生成器内部执行到return语句时，自动抛出StopIteration异常，return的值将作为异常的解释；<br>2、外部可以通过generator.close()函数手动关闭生成器，此后调用next或者send方法将抛出异常</p><h2 id="3-next和send函数"><a href="#3-next和send函数" class="headerlink" title="3.next和send函数"></a>3.next和send函数</h2><p>next函数与send函数很相似，都能获得生成器的下一个yield后面表达式的值，不同的是send函数可以向生成器传参：  </p><p><img src="https://i.imgur.com/DnXjt9v.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/S0qXyCM.png" alt=""><br>程序首先调用next函数，使得生成器执行到第4行的时候，把i的值0作为next函数的返回值返回，程序输出main:0，然后生成器暂停。程序往下调用send(777)函数，<br>生成器从第四行继续执行，send函数的参数777作为yield的返回值，并赋值给msg，然后得到gen:777的输出。<br><strong>简单的说，send函数使得yield关键字拥有了返回值返回给它的左值。</strong></p><p>注意：  </p><p><img src="https://i.imgur.com/OeTnsTo.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/xYXE8HK.png" alt=""><br>程序报错：<strong>不能将一个非None的值传给初始的生成器</strong>。<br>从上面的测试，我们知道，当调用send函数前，生成器内部应该执行到yield所在的语句并暂停。而在这次的测试中，我们从一开始就调用send并传了一个参数，<br>程序报错误。<br>因此，在调用带非空参数的send函数之前，我们应该使用next(generator)或者send(None)使得生成器执行到yield语句并暂停。  </p><p><img src="https://i.imgur.com/jt4QKvJ.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/YlrS6Jl.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;迭代器&quot;&gt;&lt;a href=&quot;#迭代器&quot; class=&quot;headerlink&quot; title=&quot;迭代器&quot;&gt;&lt;/a&gt;迭代器&lt;/h2&gt;&lt;p&gt;迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="yeild" scheme="http://yoursite.com/tags/yeild/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习之函数,文件操作</title>
+    <link href="http://yoursite.com/2018/07/22/Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%87%BD%E6%95%B0,%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"/>
+    <id>http://yoursite.com/2018/07/22/Python学习之函数,文件操作/</id>
+    <published>2018-07-22T09:24:25.000Z</published>
+    <updated>2018-08-01T04:08:16.712Z</updated>
+    
+    <content type="html"><![CDATA[<p>关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。  </p><a id="more"></a><hr><h2 id="函数的定义和调用"><a href="#函数的定义和调用" class="headerlink" title="函数的定义和调用"></a>函数的定义和调用</h2><p><strong>定义格式:</strong>  </p><pre><code>def 函数名():    pass </code></pre><p><img src="https://i.imgur.com/fqu38vt.png" alt=""><br><strong>调用函数</strong><br>定义了函数之后，就相当于有了一个具有某些功能的代码，想要让这些代码能够执行，需要调用它,调用函数很简单的，通过 函数名() 即可完成调用。<br>    <code>printinfo()</code>  # 完成调用  </p><h2 id="函数的参数"><a href="#函数的参数" class="headerlink" title="函数的参数"></a>函数的参数</h2><p>有时候为了让一个函数更通用，假设想让它随便计算两个数的和，就让它计算哪两个数的和，在定义函数的时候可以让函数接收数据，就解决了这个问题，这就是 <strong>函数的参数</strong>。<br><img src="https://i.imgur.com/soDny72.png" alt=""><br>在调用时直接传入参数，<code>add2num(11,22)</code>,调用函数时参数的顺序需要注意，还有就是定义函数时小括号中的参数，是用来接收参数用的，称为 “形参”；调用时小括号中的参数，用来传递给函数用的，称为 “实参”。<br><strong>缺省参数</strong><br>调用函数时，缺省参数的值如果没有传入，则被认为是默认值。比如def printinfo( name, age = 35 ):如果age未传入，函数中代码会默认使用age=35这个值。注意：带有默认值的参数一定要位于参数列表的最后面。<br><strong>不定长参数</strong><br>有时可能需要一个函数能处理比当初声明时更多的参数。这些参数叫做不定长参数，声明时不会命名。<br><img src="https://i.imgur.com/YLjiiBr.png" alt=""><br>加了星号（*）的变量args会存放所有未命名的变量参数，args为元组；而加<strong>的变量kwargs会存放命名参数，即形如key=value的参数， kwargs为字典。  </strong>引用传参**<br>Python中函数参数是引用传递（注意不是值传递）。对于不可变类型，因变量不能修改，所以运算不会影响到变量自身而是生成一个新变量，指向一个新内存（new id）；而对于可变类型来说，函数体中的运算有可能会更改传入的参数变量，其内存地址不变，直接在自身值上做出改变。  </p><h2 id="局部变量，全局变量"><a href="#局部变量，全局变量" class="headerlink" title="局部变量，全局变量"></a>局部变量，全局变量</h2><p>局部变量，就是在函数内部定义的变量不同的函数，可以定义相同的名字的局部变量，但是各用个的不会产生影响局部变量的作用，为了临时保存数据需要在函数中定义变量来进行存储，这就是它的作用。<br>如果一个变量，既能在一个函数中使用，也能在其他的函数中使用，这样的变量就是全局变量<br><img src="https://i.imgur.com/KAQbNEg.png" alt=""><br>在函数外边定义的变量叫做全局变量，全局变量能够在所有的函数中进行访问，如果在函数中修改全局变量，那么就需要使用global进行声明，否则出错，如果全局变量的名字和局部变量的名字相同，那么使用的是局部变量的。<br>另外，<br>在函数中不使用global声明全局变量时不能修改全局变量的本质是不能修改全局变量的指向，即不能将全局变量指向新的数据。<br>对于不可变类型的全局变量来说，因其指向的数据不能修改，所以不使用global时无法修改全局变量。<br>对于可变类型的全局变量来说，因其指向的数据可以修改，所以不使用global时也可修改全局变量。</p><h2 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h2><p>所谓函数的“返回值”，就是程序中函数完成一件事情后，最后给调用者的结果。如果我们想要在函数中把结果返回给调用者，需要在函数中使用<strong>return</strong>。<br><img src="https://i.imgur.com/FUdn5Xe.png" alt=""><br>如果一个函数返回了一个数据，那么想要用这个数据，那么就需要保存，可以定义一个变量来保存，如<code>result = add2num(11, 22)</code>   </p><h2 id="4种函数类型"><a href="#4种函数类型" class="headerlink" title="4种函数类型"></a>4种函数类型</h2><p>函数根据有没有参数，有没有返回值，可以相互组合，一共有4种：<br>1.无参数，无返回值的函数：此类函数，不能接收参数，也没有返回值，一般情况下，打印提示灯类似的功能，使用这类的函数。<br>2.无参数，有返回值的函数:此类函数，不能接收参数，但是可以返回某个数据，一般情况下，像采集数据，用此类函数<br>3.有参数，无返回值的函数:此类函数，能接收参数，但不可以返回数据，一般情况下，对某些变量设置数据而不需结果时，用此类函数<br>4.有参数，有返回值的函数:此类函数，不仅能接收参数，还可以返回某个数据，一般情况下，像数据处理并需要结果的应用，用此类函数  </p><h2 id="函数的嵌套"><a href="#函数的嵌套" class="headerlink" title="函数的嵌套"></a>函数的嵌套</h2><p>一个函数里面又调用了另外一个函数，这就是所谓的函数嵌套调用。<br><img src="https://i.imgur.com/TaFM81R.png" alt=""><br>如果函数A中，调用了另外一个函数B，那么先把函数B中的任务都执行完毕之后才会回到上次 函数A执行的位置。<br><strong>递归函数</strong><br>如果一个函数在内部不调用其它的函数，而是自己本身的话，这个函数就是递归函数。<br> 举个例子，我们来计算阶乘 n! = 1 <em> 2 </em> 3 <em> … </em> n<br><img src="https://i.imgur.com/DxtQgpV.png" alt=""><br><strong>匿名函数</strong><br>用lambda关键词能创建小型匿名函数。这种函数得名于省略了用def声明函数的标准步骤。<br>lambda函数的语法只包含一个语句，如下：  </p><blockquote><pre><code>lambda [arg1 [,arg2,.....argn]]:expression  </code></pre></blockquote><p>Lambda函数能接收任何数量的参数但只能返回一个表达式的值；匿名函数不能直接调用print，因为lambda需要一个表达式。<br>应用场景：函数作为参数传递 ，1.自己定义函数 2.作为内置函数的参数</p><h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><p><strong>使用文件的目的，就是把一些存储存放起来，可以让程序下一次执行的时候直接使用，而不必重新制作一份，省时省力。</strong><br><strong>1.打开文件</strong><br>在python，使用open函数，可以打开一个已经存在的文件，或者创建一个新文件  </p><blockquote><pre><code>open(&apos;文件名&apos;，&apos;访问模式&apos;)  f.open(&apos;test.txt&apos;, &apos;w&apos;) </code></pre><p>访问模式:<br><img src="https://i.imgur.com/Ee6pDY7.png" alt="">  </p></blockquote><p><strong>2.关闭文件</strong>  </p><blockquote><pre><code>f.close()  </code></pre></blockquote><p><strong>3.文件的读写</strong><br>写数据：write()  </p><blockquote><pre><code>f = open(&apos;test.txt&apos;, &apos;w&apos;)f.write(&apos;hello world, i am here!&apos;)f.close()  </code></pre><p>如果文件不存在那么创建，如果存在那么就先清空，然后写入数据.  </p></blockquote><p>读数据：read()<br>使用read(num)可以从文件中读取数据，num表示要从文件中读取的数据的长度（单位是字节），如果没有传入num，那么就表示读取文件中所有的数据。  </p><p>读数据：readlines<br>就像read没有参数时一样，readlines可以按照行的方式把整个文件中的内容进行一次性读取，并且返回的是一个列表，其中每一行的数据为一个元素。 </p><p><strong>4.文件的随机读写</strong><br>1.获取当前读写的位置，在读写文件的过程中，如果想知道当前的位置，可以使用tell()来获取。<br> 2.定位到某个位置，如果在读写文件的过程中，需要从另外一个位置进行操作的话，可以使用seek()； </p><blockquote><pre><code>seek(offset, from)  offset:偏移量from:方向0:表示文件开头1:表示当前位置2:表示文件末尾  </code></pre></blockquote><p><strong>5.文件的重命名、删除</strong><br>有些时候，需要对文件进行重命名、删除等一些操作，python的os模块中都有这么功能<br>1.文件重命名  </p><blockquote><p>os模块中的rename()可以完成对文件的重命名操作,rename(原文件名, 新文件名)  </p></blockquote><p>2.删除文件  </p><blockquote><p>os模块中的remove()可以完成对文件的删除操作,remove(待删除的文件名)  </p></blockquote><p><strong>文件夹的相关操作</strong>  </p><blockquote><p>1.创建文件夹,   os.mkdir(‘文件夹名’)<br>2.获取当前目录, os.getcwd()<br>3.改变默认目录, os.chdir(“../“)<br>4.获取目录列表, os.listdir(“./“)<br>5.删除文件夹,   os.rmdir(“文件夹名”)  </p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;关于函数，可以说在程序中最常见不过了，在开发程序时，需要某块代码多次，但是为了提高编写的效率以及代码的重用，所以把具有独立功能的代码块组织为一个小模块，这就是函数。  &lt;/p&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="函数，文件操作" scheme="http://yoursite.com/tags/%E5%87%BD%E6%95%B0%EF%BC%8C%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python学习之循环判断</title>
+    <link href="http://yoursite.com/2018/07/21/python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%BE%AA%E7%8E%AF%E5%88%A4%E6%96%AD/"/>
+    <id>http://yoursite.com/2018/07/21/python学习之循环判断/</id>
+    <published>2018-07-21T08:35:25.000Z</published>
+    <updated>2018-08-01T04:08:42.706Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-条件判断"><a href="#1-条件判断" class="headerlink" title="1.条件判断"></a>1.条件判断</h2><p>Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:<br><a id="more"></a><br><img src="https://i.imgur.com/V3zhCzN.jpg" alt=""><br>下面举个实例简要说一下其功能：<br>a = float(input(‘请输入成绩：’))<br>if a &gt;= 90:<br>print(‘等级为A’)<br>elif a &gt;=80:<br>print(‘等级为B’)<br>elif a &gt;= 70:<br>print(‘等级为C’)<br>else:<br>print(‘等级为D’)<br>注意：<br>1、每个条件后面要使用冒号 :，表示接下来是满足条件后要执行的语句块。2、使用缩进来划分语句块，相同缩进数的语句在一起组成一个语句块。<br>另外还要注意if的嵌套，if语句中在执行一次if，只有在满足第1个条件和第2个条件时才能执行2中的内容。<br><!-- more -->  </p><h2 id="2-循环"><a href="#2-循环" class="headerlink" title="2.循环"></a>2.循环</h2><p>为了让计算机能计算成千上万次的重复运算，我们就需要循环语句。<br>Python的循环有两种，一种是for…in循环，第二种循环是while循环，只要条件满足，就不断循环，条件不满足时退出循环。<br>1.while循环<br>Python中while语句的一般形式：先判断条件是否满足，满足后就执行，插入一个实例<br><img src="https://i.imgur.com/CPZaEmA.png" alt=""><br>2.for循环<br>Python中 for循环可以遍历任何序列的项目，如一个列表或者一个字符串。<br><img src="https://i.imgur.com/Xd2JDRY.png" alt=""><br>3.break 和 continue<br>break用于结束整个循环; continue结束本次循环，紧接着继续下一循环,且只对最近的一层循环起作用。<br>另外，也需注意while和for循环的嵌套使用，上面第一个例子已有while的示范；for循环嵌套一般用于多重遍历，比如列表里嵌套其他序列，那么我用两重遍历即可取到内层值了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-条件判断&quot;&gt;&lt;a href=&quot;#1-条件判断&quot; class=&quot;headerlink&quot; title=&quot;1.条件判断&quot;&gt;&lt;/a&gt;1.条件判断&lt;/h2&gt;&lt;p&gt;Python条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。可以通过下图来简单了解条件语句的执行过程:&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python学习之数据类型</title>
+    <link href="http://yoursite.com/2018/07/20/Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2018/07/20/Python学习之数据类型/</id>
+    <published>2018-07-20T00:35:25.000Z</published>
+    <updated>2018-08-01T04:08:35.187Z</updated>
+    
+    <content type="html"><![CDATA[<p>Python中有六个标准的数据类型，它们分别为<br>Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。<br><a id="more"></a><br>我们在编写代码无时无刻不在与这些数据类型打交道，所以必须对它们的结构和常用方法非常熟悉。    </p><h2 id="1-数字类型"><a href="#1-数字类型" class="headerlink" title="1.数字类型"></a>1.数字类型</h2><p>常用到主要是int、float、bool（布尔）、complex（复数）这几种，一般用于给变量赋值和计算。算术运算符如下：<br><img src="https://i.imgur.com/jjIB0do.png" alt="">   </p><h2 id="2-字符串类型"><a href="#2-字符串类型" class="headerlink" title="2.字符串类型"></a>2.字符串类型</h2><p>Python中的字符串用单引号 ‘ 或双引号 “ 括起来，双引号或者单引号中的数据，就是字符串。<br><strong>字符串输入</strong>：使用input()函数从外部获取，通过它能够完成从键盘获取数据，然后保存到指定的变量中；这里要注意input获取的数据，都以字符串的方式进行保存，即使输入的是<strong>数字</strong>，那么也是以字符串方式保存。<br><strong>字符串输出:</strong> 以名字为例，<code>name = &#39;huhua&#39;</code> , <code>print(&quot;姓名：%s&quot;%name)</code><br>这样可以输出我们定义的字符串，另外这里讲一下格式化输出，%s,%d,%f分别对应到字符串，数字，以及小数的输出。python3中使用format()方法， <code>print(&#39;{0} 和 {1}&#39;.format(&#39;Google&#39;, &#39;Runoob&#39;))</code>  </p><p>字符串常用操作和方法：<br><strong>1. 下标索引</strong><br>下标从0开始起，name = ‘huhua’，name[0]会返回第一个字符h。<br><strong>2. 切片</strong><br>切片是指对操作的对象截取其中一部分的操作。字符串、列表、元组都支持切片操作。<br>切片的语法：[起始:结束:步长]，截取内容为起始位到结束位前一位，切片可以正序来切，也可反过来切，例如name[:3:1]取前三位；name[-1::-1]为反着取，步长的符号决定是正着取还是反着取。<br><strong>3. find，index</strong><br>检测 str 是否包含在 mystr中，如果是，则返回开始的索引值，否则返回-1 。 语法：mystr.find(str, start=0, end=len(mystr))，后面两个参数可省略<br><strong>4. count</strong><br>  返回 str在start和end之间 在 mystr里面出现的次数；语法为mystr.count(str, start=0, end=len(mystr))，当字符串中有重复的字符时，可用count来计算该字符出现的次数。<br><strong>5. replace</strong><br>把 mystr 中的 str1 替换成 str2,如果 count 指定，则替换不超过 count 次.<br>mystr.replace(str1, str2,  mystr.count(str1))。<br><strong>6. split</strong><br>以 str 为分隔符切片 mystr，分隔符会被切掉，如果 maxsplit有指定值，则仅分隔 maxsplit 个子字符串，返回的是一个列表；语法：mystr.split(str=” “, 2) ，这里注意，split()方法如果不指定参数会默认以\n,\t,空格作为分隔符，一般我们在处理网页多行文本信息时会用到。<br><strong>7. capitalize，title</strong><br>前者是将字符串第一个字母大写，后者时将每个单词首字母大写。<br><strong>8. startswith，endswith</strong><br>mystr.startswith(obj)，检查字符串是否是以 obj 开头, 是则返回 True，否则返回 False；mystr.endswith(obj)，检查字符串是否以obj结束，如果是返回True,否则返回 False。<br><strong>9. lower，upper</strong><br>mystr.lower() ，转换 mystr 中所有大写字符为小写；后者时小写转化为大写。<br><strong>10. ljust, rjust, center</strong><br>mystr.ljust(width),返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串;后两者为右对齐和中间对齐。<br><strong>11. lstrip, rstrip, strip</strong><br>mystr.lstrip(),删除 mystr 左边的空白字符；strip()方法可以删除字符串两端的空白字符，比如\n,\t，这个在后续爬虫文本处理时常用到。<br><strong>12. isalpha，isdigit，isalnum，isspace</strong><br>mystr.isalpha()：如果 mystr 所有字符都是字母 则返回 True,否则返回 False<br>mystr.isdigit()：如果 mystr 只包含数字则返回 True 否则返回 False.<br>mystr.isalnum()：如果 mystr 所有字符都是字母或数字则返回 True,否则返回 False<br>mystr.isspace()：如果 mystr 中只包含空格，则返回 True，否则返回 False.<br><strong>13. join </strong><br>mystr.join(str)，mystr 中每个字符后面插入str,构造出一个新的字符串，join方法常用来构造新字符串，比如有一个列表li = [‘hello’, ‘my’, ‘girl’],使用’ ‘.join(li)则可以将列表中字符串连接起来，结果为hello my girl，这个也是常用到的。  </p><h2 id="3-列表类型"><a href="#3-列表类型" class="headerlink" title="3.列表类型"></a>3.列表类型</h2><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。<br>Python有6个序列的内置类型，但最常见的是列表和元组。<br>序列都可以进行的操作包括索引，切片，加，乘，检查成员。<br>此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。<br>列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。<br>列表的数据项不需要具有相同的类型<br>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。如下所示：<br>list = [‘Google’, ‘华仔’, 1997, 2000]<br>列表常用的操作：<br><strong>1. 添加元素(“增”append, extend, insert)</strong><br>通过append可以向列表添加元素，如list.append(‘haha’);通过extend可以将另一个集合中的元素逐一添加到列表中,如list.extend([1,2]),这里注意extend会将集合中的元素转化为list元素后分开放入其中，其结果为[‘Google’, ‘华仔’, 1997, 2000，1，2];insert(index, object) 在指定位置index前插入元素object。<br><strong>2. 修改元素(“改”)</strong><br>修改元素的时候，要通过下标来确定要修改的是哪个元素，然后才能进行修改，如list[0]=’python’，list中第一个元素会被修改。<br><strong>3. 查找元素(“查”in, not in, index, count)</strong><br>python中查找的常用方法为：<br>in（存在）,如果存在那么结果为true，否则为false；<br>not in（不存在），如果不存在那么结果为true，否则false。index和count与字符串中的用法相同。<br><strong>4. 删除元素(“删”del, pop, remove)</strong><br>del：根据下标进行删除， del list[0]<br>pop：删除最后一个元素， list.pop()<br>remove：根据元素的值进行删除,  list.remove(‘Google’)<br><strong>5. 排序(sort, reverse)</strong><br>sort方法是将list按特定顺序重新排列，默认为由小到大，参数reverse=True可改为倒序，由大到小。reverse方法是将list逆置。  这里注意sort和reverse不返回值。<br><strong>6. 列表的嵌套</strong><br>一个列表中的元素又是一个列表，那么这就是列表的嵌套，如  </p><blockquote><pre><code>schoolNames = [[&apos;北京大学&apos;,&apos;清华大学&apos;],[&apos;南开大学&apos;,&apos;天津大学&apos;,&apos;天津师范大学&apos;],[&apos;山东大学&apos;,&apos;中国海洋大学&apos;]]  </code></pre></blockquote><h2 id="4-元组"><a href="#4-元组" class="headerlink" title="4.元组"></a>4.元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。元组使用小括号，列表使用方括号。Tuple = (‘et’,77,99.9)<br><strong>1. 元组访问</strong><br>直接通过下标，Tuple[0]对应的为et这个元素。<br><strong>2. 元组的内置函数count, index</strong><br>index和count与字符串和列表中的用法相同，这里不过多做介绍了。<br>注意，当元组中只有一个元素时，接的价格逗号来区分，比如tuple(1,)。</p><h2 id="5-字典"><a href="#5-字典" class="headerlink" title="5.字典"></a>5.字典</h2><p>字典是另一种可变容器模型，且可存储任意类型对象。<br>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：  </p><blockquote><pre><code>dict = {key1 : value1, key2 : value2 }  </code></pre><p>键必须是唯一的，但值则不必。值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。<br>字典的常见操作1<br><strong><1>修改元素</1></strong>：字典的每个元素中的数据是可以修改的，只要通过key找到，即可修改，如dict[key1] = new便可更新其值。<br><strong><2>添加元素</2></strong>：如果在使用 变量名[‘键’] = 数据 时，这个“键”在字典中，不存在，那么就会新增这个元素。<br><strong><3>删除元素</3></strong>：del删除指定的元素，del dict[key1];del删除整个字典,del dict.   clear清空整个字典, dict.clear()。<br>字典的常见操作2<br><strong><1>len(dict)</1></strong>：测量字典中，键值对的个数<br><strong><2>dict.keys()</2></strong>：返回一个包含字典所有KEY的列表<br><strong><3>dict.values()</3></strong>：返回一个包含字典所有value的列表<br><strong><4>dict.items()</4></strong>：返回一个包含所有（键，值）元祖的列表  </p></blockquote><h2 id="6-集合"><a href="#6-集合" class="headerlink" title="6.集合"></a>6.集合</h2><p>集合（set）是一个无序不重复元素的序列,基本功能包括关系测试和消除重复元素。<br>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。创建格式：<br>parame = {value01,value02,…}或者set(value)<br>集合的基本操作<br><strong>1.添加元素</strong><br>s.add(x)，将元素 x 添加到集合 s 中，如果元素已存在，则不进行任何操作。还有一个方法，也可以添加元素，且参数可以是列表，元组，字典等，语法格式如下：<br>s.update(x)，x 可以有多个，用逗号分开<br><strong>2.移除元素</strong><br>s.remove(x)，将元素 x 添加到集合 s 中移除，如果元素不存在，则会发生错误。<br>此外还有一个方法也是移除集合中的元素，且如果元素不存在，不会发生错误。格式如下所示：s.discard(x)。<br><strong>3.清空集合</strong><br>s.clear()，清空指定集合s。</p><h2 id="7-公共方法"><a href="#7-公共方法" class="headerlink" title="7.公共方法"></a>7.公共方法</h2><p><strong>1.遍历</strong><br>通过for … in …:的语法结构，我们可以遍历字符串、列表、元组、字典等数据结构。  </p><blockquote><p>在字典中遍历时，关键字和对应的值可以使用 items() 方法同时解读出来.<br>在序列中遍历时，索引位置和对应值可以使用 enumerate() 函数同时得到.<br>同时遍历两个或更多的序列，可以使用 zip() 组合.<br>要反向遍历一个序列，首先指定这个序列，然后调用 reversed() 函数.<br>要按顺序遍历一个序列，使用 sorted() 函数返回一个已排序的序列，并不修改原值.    </p></blockquote><p><strong>2.运算符</strong><br><img src="https://i.imgur.com/Rn7JbLo.png" alt=""><br>3.python内置函数<br><img src="https://i.imgur.com/Y8zvoT5.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Python中有六个标准的数据类型，它们分别为&lt;br&gt;Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
+    
+    
+      <category term="数据类型" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    
+  </entry>
+  
+</feed>
