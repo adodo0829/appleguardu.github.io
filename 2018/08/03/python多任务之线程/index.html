@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="多线程," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。">
+<meta name="keywords" content="多线程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python多任务之线程">
+<meta property="og:url" content="http://yoursite.com/2018/08/03/python多任务之线程/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/x67NBCR.png">
+<meta property="og:image" content="https://i.imgur.com/rQH2Xtt.png">
+<meta property="og:image" content="https://i.imgur.com/iX50xhn.png">
+<meta property="og:image" content="https://i.imgur.com/SQZGiNr.png">
+<meta property="og:image" content="https://i.imgur.com/2H0gsyC.png">
+<meta property="og:image" content="https://i.imgur.com/kCgcdgP.png">
+<meta property="og:image" content="https://i.imgur.com/A27ZSCE.png">
+<meta property="og:image" content="https://i.imgur.com/RmnqU61.png">
+<meta property="og:image" content="https://i.imgur.com/0wX6ZEp.png">
+<meta property="og:image" content="https://i.imgur.com/MyvGbrW.png">
+<meta property="og:image" content="https://i.imgur.com/BxN3GGz.png">
+<meta property="og:image" content="https://i.imgur.com/Xb4rFqx.png">
+<meta property="og:image" content="https://i.imgur.com/5q20yT9.png">
+<meta property="og:image" content="https://i.imgur.com/lD7PF52.png">
+<meta property="og:image" content="https://i.imgur.com/lwoA6Hk.png">
+<meta property="og:image" content="https://i.imgur.com/3MXMmEz.png">
+<meta property="og:image" content="https://i.imgur.com/aIvKYxg.png">
+<meta property="og:image" content="https://i.imgur.com/lwVSBjD.png">
+<meta property="og:image" content="https://i.imgur.com/klbL1LC.png">
+<meta property="og:image" content="https://i.imgur.com/m07r1f6.png">
+<meta property="og:image" content="https://i.imgur.com/meBycn5.png">
+<meta property="og:updated_time" content="2018-08-03T15:37:04.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python多任务之线程">
+<meta name="twitter:description" content="进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。">
+<meta name="twitter:image" content="https://i.imgur.com/x67NBCR.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/03/python多任务之线程/"/>
+
+
+
+
+
+  <title>python多任务之线程 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/03/python多任务之线程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python多任务之线程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-03T21:46:35+08:00">
+                2018-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统编程/" itemprop="url" rel="index">
+                    <span itemprop="name">系统编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。<br><a id="more"></a>  </p>
+<h2 id="1-threading模块使用"><a href="#1-threading模块使用" class="headerlink" title="1.threading模块使用"></a>1.threading模块使用</h2><p>python的thread模块是比较底层的模块，python的threading模块是对thread做了一些包装的，可以更加方便的被使用。<br><strong>1.1单线程执行</strong><br><img src="https://i.imgur.com/x67NBCR.png" alt=""></p>
+<p><strong>1.2多线程执行</strong><br><img src="https://i.imgur.com/rQH2Xtt.png" alt=""><br>经过对比，可以明显看出使用了多线程并发的操作，花费时间要短很多。  </p>
+<p><strong>1.3主线程,子线程执行顺序</strong><br><img src="https://i.imgur.com/iX50xhn.png" alt=""></p>
+<h2 id="2-线程执行代码的封装"><a href="#2-线程执行代码的封装" class="headerlink" title="2.线程执行代码的封装"></a>2.线程执行代码的封装</h2><p><strong>2.1线程子类</strong><br>通过使用threading模块能完成多任务的程序开发，为了让每个线程的封装性更完美，所以使用threading模块时，往往会定义一个新的子类class，只要继承threading.Thread就可以了，然后重写run方法.<br><img src="https://i.imgur.com/SQZGiNr.png" alt=""><br>python的threading.Thread类有一个run方法，用于定义线程的功能函数，可以在自己的线程类中覆盖该方法。<br>而创建自己的线程实例后，通过Thread类的start方法，可以启动该线程，交给python虚拟机进行调度，当该线程获得执行的机会时，就会调用run方法执行线程。<br><strong>2.2线程的执行顺序</strong><br><img src="https://i.imgur.com/2H0gsyC.png" alt=""><br>从代码和执行结果我们可以看出，多线程程序的执行顺序是不确定的。<br>当执行到sleep语句时，线程将被阻塞（Blocked），到sleep结束后，线程进入就绪（Runnable）状态，等待调度。而线程调度将自行选择一个线程执行。上面的代码中只能保证每个线程都运行完整个run函数，但是线程的启动顺序、run函数中每次循环的执行顺序都不能确定。  </p>
+<p><strong>总结</strong><br>每个线程一定会有一个名字，尽管上面的例子中没有指定线程对象的name，但是python会自动为线程指定一个名字。<br>当线程的run()方法结束时该线程完成。<br>无法控制线程调度程序，但可以通过别的方式来影响线程调度的方式。<br>线程的几种状态:<br>新建，就绪，运行，等待（堵塞），死亡  </p>
+<h2 id="3-多线程-共享全局变量"><a href="#3-多线程-共享全局变量" class="headerlink" title="3.多线程-共享全局变量"></a>3.多线程-共享全局变量</h2><p>实例1：<br><img src="https://i.imgur.com/kCgcdgP.png" alt=""></p>
+<p>实例2：列表当做实参传递到线程中<br><img src="https://i.imgur.com/A27ZSCE.png" alt=""><br>在一个进程内的所有线程共享全局变量，能够在不适用其他方式的前提下完成多线程之间的数据共享（这点要比多进程要好）<br>缺点就是，线程是对全局变量随意遂改可能造成多线程之间对全局变量的混乱（即线程非安全）</p>
+<h2 id="4-进程-线程对比"><a href="#4-进程-线程对比" class="headerlink" title="4.进程,线程对比"></a>4.进程,线程对比</h2><p><strong>4.1功能</strong>  </p>
+<blockquote>
+<pre><code>进程:能够完成多任务，比如 在一台电脑上能够同时运行多个QQ
+线程:能够完成多任务，比如 一个QQ中的多个聊天窗口
+</code></pre></blockquote>
+<p><strong>4.2定义的不同</strong><br>进程是系统进行资源分配和调度的一个独立单位.<br>线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.</p>
+<p><strong>4.3区别</strong><br>一个程序至少有一个进程,一个进程至少有一个线程.线程的划分尺度小于进程(资源比进程少)，使得多线程程序的并发性高。进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率;线线程不能够独立执行，必须依存在进程中</p>
+<p><strong>4.4优缺点</strong><br>线程和进程在使用上各有优缺点：线程执行开销小，但不利于资源的管理和保护；而进程正相反。</p>
+<h2 id="5-同步的概念"><a href="#5-同步的概念" class="headerlink" title="5.同步的概念"></a>5.同步的概念</h2><p>在理解同步之前，先看一个问题。多线程开发可能遇到的问题：<br>假设两个线程t1和t2都要对num=0进行增1运算，t1和t2都各对num修改10次，num的最终的结果应该为20。但是由于是多线程访问，有可能出现下面情况：<br>在num=0时，t1取得num=0。此时系统把t1调度为”sleeping”状态，把t2转换为”running”状态，t2也获得num=0。然后t2对得到的值进行加1并赋给num，使得num=1。然后系统又把t2调度为”sleeping”，把t1转为”running”。线程t1又把它之前得到的0加1后赋值给num。这样，明明t1和t2都完成了1次加1工作，但结果仍然是num=1。<br>下面我们就来测试一下：<br><img src="https://i.imgur.com/RmnqU61.png" alt=""><br><img src="https://i.imgur.com/0wX6ZEp.png" alt=""></p>
+<p>问题产生的原因就是没有控制多个线程对同一资源的访问，对数据造成破坏，操作系统在调度一个线程时，执行过程出现暂停，执行另一个线程<br>使得线程运行的结果不可预期。这种现象称为“线程不安全”。</p>
+<p><strong>5.1何为同步</strong><br>同步就是协同步调，按预定的先后次序进行运行。<br>如进程、线程同步，可理解为进程或线程A和B一块配合，A执行到一定程度时要依靠B的某个结果，于是停下来，示意B运行; B依言执行，再将结果给A; A再继续操作。  </p>
+<p><strong>5.2解决问题的思路</strong><br>对于上述提出的那个计算错误的问题，可以通过线程同步来进行解决思路，如下:</p>
+<p>1.系统调用t1，然后获取到num的值为0，此时上一把锁，即不允许其他现在操作num。<br>2.对num的值进行+1<br>3.解锁，此时num的值为1，其他的线程就可以使用num了，而且是num的值不是0而是1<br>4.同理其他线程在对num进行修改时，都要先上锁，处理完后再解锁，在上锁的整个过程中不允许其他线程访问，就保证了数据的正确性  </p>
+<p><strong>5.3互斥锁</strong><br>当多个线程几乎同时修改某一个共享数据的时候，需要进行同步控制线程同步能够保证多个线程安全访问竞争资源，最简单的同步机制是引入互斥锁。</p>
+<p>互斥锁为资源引入一个状态：锁定/非锁定。</p>
+<p>某个线程要更改共享数据时，先将其锁定，此时资源的状态为“锁定”，其他线程不能更改；直到该线程释放资源，将资源的状态变成“非锁定”，其他的线程才能再次锁定该资源。互斥锁保证了每次只有一个线程进行写入操作，从而保证了多线程情况下数据的正确性。<br>threading模块中定义了Lock类，可以方便的处理锁定：</p>
+<blockquote>
+<pre><code>#创建锁
+mutex = threading.Lock()
+#锁定
+mutex.acquire([blocking])
+#释放
+mutex.release()
+</code></pre><p>其中，锁定方法acquire可以有一个blocking参数。<br>如果设定blocking为True，则当前线程会堵塞，直到获取到这个锁为止（如果没有指定，那么默认为True）<br>如果设定blocking为False，则当前线程不会堵塞<br>还有一个timeout参数，用来设定超时时间的。  </p>
+</blockquote>
+<p><img src="https://i.imgur.com/MyvGbrW.png" alt=""><br><img src="https://i.imgur.com/BxN3GGz.png" alt=""><br>可以看到，加入互斥锁后，运行结果与预期相符。  </p>
+<p>过程分析：<br>上锁解锁过程<br>当一个线程调用锁的acquire()方法获得锁时，锁就进入“locked”状态。每次只有一个线程可以获得锁。如果此时另一个线程试图获得这个锁，该线程就会变为“blocked”状态，称为“阻塞”，直到拥有锁的线程调用锁的release()方法释放锁之后，锁进入“unlocked”状态。<br>线程调度程序从处于同步阻塞状态的线程中选择一个来获得锁，并使得该线程进入运行（running）状态。</p>
+<p>总结<br>锁的好处：确保了某段关键代码只能由一个线程从头到尾完整地执行<br>锁的坏处：阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了<br>由于可以存在多个锁，不同的线程持有不同的锁，并试图获取对方持有的锁时，可能会造成死锁  </p>
+<h2 id="6-死锁"><a href="#6-死锁" class="headerlink" title="6.死锁"></a>6.死锁</h2><p>在线程间共享多个资源的时候，如果两个线程分别占有一部分资源并且同时等待对方的资源，就会造成死锁。<br>死锁实例：<br><img src="https://i.imgur.com/Xb4rFqx.png" alt=""><br><img src="https://i.imgur.com/5q20yT9.png" alt=""><br>程序会进入死锁状态，如何避免呢？ 1.程序设计前要尽量避免，减少变量交叉调用 2.添加超时时间(timeout)等。  </p>
+<h2 id="7-多线程-非共享数据"><a href="#7-多线程-非共享数据" class="headerlink" title="7.多线程-非共享数据"></a>7.多线程-非共享数据</h2><p>对于全局变量，在多线程中要格外小心，否则容易造成数据错乱的情况发生;那么对于非全局变量我们怎么处理呢？<br><img src="https://i.imgur.com/lD7PF52.png" alt=""></p>
+<p>在多线程开发中，全局变量是多个线程都共享的数据，而局部变量等是各自线程的，是非共享的。  </p>
+<h2 id="8-同步应用"><a href="#8-同步应用" class="headerlink" title="8.同步应用"></a>8.同步应用</h2><p><strong>8.1多个线程有序执行</strong><br>使用互斥锁完成多个任务，有序的进程工作，这就是线程的同步。<br><img src="https://i.imgur.com/lwoA6Hk.png" alt=""><br><img src="https://i.imgur.com/3MXMmEz.png" alt=""></p>
+<h2 id="9-生产者与消费者模式"><a href="#9-生产者与消费者模式" class="headerlink" title="9.生产者与消费者模式"></a>9.生产者与消费者模式</h2><p>为什么要使用生产者和消费者模式？  </p>
+<p>在线程世界里，生产者就是生产数据的线程，消费者就是消费数据的线程。在多线程开发当中，如果生产者处理速度很快，而消费者处理速度很慢，那么生产者就必须等待消费者处理完，才能继续生产数据。同样的道理，如果消费者的处理能力大于生产者，那么消费者就必须等待生产者。为了解决这个问题于是引入了生产者和消费者模式。</p>
+<p>什么是生产者消费者模式？  </p>
+<p>生产者消费者模式是通过一个容器来解决生产者和消费者的强耦合问题。生产者和消费者彼此之间不直接通讯，而通过阻塞队列来进行通讯，所以生产者生产完数据之后不用等待消费者处理，直接扔给阻塞队列，消费者不找生产者要数据，而是直接从阻塞队列里取，阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。<br><img src="https://i.imgur.com/aIvKYxg.png" alt=""><br>这个阻塞队列就是用来给生产者和消费者<strong>解耦</strong>的。</p>
+<p>队列Queue的说明：</p>
+<blockquote>
+<pre><code>对于Queue，在多线程通信之间扮演重要的角色
+添加数据到队列中，使用put()方法
+从队列中取数据，使用get()方法
+判断队列中是否还有数据，使用qsize()方法
+</code></pre></blockquote>
+<p>实例：<br><img src="https://i.imgur.com/lwVSBjD.png" alt=""><br><img src="https://i.imgur.com/klbL1LC.png" alt=""></p>
+<h2 id="10-ThreadLocal"><a href="#10-ThreadLocal" class="headerlink" title="10.ThreadLocal"></a>10.ThreadLocal</h2><p>在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。为了解决这个问题，我们用到ThreadLocal。<br><img src="https://i.imgur.com/m07r1f6.png" alt="">  </p>
+<p>全局变量local_school就是一个ThreadLocal对象，每个Thread对它都可以读写student属性，但互不影响。你可以把local_school看成全局变量，但每个属性如local_school.student都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。</p>
+<p>可以理解为全局变量local_school是一个dict，不但可以用local_school.student，还可以绑定其他变量，如local_school.teacher等等。ThreadLocal最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到的处理函数都可以非常方便地访问这些资源。</p>
+<p>一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题</p>
+<h2 id="11-异步"><a href="#11-异步" class="headerlink" title="11.异步"></a>11.异步</h2><p>同步是按顺序执行，执行完一个再执行下一个，需要等待、协调运行。<br>与同步相反，异步就是彼此独立,在等待某事件的过程中继续做自己的事，不需要等待这一事件完成后再工作。<br><img src="https://i.imgur.com/meBycn5.png" alt=""><br>从返回结果看，父进程在执行time.sleep(5)时，被系统分配去做了其他事情(执行callback)，做完后才回来执行print</p>
+<h2 id="12-GIL-全局解释器锁"><a href="#12-GIL-全局解释器锁" class="headerlink" title="12.GIL-全局解释器锁"></a>12.GIL-全局解释器锁</h2><p>Python代码的执行由Python 虚拟机(也叫解释器主循环，CPython版本)来控制，Python 在设计之初就考虑到要在解释器的主循环中，同时只有一个线程在执行，即在任意时刻，只有一个线程在解释器中运行。这大大影响了python多线程的性能。而这个解释器锁由于历史原因，现在几乎无法消除。</p>
+<p>python GIL 之所以会影响多线程等性能，是因为在多线程的情况下，只有当线程获得了一个全局锁的时候，那么该线程的代码才能运行，而全局锁只有一个，所以使用python多线程，在同一时刻也只有一个线程在运行，因此在即使在多核的情况下也只能发挥出单核的性能。</p>
+<p>既然python在同一时刻下只能运行一个线程的代码，那线程之间是如何调度的呢？ </p>
+<p>对于有io操作的线程，当一个线程在做io操作的时候，因为io操作不需要cpu，所以，这个时候，python会释放python全局锁，这样其他需要运行的线程就会使用该锁。 </p>
+<p>对于cpu密集型的线程，比如一个线程可能一直需要使用cpu做计算，那么python中会有一个执行指令的计数器，当一个线程执行了一定数量的指令时，该线程就会停止执行并让出当前的锁，这样其他的线程就可以执行代码了。 </p>
+<p>由上面可知，至少有两种情况python会做线程切换，一是一但有IO操作时，会有线程切换，二是当一个线程连续执行了一定数量的指令时，会出现线程切换。当然此处的线程切换不一定就一定会切换到其他线程执行，因为如果当前线程 优先级比较高的话，可能在让出锁以后，又继续获得锁，并优先执行。</p>
+<p>在做科学计算的时候是用的单线程，因为这种计算是需要CPU一直做计算的，如果用多线程反而会降低计算速度。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/02/python多任务之进程/" rel="next" title="python多任务之进程">
+                <i class="fa fa-chevron-left"></i> python多任务之进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-threading模块使用"><span class="nav-number">1.</span> <span class="nav-text">1.threading模块使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线程执行代码的封装"><span class="nav-number">2.</span> <span class="nav-text">2.线程执行代码的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-多线程-共享全局变量"><span class="nav-number">3.</span> <span class="nav-text">3.多线程-共享全局变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-进程-线程对比"><span class="nav-number">4.</span> <span class="nav-text">4.进程,线程对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-同步的概念"><span class="nav-number">5.</span> <span class="nav-text">5.同步的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-死锁"><span class="nav-number">6.</span> <span class="nav-text">6.死锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-多线程-非共享数据"><span class="nav-number">7.</span> <span class="nav-text">7.多线程-非共享数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-同步应用"><span class="nav-number">8.</span> <span class="nav-text">8.同步应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-生产者与消费者模式"><span class="nav-number">9.</span> <span class="nav-text">9.生产者与消费者模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-ThreadLocal"><span class="nav-number">10.</span> <span class="nav-text">10.ThreadLocal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-异步"><span class="nav-number">11.</span> <span class="nav-text">11.异步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-GIL-全局解释器锁"><span class="nav-number">12.</span> <span class="nav-text">12.GIL-全局解释器锁</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
