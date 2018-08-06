@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-04T13:04:00.847Z</updated>
+  <updated>2018-08-06T13:27:27.164Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JavaScript基础语法</title>
+    <link href="http://yoursite.com/2018/08/06/JavaScript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/08/06/JavaScript基础语法/</id>
+    <published>2018-08-06T12:43:24.000Z</published>
+    <updated>2018-08-06T13:27:27.164Z</updated>
+    
+    <content type="html"><![CDATA[<p>JavaScript是运行在浏览器端的脚步语言，JavaScript主要解决的是前端与用户交互的问题，包括使用交互与数据交互；JavaScript是浏览器解释执行的，使浏览器页面呈现出特定的行为。<br><a id="more"></a>  </p><h2 id="1-JavaScript嵌入页面的方式"><a href="#1-JavaScript嵌入页面的方式" class="headerlink" title="1.JavaScript嵌入页面的方式"></a>1.JavaScript嵌入页面的方式</h2><p><strong>1.1行间事件（主要用于事件）</strong>  </p><blockquote><pre><code>&lt;input type=&quot;button&quot; name=&quot;&quot; onclick=&quot;aler(&apos;ok！&apos;);&quot;&gt;  </code></pre></blockquote><p><strong>1.2页面script标签嵌入</strong>  </p><blockquote><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;          var a = &apos;hello！&apos;;  alert(a);&lt;/script&gt;  </code></pre></blockquote><p><strong>1.3外部引入</strong></p><blockquote><pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;js/index.js&quot;&gt;&lt;/script&gt;</code></pre></blockquote><h2 id="2-变量"><a href="#2-变量" class="headerlink" title="2.变量"></a>2.变量</h2><p>JavaScript 是一种弱类型语言，javascript的变量类型由它的值来决定。 定义变量需要用关键字 ‘var’。<br><strong>2.1变量类型</strong><br>5种基本数据类型：<br>number、string、boolean、undefined、null</p><p>1种复合类型：<br>object</p><p><strong>2.2变量、函数、属性、函数参数命名规范</strong><br>1.区分大小写</p><p>2.第一个字符必须是字母、下划线（_）或者美元符号（$)</p><p>3.其他字符可以是字母、下划线、美元符或数字  </p><h2 id="2-3元素属性操作"><a href="#2-3元素属性操作" class="headerlink" title="2.3元素属性操作"></a>2.3元素属性操作</h2><p>可以使用内置对象document上的getElementById方法来获取页面上设置了id属性的元素，获取到的是一个html对象，然后将它赋值给一个变量。<br><img src="https://i.imgur.com/8EPx4l3.png" alt=""><br>获取的页面元素，就可以对页面元素的属性进行操作，属性的操作包括属性的读和写。<br>操作属性的方法  </p><blockquote><pre><code>1 “.” 操作2 “[ ]”操作</code></pre></blockquote><p>属性写法</p><blockquote><pre><code>1、html的属性和js里面属性写法一样2、“class” 属性写成 “className”3、“style” 属性里面的属性，有横杠的改成驼峰式，比如：“font-size”，改成”style.fontSize”  </code></pre></blockquote><p><img src="https://i.imgur.com/uLkjIe2.png" alt=""></p><p><img src="https://i.imgur.com/hxo7iZn.png" alt=""></p><p><img src="https://i.imgur.com/46MCQHv.png" alt=""></p><h2 id="3-函数"><a href="#3-函数" class="headerlink" title="3.函数"></a>3.函数</h2><p>函数就是重复执行的代码片。  </p><p><strong>3.1函数定义与执行</strong><br><img src="https://i.imgur.com/FxoRgqW.png" alt=""></p><p><strong>3.2变量与函数预解析</strong><br>JavaScript解析过程分为两个阶段，先是编译阶段，然后执行阶段，在编译阶段会将function定义的函数提前，并且将var定义的变量声明提前，将它赋值为undefined。<br><img src="https://i.imgur.com/FklDbHT.png" alt=""></p><p><strong>3.3提取行间事件</strong><br>在html行间调用的事件可以提取到javascript中调用，从而做到结构与行为分离。<br><img src="https://i.imgur.com/H1RHnep.png" alt=""></p><p><strong>3.4匿名函数</strong><br>定义的函数可以不给名称，这个叫做匿名函数，可以将匿名函数直接赋值给元素绑定的事件来完成匿名函数的调用。<br><img src="https://i.imgur.com/0OikuMg.png" alt=""></p><p><strong>3.5函数传参</strong><br><img src="https://i.imgur.com/HtgTIl5.png" alt=""></p><p><strong>3.6 return</strong><br>函数中’return’关键字的作用：</p><blockquote><pre><code>1、返回函数执行的结果2、结束函数的运行3、阻止默认行为</code></pre></blockquote><p><img src="https://i.imgur.com/bG7Mv99.png" alt=""></p><h2 id="4-条件语句"><a href="#4-条件语句" class="headerlink" title="4.条件语句"></a>4.条件语句</h2><p>通过条件来控制程序的走向，就需要用到条件语句。<br><img src="https://i.imgur.com/T4pE7nQ.png" alt=""></p><h2 id="5-数组及操作方法"><a href="#5-数组及操作方法" class="headerlink" title="5.数组及操作方法"></a>5.数组及操作方法</h2><p>数组就是一组数据的集合，javascript中，数组里面的数据可以是不同类型的。  </p><p><strong>5.1定义数组的方法</strong>  </p><blockquote><pre><code>//对象的实例创建 var aList = new Array(1,2,3);//直接量创建var aList2 = [1,2,3,&apos;asd&apos;];</code></pre></blockquote><p><strong>5.2操作数组中数据的常用方法</strong><br><img src="https://i.imgur.com/AEeTdkI.png" alt=""></p><h2 id="6-循环语句"><a href="#6-循环语句" class="headerlink" title="6.循环语句"></a>6.循环语句</h2><p>程序中进行有规律的重复性操作，需要用到循环语句。主要以 for 循环为主。  </p><p>实例1：<br><img src="https://i.imgur.com/TNFemIb.png" alt=""></p><p>实例2：<br><img src="https://i.imgur.com/0gKNFFn.png" alt=""></p><h2 id="7-字符串处理方法"><a href="#7-字符串处理方法" class="headerlink" title="7.字符串处理方法"></a>7.字符串处理方法</h2><p><img src="https://i.imgur.com/WnrsXI6.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JavaScript是运行在浏览器端的脚步语言，JavaScript主要解决的是前端与用户交互的问题，包括使用交互与数据交互；JavaScript是浏览器解释执行的，使浏览器页面呈现出特定的行为。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>python多任务之协程</title>
