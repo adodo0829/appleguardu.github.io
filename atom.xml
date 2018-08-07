@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-07T01:54:59.449Z</updated>
+  <updated>2018-08-07T15:51:30.663Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>leetcode02-两数相加</title>
+    <link href="http://yoursite.com/2018/08/07/leetcode02-%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/"/>
+    <id>http://yoursite.com/2018/08/07/leetcode02-两数相加/</id>
+    <published>2018-08-07T13:11:58.000Z</published>
+    <updated>2018-08-07T15:51:30.663Z</updated>
+    
+    <content type="html"><![CDATA[<p>题目二：<br>给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。<br><a id="more"></a><br>示例：</p><blockquote><pre><code>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807</code></pre></blockquote><p>分析：<br>在这之前先把链表的知识复习一下，以单链表为例，它是链表中最简单的一种形式，它的每个节点包含两个域，一个信息域（元素域）和一个链接域。这个链接指向链表中的下一个节点，而最后一个节点的链接域则指向一个空值。<br><img src="https://i.imgur.com/SXv0O3O.png" alt=""></p><blockquote><pre><code>表元素域elem用来存放具体的数据。链接域next用来存放下一个节点的位置（python中的标识）变量p指向链表的头节点（首节点）的位置head，从p出发能找到表中的任意节点</code></pre></blockquote><p>链表的操作：</p><blockquote><pre><code>is_empty() 链表是否为空length() 链表长度travel() 遍历整个链表add(item) 链表头部添加元素append(item) 链表尾部添加元素insert(pos, item) 指定位置添加元素remove(item) 删除节点search(item) 查找节点是否存在</code></pre></blockquote><p>使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。<br><img src="https://i.imgur.com/b7iQwXf.png" alt=""></p><p>我们首先从最低有效位也就是列表l1和l2的表头开始相加。由于每位数字都应当处于0到9的范围内，我们计算两个数字的和时可能会出现“溢出”。例如，5 + 7 = 12。在这种情况下，我们会将当前位的数值设置为 2，并将进位 carry = 1带入下一次迭代。进位 carry 必定是 0 或 1，这是因为两个数字相加（考虑到进位）可能出现的最大和为 9 + 9 + 1 = 19。<br>我们考虑到了存在的进位情况，但是还可能出现链表长度不等，即两个加数位数不等。我们将题目拆分为两个情况，以三位数加五位数为例，前三位数和前三位数我们将进位carry初始化为0，遍历列表 l1 和 l2 直至到达它们的尾端，新列表l3就等于l1+l2+carry；carry满足大于10时进1。第四位第五位则是另一种情况；具体就是：前三位数范围内，对应位进行相加操作时附加上低位的进位；第四位第五位只用将该位加上低位的进位即可（或者理解成另一个三位数的高位为0）<br>执行代码如下：<br><img src="https://i.imgur.com/PnJsCoU.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;题目二：&lt;br&gt;给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
+    
+    
+      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript基础学习(二)</title>
+    <link href="http://yoursite.com/2018/08/07/JavaScript%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-%E4%BA%8C/"/>
+    <id>http://yoursite.com/2018/08/07/JavaScript基础学习-二/</id>
+    <published>2018-08-07T08:08:15.000Z</published>
+    <updated>2018-08-07T12:28:21.158Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-定时器"><a href="#1-定时器" class="headerlink" title="1.定时器"></a>1.定时器</h2><p>定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。<br><a id="more"></a>  </p><p><strong>1.1定时器类型及语法</strong>  </p><blockquote><pre><code>定时器：setTimeout  只执行一次的定时器 clearTimeout 关闭只执行一次的定时器setInterval  反复执行的定时器clearInterval 关闭反复执行的定时器</code></pre></blockquote><p>实例1：定时器制作时钟<br><img src="https://i.imgur.com/SWmiiF5.png" alt=""><br><img src="https://i.imgur.com/LusZz6q.png" alt=""></p><p>实例二：定时器制作倒计时<br><img src="https://i.imgur.com/WhsbnOW.png" alt="">  </p><h2 id="2-类型转换"><a href="#2-类型转换" class="headerlink" title="2.类型转换"></a>2.类型转换</h2><p><strong>2.1直接转换 parseInt() 与 parseFloat()</strong></p><blockquote><pre><code>alert(&apos;12&apos;+7); //弹出127alert( parseInt(&apos;12&apos;) + 7 );  //弹出19 alert( parseInt(5.6));  // 弹出5alert(&apos;5.6&apos;+2.3);  // 弹出5.62.3alert(parseFloat(&apos;5.6&apos;)+2.3);  // 弹出7.8999999999999995alert(0.1+0.2); //弹出 0.3000000000000004,改进方法如下alert((0.1*100+0.2*100)/100); //弹出0.3alert((parseFloat(&apos;5.6&apos;)*100+2.3*100)/100); //弹出7.9</code></pre></blockquote><p><strong>2.22、隐式转换 “==” 和 “-”</strong>  </p><blockquote><pre><code>if(&apos;3&apos;==3){alert(&apos;相等&apos;);} //弹出&apos;相等&apos;；‘==’会先转换成相同类型再比较</code></pre></blockquote><blockquote><pre><code>alert(&apos;10&apos;-3);  // 弹出7</code></pre></blockquote><p><strong>3.NaN 和 isNaN</strong><br>NaN: Not a Number<br>isNaN: 判断是否是非数字，是，则返回True。 </p><blockquote><pre><code>alert( parseInt(&apos;123abc&apos;) );  // 弹出123alert( parseInt(&apos;abc123&apos;) );  // 弹出NaN</code></pre></blockquote><h2 id="3-变量作用域"><a href="#3-变量作用域" class="headerlink" title="3.变量作用域"></a>3.变量作用域</h2><p>变量作用域指的是变量的作用范围，javascript中的变量分为全局变量和局部变量。  </p><blockquote><pre><code>全局变量：在函数之外定义的变量，为整个页面公用，函数内部外部都可以访问。  局部变量：在函数内部定义的变量，只能在定义该变量的函数内部访问，外部无法访问。  </code></pre></blockquote><p><img src="https://i.imgur.com/khRSBDv.png" alt=""></p><h2 id="4-封闭函数"><a href="#4-封闭函数" class="headerlink" title="4.封闭函数"></a>4.封闭函数</h2><p>封闭函数是javascript中匿名函数的另外一种写法，创建一个一开始就执行而不用命名的函数。 </p><p><img src="https://i.imgur.com/jHRoYFq.png" alt=""></p><h2 id="5-变量方式定义函数"><a href="#5-变量方式定义函数" class="headerlink" title="5.变量方式定义函数"></a>5.变量方式定义函数</h2><p><img src="https://i.imgur.com/UrF0DwV.png" alt=""></p><h2 id="6-闭包"><a href="#6-闭包" class="headerlink" title="6.闭包"></a>6.闭包</h2><p>函数嵌套函数，内部函数可以引用外部函数的参数和变量，参数和变量不会被垃圾回收机制收回 。  </p><p><img src="https://i.imgur.com/b5pM7hE.png" alt=""><br><strong>使用封闭函数简写闭包</strong><br><img src="https://i.imgur.com/eu3enth.png" alt=""></p><p><strong>闭包的作用</strong><br>1.将一个变量长期驻扎在内存当中，可用于循环中存索引值<br><img src="https://i.imgur.com/ruhKqYk.png" alt=""></p><p>2.私有变量计数器，外部无法访问，只能通过对应的函数来访问；避免全局变量的污染。<br><img src="https://i.imgur.com/Yc6kQVb.png" alt=""></p><h2 id="7-内置对象"><a href="#7-内置对象" class="headerlink" title="7.内置对象"></a>7.内置对象</h2><p>1.document</p><blockquote><pre><code>document.referrer  //获取上一个跳转页面的地址(需要服务器环境)  </code></pre></blockquote><p>2.location</p><blockquote><pre><code>window.location.href  //获取或者重定url地址window.location.search //获取地址参数部分window.location.hash //获取页面锚点或者叫哈希值</code></pre></blockquote><p>3.Math</p><blockquote><pre><code>Math.random 获取0-1的随机数Math.floor 向下取整Math.ceil 向上取整</code></pre></blockquote><h2 id="8-面向对象"><a href="#8-面向对象" class="headerlink" title="8.面向对象"></a>8.面向对象</h2><p><strong>面向过程与面向对象编程</strong><br>1、面向过程：所有的工作都是现写现用。</p><p>2、面向对象：是一种编程思想，许多功能事先已经编写好了，在使用时，只需要关注功能的运用，而不需要这个功能的具体实现过程。</p><p><strong>javascript对象</strong><br>将相关的变量和函数组合成一个整体，这个整体叫做对象，对象中的变量叫做属性，变量中的函数叫做方法。javascript中的对象类似字典。</p><p><strong>8.1创建对象的方法</strong><br>1、单体<br><img src="https://i.imgur.com/KtEySXa.png" alt=""></p><p>2、工厂模式<br><img src="https://i.imgur.com/35AshCy.png" alt=""></p><p>3、原型模式<br><img src="https://i.imgur.com/hKOYvdj.png" alt=""></p><p>4、继承<br><img src="https://i.imgur.com/Y8sPzmq.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-定时器&quot;&gt;&lt;a href=&quot;#1-定时器&quot; class=&quot;headerlink&quot; title=&quot;1.定时器&quot;&gt;&lt;/a&gt;1.定时器&lt;/h2&gt;&lt;p&gt;定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
+    
+    
+      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+  </entry>
   
   <entry>
     <title>leetcode01-两数之和</title>
@@ -40,8 +84,8 @@
   
   <entry>
     <title>JavaScript基础语法</title>
-    <link href="http://yoursite.com/2018/08/06/JavaScript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/"/>
-    <id>http://yoursite.com/2018/08/06/JavaScript基础语法/</id>
+    <link href="http://yoursite.com/2018/08/06/JavaScript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95(%E4%B8%80)/"/>
+    <id>http://yoursite.com/2018/08/06/JavaScript基础语法(一)/</id>
     <published>2018-08-06T12:43:24.000Z</published>
     <updated>2018-08-06T13:27:27.164Z</updated>
     
