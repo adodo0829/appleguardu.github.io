@@ -81,13 +81,13 @@
 
 
 
-<meta name="description" content="1.定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
+<meta name="description" content="定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JavaScript基础学习(二)">
 <meta property="og:url" content="http://yoursite.com/2018/08/07/JavaScript基础学习-二/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="1.定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
+<meta property="og:description" content="定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/SWmiiF5.png">
 <meta property="og:image" content="https://i.imgur.com/LusZz6q.png">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="https://i.imgur.com/35AshCy.png">
 <meta property="og:image" content="https://i.imgur.com/hKOYvdj.png">
 <meta property="og:image" content="https://i.imgur.com/Y8sPzmq.png">
-<meta property="og:updated_time" content="2018-08-07T12:28:21.158Z">
+<meta property="og:updated_time" content="2018-08-08T07:59:30.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript基础学习(二)">
-<meta name="twitter:description" content="1.定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
+<meta name="twitter:description" content="定时器定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。">
 <meta name="twitter:image" content="https://i.imgur.com/SWmiiF5.png">
 
 
@@ -369,7 +369,7 @@
       
 
       
-        <h2 id="1-定时器"><a href="#1-定时器" class="headerlink" title="1.定时器"></a>1.定时器</h2><p>定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。<br><a id="more"></a>  </p>
+        <h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><p>定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。<br><a id="more"></a>  </p>
 <p><strong>1.1定时器类型及语法</strong>  </p>
 <blockquote>
 <pre><code>定时器：
@@ -380,7 +380,7 @@ clearInterval 关闭反复执行的定时器
 </code></pre></blockquote>
 <p>实例1：定时器制作时钟<br><img src="https://i.imgur.com/SWmiiF5.png" alt=""><br><img src="https://i.imgur.com/LusZz6q.png" alt=""></p>
 <p>实例二：定时器制作倒计时<br><img src="https://i.imgur.com/WhsbnOW.png" alt="">  </p>
-<h2 id="2-类型转换"><a href="#2-类型转换" class="headerlink" title="2.类型转换"></a>2.类型转换</h2><p><strong>2.1直接转换 parseInt() 与 parseFloat()</strong></p>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p><strong>2.1直接转换 parseInt() 与 parseFloat()</strong></p>
 <blockquote>
 <pre><code>alert(&apos;12&apos;+7); //弹出127
 alert( parseInt(&apos;12&apos;) + 7 );  //弹出19 
@@ -404,20 +404,20 @@ alert(&apos;相等&apos;);} //弹出&apos;相等&apos;；‘==’会先转换成
 <pre><code>alert( parseInt(&apos;123abc&apos;) );  // 弹出123
 alert( parseInt(&apos;abc123&apos;) );  // 弹出NaN
 </code></pre></blockquote>
-<h2 id="3-变量作用域"><a href="#3-变量作用域" class="headerlink" title="3.变量作用域"></a>3.变量作用域</h2><p>变量作用域指的是变量的作用范围，javascript中的变量分为全局变量和局部变量。  </p>
+<h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><p>变量作用域指的是变量的作用范围，javascript中的变量分为全局变量和局部变量。  </p>
 <blockquote>
 <pre><code>全局变量：在函数之外定义的变量，为整个页面公用，函数内部外部都可以访问。  
 局部变量：在函数内部定义的变量，只能在定义该变量的函数内部访问，外部无法访问。  
 </code></pre></blockquote>
 <p><img src="https://i.imgur.com/khRSBDv.png" alt=""></p>
-<h2 id="4-封闭函数"><a href="#4-封闭函数" class="headerlink" title="4.封闭函数"></a>4.封闭函数</h2><p>封闭函数是javascript中匿名函数的另外一种写法，创建一个一开始就执行而不用命名的函数。 </p>
+<h2 id="封闭函数"><a href="#封闭函数" class="headerlink" title="封闭函数"></a>封闭函数</h2><p>封闭函数是javascript中匿名函数的另外一种写法，创建一个一开始就执行而不用命名的函数。 </p>
 <p><img src="https://i.imgur.com/jHRoYFq.png" alt=""></p>
-<h2 id="5-变量方式定义函数"><a href="#5-变量方式定义函数" class="headerlink" title="5.变量方式定义函数"></a>5.变量方式定义函数</h2><p><img src="https://i.imgur.com/UrF0DwV.png" alt=""></p>
-<h2 id="6-闭包"><a href="#6-闭包" class="headerlink" title="6.闭包"></a>6.闭包</h2><p>函数嵌套函数，内部函数可以引用外部函数的参数和变量，参数和变量不会被垃圾回收机制收回 。  </p>
+<h2 id="变量方式定义函数"><a href="#变量方式定义函数" class="headerlink" title="变量方式定义函数"></a>变量方式定义函数</h2><p><img src="https://i.imgur.com/UrF0DwV.png" alt=""></p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p>函数嵌套函数，内部函数可以引用外部函数的参数和变量，参数和变量不会被垃圾回收机制收回 。  </p>
 <p><img src="https://i.imgur.com/b5pM7hE.png" alt=""><br><strong>使用封闭函数简写闭包</strong><br><img src="https://i.imgur.com/eu3enth.png" alt=""></p>
 <p><strong>闭包的作用</strong><br>1.将一个变量长期驻扎在内存当中，可用于循环中存索引值<br><img src="https://i.imgur.com/ruhKqYk.png" alt=""></p>
 <p>2.私有变量计数器，外部无法访问，只能通过对应的函数来访问；避免全局变量的污染。<br><img src="https://i.imgur.com/Yc6kQVb.png" alt=""></p>
-<h2 id="7-内置对象"><a href="#7-内置对象" class="headerlink" title="7.内置对象"></a>7.内置对象</h2><p>1.document</p>
+<h2 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h2><p>1.document</p>
 <blockquote>
 <pre><code>document.referrer  //获取上一个跳转页面的地址(需要服务器环境)  
 </code></pre></blockquote>
@@ -433,7 +433,7 @@ window.location.hash //获取页面锚点或者叫哈希值
 Math.floor 向下取整
 Math.ceil 向上取整
 </code></pre></blockquote>
-<h2 id="8-面向对象"><a href="#8-面向对象" class="headerlink" title="8.面向对象"></a>8.面向对象</h2><p><strong>面向过程与面向对象编程</strong><br>1、面向过程：所有的工作都是现写现用。</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p><strong>面向过程与面向对象编程</strong><br>1、面向过程：所有的工作都是现写现用。</p>
 <p>2、面向对象：是一种编程思想，许多功能事先已经编写好了，在使用时，只需要关注功能的运用，而不需要这个功能的具体实现过程。</p>
 <p><strong>javascript对象</strong><br>将相关的变量和函数组合成一个整体，这个整体叫做对象，对象中的变量叫做属性，变量中的函数叫做方法。javascript中的对象类似字典。</p>
 <p><strong>8.1创建对象的方法</strong><br>1、单体<br><img src="https://i.imgur.com/KtEySXa.png" alt=""></p>
@@ -563,7 +563,7 @@ Math.ceil 向上取整
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -574,7 +574,7 @@ Math.ceil 向上取整
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -585,7 +585,7 @@ Math.ceil 向上取整
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -671,7 +671,7 @@ Math.ceil 向上取整
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-定时器"><span class="nav-number">1.</span> <span class="nav-text">1.定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-类型转换"><span class="nav-number">2.</span> <span class="nav-text">2.类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-变量作用域"><span class="nav-number">3.</span> <span class="nav-text">3.变量作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-封闭函数"><span class="nav-number">4.</span> <span class="nav-text">4.封闭函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-变量方式定义函数"><span class="nav-number">5.</span> <span class="nav-text">5.变量方式定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-闭包"><span class="nav-number">6.</span> <span class="nav-text">6.闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-内置对象"><span class="nav-number">7.</span> <span class="nav-text">7.内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-面向对象"><span class="nav-number">8.</span> <span class="nav-text">8.面向对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">1.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">2.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量作用域"><span class="nav-number">3.</span> <span class="nav-text">变量作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封闭函数"><span class="nav-number">4.</span> <span class="nav-text">封闭函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量方式定义函数"><span class="nav-number">5.</span> <span class="nav-text">变量方式定义函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">6.</span> <span class="nav-text">闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置对象"><span class="nav-number">7.</span> <span class="nav-text">内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面向对象"><span class="nav-number">8.</span> <span class="nav-text">面向对象</span></a></li></ol></div>
             
 
           </div>
