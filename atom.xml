@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-10T10:50:35.015Z</updated>
+  <updated>2018-08-12T06:38:00.064Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python爬虫基本流程</title>
+    <link href="http://yoursite.com/2018/08/12/python%E7%88%AC%E8%99%AB%E5%9F%BA%E6%9C%AC%E6%B5%81%E7%A8%8B/"/>
+    <id>http://yoursite.com/2018/08/12/python爬虫基本流程/</id>
+    <published>2018-08-12T06:34:17.000Z</published>
+    <updated>2018-08-12T06:38:00.064Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="何为爬虫"><a href="#何为爬虫" class="headerlink" title="何为爬虫"></a>何为爬虫</h2><p>爬虫：请求网站并提取数据的自动化程序<br><a id="more"></a>  </p><h2 id="爬虫的基本流程"><a href="#爬虫的基本流程" class="headerlink" title="爬虫的基本流程"></a>爬虫的基本流程</h2><p>1.. 发起请求<br>通过HTTP库(主要用到urllib和requests这两个库)向目标站点发起请求，即发送一个Request，请求可以包含headers等信息，等待服务器响应。  </p><blockquote><pre><code>Request：浏览器就发送消息给该网址所在的服务器，这个过程叫做HTTP Request。  Request介绍：1.请求方式：主要有GET、POST两种类型，另外还有HEAD、PUT、DELETE、OPTIONS等。2.请求URL：URL全称统一资源定位符，如一个网页文档、一张图片、一个视频等都可以用URL唯一来确定。3.请求头：包含请求时的头部信息，如User-Agent、Host、Cookies等信息。4.请求体：请求时额外携带的数据如表单提交时的表单数据</code></pre></blockquote><p>2.. 获取响应内容<br>如果服务器正常响应，会得到一个Response，Response的内容便是所要获取的页面内容，类型可能是HtML，Json字符串，二进制数据(图片，视频)等类型。  </p><blockquote><pre><code>Response:服务器收到浏览器发送的消息后，能够根据浏览器发送消息的内容，做相应处理，然后把消息回传给浏览器。这个过程叫做HTTP Response。浏览器收到服务器的Response信息后，会对信息进行相应处理，然后展示。 Response介绍：1.响应状态：有多种响应状态，如200代表成功、301跳转、404找不到页面、502服务器错误。2.响应头：如内容类型、内容长度、服务器信息、设置Cookie等等。3.响应体：最主要的部分，包含了请求资源的内容，如网页HTML、图片二进制数据等。 </code></pre></blockquote><p>3.. 解析获取的内容<br>获取的内容若是HTML，可以用正则表达式，网页解析库(BS,XPath等)进行解析。可能是Json，可以直接转为Json对象解析，可能是二进制数据，可以做保存或者进一步的处理。  </p><p>4.. 保存数据<br>保存形式多样，可以存为文本，也可以保存至数据库，或者保存特定格式的文件。  </p><blockquote><pre><code>1.文本：纯文本、Json、Xml等。2.关系型数据库：如MySQL、Oracle等具有结构化表结构形式存储。3.非关系型数据库：如MongoDB、Redis等Key-Value形式存储。4.二进制文件：如图片、视频、音频等等直接保存成特定格式即可。  </code></pre></blockquote><p>另外，爬虫过程还会遇到很多问题，例如JavaScript渲染的问题，网站的反爬措施，爬取速度太慢等等，这些问题会在后期更新博文的时候再做详细的讲解。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;何为爬虫&quot;&gt;&lt;a href=&quot;#何为爬虫&quot; class=&quot;headerlink&quot; title=&quot;何为爬虫&quot;&gt;&lt;/a&gt;何为爬虫&lt;/h2&gt;&lt;p&gt;爬虫：请求网站并提取数据的自动化程序&lt;br&gt;
+    
+    </summary>
+    
+      <category term="爬虫" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>Python之数据结构与算法</title>
