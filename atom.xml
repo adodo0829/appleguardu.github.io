@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-12T06:38:00.064Z</updated>
+  <updated>2018-08-14T15:12:47.785Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>爬取猫眼电影信息</title>
+    <link href="http://yoursite.com/2018/08/14/%E7%88%AC%E5%8F%96%E7%8C%AB%E7%9C%BC%E7%94%B5%E5%BD%B1%E4%BF%A1%E6%81%AF/"/>
+    <id>http://yoursite.com/2018/08/14/爬取猫眼电影信息/</id>
+    <published>2018-08-14T07:52:36.000Z</published>
+    <updated>2018-08-14T15:12:47.785Z</updated>
+    
+    <content type="html"><![CDATA[<p>本篇内容主要讲解的是一个基础爬虫实例——爬去猫眼电影排行榜前100的影片信息，通过这个实例，来理解一个爬虫的基本思路。<br><a id="more"></a>  </p><h2 id="抓取目标"><a href="#抓取目标" class="headerlink" title="抓取目标"></a>抓取目标</h2><p>确定需要爬去的信息：猫眼电影top100的影片信息，这些信息包括电影名称，上映时间，演员，图片等。</p><h2 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h2><p>我们发现榜单top100对应的url是maoyan.com/board/4 。这便是我们要抓取的目标站点。<br><img src="https://i.imgur.com/uP4n5f7.png" alt=""></p><p>首先我们看到，霸王别姬排名第一，页面中的有效信息包括电影名，主演，上映时间，地区，评分和图片等。接着我们继续翻页，观察页面url和内容的变化；<br><img src="https://i.imgur.com/1mniQsL.png" alt=""></p><p>可以看到页面的url变成了<a href="http://maoyan.com/board/4?offset=10，多了一个参数offset=10，目前页面显示内容为排行11~20的电影；我们再点击下一页，发现此时url变成了http://maoyan.com/board/4?offset=20，显示结果为排行21~30的电影，所以：" target="_blank" rel="noopener">http://maoyan.com/board/4?offset=10，多了一个参数offset=10，目前页面显示内容为排行11~20的电影；我们再点击下一页，发现此时url变成了http://maoyan.com/board/4?offset=20，显示结果为排行21~30的电影，所以：</a><br>网页显示规律为：offset表示偏移量，如果偏移量为n，那么显示电影排行为n+1到n+10，每页显示10部电影。如果要获取top100，则需要请求10次，每次抓取一个页面，提取出里面有用的信息。  </p><h2 id="抓取第一页"><a href="#抓取第一页" class="headerlink" title="抓取第一页"></a>抓取第一页</h2><p>首先我们来抓取第一页的内容。在此之前我们先创建一个主函数main(),用来执行主要操作。<br>第一步，获取网页内容。</p><p><img src="https://i.imgur.com/2AQs44l.png" alt=""></p><h2 id="解析页面"><a href="#解析页面" class="headerlink" title="解析页面"></a>解析页面</h2><p>获取到网页源代码后，就需要对页面进行解析，然后提取出我们想要的信息。我们先回到网页查看一下真实源码，在<strong>开发者模式下的Network监听组件</strong>中查看源代码。注意：不要在Elements选项卡中查看源代码，因为那里的源码可能是经过JavaScript操作，与原始请求不同，所以需要从Network下查看。<br>排行第一的源代码片段：<br><img src="https://i.imgur.com/ydbNLEA.png" alt=""> </p><p>经过分析发现，每部电影的信息都包含在一个<dd></dd>的节点中。  </p><blockquote><pre><code>排名对应节点： &lt;i class=&quot;board-index board-index-1&quot;&gt;1&lt;/i&gt;图片对应节点：&lt;img data-src=&quot;http://p1.meituan.net/movie/20803f59291c47e1e116c11963ce019e68711.jpg@160w_220h_1e_1c&quot; alt=&quot;霸王别姬&quot; class=&quot;board-img&quot; /&gt;电影名称：&lt;p class=&quot;name&quot;&gt;&lt;a href=&quot;/films/1203&quot; title=&quot;霸王别姬&quot; data-act=&quot;boarditem-click&quot; data-val=&quot;{movieId:1203}&quot;&gt;霸王别姬&lt;/a&gt;&lt;/p  主演：&lt;p class=&quot;star&quot;&gt;主演：张国荣,张丰毅,巩俐&lt;/p&gt;上映时间：&lt;p class=&quot;releasetime&quot;&gt;上映时间：1993-01-01(中国香港)&lt;/p&gt;</code></pre></blockquote><p>下面我们就用正则表达式来提取上述信息，当然也可以使用Xpath和css选择器，我这里为了巩固一下正则用法，就先用re来写，虽然麻烦点。下面定义一个解析的方法。<br><img src="https://i.imgur.com/sVlFvdE.png" alt=""></p><p>这样我们就得到了第一个页面的信息，以列表list的形式返回的，每部电影信息保存在一个元组中。<br><img src="https://i.imgur.com/tAlDjx9.png" alt=""></p><p>由于数据的格式比较乱，我们需要对其进行格式的整理，这里选择遍历数据列表，把每部电影信息保存为字典dict形式。现在将方法修改一下。<br><img src="https://i.imgur.com/gZUzIXx.png" alt=""></p><p>整理后的信息如下：<br><img src="https://i.imgur.com/HYgoqD7.png" alt=""></p><h2 id="保存提取信息"><a href="#保存提取信息" class="headerlink" title="保存提取信息"></a>保存提取信息</h2><p>由于上面我们将每部电影信息都保存为了字典类型，这样更为结构化；现在我们将他们写入到文本文件中。这里通过JSON库的dumps()方法将字典进行序列化，由于输出结果有中文，需要将ensure_ascii指定为False，这样可以保证中文输出，而不是Unicode编码格式。<br><img src="https://i.imgur.com/bilBPae.png" alt=""></p><h2 id="main-方法调用"><a href="#main-方法调用" class="headerlink" title="main()方法调用"></a>main()方法调用</h2><p>最后我们定义一个main()方法用来调用前面的方法，将单页的电影信息全部写入到文件中。<br><img src="https://i.imgur.com/wUBtzNw.png" alt=""></p><p>单页文件输出结果：<br><img src="https://i.imgur.com/RzwULTw.png" alt=""></p><p>这样，我们就成功完成了第一页电影信息的爬取，但是我们目标是爬取所有电影，接下来就来试试把</p><h2 id="分页爬取"><a href="#分页爬取" class="headerlink" title="分页爬取"></a>分页爬取</h2><p>之前已经分析过了，每次翻页之后，url都会有变化，多了一个参数offset，所以我们只需要构造一下URL即可。下面将代码修改一下：<br><img src="https://i.imgur.com/M3gGvdY.png" alt=""></p><p>输出结果：<br><img src="https://i.imgur.com/9gFXrP7.png" alt=""></p><h2 id="代码最后的修改"><a href="#代码最后的修改" class="headerlink" title="代码最后的修改"></a>代码最后的修改</h2><p>现在我们已经基本上完成了所有电影信息的抓取，但是部分代码还是有缺陷，比如请求部分未作异常处理，爬取速度太快，可能会被反爬措施封锁等，所以还需要将代码优化一下。<br>代码地址：<a href="https://github.com/appleguardu/spider_projects" target="_blank" rel="noopener">https://github.com/appleguardu/spider_projects</a></p><p>好了，一个简单爬虫基本上完成！！！继续加油！！！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本篇内容主要讲解的是一个基础爬虫实例——爬去猫眼电影排行榜前100的影片信息，通过这个实例，来理解一个爬虫的基本思路。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="爬虫" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>python爬虫基本流程</title>
@@ -427,28 +449,6 @@
     
     
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习之数据类型</title>
-    <link href="http://yoursite.com/2018/07/20/Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
-    <id>http://yoursite.com/2018/07/20/Python学习之数据类型/</id>
-    <published>2018-07-20T00:35:25.000Z</published>
-    <updated>2018-08-01T04:08:35.187Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python中有六个标准的数据类型，它们分别为<br>Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。<br><a id="more"></a><br>我们在编写代码无时无刻不在与这些数据类型打交道，所以必须对它们的结构和常用方法非常熟悉。    </p><h2 id="1-数字类型"><a href="#1-数字类型" class="headerlink" title="1.数字类型"></a>1.数字类型</h2><p>常用到主要是int、float、bool（布尔）、complex（复数）这几种，一般用于给变量赋值和计算。算术运算符如下：<br><img src="https://i.imgur.com/jjIB0do.png" alt="">   </p><h2 id="2-字符串类型"><a href="#2-字符串类型" class="headerlink" title="2.字符串类型"></a>2.字符串类型</h2><p>Python中的字符串用单引号 ‘ 或双引号 “ 括起来，双引号或者单引号中的数据，就是字符串。<br><strong>字符串输入</strong>：使用input()函数从外部获取，通过它能够完成从键盘获取数据，然后保存到指定的变量中；这里要注意input获取的数据，都以字符串的方式进行保存，即使输入的是<strong>数字</strong>，那么也是以字符串方式保存。<br><strong>字符串输出:</strong> 以名字为例，<code>name = &#39;huhua&#39;</code> , <code>print(&quot;姓名：%s&quot;%name)</code><br>这样可以输出我们定义的字符串，另外这里讲一下格式化输出，%s,%d,%f分别对应到字符串，数字，以及小数的输出。python3中使用format()方法， <code>print(&#39;{0} 和 {1}&#39;.format(&#39;Google&#39;, &#39;Runoob&#39;))</code>  </p><p>字符串常用操作和方法：<br><strong>1. 下标索引</strong><br>下标从0开始起，name = ‘huhua’，name[0]会返回第一个字符h。<br><strong>2. 切片</strong><br>切片是指对操作的对象截取其中一部分的操作。字符串、列表、元组都支持切片操作。<br>切片的语法：[起始:结束:步长]，截取内容为起始位到结束位前一位，切片可以正序来切，也可反过来切，例如name[:3:1]取前三位；name[-1::-1]为反着取，步长的符号决定是正着取还是反着取。<br><strong>3. find，index</strong><br>检测 str 是否包含在 mystr中，如果是，则返回开始的索引值，否则返回-1 。 语法：mystr.find(str, start=0, end=len(mystr))，后面两个参数可省略<br><strong>4. count</strong><br>  返回 str在start和end之间 在 mystr里面出现的次数；语法为mystr.count(str, start=0, end=len(mystr))，当字符串中有重复的字符时，可用count来计算该字符出现的次数。<br><strong>5. replace</strong><br>把 mystr 中的 str1 替换成 str2,如果 count 指定，则替换不超过 count 次.<br>mystr.replace(str1, str2,  mystr.count(str1))。<br><strong>6. split</strong><br>以 str 为分隔符切片 mystr，分隔符会被切掉，如果 maxsplit有指定值，则仅分隔 maxsplit 个子字符串，返回的是一个列表；语法：mystr.split(str=” “, 2) ，这里注意，split()方法如果不指定参数会默认以\n,\t,空格作为分隔符，一般我们在处理网页多行文本信息时会用到。<br><strong>7. capitalize，title</strong><br>前者是将字符串第一个字母大写，后者时将每个单词首字母大写。<br><strong>8. startswith，endswith</strong><br>mystr.startswith(obj)，检查字符串是否是以 obj 开头, 是则返回 True，否则返回 False；mystr.endswith(obj)，检查字符串是否以obj结束，如果是返回True,否则返回 False。<br><strong>9. lower，upper</strong><br>mystr.lower() ，转换 mystr 中所有大写字符为小写；后者时小写转化为大写。<br><strong>10. ljust, rjust, center</strong><br>mystr.ljust(width),返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串;后两者为右对齐和中间对齐。<br><strong>11. lstrip, rstrip, strip</strong><br>mystr.lstrip(),删除 mystr 左边的空白字符；strip()方法可以删除字符串两端的空白字符，比如\n,\t，这个在后续爬虫文本处理时常用到。<br><strong>12. isalpha，isdigit，isalnum，isspace</strong><br>mystr.isalpha()：如果 mystr 所有字符都是字母 则返回 True,否则返回 False<br>mystr.isdigit()：如果 mystr 只包含数字则返回 True 否则返回 False.<br>mystr.isalnum()：如果 mystr 所有字符都是字母或数字则返回 True,否则返回 False<br>mystr.isspace()：如果 mystr 中只包含空格，则返回 True，否则返回 False.<br><strong>13. join </strong><br>mystr.join(str)，mystr 中每个字符后面插入str,构造出一个新的字符串，join方法常用来构造新字符串，比如有一个列表li = [‘hello’, ‘my’, ‘girl’],使用’ ‘.join(li)则可以将列表中字符串连接起来，结果为hello my girl，这个也是常用到的。  </p><h2 id="3-列表类型"><a href="#3-列表类型" class="headerlink" title="3.列表类型"></a>3.列表类型</h2><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。<br>Python有6个序列的内置类型，但最常见的是列表和元组。<br>序列都可以进行的操作包括索引，切片，加，乘，检查成员。<br>此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。<br>列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。<br>列表的数据项不需要具有相同的类型<br>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。如下所示：<br>list = [‘Google’, ‘华仔’, 1997, 2000]<br>列表常用的操作：<br><strong>1. 添加元素(“增”append, extend, insert)</strong><br>通过append可以向列表添加元素，如list.append(‘haha’);通过extend可以将另一个集合中的元素逐一添加到列表中,如list.extend([1,2]),这里注意extend会将集合中的元素转化为list元素后分开放入其中，其结果为[‘Google’, ‘华仔’, 1997, 2000，1，2];insert(index, object) 在指定位置index前插入元素object。<br><strong>2. 修改元素(“改”)</strong><br>修改元素的时候，要通过下标来确定要修改的是哪个元素，然后才能进行修改，如list[0]=’python’，list中第一个元素会被修改。<br><strong>3. 查找元素(“查”in, not in, index, count)</strong><br>python中查找的常用方法为：<br>in（存在）,如果存在那么结果为true，否则为false；<br>not in（不存在），如果不存在那么结果为true，否则false。index和count与字符串中的用法相同。<br><strong>4. 删除元素(“删”del, pop, remove)</strong><br>del：根据下标进行删除， del list[0]<br>pop：删除最后一个元素， list.pop()<br>remove：根据元素的值进行删除,  list.remove(‘Google’)<br><strong>5. 排序(sort, reverse)</strong><br>sort方法是将list按特定顺序重新排列，默认为由小到大，参数reverse=True可改为倒序，由大到小。reverse方法是将list逆置。  这里注意sort和reverse不返回值。<br><strong>6. 列表的嵌套</strong><br>一个列表中的元素又是一个列表，那么这就是列表的嵌套，如  </p><blockquote><pre><code>schoolNames = [[&apos;北京大学&apos;,&apos;清华大学&apos;],[&apos;南开大学&apos;,&apos;天津大学&apos;,&apos;天津师范大学&apos;],[&apos;山东大学&apos;,&apos;中国海洋大学&apos;]]  </code></pre></blockquote><h2 id="4-元组"><a href="#4-元组" class="headerlink" title="4.元组"></a>4.元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。元组使用小括号，列表使用方括号。Tuple = (‘et’,77,99.9)<br><strong>1. 元组访问</strong><br>直接通过下标，Tuple[0]对应的为et这个元素。<br><strong>2. 元组的内置函数count, index</strong><br>index和count与字符串和列表中的用法相同，这里不过多做介绍了。<br>注意，当元组中只有一个元素时，接的价格逗号来区分，比如tuple(1,)。</p><h2 id="5-字典"><a href="#5-字典" class="headerlink" title="5.字典"></a>5.字典</h2><p>字典是另一种可变容器模型，且可存储任意类型对象。<br>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：  </p><blockquote><pre><code>dict = {key1 : value1, key2 : value2 }  </code></pre><p>键必须是唯一的，但值则不必。值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。<br>字典的常见操作1<br><strong><1>修改元素</1></strong>：字典的每个元素中的数据是可以修改的，只要通过key找到，即可修改，如dict[key1] = new便可更新其值。<br><strong><2>添加元素</2></strong>：如果在使用 变量名[‘键’] = 数据 时，这个“键”在字典中，不存在，那么就会新增这个元素。<br><strong><3>删除元素</3></strong>：del删除指定的元素，del dict[key1];del删除整个字典,del dict.   clear清空整个字典, dict.clear()。<br>字典的常见操作2<br><strong><1>len(dict)</1></strong>：测量字典中，键值对的个数<br><strong><2>dict.keys()</2></strong>：返回一个包含字典所有KEY的列表<br><strong><3>dict.values()</3></strong>：返回一个包含字典所有value的列表<br><strong><4>dict.items()</4></strong>：返回一个包含所有（键，值）元祖的列表  </p></blockquote><h2 id="6-集合"><a href="#6-集合" class="headerlink" title="6.集合"></a>6.集合</h2><p>集合（set）是一个无序不重复元素的序列,基本功能包括关系测试和消除重复元素。<br>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。创建格式：<br>parame = {value01,value02,…}或者set(value)<br>集合的基本操作<br><strong>1.添加元素</strong><br>s.add(x)，将元素 x 添加到集合 s 中，如果元素已存在，则不进行任何操作。还有一个方法，也可以添加元素，且参数可以是列表，元组，字典等，语法格式如下：<br>s.update(x)，x 可以有多个，用逗号分开<br><strong>2.移除元素</strong><br>s.remove(x)，将元素 x 添加到集合 s 中移除，如果元素不存在，则会发生错误。<br>此外还有一个方法也是移除集合中的元素，且如果元素不存在，不会发生错误。格式如下所示：s.discard(x)。<br><strong>3.清空集合</strong><br>s.clear()，清空指定集合s。</p><h2 id="7-公共方法"><a href="#7-公共方法" class="headerlink" title="7.公共方法"></a>7.公共方法</h2><p><strong>1.遍历</strong><br>通过for … in …:的语法结构，我们可以遍历字符串、列表、元组、字典等数据结构。  </p><blockquote><p>在字典中遍历时，关键字和对应的值可以使用 items() 方法同时解读出来.<br>在序列中遍历时，索引位置和对应值可以使用 enumerate() 函数同时得到.<br>同时遍历两个或更多的序列，可以使用 zip() 组合.<br>要反向遍历一个序列，首先指定这个序列，然后调用 reversed() 函数.<br>要按顺序遍历一个序列，使用 sorted() 函数返回一个已排序的序列，并不修改原值.    </p></blockquote><p><strong>2.运算符</strong><br><img src="https://i.imgur.com/Rn7JbLo.png" alt=""><br>3.python内置函数<br><img src="https://i.imgur.com/Y8zvoT5.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Python中有六个标准的数据类型，它们分别为&lt;br&gt;Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="数据类型" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
     
   </entry>
   
