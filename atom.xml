@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-19T02:27:31.726Z</updated>
+  <updated>2018-08-19T14:48:46.678Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Selenium爬取淘宝商品</title>
+    <link href="http://yoursite.com/2018/08/19/selenium%E7%88%AC%E5%8F%96%E6%B7%98%E5%AE%9D%E5%95%86%E5%93%81/"/>
+    <id>http://yoursite.com/2018/08/19/selenium爬取淘宝商品/</id>
+    <published>2018-08-19T05:28:28.000Z</published>
+    <updated>2018-08-19T14:48:46.678Z</updated>
+    
+    <content type="html"><![CDATA[<p>前一天学习了selenium的相关用法，今天打算用selenium来模拟浏览器操作，抓取数据，抓取目标就定为淘宝网吧，接下来我们就开工啦！<br><a id="more"></a>  </p><h2 id="目标设定"><a href="#目标设定" class="headerlink" title="目标设定"></a>目标设定</h2><p>目标定为抓取淘宝iPhone手机销售的相关信息：其中包括商品的图片，名字，最关键的价格，购买量，商铺，地点等信息。目标定好了，接下来我们就去分析网页规律了。  </p><h2 id="网页分析"><a href="#网页分析" class="headerlink" title="网页分析"></a>网页分析</h2><p>首先，确定抓取入口，也就是start url为淘宝搜索页面，url的链接为：  </p><blockquote><pre><code>https://s.taobao.com/search?q=iphone</code></pre></blockquote><p>当然，这是第一页的链接。但是我们要获取的是所有页面的，先下拉到页面底部，我们发现：<br><img src="https://i.imgur.com/B2oVHX4.png" alt="">  </p><p>用黑线圈起来的是一个分页导航，其中包括前5页的链接，下一页的链接，同时还有一个任意页码跳转的链接，页面总数为100。 若要获取每一页的内容， 我们的思路是将页码从1到100的顺序进行遍历一遍。 此时我们便又两种方式来进行遍历：  </p><blockquote><pre><code>1.点击下一页，等下一页面加载出来后进行爬取2.在页面跳转框逐一输入1~100，点击确定按钮后跳转到对应页码进行爬取  </code></pre></blockquote><p>对于方法一，有一个弊端就是如果爬取过程中出现异常，程序退出了，我在点击下一页时，可能无法快速切换到后续的页面；所以，在爬取过程中还需要记录当前页码数，如果点击下一页加载失败的话，还要增加异常检查等。 方法二，我们只需输入对应页面的数值就可以跳转，比较方便。<br>当页面成功加载出来后，我们利用selenium获取页面源代码，然后进行解析，就可以获取目标信息了。  </p><h2 id="获取商品列表"><a href="#获取商品列表" class="headerlink" title="获取商品列表"></a>获取商品列表</h2><p>首先，构造出要抓取的url：  </p><blockquote><pre><code>https://s.taobao.com/search?q=iphone </code></pre></blockquote><p>q指得是搜索的关键字，改变这个参数就可以搜索不同的商品，这里我们把定义成一个变量keyword。<br>接下来我们进行代码演练了。<br><img src="https://i.imgur.com/9zhFFeT.png" alt=""><br><img src="https://i.imgur.com/2Bu9bhH.png" alt=""></p><p>输出结果：<br><img src="https://i.imgur.com/4NA5EqV.png" alt=""></p><p>这样我们便拿到了第一页商品信息的源码啦，当然这个代码还不完善，还没添加跳转功能，因为page我们设计是从第一页抓取的，当page值为2时，我们就要翻页了，那么怎么进行翻页呢？首先获取页码输入框啊，然后获取确定按钮进行操作啦。<br><img src="https://i.imgur.com/Aepl0Mc.png" alt=""><br><img src="https://i.imgur.com/94knVze.png" alt=""></p><p>我们发现，当前页面都是高亮显示的，那么我们只需要判断高亮的页码数是当前页码数就证明页面跳转成功。这里可以使用等待条件：text_to_be_present_in_element,它会等待指定的文本出现在某一节点里面时即返回成功。<br><img src="https://i.imgur.com/djIRfga.png" alt=""></p><h2 id="解析商品列表"><a href="#解析商品列表" class="headerlink" title="解析商品列表"></a>解析商品列表</h2><p>既然上面已经能拿到页面商品的源代码了，那么我们接下来就可以对源码进行解析了。<br>分析可得，每个页面有44家店铺，在源代码里我们可以发现整个商品列表使用的CSS选择器是#mainsrp-itemlist .items .item, 它匹配了整个页面的44件商品，然后我们先用items()方法将其全部提取出来，他会返回一个生成器，再使用for循环进行遍历，得到每个item对象，然后用pyquery的find方法选取我们所需要的信息即可。<br>代码如下：<br><img src="https://i.imgur.com/JDIeNPe.png" alt=""></p><p>提取结果：<br><img src="https://i.imgur.com/gxIzM05.png" alt=""></p><p>哈哈，这样我们就已经拿到第一页所有商品的数据了，接下，我们要把100页的信息都爬取下来，这里可以直接使用for循环进行遍历页码。  </p><h2 id="爬取所有商品，保存数据库"><a href="#爬取所有商品，保存数据库" class="headerlink" title="爬取所有商品，保存数据库"></a>爬取所有商品，保存数据库</h2><p>先创建数据库：<br><img src="https://i.imgur.com/cV5FihW.png" alt=""></p><p>然后for循环遍历所有页面<br><img src="https://i.imgur.com/YYEc2ko.png" alt=""></p><p>最后的结果：<br><img src="https://i.imgur.com/tjwiYUs.png" alt=""><br>MongoDB数据库：<br><img src="https://i.imgur.com/BJyyvDe.png" alt=""></p><p>然后，所有页面的iphone数据都被我们爬取下来了。。。当然，代码还可以再精简一点。。。  </p><p>源码地址:<a href="https://github.com/appleguardu/spider_projects/blob/master/taobao_iphone.py" target="_blank" rel="noopener">https://github.com/appleguardu/spider_projects/blob/master/taobao_iphone.py</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前一天学习了selenium的相关用法，今天打算用selenium来模拟浏览器操作，抓取数据，抓取目标就定为淘宝网吧，接下来我们就开工啦！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="爬虫" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="selenium" scheme="http://yoursite.com/tags/selenium/"/>
+    
+  </entry>
   
   <entry>
     <title>爬虫的思路</title>
@@ -427,28 +449,6 @@
     
     
       <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python学习之反射机制</title>
-    <link href="http://yoursite.com/2018/07/24/Python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6/"/>
-    <id>http://yoursite.com/2018/07/24/Python学习之反射机制/</id>
-    <published>2018-07-24T02:22:11.000Z</published>
-    <updated>2018-08-01T04:08:06.120Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="Python反射机制"><a href="#Python反射机制" class="headerlink" title="Python反射机制"></a>Python反射机制</h2><p>程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。<br><a id="more"></a><br><strong>hasattr和getattr</strong><br>-<br><img src="https://i.imgur.com/MMPbrYr.png" alt="">  </p><p><strong>setattr和delattr</strong><br>-<br><img src="https://i.imgur.com/ZKFQvtf.png" alt=""></p><p><strong>总结：</strong>反射就是通过字符串的形式，导入对象（或者模块，这里未提到）；通过字符串的形式，去对象中寻找指定函数，并执行。利用字符串的形式去对象（模块）中操作（查找/获取/删除/添加）成员，一种基于字符串的事件驱动。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;Python反射机制&quot;&gt;&lt;a href=&quot;#Python反射机制&quot; class=&quot;headerlink&quot; title=&quot;Python反射机制&quot;&gt;&lt;/a&gt;Python反射机制&lt;/h2&gt;&lt;p&gt;程序开发中，我们常常会遇到这样的需求：需要执行对象里的某个方法，或需要调用对象中的某个变量，但是由于种种原因我们无法确定这个方法或变量是否存在，这是我们需要用一个特殊的方法或机制要访问和操作这个未知的方法或变量，这中机制就称之为反射。接下记录下反射几个重要方法。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="反射" scheme="http://yoursite.com/tags/%E5%8F%8D%E5%B0%84/"/>
     
   </entry>
   
