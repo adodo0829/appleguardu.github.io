@@ -107,7 +107,7 @@
 <meta property="og:image" content="https://i.imgur.com/x74m1XQ.png">
 <meta property="og:image" content="https://i.imgur.com/22jrCiD.png">
 <meta property="og:image" content="https://i.imgur.com/7enGi11.png">
-<meta property="og:updated_time" content="2018-08-16T14:01:41.117Z">
+<meta property="og:updated_time" content="2018-08-17T09:18:47.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax数据的爬取">
 <meta name="twitter:description" content="不知道你在写爬虫时有没有遇到这种情况：在浏览器中可以看到正常显示的页面数据，但是用requests得到的html文件里却没有这些数据。这是因为浏览器中的页面时经过JavaScript处理数据后生成的，Ajax加载就是其中一种方式，下面我们便来讲一下如何在异步加载的网页中抓取有用数据。">
@@ -414,7 +414,8 @@
 <h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><p>我们将数据保存至mongodb中，由于是字典，我们直接进行存储即可<br>连接数据库：<br><img src="https://i.imgur.com/aUFTnAK.png" alt=""></p>
 <p>保存：<br><img src="https://i.imgur.com/x74m1XQ.png" alt=""><br>运行结果：<br><img src="https://i.imgur.com/22jrCiD.png" alt=""></p>
 <p>查看数据库：<br><img src="https://i.imgur.com/7enGi11.png" alt=""></p>
-<p>这样我们便完成了Ajax加载的网页数据的抓取啦，在分析ajax请求时，我们还可以使用抓包工具Fiddler来进行分析。<br>另外，有些网站把ajax请求的所有参数全部加密了。我们根本没办法构造自己所需要的数据的请求。这种情况下就用<strong>selenium+phantomJS</strong>，调用浏览器内核，并利用phantomJS执行js来模拟人为操作以及触发页面中的js脚本。从填写表单到点击按钮再到滚动页面，全部都可以模拟，不考虑具体的请求和响应过程，只是完完整整的把人浏览页面获取数据的过程模拟一遍。 这个我们会在下篇博文来讲解。</p>
+<p>这样我们便完成了Ajax加载的网页数据的抓取啦，在分析ajax请求时，我们还可以使用抓包工具Fiddler来进行分析。<br>另外，有些网站把ajax请求的所有参数全部加密了。我们根本没办法构造自己所需要的数据的请求。这种情况下就用<strong>selenium+phantomJS</strong>，调用浏览器内核，并利用phantomJS执行js来模拟人为操作以及触发页面中的js脚本。从填写表单到点击按钮再到滚动页面，全部都可以模拟，不考虑具体的请求和响应过程，只是完完整整的把人浏览页面获取数据的过程模拟一遍。 这个我们会在下篇博文来讲解。 </p>
+<p>文末附上写的另一个小demo，今日头条街拍图片：<br><a href="https://github.com/appleguardu/spider_projects/blob/master/Ajax_spider/toutiao_today.py" target="_blank" rel="noopener">https://github.com/appleguardu/spider_projects/blob/master/Ajax_spider/toutiao_today.py</a></p>
 
       
     </div>
@@ -454,6 +455,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/18/selenium的使用/" rel="prev" title="selenium的使用">
+                selenium的使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -534,7 +539,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

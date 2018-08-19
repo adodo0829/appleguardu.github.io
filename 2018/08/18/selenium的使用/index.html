@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="爬虫," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="对于像淘宝，京东这样的网站，虽然它也是采用Ajax获取数据，但是Ajax接口中含有许多加密参数，我们很难去直接找出其规律；所以我们需要直接使用模拟浏览器运行的方式来实现，这样就可以做到在浏览器中看到的是什么样，抓取的源码就是什么样的啦，即可见可爬，系不系很可怕。">
+<meta name="keywords" content="爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="selenium的使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/18/selenium的使用/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="对于像淘宝，京东这样的网站，虽然它也是采用Ajax获取数据，但是Ajax接口中含有许多加密参数，我们很难去直接找出其规律；所以我们需要直接使用模拟浏览器运行的方式来实现，这样就可以做到在浏览器中看到的是什么样，抓取的源码就是什么样的啦，即可见可爬，系不系很可怕。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/mZll8Ht.png">
+<meta property="og:image" content="https://i.imgur.com/gxAlhda.png">
+<meta property="og:image" content="https://i.imgur.com/CUAkEEO.png">
+<meta property="og:image" content="https://i.imgur.com/5NwK8Ag.jpg">
+<meta property="og:image" content="https://i.imgur.com/ed1UMjD.png">
+<meta property="og:image" content="https://i.imgur.com/11otno6.png">
+<meta property="og:image" content="https://i.imgur.com/Q0duWFX.png">
+<meta property="og:image" content="https://i.imgur.com/kleR7Xi.png">
+<meta property="og:image" content="https://i.imgur.com/odEyGQP.png">
+<meta property="og:image" content="https://i.imgur.com/yApOg8G.png">
+<meta property="og:image" content="https://i.imgur.com/9IILHeu.png">
+<meta property="og:image" content="https://i.imgur.com/rsl9U5d.png">
+<meta property="og:image" content="https://i.imgur.com/A4Ts0H9.png">
+<meta property="og:image" content="https://i.imgur.com/Zq8XTVv.png">
+<meta property="og:image" content="https://i.imgur.com/Xpj1Vj2.png">
+<meta property="og:image" content="https://i.imgur.com/GMq4nfL.png">
+<meta property="og:image" content="https://i.imgur.com/ZrNbSSZ.png">
+<meta property="og:image" content="https://i.imgur.com/P0NCssl.png">
+<meta property="og:image" content="https://i.imgur.com/agPTE5p.png">
+<meta property="og:updated_time" content="2018-08-19T01:37:32.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="selenium的使用">
+<meta name="twitter:description" content="对于像淘宝，京东这样的网站，虽然它也是采用Ajax获取数据，但是Ajax接口中含有许多加密参数，我们很难去直接找出其规律；所以我们需要直接使用模拟浏览器运行的方式来实现，这样就可以做到在浏览器中看到的是什么样，抓取的源码就是什么样的啦，即可见可爬，系不系很可怕。">
+<meta name="twitter:image" content="https://i.imgur.com/mZll8Ht.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/18/selenium的使用/"/>
+
+
+
+
+
+  <title>selenium的使用 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/selenium的使用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">selenium的使用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-18T17:10:04+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>对于像淘宝，京东这样的网站，虽然它也是采用Ajax获取数据，但是Ajax接口中含有许多加密参数，我们很难去直接找出其规律；所以我们需要直接使用模拟浏览器运行的方式来实现，这样就可以做到在浏览器中看到的是什么样，抓取的源码就是什么样的啦，即可见可爬，系不系很可怕。<br><a id="more"></a>  </p>
+<h2 id="Selenium"><a href="#Selenium" class="headerlink" title="Selenium"></a>Selenium</h2><p>selenium是一个自动化测试工具，使用它可以驱动浏览器执行特定的动作，如点击，下拉，填充表单等操作，同时可以获取浏览器当前呈现页面的源代码，做到可见可爬。<br>下面以chrome浏览器为例，来说一下selenium的使用方式。  </p>
+<blockquote>
+<pre><code>首先，配置谷歌浏览器对于版本的ChromeDriver，可以找资源去下载，然后将chromedriver.exe放在python文件夹下的Scripts文件夹里。
+然后，安装python的selenium库，自行百度；接下来我们就可以使用selenium啦!!!
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/mZll8Ht.png" alt=""></p>
+<h2 id="声明浏览器对象"><a href="#声明浏览器对象" class="headerlink" title="声明浏览器对象"></a>声明浏览器对象</h2><p>首先初始化浏览器对象，接着就可调用browser对象，让其模拟浏览器操作啦！<br><img src="https://i.imgur.com/gxAlhda.png" alt=""></p>
+<h2 id="访问页面"><a href="#访问页面" class="headerlink" title="访问页面"></a>访问页面</h2><p>使用get()方法访问页面<br><img src="https://i.imgur.com/CUAkEEO.png" alt=""></p>
+<p>运行代码后，会弹出一个淘宝界面，并输出网页的源代码。<br><img src="https://i.imgur.com/5NwK8Ag.jpg" alt=""></p>
+<h2 id="节点操作"><a href="#节点操作" class="headerlink" title="节点操作"></a>节点操作</h2><p>当我们用selenium驱动浏览器模拟操作时，需要先获取其操作节点，比如输入框，按钮的位置。  </p>
+<p><strong>单个节点</strong><br>以淘宝搜索框为例，先从源代码里找到其位置。<br><img src="https://i.imgur.com/ed1UMjD.png" alt=""></p>
+<blockquote>
+<pre><code>&lt;input id=&quot;q&quot; name=&quot;q&quot; aria-label=&quot;请输入搜索文字&quot; accesskey=&quot;s&quot; autofocus=&quot;autofocus&quot; autocomplete=&quot;off&quot; class=&quot;search-combobox-input&quot; aria-haspopup=&quot;true&quot; aria-combobox=&quot;list&quot; role=&quot;combobox&quot; x-webkit-grammar=&quot;builtin:translate&quot; tabindex=&quot;0&quot;&gt;
+</code></pre></blockquote>
+<p>这个节点或者说是标签中有很多属性，比如id属性：q， name属性：q；那么我们可以根据css选择器或者xpath获取这个节点。  </p>
+<blockquote>
+<pre><code>1. find_element_by_id(&apos;q&apos;)  
+2. find_element_by_css_selector(&apos;#q&apos;)
+3. find_element_by_xpath(&apos;//*[@id=&quot;q&quot;]&apos;)
+以上方法都可获取搜索输入框，一般获取单个节点用以上方法就足够了，另外还可以根据name或者class_name来获取。  
+</code></pre></blockquote>
+<p>selenium还有通用方法，find_element(By.ID, ‘q’),需要传入两个参数，一个时查找方式，一个是查找值。返回结果为webelement类型。</p>
+<p><strong>多个节点</strong><br>如果我们需要查找满足条件的所有节点，就绪要用到find_elements()方法。返回结果为列表类型，列表在每个节点为webelement类型。查找方式与单个节点一致。  </p>
+<p><strong>节点交互</strong><br>selenium可以驱动浏览器执行相应的操作，我们先找到这个节点，比如淘宝搜索框，然后调用方法：  </p>
+<blockquote>
+<pre><code>send_keys() 输入文字
+clear() 清空文字
+click() 点击按钮 还有很多其他的操作，可以去google查
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/11otno6.png" alt="">  </p>
+<p>代码运行效果：<br><img src="https://i.imgur.com/Q0duWFX.png" alt=""></p>
+<h2 id="动作链"><a href="#动作链" class="headerlink" title="动作链"></a>动作链</h2><p>还有一些其他的操作，他们没有像上面那样是针对单个节点的，他们没有特定的对象，比如鼠标拖动，键盘按键等，这些动作就是动作链。  </p>
+<p><img src="https://i.imgur.com/kleR7Xi.png" alt="">  </p>
+<p>动作前：<br><img src="https://i.imgur.com/odEyGQP.png" alt=""></p>
+<p>动作后：<br><img src="https://i.imgur.com/yApOg8G.png" alt=""></p>
+<h2 id="执行JavaScript"><a href="#执行JavaScript" class="headerlink" title="执行JavaScript"></a>执行JavaScript</h2><p>对于某些操作，selenium API并没有提供；比如，下拉进度条，它可直接模拟运行JS脚本，此时可以使用<strong>execute_script()</strong>方法实现。<br><img src="https://i.imgur.com/9IILHeu.png" alt=""></p>
+<p>执行效果：<br><img src="https://i.imgur.com/rsl9U5d.png" alt=""></p>
+<h2 id="获取节点信息"><a href="#获取节点信息" class="headerlink" title="获取节点信息"></a>获取节点信息</h2><p>通过前面讲的page_source属性可以获取网页的源代码，那么我们都可以对获取的网页源码进行解析(re, BS, pyquery)。不过selenium自带相关的方法和属性来直接提取节点信息。  </p>
+<p><strong>获取属性值</strong><br>先选中节点，再通过节点对象调用get_attribute(‘属性名’)就可获取这个属性对应的内容。<br><img src="https://i.imgur.com/A4Ts0H9.png" alt=""> </p>
+<p><strong>获取文本值</strong><br>每个WeBElement节点都有text属性，直接调用这个属性就可以获取节点内部的文本信息，这相当于BS中的get_text()和pyquery中的text()方法。<br>加入获取的节点为p，那么p.text就是其文本内容。这里就不演示了  </p>
+<p><strong>获取其他值</strong><br>另外，一个节点还有其他属性，方法都差不多。  </p>
+<blockquote>
+<pre><code>节点.id   # 获取节点id
+节点.location   # 获取节点在页面中的位置
+节点.tag_name   # 获取节点标签名称
+节点.size   # 获取节点宽高
+</code></pre></blockquote>
+<h2 id="切换frame"><a href="#切换frame" class="headerlink" title="切换frame"></a>切换frame</h2><p>网页中有一种节点叫作 iframe， 即子frame，相当于页面的子页面，它的结构和外部网页的结构完全一致。selenium打开页面后，默认在父级的Frame里操作，若此时页面中还有子Frame，它是不能获取到子Frame里面的节点的，所以，此时需要使用<strong>switch_to.frame()</strong>方法来切换Frame。  </p>
+<h2 id="延时等待"><a href="#延时等待" class="headerlink" title="延时等待"></a>延时等待</h2><p>在selenium中， get()方法会在网页框架加载结束后执行，此时若获取page_soucre，可能并不是浏览器完全加载的页面，如果某些页面有额外的Ajax请求，我们就不一定能捕获成功。 所以，这里需要延时等待一定时间，确保节点已经加载完全。<br><strong>隐式等待</strong><br>当使用隐式等待时，如果selenium没有在DOM中找到节点，将继续等待，超出设定时间后，则会抛出找不到节点的异常。<br><img src="https://i.imgur.com/Zq8XTVv.png" alt=""></p>
+<p><strong>显式等待</strong><br>由于页面加载有时候会受到网络的影响，所以隐式等待这种设置固定时间并不是很靠谱；这里引入显式等待。<br>显式等待指定了要查找的节点，然后指定一个最长等待时间，如果在规定时间加载出来便返回该节点；如果没有，即抛出超时异常。  </p>
+<p>首先，需要引入WebDriverWait这个对象，调用until方法，传入等待条件excepted_conditions。<br><strong>expected_conditions模块:</strong>  </p>
+<p>以下两个条件类验证title，验证传入的参数title是否等于或包含于driver.title </p>
+<blockquote>
+<pre><code>title_is 
+title_contains
+</code></pre></blockquote>
+<p>以下两个条件验证元素是否出现，传入的参数都是元组类型的locator，如(By.ID, ‘kw’) ;顾名思义，一个只要一个符合条件的元素加载出来就通过；另一个必须所有符合条件的元素都加载出来才行 </p>
+<blockquote>
+<pre><code>presence_of_element_located 
+presence_of_all_elements_located
+</code></pre></blockquote>
+<p>以下三个条件验证元素是否可见，前两个传入参数是元组类型的locator，第三个传入WebElement ;第一个和第三个其实质是一样的 </p>
+<blockquote>
+<pre><code>visibility_of_element_located 
+invisibility_of_element_located 
+visibility_of
+</code></pre></blockquote>
+<p>以下两个条件判断某段文本是否出现在某元素中，一个判断元素的text，一个判断元素的value </p>
+<blockquote>
+<pre><code>text_to_be_present_in_element 
+text_to_be_present_in_element_value
+</code></pre></blockquote>
+<p>以下条件判断frame是否可切入，可传入locator元组或者直接传入定位方式：id、name、index或WebElement </p>
+<blockquote>
+<pre><code>frame_to_be_available_and_switch_to_it
+</code></pre></blockquote>
+<p>以下条件判断是否有alert出现 </p>
+<blockquote>
+<pre><code>alert_is_present
+</code></pre></blockquote>
+<p>以下条件判断元素是否可点击，传入locator<br>element_to_be_clickable</p>
+<p>以下四个条件判断元素是否被选中，第一个条件传入WebElement对象，第二个传入locator元组<br>第三个传入WebElement对象以及状态，相等返回True，否则返回False<br>第四个传入locator以及状态，相等返回True，否则返回False </p>
+<blockquote>
+<pre><code>element_to_be_selected 
+element_located_to_be_selected 
+element_selection_state_to_be 
+element_located_selection_state_to_be
+</code></pre></blockquote>
+<p>最后一个条件判断一个元素是否仍在DOM中，传入WebElement对象，可以判断页面是否刷新了 </p>
+<blockquote>
+<pre><code>staleness_of
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/Xpj1Vj2.png" alt=""></p>
+<h2 id="前进和后退"><a href="#前进和后退" class="headerlink" title="前进和后退"></a>前进和后退</h2><blockquote>
+<pre><code>browser.back()   后退，浏览器中返回上一个页面
+browser.forward()   前进，下一个页面
+</code></pre></blockquote>
+<h2 id="Cookies操作"><a href="#Cookies操作" class="headerlink" title="Cookies操作"></a>Cookies操作</h2><p>使用selenium还可以方便的对cookies进行操作<br><img src="https://i.imgur.com/GMq4nfL.png" alt=""></p>
+<h2 id="选项卡管理"><a href="#选项卡管理" class="headerlink" title="选项卡管理"></a>选项卡管理</h2><p>在实际访问网页时，会开启一个个选项卡。在selenium中，我们也会对其进行操作。  </p>
+<p><img src="https://i.imgur.com/ZrNbSSZ.png" alt=""></p>
+<p>效果：<br><img src="https://i.imgur.com/P0NCssl.png" alt=""></p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>在使用selenium时，也会遇到异常情况；比如访问超时，节点无法找到等，所有也需要使用try。。。except来捕获各类异常。<br>下面举个例子：<br><img src="https://i.imgur.com/agPTE5p.png" alt="">  </p>
+<p>那么到目前为止，selenium的常规用法基本上都讲了一遍了，若是想了解更多相关内容的话，可以参考以下几个链接：<br>selenium官方文档：<br><a href="http://selenium-python.readthedocs.io/installation.html#introduction" title="selenium官方文档" target="_blank" rel="noopener">http://selenium-python.readthedocs.io/installation.html#introduction</a><br>博文参考：<br><a href="https://blog.csdn.net/wenboyu/article/details/78162667" target="_blank" rel="noopener">https://blog.csdn.net/wenboyu/article/details/78162667</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/16/Ajax数据的爬取/" rel="next" title="Ajax数据的爬取">
+                <i class="fa fa-chevron-left"></i> Ajax数据的爬取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selenium"><span class="nav-number">1.</span> <span class="nav-text">Selenium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明浏览器对象"><span class="nav-number">2.</span> <span class="nav-text">声明浏览器对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#访问页面"><span class="nav-number">3.</span> <span class="nav-text">访问页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#节点操作"><span class="nav-number">4.</span> <span class="nav-text">节点操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动作链"><span class="nav-number">5.</span> <span class="nav-text">动作链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行JavaScript"><span class="nav-number">6.</span> <span class="nav-text">执行JavaScript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#获取节点信息"><span class="nav-number">7.</span> <span class="nav-text">获取节点信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换frame"><span class="nav-number">8.</span> <span class="nav-text">切换frame</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#延时等待"><span class="nav-number">9.</span> <span class="nav-text">延时等待</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前进和后退"><span class="nav-number">10.</span> <span class="nav-text">前进和后退</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cookies操作"><span class="nav-number">11.</span> <span class="nav-text">Cookies操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选项卡管理"><span class="nav-number">12.</span> <span class="nav-text">选项卡管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">13.</span> <span class="nav-text">异常处理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
