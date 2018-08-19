@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="leetcode," />
+  <meta name="keywords" content="爬虫," />
 
 
 
@@ -81,22 +81,18 @@
 
 
 
-<meta name="description" content="题目一给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。">
-<meta name="keywords" content="leetcode">
+<meta name="description" content="万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。">
+<meta name="keywords" content="爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode01-两数之和">
-<meta property="og:url" content="http://yoursite.com/2018/08/06/leetcode01-两数之和/index.html">
+<meta property="og:title" content="爬虫的思路">
+<meta property="og:url" content="http://yoursite.com/2018/08/19/爬虫的思路/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="题目一给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。">
+<meta property="og:description" content="万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/jIFzDnU.png">
-<meta property="og:image" content="https://i.imgur.com/EiH22Fh.png">
-<meta property="og:image" content="https://i.imgur.com/D3GRGgz.png">
-<meta property="og:updated_time" content="2018-08-07T01:54:59.449Z">
+<meta property="og:updated_time" content="2018-08-19T02:27:31.726Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode01-两数之和">
-<meta name="twitter:description" content="题目一给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。">
-<meta name="twitter:image" content="https://i.imgur.com/jIFzDnU.png">
+<meta name="twitter:title" content="爬虫的思路">
+<meta name="twitter:description" content="万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。">
 
 
 
@@ -126,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/06/leetcode01-两数之和/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/19/爬虫的思路/"/>
 
 
 
 
 
-  <title>leetcode01-两数之和 | AppleGuard的博客</title>
+  <title>爬虫的思路 | AppleGuard的博客</title>
   
 
 
@@ -269,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/06/leetcode01-两数之和/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/19/爬虫的思路/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -286,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode01-两数之和</h1>
+          <h1 class="post-title" itemprop="name headline">爬虫的思路</h1>
         
 
         <div class="post-meta">
@@ -298,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-06T23:17:50+08:00">
-                2018-08-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-19T09:56:37+08:00">
+                2018-08-19
               </time>
             
 
@@ -321,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -358,23 +354,45 @@
       
 
       
-        <p>题目一<br>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。<br>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。<br><a id="more"></a></p>
+        <p>万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。<br><a id="more"></a>  </p>
+<h2 id="准备好目标URL"><a href="#准备好目标URL" class="headerlink" title="准备好目标URL"></a>准备好目标URL</h2><p>一般分为一下两种情况：  </p>
+<p>1.准备start_url</p>
 <blockquote>
-<pre><code>示例：
-给定 nums = [2, 7, 11, 15], target = 9
-因为 nums[0] + nums[1] = 2 + 7 = 9
-所以返回 [0, 1]
+<pre><code>页码总数不确定，规律不明显
+通过代码提取下一页地址
+使用xpath/css/re提取url
+寻找url地址，部分参数在当前页面中，比如当前页码数和总页码数，使用这两个参数构建url
 </code></pre></blockquote>
-<p>分析：目的：找到数组中和为目标值的两个数，并返回他们的索引；这里可以用两个for循环来遍历数组nums，让他们的和等于target。代码如下：<br><img src="https://i.imgur.com/jIFzDnU.png" alt=""></p>
-<p>提交结果：超出时间限制。哈哈，用时太长了。这里用了2层for循环，时间复杂度为O(n^2)。</p>
-<p>那么有没有更好的方法呢？既然要返回元素的索引值，不妨试试把元素和其索引存放到字典里试一试。</p>
+<p>2.准备url_list</p>
 <blockquote>
-<pre><code>first：通过创建字典，将nums里的值和序号对应起来
-second：创建另一个字典用来存储目标值（target-nums）的值，
-third：判断该值是否在nums内，并返回其对应索引值
+<pre><code>页码总数清楚
+url的地址规律明显
 </code></pre></blockquote>
-<p><img src="https://i.imgur.com/EiH22Fh.png" alt=""></p>
-<p>提交结果：通过！！！这个方法只遍历了一次列表，显然降低了计算时间；时间复杂度降低为O(n)<br><img src="https://i.imgur.com/D3GRGgz.png" alt=""></p>
+<h2 id="发送请求，获取响应"><a href="#发送请求，获取响应" class="headerlink" title="发送请求，获取响应"></a>发送请求，获取响应</h2><blockquote>
+<pre><code>添加随机user-agent，
+添加随机代理ip，
+如果对方判断我们是爬虫之后应该添加更多的headers字段，包含cookie；cookie的处理可以使用session来解决
+准备一堆能用的cookie，组成cookie池。
+如果不登录:
+        准备刚刚开始能够成功请求的cookie，即接收对方网站设置在response的cookie
+如果登录:
+       准备多个账号
+       使用程序获取每个账号的cookie
+       请求登录之后才能访问的网站随机选择上一步获取的cookie
+</code></pre></blockquote>
+<h2 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h2><p>1.确定数据的位置:  </p>
+<p>如果数据在当前的url地址中,提取的是列表页中的数据;直接请求列表页的url地址，不用进入详情页,提取详情页的数据<br><strong>1.确定url; 2.发送请求; 3.提取数据; 4.返回</strong></p>
+<p>如果数据不在当前的url地址中,在其他响应中(例如Ajax请求)，寻找数据的位置<br> <strong>在network中从上而下找,使用chrome中的过滤条件，选择除了js，css, image之外的按钮,使用chrome的serach all file，搜索数字和英文</strong></p>
+<p>如果碰到加密的Ajax请求，可使用selenium等工具获取响应源码<br><strong>分析源码，获取目标数据</strong></p>
+<p>2.数据的提取  </p>
+<blockquote>
+<pre><code>1.使用re,xpath，css selector从html中提取整块的数据，先分组，之后每一组在提取
+2.json数据，可使用get方法进行筛选后，在进行相应的提取
+</code></pre></blockquote>
+<h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><blockquote>
+<pre><code>保存在本地json ，csv，text,使用open方法或者os创建本地文件夹，将文件保存至本地。
+保存在数据库，关系型MySQL，提前创建好表，将数据按字段分类；非关系型，MongoDB， redis等。
+</code></pre></blockquote>
 
       
     </div>
@@ -392,7 +410,7 @@ third：判断该值是否在nums内，并返回其对应索引值
       
         <div class="post-tags">
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/爬虫/" rel="tag"># 爬虫</a>
           
         </div>
       
@@ -405,8 +423,8 @@ third：判断该值是否在nums内，并返回其对应索引值
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/06/JavaScript基础语法(一)/" rel="next" title="JavaScript基础语法">
-                <i class="fa fa-chevron-left"></i> JavaScript基础语法
+              <a href="/2018/08/18/selenium的使用/" rel="next" title="selenium的使用">
+                <i class="fa fa-chevron-left"></i> selenium的使用
               </a>
             
           </div>
@@ -414,10 +432,6 @@ third：判断该值是否在nums内，并返回其对应索引值
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/07/JavaScript基础学习-二/" rel="prev" title="JavaScript基础学习(二)">
-                JavaScript基础学习(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -469,8 +483,17 @@ third：判断该值是否在nums内，并返回其对应索引值
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -587,6 +610,22 @@ third：判断该值是否在nums内，并返回其对应索引值
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备好目标URL"><span class="nav-number">1.</span> <span class="nav-text">准备好目标URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发送请求，获取响应"><span class="nav-number">2.</span> <span class="nav-text">发送请求，获取响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取数据"><span class="nav-number">3.</span> <span class="nav-text">提取数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存数据"><span class="nav-number">4.</span> <span class="nav-text">保存数据</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

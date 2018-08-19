@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-19T01:37:32.562Z</updated>
+  <updated>2018-08-19T02:27:31.726Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>爬虫的思路</title>
+    <link href="http://yoursite.com/2018/08/19/%E7%88%AC%E8%99%AB%E7%9A%84%E6%80%9D%E8%B7%AF/"/>
+    <id>http://yoursite.com/2018/08/19/爬虫的思路/</id>
+    <published>2018-08-19T01:56:37.000Z</published>
+    <updated>2018-08-19T02:27:31.726Z</updated>
+    
+    <content type="html"><![CDATA[<p>万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。<br><a id="more"></a>  </p><h2 id="准备好目标URL"><a href="#准备好目标URL" class="headerlink" title="准备好目标URL"></a>准备好目标URL</h2><p>一般分为一下两种情况：  </p><p>1.准备start_url</p><blockquote><pre><code>页码总数不确定，规律不明显通过代码提取下一页地址使用xpath/css/re提取url寻找url地址，部分参数在当前页面中，比如当前页码数和总页码数，使用这两个参数构建url</code></pre></blockquote><p>2.准备url_list</p><blockquote><pre><code>页码总数清楚url的地址规律明显</code></pre></blockquote><h2 id="发送请求，获取响应"><a href="#发送请求，获取响应" class="headerlink" title="发送请求，获取响应"></a>发送请求，获取响应</h2><blockquote><pre><code>添加随机user-agent，添加随机代理ip，如果对方判断我们是爬虫之后应该添加更多的headers字段，包含cookie；cookie的处理可以使用session来解决准备一堆能用的cookie，组成cookie池。如果不登录:        准备刚刚开始能够成功请求的cookie，即接收对方网站设置在response的cookie如果登录:       准备多个账号       使用程序获取每个账号的cookie       请求登录之后才能访问的网站随机选择上一步获取的cookie</code></pre></blockquote><h2 id="提取数据"><a href="#提取数据" class="headerlink" title="提取数据"></a>提取数据</h2><p>1.确定数据的位置:  </p><p>如果数据在当前的url地址中,提取的是列表页中的数据;直接请求列表页的url地址，不用进入详情页,提取详情页的数据<br><strong>1.确定url; 2.发送请求; 3.提取数据; 4.返回</strong></p><p>如果数据不在当前的url地址中,在其他响应中(例如Ajax请求)，寻找数据的位置<br> <strong>在network中从上而下找,使用chrome中的过滤条件，选择除了js，css, image之外的按钮,使用chrome的serach all file，搜索数字和英文</strong></p><p>如果碰到加密的Ajax请求，可使用selenium等工具获取响应源码<br><strong>分析源码，获取目标数据</strong></p><p>2.数据的提取  </p><blockquote><pre><code>1.使用re,xpath，css selector从html中提取整块的数据，先分组，之后每一组在提取2.json数据，可使用get方法进行筛选后，在进行相应的提取</code></pre></blockquote><h2 id="保存数据"><a href="#保存数据" class="headerlink" title="保存数据"></a>保存数据</h2><blockquote><pre><code>保存在本地json ，csv，text,使用open方法或者os创建本地文件夹，将文件保存至本地。保存在数据库，关系型MySQL，提前创建好表，将数据按字段分类；非关系型，MongoDB， redis等。</code></pre></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;万事开头难，刚开始写爬虫程序的时候，不知从何下手；通过最近一段时间练习写爬虫程序，也渐渐有了一些简单的思路，在这里做个笔记，供日后翻阅。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="爬虫" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="爬虫" scheme="http://yoursite.com/tags/%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>selenium的使用</title>
@@ -427,28 +449,6 @@
     
     
       <category term="反射" scheme="http://yoursite.com/tags/%E5%8F%8D%E5%B0%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python学习之迭代器,生成器,yield</title>
-    <link href="http://yoursite.com/2018/07/23/python%E5%AD%A6%E4%B9%A0%E4%B9%8B%E8%BF%AD%E4%BB%A3%E5%99%A8-%E7%94%9F%E6%88%90%E5%99%A8-yield/"/>
-    <id>http://yoursite.com/2018/07/23/python学习之迭代器-生成器-yield/</id>
-    <published>2018-07-23T11:33:35.000Z</published>
-    <updated>2018-08-01T04:16:01.450Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。<br><a id="more"></a><br><strong>1.可迭代对象</strong><br>以直接作用于for循环的数据类型有以下几种：<br>一类是集合数据类型，如    list、tuple    、dict、    set    、str等；<br>另一类是    generator，包括生成器和带    yield的generator     function。<br>这些可以直接作用于for    循环的对象统称为可迭代对象：Iterable。<br><strong>2.迭代器方法</strong><br>迭代器有两个基本的方法：<strong>iter()</strong> 和<strong>next()</strong>。字符串，列表或元组对象都可用于创建迭代器。  </p><p><img src="https://i.imgur.com/Eph73gt.png" alt="">  </p><p>当然，也可以直接用for循环进行遍历，如下：  </p><p><img src="https://i.imgur.com/AKQMlUN.png" alt="">  </p><p>也可以使用next()方法：  </p><p><img src="https://i.imgur.com/lH2UoAH.png" alt=""></p><h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p><strong>什么是生成器</strong><br>通过列表生成式，我们可以直接创建一个列表。但是，受到内存限制，列表容量肯定是有限的。而且，创建一个包含100万个元素的列表，不仅占用很大的存储空间，如果我们仅仅需要访问前面几个元素，那后面绝大多数元素 占用的空间都白白浪费了。所以，如果列表元素可以按照某种算法推算出 来，那我们是否可以在循环的过程中不断推算出后续的元素呢？这样就不必创建完整的list，从而节省大量的空间。在Python中，这种一边循环一边计算的机制，称为生成器generator。生成器是一个简单的方式来完成迭代，简单来说，Python的生成器是一个返回可以迭代对象的函数，可以理解为生成器本身也是一个迭代器。<br><strong>创建生成器</strong>  </p><ul><li><strong>1.生成器表达式</strong><br>类似于列表推导，但，生成器返回按需生产结果的一个对象，而不是一次构建一个结果列表。  </li></ul><p><img src="https://i.imgur.com/HdJ6dVz.png" alt="">  </p><p><strong>2.生成器函数</strong><br>在Python中，使用了yield的函数就称为生成器。<br>跟普通函数不同的是，生成器是一个返回迭代器的函数，只能用于迭代操作，可以理解为：生成器就是一个迭代值。并在下一次执行next方法时，从当前位置继续运行。  </p><p><img src="https://i.imgur.com/YZYz2B8.png" alt=""><br>结论：<br>1、对于生成器，当调用函数next(generator)时，将获得生成器yield后面表达式的值；<br>2、当生成器已经执行完毕时，再次调用next函数，生成器会抛出StopIteration异常。<br>扩展：<br>1、当生成器内部执行到return语句时，自动抛出StopIteration异常，return的值将作为异常的解释；<br>2、外部可以通过generator.close()函数手动关闭生成器，此后调用next或者send方法将抛出异常</p><h2 id="3-next和send函数"><a href="#3-next和send函数" class="headerlink" title="3.next和send函数"></a>3.next和send函数</h2><p>next函数与send函数很相似，都能获得生成器的下一个yield后面表达式的值，不同的是send函数可以向生成器传参：  </p><p><img src="https://i.imgur.com/DnXjt9v.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/S0qXyCM.png" alt=""><br>程序首先调用next函数，使得生成器执行到第4行的时候，把i的值0作为next函数的返回值返回，程序输出main:0，然后生成器暂停。程序往下调用send(777)函数，<br>生成器从第四行继续执行，send函数的参数777作为yield的返回值，并赋值给msg，然后得到gen:777的输出。<br><strong>简单的说，send函数使得yield关键字拥有了返回值返回给它的左值。</strong></p><p>注意：  </p><p><img src="https://i.imgur.com/OeTnsTo.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/xYXE8HK.png" alt=""><br>程序报错：<strong>不能将一个非None的值传给初始的生成器</strong>。<br>从上面的测试，我们知道，当调用send函数前，生成器内部应该执行到yield所在的语句并暂停。而在这次的测试中，我们从一开始就调用send并传了一个参数，<br>程序报错误。<br>因此，在调用带非空参数的send函数之前，我们应该使用next(generator)或者send(None)使得生成器执行到yield语句并暂停。  </p><p><img src="https://i.imgur.com/jt4QKvJ.png" alt=""><br>输出结果：  </p><p><img src="https://i.imgur.com/YlrS6Jl.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;迭代器&quot;&gt;&lt;a href=&quot;#迭代器&quot; class=&quot;headerlink&quot; title=&quot;迭代器&quot;&gt;&lt;/a&gt;迭代器&lt;/h2&gt;&lt;p&gt;迭代是Python最强大的功能之一，是访问集合元素的一种方式。迭代器是一个可以记住遍历的位置的对象。迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="yeild" scheme="http://yoursite.com/tags/yeild/"/>
     
   </entry>
   
