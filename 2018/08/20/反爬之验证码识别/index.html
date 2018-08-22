@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="反爬虫," />
 
 
 
@@ -81,23 +81,40 @@
 
 
 
-<meta name="description" content="Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。">
+<meta name="description" content="现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！">
+<meta name="keywords" content="反爬虫">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python标准库和内建函数">
-<meta property="og:url" content="http://yoursite.com/2018/07/30/python标准库和内建函数/index.html">
+<meta property="og:title" content="图形，滑块验证码识别">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/反爬之验证码识别/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。">
+<meta property="og:description" content="现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/hn08bjp.png">
-<meta property="og:image" content="https://i.imgur.com/bWf8wMA.png">
-<meta property="og:image" content="https://i.imgur.com/xed9Pik.png">
-<meta property="og:image" content="https://i.imgur.com/xmTfHqc.png">
-<meta property="og:image" content="https://i.imgur.com/OJSWUm3.png">
-<meta property="og:updated_time" content="2018-08-01T04:07:17.425Z">
+<meta property="og:image" content="https://i.imgur.com/KfnZxWP.png">
+<meta property="og:image" content="https://i.imgur.com/Dx7xscT.png">
+<meta property="og:image" content="https://i.imgur.com/WagZ5W3.png">
+<meta property="og:image" content="https://i.imgur.com/li0queT.png">
+<meta property="og:image" content="https://i.imgur.com/pYD8C6K.png">
+<meta property="og:image" content="https://i.imgur.com/sVfDi03.png">
+<meta property="og:image" content="https://i.imgur.com/u1iul7H.png">
+<meta property="og:image" content="https://i.imgur.com/dKjUoEK.png">
+<meta property="og:image" content="https://i.imgur.com/v8ouv0P.png">
+<meta property="og:image" content="https://i.imgur.com/Ayg9jgg.png">
+<meta property="og:image" content="https://i.imgur.com/vCAntIv.png">
+<meta property="og:image" content="https://i.imgur.com/p7giBb3.png">
+<meta property="og:image" content="https://i.imgur.com/EC60eS5.png">
+<meta property="og:image" content="https://i.imgur.com/YHzDimh.png">
+<meta property="og:image" content="https://i.imgur.com/KNLDRsB.png">
+<meta property="og:image" content="https://i.imgur.com/TQzHllN.png">
+<meta property="og:image" content="https://i.imgur.com/Rlb2brE.png">
+<meta property="og:image" content="https://i.imgur.com/uaEc7Jg.png">
+<meta property="og:image" content="https://i.imgur.com/G8pc1GS.png">
+<meta property="og:image" content="https://i.imgur.com/f9DPlNE.png">
+<meta property="og:image" content="https://i.imgur.com/br02DBK.png">
+<meta property="og:updated_time" content="2018-08-22T04:12:29.047Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python标准库和内建函数">
-<meta name="twitter:description" content="Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。">
-<meta name="twitter:image" content="https://i.imgur.com/hn08bjp.png">
+<meta name="twitter:title" content="图形，滑块验证码识别">
+<meta name="twitter:description" content="现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！">
+<meta name="twitter:image" content="https://i.imgur.com/KfnZxWP.png">
 
 
 
@@ -127,13 +144,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/30/python标准库和内建函数/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/20/反爬之验证码识别/"/>
 
 
 
 
 
-  <title>python标准库和内建函数 | AppleGuard的博客</title>
+  <title>图形，滑块验证码识别 | AppleGuard的博客</title>
   
 
 
@@ -270,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/python标准库和内建函数/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/反爬之验证码识别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -287,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python标准库和内建函数</h1>
+          <h1 class="post-title" itemprop="name headline">图形，滑块验证码识别</h1>
         
 
         <div class="post-meta">
@@ -299,8 +316,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T21:12:17+08:00">
-                2018-07-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-20T10:49:58+08:00">
+                2018-08-20
               </time>
             
 
@@ -322,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python基础/" itemprop="url" rel="index">
-                    <span itemprop="name">python基础</span>
+                  <a href="/categories/反爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">反爬虫</span>
                   </a>
                 </span>
 
@@ -359,63 +376,47 @@
       
 
       
-        <p>Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。<br><a id="more"></a>  </p>
-<h2 id="常用标准库"><a href="#常用标准库" class="headerlink" title="常用标准库"></a>常用标准库</h2><p><img src="https://i.imgur.com/hn08bjp.png" alt=""></p>
-<h2 id="常用扩展库"><a href="#常用扩展库" class="headerlink" title="常用扩展库"></a>常用扩展库</h2><p><img src="https://i.imgur.com/bWf8wMA.png" alt=""></p>
-<h2 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h2><p>Build-in Function,启动python解释器，输入dir(__builtins__), 可以看到很多python解释器启动后默认加载的属性和函数，这些函数称之为内建函数， 这些函数因为在编程时使用较多，cpython解释器用c语言实现了这些函数，启动解释器 时默认加载。<br>这些函数数量众多，不宜记忆，开发时不是都用到的，待用到时再help(function), 查看如何使用，或结合百度查询即可，在这里介绍些常用的内建函数。  </p>
-<p><strong>1.range函数</strong><br>range(stop) -&gt; list of integers  </p>
-<p>range(start, stop[, step]) -&gt; list of integers  </p>
+        <p>现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！<br><a id="more"></a>  </p>
+<h2 id="PIL库"><a href="#PIL库" class="headerlink" title="PIL库"></a>PIL库</h2><p>其实，验证码识别归根到底还是对各种各样图片的识别和操作，python中有很对图像处理的库，其中PIL就是其中之一。 所以在处理验证码识别之前，必须先了解PIL库。 下面附上其API源码地址，以及对应的学习博客。<br>源码地址：<a href="https://pillow-cn.readthedocs.io/zh_CN/latest/reference/index.html" target="_blank" rel="noopener">https://pillow-cn.readthedocs.io/zh_CN/latest/reference/index.html</a><br>参考博客：<a href="https://blog.csdn.net/louishao/article/details/69879981" target="_blank" rel="noopener">https://blog.csdn.net/louishao/article/details/69879981</a><br>下面我们就开始验证码识别之路了。</p>
+<h2 id="图形验证码"><a href="#图形验证码" class="headerlink" title="图形验证码"></a>图形验证码</h2><p>以中国知网为例：<br><img src="https://i.imgur.com/KfnZxWP.png" alt=""></p>
+<p>首先，我们先拿到上图中绿线标记的验证码，下载到本地项目文件中，<br>然后，编写如下代码:<br><img src="https://i.imgur.com/Dx7xscT.png" alt=""><br>输出结果为：486V， 可是实际图片为4S6V，这是因为验证码内多余线条干扰了图片的识别，像这类情况，还需要做出额外的处理，比如转灰度，二值化等。对应的方法如下：<br><img src="https://i.imgur.com/WagZ5W3.png" alt=""></p>
+<p>当然，实际处理中并不是这样，一般我们会先对模糊图片进行灰度处理后，再设定二值化的阈值，实际处理如下。<br><img src="https://i.imgur.com/li0queT.png" alt=""></p>
+<p>输出结果：4S6V<br>进行识别时，先设定好二值化阈值threshold，进行适当调试，直到图片能正常识别为止。</p>
+<h2 id="滑动验证码"><a href="#滑动验证码" class="headerlink" title="滑动验证码"></a>滑动验证码</h2><p><strong>过程分析：</strong></p>
+<p>滑动验证码主要的验证方式是拖动滑块，拼合图像；如图象完全拼合，则验证成功，即表单提交成功，否则需要重新验证。<br>如图：<br><img src="https://i.imgur.com/pYD8C6K.png" alt=""></p>
+<p>下面，我们就以极验的验证码为例，来讲诉一下识别方法。<br>因为极验的验证码在拖动验证码后会生成一个加密的表单提交到后台，所有为了避免麻烦我们直接用selenium模拟浏览器行为来完成验证。<br>登陆网站：极验官网</p>
 <blockquote>
-<pre><code>start:计数从start开始。默认是从0开始。例如range（5）等价于range（0， 5）;
-stop:到stop结束，但不包括stop.例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5
-step:每次跳跃的间距，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)
+<pre><code>目标站点：https://account.geetest.com/login
 </code></pre></blockquote>
-<p>python2中range返回列表，python3中range返回一个迭代值。如果想得到列表,可通过list函数,也可以用列表生成式<code>List = [x for x in range(5)]</code>。  </p>
-<p><strong>2.map函数</strong><br>map函数会根据提供的函数对指定序列做映射。  </p>
+<p><img src="https://i.imgur.com/sVfDi03.png" alt=""></p>
+<p>首先，我们发现登陆界面有个智能按钮，一般来说，在输入邮箱之后，点击按钮就会弹出滑动验证窗口，然后我们在拖动验证码完成图像拼接，完成验证。<br>弹出滑块验证：<br><img src="https://i.imgur.com/u1iul7H.png" alt=""><br>拖动滑块，完成验证：<br><img src="https://i.imgur.com/dKjUoEK.png" alt=""></p>
+<p>所以，滑块验证识别需要完成以下步骤：</p>
 <blockquote>
-<pre><code>map(...)
-     map(function, sequence[, sequence, ...]) -&gt; list  
+<pre><code>1. 模拟点击验证按钮
+2. 识别滑块的缺口位置
+3. 模拟拖动滑块
 </code></pre></blockquote>
-<blockquote>
-<pre><code>function:是一个函数
-sequence:是一个或多个序列,取决于function需要几个参数
-返回值是一个list
-</code></pre></blockquote>
-<p>参数序列中的每一个元素分别调用function函数，返回包含每次function函数返回值的list。<br><img src="https://i.imgur.com/xed9Pik.png" alt="">  </p>
-<p><strong>3.filter函数</strong><br>filter函数会对指定序列执行过滤操作  </p>
-<blockquote>
-<pre><code>filter(...)  
-filter(function or None, sequence) -&gt; list, tuple, or string
-</code></pre></blockquote>
-<blockquote>
-<pre><code>Return those items of sequence for which function(item) is true.    
-If function is None, return the items that are true.  
-If sequence is a tuple or string, return the same type, else return a list.  
-</code></pre></blockquote>
-<blockquote>
-<pre><code>function:接受一个参数，返回布尔值True或False
-sequence:序列可以是str，tuple，list
-</code></pre></blockquote>
-<p>filter函数会对序列参数sequence中的每个元素调用function函数，最后返回的结果包含调用结果为True的元素。返回值的类型和参数sequence的类型相同。<br><img src="https://i.imgur.com/xmTfHqc.png" alt=""></p>
-<p><strong>4.reduce函数</strong><br>reduce函数，reduce函数会对参数序列中元素进行累积。  </p>
-<blockquote>
-<pre><code>reduce(...)  
-reduce(function, sequence[, initial]) -&gt; value
-</code></pre></blockquote>
-<blockquote>
-<pre><code>Apply a function of two arguments cumulatively to the items of a sequence,  
-from left to right, so as to reduce the sequence to a single value.  
-For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates  
-((((1+2)+3)+4)+5).  If initial is present, it is placed before the items  
-of the sequence in the calculation, and serves as a default when the  
-sequence is empty.
-</code></pre></blockquote>
-<blockquote>
-<pre><code>function:该函数有两个参数
-sequence:序列可以是str，tuple，list
-initial:固定初始值
-</code></pre></blockquote>
-<p>reduce依次从sequence中取一个元素，和上一次调用function的结果做参数再次调用function。 第一次调用function时，如果提供initial参数，会以sequence中的第一个元素和initial 作为参数调用function，否则会以序列sequence中的前两个元素做参数调用function。 注意function函数不能为None。另外，在Python3里,reduce函数已经被从全局名字空间里移除了, 它现在被放置在fucntools模块里用的话要先引入： <code>from functools import reduce</code><br><img src="https://i.imgur.com/OJSWUm3.png" alt=""></p>
+<p><strong>如何实现以上步骤呢？我们先需要将任务进行分解，看似只有三大步骤，其实里面坑还有很多的，稍后会做解释。</strong>  </p>
+<p>第一步，输入账号，获取智能按钮，使用selenium模拟点击，获取带有缺口的图片。  </p>
+<p>第二步，获取上面缺口图片中的完整图片。这里有个地方要注意，正常情况下我们在网页源代码里是找不到完整图的，因为它被隐藏了，必须执行javascript语句才能出现完整图。<br><img src="https://i.imgur.com/v8ouv0P.png" alt=""></p>
+<p>我们将display参数改为block，opacity参数改为1，然后进行截图，就可以拿到完整的验证码图片了。</p>
+<p>第三步，对比两张图片的所有RGB像素点，得到缺口位置。</p>
+<p>第四步，模拟人的拖动习惯，这里也有坑，极验的验证码增加了机器轨迹识别，匀速移动，或者随机速度移动滑块都不能通过验证，所以我们将需要拖动的总位移分成一段一段小的轨迹，先匀加速拖动后匀减速拖动。</p>
+<p>第五步，按照规定轨迹进行拖动，完成验证。</p>
+<p>第六步，完成账号登陆。</p>
+<p>过程分析完了，下面我们就来写代码试一下：<br>首先，我们先将整个代码的一个逻辑思路做一个大致的概括吧。<br><img src="https://i.imgur.com/Ayg9jgg.png" alt="">  </p>
+<p>接下来，我们便来逐一完成main函数里要实现的功能了。</p>
+<p><strong>代码示例：</strong><br><img src="https://i.imgur.com/vCAntIv.png" alt=""><br><img src="https://i.imgur.com/p7giBb3.png" alt=""><br><img src="https://i.imgur.com/EC60eS5.png" alt=""></p>
+<p>通过以上代码我们便拿到了完整的验证码和带有缺口的验证码。<br>缺口图片：<br><img src="https://i.imgur.com/YHzDimh.png" alt="">  </p>
+<p>完整图片：<br><img src="https://i.imgur.com/KNLDRsB.png" alt=""></p>
+<p>这里我在调试的时候碰到一个坑，因为chrome中，location方法不滚动，直接返回相对整个html的坐标，我的电脑是15.6寸的，显示设置上布局的缩放大小被放大到1.25倍，导致location返回的坐标与验证码的坐标有误差。修改布局为100%后就解决了。 下面便是对比图片找出缺口位置。这里我们需要遍历图片的坐标点，获取像素点的RGB数据。  </p>
+<p><strong>代码示例</strong><br><img src="https://i.imgur.com/TQzHllN.png" alt=""></p>
+<p>接下来就是获取滑块的移动路径和模拟拖动行为了。<br><img src="https://i.imgur.com/Rlb2brE.png" alt=""><br><img src="https://i.imgur.com/uaEc7Jg.png" alt=""></p>
+<p>执行代码：<br><img src="https://i.imgur.com/G8pc1GS.png" alt=""> </p>
+<p>最后终于成功了，踩了这么多坑，终于完成了滑块验证码的破解。。。现在已经实现功能，因为还可能出现其他情况，接下来我们还需要完善一下代码，其实也可封装成一个类，测试的时候我们会发现，图片会弹出小怪兽被吃了，那是因为系统识别我们是机器行为，所以不通过，这里我们需要修改加速度参数，再增加一个回调。<br><img src="https://i.imgur.com/f9DPlNE.png" alt=""></p>
+<p>代码执行效果：<br><img src="https://i.imgur.com/br02DBK.png" alt=""></p>
+<p>这样我们就成功破解验证码，并登陆到网页界面了。。。忙活了一上午，吃饭去了。</p>
+<p>源码地址：<a href="https://github.com/appleguardu/spider_projects/tree/master/Captcha" target="_blank" rel="noopener">https://github.com/appleguardu/spider_projects/tree/master/Captcha</a></p>
 
       
     </div>
@@ -431,6 +432,12 @@ initial:固定初始值
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/反爬虫/" rel="tag"># 反爬虫</a>
+          
+        </div>
+      
 
       
       
@@ -440,8 +447,8 @@ initial:固定初始值
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/30/python闭包和装饰器/" rel="next" title="python闭包和装饰器">
-                <i class="fa fa-chevron-left"></i> python闭包和装饰器
+              <a href="/2018/08/19/selenium爬取淘宝商品/" rel="next" title="Selenium爬取淘宝商品">
+                <i class="fa fa-chevron-left"></i> Selenium爬取淘宝商品
               </a>
             
           </div>
@@ -449,10 +456,6 @@ initial:固定初始值
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/02/python多任务之进程/" rel="prev" title="python多任务之进程">
-                python多任务之进程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -641,7 +644,7 @@ initial:固定初始值
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用标准库"><span class="nav-number">1.</span> <span class="nav-text">常用标准库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用扩展库"><span class="nav-number">2.</span> <span class="nav-text">常用扩展库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内建函数"><span class="nav-number">3.</span> <span class="nav-text">内建函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PIL库"><span class="nav-number">1.</span> <span class="nav-text">PIL库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图形验证码"><span class="nav-number">2.</span> <span class="nav-text">图形验证码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑动验证码"><span class="nav-number">3.</span> <span class="nav-text">滑动验证码</span></a></li></ol></div>
             
 
           </div>

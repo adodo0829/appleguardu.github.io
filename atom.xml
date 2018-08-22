@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-19T14:48:46.678Z</updated>
+  <updated>2018-08-22T04:12:29.047Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>图形，滑块验证码识别</title>
+    <link href="http://yoursite.com/2018/08/20/%E5%8F%8D%E7%88%AC%E4%B9%8B%E9%AA%8C%E8%AF%81%E7%A0%81%E8%AF%86%E5%88%AB/"/>
+    <id>http://yoursite.com/2018/08/20/反爬之验证码识别/</id>
+    <published>2018-08-20T02:49:58.000Z</published>
+    <updated>2018-08-22T04:12:29.047Z</updated>
+    
+    <content type="html"><![CDATA[<p>现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！<br><a id="more"></a>  </p><h2 id="PIL库"><a href="#PIL库" class="headerlink" title="PIL库"></a>PIL库</h2><p>其实，验证码识别归根到底还是对各种各样图片的识别和操作，python中有很对图像处理的库，其中PIL就是其中之一。 所以在处理验证码识别之前，必须先了解PIL库。 下面附上其API源码地址，以及对应的学习博客。<br>源码地址：<a href="https://pillow-cn.readthedocs.io/zh_CN/latest/reference/index.html" target="_blank" rel="noopener">https://pillow-cn.readthedocs.io/zh_CN/latest/reference/index.html</a><br>参考博客：<a href="https://blog.csdn.net/louishao/article/details/69879981" target="_blank" rel="noopener">https://blog.csdn.net/louishao/article/details/69879981</a><br>下面我们就开始验证码识别之路了。</p><h2 id="图形验证码"><a href="#图形验证码" class="headerlink" title="图形验证码"></a>图形验证码</h2><p>以中国知网为例：<br><img src="https://i.imgur.com/KfnZxWP.png" alt=""></p><p>首先，我们先拿到上图中绿线标记的验证码，下载到本地项目文件中，<br>然后，编写如下代码:<br><img src="https://i.imgur.com/Dx7xscT.png" alt=""><br>输出结果为：486V， 可是实际图片为4S6V，这是因为验证码内多余线条干扰了图片的识别，像这类情况，还需要做出额外的处理，比如转灰度，二值化等。对应的方法如下：<br><img src="https://i.imgur.com/WagZ5W3.png" alt=""></p><p>当然，实际处理中并不是这样，一般我们会先对模糊图片进行灰度处理后，再设定二值化的阈值，实际处理如下。<br><img src="https://i.imgur.com/li0queT.png" alt=""></p><p>输出结果：4S6V<br>进行识别时，先设定好二值化阈值threshold，进行适当调试，直到图片能正常识别为止。</p><h2 id="滑动验证码"><a href="#滑动验证码" class="headerlink" title="滑动验证码"></a>滑动验证码</h2><p><strong>过程分析：</strong></p><p>滑动验证码主要的验证方式是拖动滑块，拼合图像；如图象完全拼合，则验证成功，即表单提交成功，否则需要重新验证。<br>如图：<br><img src="https://i.imgur.com/pYD8C6K.png" alt=""></p><p>下面，我们就以极验的验证码为例，来讲诉一下识别方法。<br>因为极验的验证码在拖动验证码后会生成一个加密的表单提交到后台，所有为了避免麻烦我们直接用selenium模拟浏览器行为来完成验证。<br>登陆网站：极验官网</p><blockquote><pre><code>目标站点：https://account.geetest.com/login</code></pre></blockquote><p><img src="https://i.imgur.com/sVfDi03.png" alt=""></p><p>首先，我们发现登陆界面有个智能按钮，一般来说，在输入邮箱之后，点击按钮就会弹出滑动验证窗口，然后我们在拖动验证码完成图像拼接，完成验证。<br>弹出滑块验证：<br><img src="https://i.imgur.com/u1iul7H.png" alt=""><br>拖动滑块，完成验证：<br><img src="https://i.imgur.com/dKjUoEK.png" alt=""></p><p>所以，滑块验证识别需要完成以下步骤：</p><blockquote><pre><code>1. 模拟点击验证按钮2. 识别滑块的缺口位置3. 模拟拖动滑块</code></pre></blockquote><p><strong>如何实现以上步骤呢？我们先需要将任务进行分解，看似只有三大步骤，其实里面坑还有很多的，稍后会做解释。</strong>  </p><p>第一步，输入账号，获取智能按钮，使用selenium模拟点击，获取带有缺口的图片。  </p><p>第二步，获取上面缺口图片中的完整图片。这里有个地方要注意，正常情况下我们在网页源代码里是找不到完整图的，因为它被隐藏了，必须执行javascript语句才能出现完整图。<br><img src="https://i.imgur.com/v8ouv0P.png" alt=""></p><p>我们将display参数改为block，opacity参数改为1，然后进行截图，就可以拿到完整的验证码图片了。</p><p>第三步，对比两张图片的所有RGB像素点，得到缺口位置。</p><p>第四步，模拟人的拖动习惯，这里也有坑，极验的验证码增加了机器轨迹识别，匀速移动，或者随机速度移动滑块都不能通过验证，所以我们将需要拖动的总位移分成一段一段小的轨迹，先匀加速拖动后匀减速拖动。</p><p>第五步，按照规定轨迹进行拖动，完成验证。</p><p>第六步，完成账号登陆。</p><p>过程分析完了，下面我们就来写代码试一下：<br>首先，我们先将整个代码的一个逻辑思路做一个大致的概括吧。<br><img src="https://i.imgur.com/Ayg9jgg.png" alt="">  </p><p>接下来，我们便来逐一完成main函数里要实现的功能了。</p><p><strong>代码示例：</strong><br><img src="https://i.imgur.com/vCAntIv.png" alt=""><br><img src="https://i.imgur.com/p7giBb3.png" alt=""><br><img src="https://i.imgur.com/EC60eS5.png" alt=""></p><p>通过以上代码我们便拿到了完整的验证码和带有缺口的验证码。<br>缺口图片：<br><img src="https://i.imgur.com/YHzDimh.png" alt="">  </p><p>完整图片：<br><img src="https://i.imgur.com/KNLDRsB.png" alt=""></p><p>这里我在调试的时候碰到一个坑，因为chrome中，location方法不滚动，直接返回相对整个html的坐标，我的电脑是15.6寸的，显示设置上布局的缩放大小被放大到1.25倍，导致location返回的坐标与验证码的坐标有误差。修改布局为100%后就解决了。 下面便是对比图片找出缺口位置。这里我们需要遍历图片的坐标点，获取像素点的RGB数据。  </p><p><strong>代码示例</strong><br><img src="https://i.imgur.com/TQzHllN.png" alt=""></p><p>接下来就是获取滑块的移动路径和模拟拖动行为了。<br><img src="https://i.imgur.com/Rlb2brE.png" alt=""><br><img src="https://i.imgur.com/uaEc7Jg.png" alt=""></p><p>执行代码：<br><img src="https://i.imgur.com/G8pc1GS.png" alt=""> </p><p>最后终于成功了，踩了这么多坑，终于完成了滑块验证码的破解。。。现在已经实现功能，因为还可能出现其他情况，接下来我们还需要完善一下代码，其实也可封装成一个类，测试的时候我们会发现，图片会弹出小怪兽被吃了，那是因为系统识别我们是机器行为，所以不通过，这里我们需要修改加速度参数，再增加一个回调。<br><img src="https://i.imgur.com/f9DPlNE.png" alt=""></p><p>代码执行效果：<br><img src="https://i.imgur.com/br02DBK.png" alt=""></p><p>这样我们就成功破解验证码，并登陆到网页界面了。。。忙活了一上午，吃饭去了。</p><p>源码地址：<a href="https://github.com/appleguardu/spider_projects/tree/master/Captcha" target="_blank" rel="noopener">https://github.com/appleguardu/spider_projects/tree/master/Captcha</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;现在，很多网站采取各种各样的措施来反爬虫，其中之一就是使用验证码。当我们访问网页时，必须先通过验证码才能够访问页面。下面我们便利用OCR技术来讲几种验证码的识别方式和一些思路。当然我们也可以直接使用付费的打码平台，那样可以增加识别的准确度，毕竟出了钱的嘛。哈哈！&lt;br&gt;
+    
+    </summary>
+    
+      <category term="反爬虫" scheme="http://yoursite.com/categories/%E5%8F%8D%E7%88%AC%E8%99%AB/"/>
+    
+    
+      <category term="反爬虫" scheme="http://yoursite.com/tags/%E5%8F%8D%E7%88%AC%E8%99%AB/"/>
+    
+  </entry>
   
   <entry>
     <title>Selenium爬取淘宝商品</title>
@@ -427,28 +449,6 @@
     
       <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>python面向对象编程(一)</title>
-    <link href="http://yoursite.com/2018/07/26/python%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B-%E4%B8%80/"/>
-    <id>http://yoursite.com/2018/07/26/python面向对象编程-一/</id>
-    <published>2018-07-26T01:48:45.000Z</published>
-    <updated>2018-08-01T04:07:44.383Z</updated>
-    
-    <content type="html"><![CDATA[<p>面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。<br><a id="more"></a><br>面向对象编程(Object Oriented Programming-OOP) 是一种解决软件复用的设计和编程方法。 这种方法把软件系统中相近相似的操作逻辑和操作 应用数据、状态,以类的型式描述出来,以对象实例的形式在软件系统中复用,以达到提高软件开发效率的作用。</p><p>##类和对象<br><strong>类</strong><br>类是具有相似内部状态和运动规律的实体的集合(或统称为抽象)；具有相同属性和行为事物的统称。类是抽象的,在使用的时候通常会找到这个类的一个具体的存在,使用这个具体的存在。类的抽象：拥有相同(或者类似)属性和行为的对象都可以抽像出一个类，方法:一般名词都是类(名词提炼法)  </p><p><strong>对象</strong><br>一个类可以找到多个对象，某一个具体事物的存在 ,在现实世界中可以是看得见摸得着的，可以是直接使用的。  </p><p><strong>类的构成</strong>  </p><blockquote><p>类的名称:类名<br>类的属性:一组数据<br>类的方法:允许对进行操作的方法 (行为)  </p></blockquote><p>举个例子：一个人的类的设计:  </p><blockquote><p>事物名称(类名):人(Person)<br>属性:身高(height)、年龄(age)<br>方法(行为/功能):跑(run)、打架(fight)  </p></blockquote><p><strong>定义一个类</strong><br><img src="https://i.imgur.com/d9uD0U9.png" alt=""><br><strong>创建对象</strong><br><img src="https://i.imgur.com/R4sOguL.png" alt="">  </p><p><strong>类的<strong>init</strong>()方法</strong><br><em>在上面的demo中，我们已经给bm这个对象添加了2个属性，wheel（车的轮胎数量）<br>以及color（车的颜色），试想如果再次创建一个对象的话，肯定也需要进行添加属性，显然这样做很费事，那么有没有办法能够在创建对象的时候，就顺便把车这个对象的属性给设置呢？ 这里就用到了<strong>init</strong>()方法。</em><br><img src="https://i.imgur.com/QPk53yY.png" alt="">  </p><p>既然在创建完对象后<strong>init</strong>()方法已经被默认的执行了，那么能否让对象在调用<strong>init</strong>()方法的时候传递一些参数呢？<br><img src="https://i.imgur.com/oMjLutm.png" alt=""><br><strong>魔法方法</strong><br><img src="https://i.imgur.com/my3bgJQ.png" alt="">  </p><h2 id="关于对类方法中self的理解"><a href="#关于对类方法中self的理解" class="headerlink" title="关于对类方法中self的理解"></a>关于对类方法中self的理解</h2><p>这里我们用一个例子来说明：<br><img src="https://i.imgur.com/Fj6R7Pi.png" alt=""><br>从上面看，两者返回结果都一样，所谓的self，可以理解为对象自己；<br>可以把self当做C++中类里面的this指针一样理解，就是对象自身的意思；<br>某个对象调用其方法时，python解释器会把这个对象作为第一个参数传递给self，所以我们只需要传递后面的参数即可 。  </p><h2 id="多个类之间对象和属性之间的关系"><a href="#多个类之间对象和属性之间的关系" class="headerlink" title="多个类之间对象和属性之间的关系"></a>多个类之间对象和属性之间的关系</h2><p>在程序设计时，我们经常会遇到对象与对象之间相关关联，如果一个类创建一个对象要要引用另一个类中的对象的方法或者属性，那怎么办呢？<br>这里我们得到思路是：在这个对象的类中创建一个属性来解释（或者说指向）另一个对象的引用。下面附上一个我做的小例子，可以帮助理解。<br>当然代码有点长，我这里传一个代码链接：<a href="https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py" title="对象，属性相互关系理解" target="_blank" rel="noopener">https://github.com/appleguardu/python_learning/blob/master/基础认识/test12-1.py</a>    </p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;面向对象(object-oriented ;简称: OO) 至今还没有统一的概念 我这里把它定义为: 按人们 认识客观世界的系统思维方式,采用基于对象(实体) 的概念建立模型,模拟客观世界分析、设 计、实现软件的办法。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="面向对象" scheme="http://yoursite.com/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
