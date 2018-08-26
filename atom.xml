@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-25T12:57:04.463Z</updated>
+  <updated>2018-08-26T07:15:49.020Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scrapy框架学习之Item Pipeline</title>
+    <link href="http://yoursite.com/2018/08/26/Scrapy%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E4%B9%8BItem-Pipeline/"/>
+    <id>http://yoursite.com/2018/08/26/Scrapy框架学习之Item-Pipeline/</id>
+    <published>2018-08-26T06:56:51.000Z</published>
+    <updated>2018-08-26T07:15:49.020Z</updated>
+    
+    <content type="html"><![CDATA[<p>当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。<br><a id="more"></a></p><h1 id="Item-Pipeline"><a href="#Item-Pipeline" class="headerlink" title="Item Pipeline"></a>Item Pipeline</h1><p>每个Item Pipeline都是实现了简单方法的Python类，比如决定此Item是丢弃而存储。以下是item pipeline的一些典型应用：</p><ul><li>验证爬取的数据(检查item包含某些字段，比如说name字段)</li><li>查重(并丢弃)</li><li>将爬取结果保存到文件或者数据库中</li></ul><h2 id="编写item-pipeline"><a href="#编写item-pipeline" class="headerlink" title="编写item pipeline"></a>编写item pipeline</h2><p>item pipiline组件是一个独立的Python类，其中process_item()方法必须实现:  </p><p>常用方法举例：<br><img src="https://i.imgur.com/6Drjw3H.png" alt=""></p><p>我的实例：pipeline将所有(从所有’spider’中)爬取到的item，存储到一个独立地items.json 文件，每行包含一个序列化为’JSON’格式的’item’:<br><img src="https://i.imgur.com/2Ssebh0.png" alt=""></p><h2 id="启用一个Item-Pipeline组件"><a href="#启用一个Item-Pipeline组件" class="headerlink" title="启用一个Item Pipeline组件"></a>启用一个Item Pipeline组件</h2><p>为了启用Item Pipeline组件，必须将它的类添加到 settings.py文件ITEM_PIPELINES 配置。  </p><p><img src="https://i.imgur.com/sbi6xsH.png" alt=""></p><p>分配给每个类的整型值，确定了他们运行的顺序，item按数字从低到高的顺序，通过pipeline，通常将这些数字定义在0-1000范围内（0-1000随意设置，数值越低，组件的优先级越高）。</p><h2 id="启动爬虫"><a href="#启动爬虫" class="headerlink" title="启动爬虫"></a>启动爬虫</h2><p>我们启动爬虫，就可以得到一个json文件。  </p><p><img src="https://i.imgur.com/sDXT1kj.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="scrapy" scheme="http://yoursite.com/categories/scrapy/"/>
+    
+    
+      <category term="scrapy" scheme="http://yoursite.com/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scrapy框架学习之Spider</title>
+    <link href="http://yoursite.com/2018/08/26/Scrapy%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E4%B9%8BSpider/"/>
+    <id>http://yoursite.com/2018/08/26/Scrapy框架学习之Spider/</id>
+    <published>2018-08-26T02:29:45.000Z</published>
+    <updated>2018-08-26T05:14:45.143Z</updated>
+    
+    <content type="html"><![CDATA[<p>Spider类定义了如何爬取某个(或某些)网站。包括了爬取的动作(例如:是否跟进链接)以及如何从网页的内容中提取结构化数据(爬取item)。 换句话说，Spider就是您定义爬取的动作及分析某个网页(或者是有些网页)的地方。<br><a id="more"></a>  </p><h1 id="Spider类"><a href="#Spider类" class="headerlink" title="Spider类"></a>Spider类</h1><p>class scrapy.Spider是最基本的类，所有编写的爬虫必须继承这个类。</p><p>主要用到的函数及调用顺序为：</p><p>__init__() : 初始化爬虫名字和start_urls列表</p><p>start_requests() 调用make_requests_from url():生成Requests对象交给Scrapy下载并返回response</p><p>parse() : 解析response，并返回Item或Requests（需指定回调函数）。Item传给Item pipline持久化 ， 而Requests交由Scrapy下载，并由指定的回调函数处理（默认parse())，一直进行循环，直到处理完所有的数据为止。</p><h2 id="Spider类的源码理解"><a href="#Spider类的源码理解" class="headerlink" title="Spider类的源码理解"></a>Spider类的源码理解</h2><p><img src="https://i.imgur.com/DK3qWhu.png" alt=""><br><img src="https://i.imgur.com/reWWTRh.png" alt=""></p><h2 id="主要属性和方法"><a href="#主要属性和方法" class="headerlink" title="主要属性和方法"></a>主要属性和方法</h2><ul><li>name</li></ul><p>定义spider名字的字符串。</p><p>例如，如果spider爬取 mywebsite.com ，该spider通常会被命名为 mywebsite</p><ul><li>allowed_domains</li></ul><p>包含了spider允许爬取的域名(domain)的列表，可选。</p><ul><li>start_urls</li></ul><p>初始URL元祖/列表。当没有制定特定的URL时，spider将从该列表中开始进行爬取。</p><ul><li>start_requests(self)</li></ul><p>该方法必须返回一个可迭代对象(iterable)。该对象包含了spider用于爬取（默认实现是使用 start_urls 的url）的第一个Request。</p><p>当spider启动爬取并且未指定start_urls时，该方法被调用。</p><ul><li>parse(self, response)</li></ul><p>当请求url返回网页没有指定回调函数时，默认的Request对象回调函数。用来处理网页返回的response，以及生成Item或者Request对象。</p><ul><li>log(self, message[, level, component])</li></ul><p>使用 scrapy.log.msg() 方法记录(log)message。 </p><p>下面附上自己写的spider类实例：   </p><p><strong>items.py文件：确定爬取内容</strong></p><p><img src="https://i.imgur.com/cN7SeIG.png" alt=""></p><p><strong>spider文件：parse()方法</strong>  </p><p><img src="https://i.imgur.com/D0PQrz4.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Spider类定义了如何爬取某个(或某些)网站。包括了爬取的动作(例如:是否跟进链接)以及如何从网页的内容中提取结构化数据(爬取item)。 换句话说，Spider就是您定义爬取的动作及分析某个网页(或者是有些网页)的地方。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="scrapy" scheme="http://yoursite.com/categories/scrapy/"/>
+    
+    
+      <category term="scrapy" scheme="http://yoursite.com/tags/scrapy/"/>
+    
+  </entry>
   
   <entry>
     <title>Scrapy框架学习之scrapy shell和selector</title>
@@ -409,48 +453,6 @@
     
     
       <category term="多进程" scheme="http://yoursite.com/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python标准库和内建函数</title>
-    <link href="http://yoursite.com/2018/07/30/python%E6%A0%87%E5%87%86%E5%BA%93%E5%92%8C%E5%86%85%E5%BB%BA%E5%87%BD%E6%95%B0/"/>
-    <id>http://yoursite.com/2018/07/30/python标准库和内建函数/</id>
-    <published>2018-07-30T13:12:17.000Z</published>
-    <updated>2018-08-01T04:07:17.425Z</updated>
-    
-    <content type="html"><![CDATA[<p>Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。<br><a id="more"></a>  </p><h2 id="常用标准库"><a href="#常用标准库" class="headerlink" title="常用标准库"></a>常用标准库</h2><p><img src="https://i.imgur.com/hn08bjp.png" alt=""></p><h2 id="常用扩展库"><a href="#常用扩展库" class="headerlink" title="常用扩展库"></a>常用扩展库</h2><p><img src="https://i.imgur.com/bWf8wMA.png" alt=""></p><h2 id="内建函数"><a href="#内建函数" class="headerlink" title="内建函数"></a>内建函数</h2><p>Build-in Function,启动python解释器，输入dir(__builtins__), 可以看到很多python解释器启动后默认加载的属性和函数，这些函数称之为内建函数， 这些函数因为在编程时使用较多，cpython解释器用c语言实现了这些函数，启动解释器 时默认加载。<br>这些函数数量众多，不宜记忆，开发时不是都用到的，待用到时再help(function), 查看如何使用，或结合百度查询即可，在这里介绍些常用的内建函数。  </p><p><strong>1.range函数</strong><br>range(stop) -&gt; list of integers  </p><p>range(start, stop[, step]) -&gt; list of integers  </p><blockquote><pre><code>start:计数从start开始。默认是从0开始。例如range（5）等价于range（0， 5）;stop:到stop结束，但不包括stop.例如：range（0， 5） 是[0, 1, 2, 3, 4]没有5step:每次跳跃的间距，默认为1。例如：range（0， 5） 等价于 range(0, 5, 1)</code></pre></blockquote><p>python2中range返回列表，python3中range返回一个迭代值。如果想得到列表,可通过list函数,也可以用列表生成式<code>List = [x for x in range(5)]</code>。  </p><p><strong>2.map函数</strong><br>map函数会根据提供的函数对指定序列做映射。  </p><blockquote><pre><code>map(...)     map(function, sequence[, sequence, ...]) -&gt; list  </code></pre></blockquote><blockquote><pre><code>function:是一个函数sequence:是一个或多个序列,取决于function需要几个参数返回值是一个list</code></pre></blockquote><p>参数序列中的每一个元素分别调用function函数，返回包含每次function函数返回值的list。<br><img src="https://i.imgur.com/xed9Pik.png" alt="">  </p><p><strong>3.filter函数</strong><br>filter函数会对指定序列执行过滤操作  </p><blockquote><pre><code>filter(...)  filter(function or None, sequence) -&gt; list, tuple, or string</code></pre></blockquote><blockquote><pre><code>Return those items of sequence for which function(item) is true.    If function is None, return the items that are true.  If sequence is a tuple or string, return the same type, else return a list.  </code></pre></blockquote><blockquote><pre><code>function:接受一个参数，返回布尔值True或Falsesequence:序列可以是str，tuple，list</code></pre></blockquote><p>filter函数会对序列参数sequence中的每个元素调用function函数，最后返回的结果包含调用结果为True的元素。返回值的类型和参数sequence的类型相同。<br><img src="https://i.imgur.com/xmTfHqc.png" alt=""></p><p><strong>4.reduce函数</strong><br>reduce函数，reduce函数会对参数序列中元素进行累积。  </p><blockquote><pre><code>reduce(...)  reduce(function, sequence[, initial]) -&gt; value</code></pre></blockquote><blockquote><pre><code>Apply a function of two arguments cumulatively to the items of a sequence,  from left to right, so as to reduce the sequence to a single value.  For example, reduce(lambda x, y: x+y, [1, 2, 3, 4, 5]) calculates  ((((1+2)+3)+4)+5).  If initial is present, it is placed before the items  of the sequence in the calculation, and serves as a default when the  sequence is empty.</code></pre></blockquote><blockquote><pre><code>function:该函数有两个参数sequence:序列可以是str，tuple，listinitial:固定初始值</code></pre></blockquote><p>reduce依次从sequence中取一个元素，和上一次调用function的结果做参数再次调用function。 第一次调用function时，如果提供initial参数，会以sequence中的第一个元素和initial 作为参数调用function，否则会以序列sequence中的前两个元素做参数调用function。 注意function函数不能为None。另外，在Python3里,reduce函数已经被从全局名字空间里移除了, 它现在被放置在fucntools模块里用的话要先引入： <code>from functools import reduce</code><br><img src="https://i.imgur.com/OJSWUm3.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Python有一套很有用的标准库(standard library)。标准库会随着Python解释器，一起安装在你的电脑中的。 它是Python的一个组成部分。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>python闭包和装饰器</title>
-    <link href="http://yoursite.com/2018/07/30/python%E9%97%AD%E5%8C%85%E5%92%8C%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
-    <id>http://yoursite.com/2018/07/30/python闭包和装饰器/</id>
-    <published>2018-07-30T06:04:55.000Z</published>
-    <updated>2018-08-01T03:47:34.843Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="理解闭包"><a href="#理解闭包" class="headerlink" title="理解闭包"></a>理解闭包</h2><p>所谓闭包，就是在函数内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包。下面用例子来解释闭包的实现，在理解闭包之前，先看一下函数的引用，在python语言中，一切皆对象，包括函数。<br><a id="more"></a><br><strong>1.函数的引用</strong><br><img src="https://i.imgur.com/YatHsFY.png" alt=""><br>我们在定义一个函数时，系统会给我们开辟一个空间地址用来存放这个函数体，函数名（test）用来指向这片内存；如果将函数名赋值给另一个变量，那么这个变量（ret）也会指向这片空间，也可以调用该函数。  </p><p><strong>2.闭包</strong><br>下面通过一个例子来理解闭包。<br><img src="https://i.imgur.com/42znv16.png" alt=""><br>这里我们定义了一个test()函数，返回的是内层函数test_in()的引用，test_in函数里用到外层函数test传进来的变量num。 我们看一下这个例子的执行顺序，先是<code>ret = test(1)</code>,调用test函数，传入了1，返回一个test_in，然后定义了一个变量ret用来接收test的返回值，此时，ret指向了test_in这个函数。接着我们又调用ret(),并传值100，相当于调用test_in，返回了num和num_in的和，结果为101。这就是例子运行的整个过程。  </p><p><strong>闭包实例</strong><br><img src="https://i.imgur.com/0c1BRhE.png" alt=""><br>这个例子中，函数line与变量a,b构成闭包。在创建闭包的时候，我们通过line_params的参数a,b说明了这两个变量的取值，<br>这样，我们就确定了函数的最终形式(y = x + 1和y = 4x + 5)。我们只需要变换参数a,b，就可以获得不同的直线表达函数。<br>由此，我们可以看到，闭包也具有提高代码可复用性的作用。<br>如果没有闭包，我们需要每次创建直线函数的时候同时说明a,b,x。这样，我们就需要更多的参数传递，也减少了代码的可移植性。<br>闭包思考：<br>1.闭包似优化了变量，原来需要类对象完成的工作，闭包也可以完成<br>2.由于闭包引用了外部函数的局部变量，则外部函数的局部变量没有及时释放，消耗内存  </p><h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>装饰器本质上是一个Python函数，它可以让其他函数在不需要做任何代码变动的前提下增加额外功能，装饰器的返回值也是一个函数对象。它经常用于有切面需求的场景，比如：插入日志、性能测试、事务处理、缓存、权限校验等场景。装饰器是解决这类问题的绝佳设计，有了装饰器，我们就可以抽离出大量与函数功能本身无关的雷同代码并继续重用。概括的讲，装饰器的作用就是为已经存在的函数或对象添加额外的功能。<br>下面我们以一个小例子来演示<strong>装饰器的原理</strong>。<br><img src="https://i.imgur.com/YNeI5Kr.png" alt=""><br>把这个代码的流程解释一下：<br><strong>从开头看起，定义了三个函数w1,f1,f2 (f2在上图没画出来) 分别指向各自内存空间，下面执行<code>f1 = w1(f1)</code>，w1中传入了f1的引用，此时func指向f1；接下来遇到一个inner函数，inner指向一片空间，执行完w1(f1)后返回inner并又由f1去指向。第二步指向<code>f1()</code>,此时f1指向了inner，执行的便是inner函数，先执行验证部分，在执行func，也就是f1自己。这样便实现了在自己模块上扩展了验证功能</strong>  </p><h2 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h2><p><img src="https://i.imgur.com/0h3Ki8O.png" alt=""><br>@函数名 这是python中的一种语法糖，前面所讲的就是@符号的实现原理，也就是装饰器的原理。</p><h2 id="多个装饰器"><a href="#多个装饰器" class="headerlink" title="多个装饰器"></a>多个装饰器</h2><p>当一个函数遇到多个装饰器，那它的装饰顺序怎么实现呢？<br><img src="https://i.imgur.com/h9eCc8q.png" alt=""><br>从上面的代码可以看出，对多个装饰器顺序，都是从里层开始进行装饰的，调用时从外层往里层调用。</p><h2 id="装饰器的执行"><a href="#装饰器的执行" class="headerlink" title="装饰器的执行"></a>装饰器的执行</h2><p><img src="https://i.imgur.com/ABaTcKl.png" alt=""></p><h2 id="对带有参数的函数进行装饰"><a href="#对带有参数的函数进行装饰" class="headerlink" title="对带有参数的函数进行装饰"></a>对带有参数的函数进行装饰</h2><p><img src="https://i.imgur.com/838ivWa.png" alt=""><br>如果说函数为不定长参数，可以把闭包中的参数改为不定长参数形式，如fn(*args，**kwargs)。</p><h2 id="对带有return的函数进行装饰"><a href="#对带有return的函数进行装饰" class="headerlink" title="对带有return的函数进行装饰"></a>对带有return的函数进行装饰</h2><p><img src="https://i.imgur.com/tK7c7vu.png" alt=""></p><h2 id="通用装饰器"><a href="#通用装饰器" class="headerlink" title="通用装饰器"></a>通用装饰器</h2><p><img src="https://i.imgur.com/8KbOlyx.png" alt=""></p><h2 id="装饰器带参数"><a href="#装饰器带参数" class="headerlink" title="装饰器带参数"></a>装饰器带参数</h2><p><img src="https://i.imgur.com/5lQHBl5.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;理解闭包&quot;&gt;&lt;a href=&quot;#理解闭包&quot; class=&quot;headerlink&quot; title=&quot;理解闭包&quot;&gt;&lt;/a&gt;理解闭包&lt;/h2&gt;&lt;p&gt;所谓闭包，就是在函数内部再定义一个函数，并且这个函数用到了外边函数的变量，那么将这个函数以及用到的一些变量称之为闭包。下面用例子来解释闭包的实现，在理解闭包之前，先看一下函数的引用，在python语言中，一切皆对象，包括函数。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="python基础" scheme="http://yoursite.com/categories/python%E5%9F%BA%E7%A1%80/"/>
-    
-    
-      <category term="装饰器" scheme="http://yoursite.com/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
     
   </entry>
   

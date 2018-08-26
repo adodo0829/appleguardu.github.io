@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="json," />
+  <meta name="keywords" content="scrapy," />
 
 
 
@@ -81,25 +81,23 @@
 
 
 
-<meta name="description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
-<meta name="keywords" content="json">
+<meta name="description" content="当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。">
+<meta name="keywords" content="scrapy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python之json基础">
-<meta property="og:url" content="http://yoursite.com/2018/08/08/python之json数据解析/index.html">
+<meta property="og:title" content="Scrapy框架学习之Item Pipeline">
+<meta property="og:url" content="http://yoursite.com/2018/08/26/Scrapy框架学习之Item-Pipeline/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
+<meta property="og:description" content="当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/gFu4n1P.png">
-<meta property="og:image" content="https://i.imgur.com/3zOg7fE.png">
-<meta property="og:image" content="https://i.imgur.com/foRbCB5.png">
-<meta property="og:image" content="https://i.imgur.com/N5ids9K.png">
-<meta property="og:image" content="https://i.imgur.com/b06PiXX.png">
-<meta property="og:image" content="https://i.imgur.com/bBO2Wo7.png">
-<meta property="og:updated_time" content="2018-08-08T08:01:22.866Z">
+<meta property="og:image" content="https://i.imgur.com/6Drjw3H.png">
+<meta property="og:image" content="https://i.imgur.com/2Ssebh0.png">
+<meta property="og:image" content="https://i.imgur.com/sbi6xsH.png">
+<meta property="og:image" content="https://i.imgur.com/sDXT1kj.png">
+<meta property="og:updated_time" content="2018-08-26T07:15:49.020Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python之json基础">
-<meta name="twitter:description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
-<meta name="twitter:image" content="https://i.imgur.com/gFu4n1P.png">
+<meta name="twitter:title" content="Scrapy框架学习之Item Pipeline">
+<meta name="twitter:description" content="当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。">
+<meta name="twitter:image" content="https://i.imgur.com/6Drjw3H.png">
 
 
 
@@ -129,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/08/python之json数据解析/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/26/Scrapy框架学习之Item-Pipeline/"/>
 
 
 
 
 
-  <title>python之json基础 | AppleGuard的博客</title>
+  <title>Scrapy框架学习之Item Pipeline | AppleGuard的博客</title>
   
 
 
@@ -272,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/python之json数据解析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/Scrapy框架学习之Item-Pipeline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -289,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python之json基础</h1>
+          <h1 class="post-title" itemprop="name headline">Scrapy框架学习之Item Pipeline</h1>
         
 
         <div class="post-meta">
@@ -301,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-08T13:27:17+08:00">
-                2018-08-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T14:56:51+08:00">
+                2018-08-26
               </time>
             
 
@@ -324,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
                   </a>
                 </span>
 
@@ -361,25 +359,21 @@
       
 
       
-        <p>当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。<br><a id="more"></a>  </p>
-<h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><p>JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation）；是一种轻量级的文本数据交换格式；适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。  </p>
-<p>简单来说json就是javascript中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构：  </p>
-<blockquote>
-<pre><code>1.对象：对象在js中表示为{ }括起来的内容，数据结构为 { key：value, key：value, ... }的键值对的结构，
-在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是数字、字符串、数组、对象这几种。
-</code></pre></blockquote>
-<blockquote>
-<pre><code>2.数组：数组在js中是中括号[ ]括起来的内容，数据结构为 [&quot;Python&quot;, &quot;javascript&quot;, &quot;C++&quot;, ...]，取值方式和所有语言中一样，使用索引获取，
-字段值的类型可以是 数字、字符串、数组、对象几种。
-</code></pre></blockquote>
-<h2 id="JSON模块"><a href="#JSON模块" class="headerlink" title="JSON模块"></a>JSON模块</h2><p>Python中提供了json模块，总共有四个方法：dumps、dump、loads、load，用于字符串 和 python数据类型间进行转换。<br><strong>1.json.loads()</strong><br>对数据进行解码，把Json格式字符串 解码 转换成Python对象 。<br><img src="https://i.imgur.com/gFu4n1P.png" alt=""></p>
-<p>实例：<br><img src="https://i.imgur.com/3zOg7fE.png" alt=""></p>
-<p><strong>2.json.dumps()</strong><br>对数据进行编码，返回一个str对象，把一个Python对象编码转换成Json字符串。如果直接将dict类型的数据写入json文件中会发生报错，因此在将数据写入时需要用到该函数。<br><img src="https://i.imgur.com/foRbCB5.png" alt=""></p>
-<p>实例：<br><img src="https://i.imgur.com/N5ids9K.png" alt=""></p>
-<p><strong>3.json.dump()</strong><br>json.dump()用于将dict类型的数据转成str，并写入到json文件中  </p>
-<p><img src="https://i.imgur.com/b06PiXX.png" alt=""></p>
-<p><strong>4.json.load()</strong><br>json.load()直接从json文件中读取数据，并将str转为dict类型</p>
-<p>实例：<br><img src="https://i.imgur.com/bBO2Wo7.png" alt=""></p>
+        <p>当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。<br><a id="more"></a></p>
+<h1 id="Item-Pipeline"><a href="#Item-Pipeline" class="headerlink" title="Item Pipeline"></a>Item Pipeline</h1><p>每个Item Pipeline都是实现了简单方法的Python类，比如决定此Item是丢弃而存储。以下是item pipeline的一些典型应用：</p>
+<ul>
+<li>验证爬取的数据(检查item包含某些字段，比如说name字段)</li>
+<li>查重(并丢弃)</li>
+<li>将爬取结果保存到文件或者数据库中</li>
+</ul>
+<h2 id="编写item-pipeline"><a href="#编写item-pipeline" class="headerlink" title="编写item pipeline"></a>编写item pipeline</h2><p>item pipiline组件是一个独立的Python类，其中process_item()方法必须实现:  </p>
+<p>常用方法举例：<br><img src="https://i.imgur.com/6Drjw3H.png" alt=""></p>
+<p>我的实例：pipeline将所有(从所有’spider’中)爬取到的item，存储到一个独立地items.json 文件，每行包含一个序列化为’JSON’格式的’item’:<br><img src="https://i.imgur.com/2Ssebh0.png" alt=""></p>
+<h2 id="启用一个Item-Pipeline组件"><a href="#启用一个Item-Pipeline组件" class="headerlink" title="启用一个Item Pipeline组件"></a>启用一个Item Pipeline组件</h2><p>为了启用Item Pipeline组件，必须将它的类添加到 settings.py文件ITEM_PIPELINES 配置。  </p>
+<p><img src="https://i.imgur.com/sbi6xsH.png" alt=""></p>
+<p>分配给每个类的整型值，确定了他们运行的顺序，item按数字从低到高的顺序，通过pipeline，通常将这些数字定义在0-1000范围内（0-1000随意设置，数值越低，组件的优先级越高）。</p>
+<h2 id="启动爬虫"><a href="#启动爬虫" class="headerlink" title="启动爬虫"></a>启动爬虫</h2><p>我们启动爬虫，就可以得到一个json文件。  </p>
+<p><img src="https://i.imgur.com/sDXT1kj.png" alt=""></p>
 
       
     </div>
@@ -397,7 +391,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/json/" rel="tag"># json</a>
+            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
           
         </div>
       
@@ -410,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/07/leetcode02-两数相加/" rel="next" title="leetcode02-两数相加">
-                <i class="fa fa-chevron-left"></i> leetcode02-两数相加
+              <a href="/2018/08/26/Scrapy框架学习之Spider/" rel="next" title="Scrapy框架学习之Spider">
+                <i class="fa fa-chevron-left"></i> Scrapy框架学习之Spider
               </a>
             
           </div>
@@ -419,10 +413,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/09/Python之数据结构与算法/" rel="prev" title="Python之数据结构与算法">
-                Python之数据结构与算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -611,7 +601,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是JSON"><span class="nav-number">1.</span> <span class="nav-text">什么是JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON模块"><span class="nav-number">2.</span> <span class="nav-text">JSON模块</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Item-Pipeline"><span class="nav-number">1.</span> <span class="nav-text">Item Pipeline</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写item-pipeline"><span class="nav-number">1.1.</span> <span class="nav-text">编写item pipeline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用一个Item-Pipeline组件"><span class="nav-number">1.2.</span> <span class="nav-text">启用一个Item Pipeline组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动爬虫"><span class="nav-number">1.3.</span> <span class="nav-text">启动爬虫</span></a></li></ol></li></ol></div>
             
 
           </div>
