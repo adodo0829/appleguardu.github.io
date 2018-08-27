@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="leetcode," />
+  <meta name="keywords" content="scrapy," />
 
 
 
@@ -81,22 +81,23 @@
 
 
 
-<meta name="description" content="题目二：给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。">
-<meta name="keywords" content="leetcode">
+<meta name="description" content="Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。">
+<meta name="keywords" content="scrapy">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode02-两数相加">
-<meta property="og:url" content="http://yoursite.com/2018/08/07/leetcode02-两数相加/index.html">
+<meta property="og:title" content="Scrapy框架学习之Downloader Middlewares">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/Scrapy框架学习之Downloader-Middlewares/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="题目二：给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。">
+<meta property="og:description" content="Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/SXv0O3O.png">
-<meta property="og:image" content="https://i.imgur.com/b7iQwXf.png">
-<meta property="og:image" content="https://i.imgur.com/PnJsCoU.png">
-<meta property="og:updated_time" content="2018-08-07T15:51:30.663Z">
+<meta property="og:image" content="https://i.imgur.com/jAeXWuy.png">
+<meta property="og:image" content="https://i.imgur.com/KrjxbBW.png">
+<meta property="og:image" content="https://i.imgur.com/E2dgdX0.png">
+<meta property="og:image" content="https://i.imgur.com/eICOPL8.png">
+<meta property="og:updated_time" content="2018-08-27T09:30:06.326Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="leetcode02-两数相加">
-<meta name="twitter:description" content="题目二：给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。">
-<meta name="twitter:image" content="https://i.imgur.com/SXv0O3O.png">
+<meta name="twitter:title" content="Scrapy框架学习之Downloader Middlewares">
+<meta name="twitter:description" content="Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。">
+<meta name="twitter:image" content="https://i.imgur.com/jAeXWuy.png">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/08/07/leetcode02-两数相加/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/Scrapy框架学习之Downloader-Middlewares/"/>
 
 
 
 
 
-  <title>leetcode02-两数相加 | AppleGuard的博客</title>
+  <title>Scrapy框架学习之Downloader Middlewares | AppleGuard的博客</title>
   
 
 
@@ -269,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/07/leetcode02-两数相加/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/Scrapy框架学习之Downloader-Middlewares/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -286,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">leetcode02-两数相加</h1>
+          <h1 class="post-title" itemprop="name headline">Scrapy框架学习之Downloader Middlewares</h1>
         
 
         <div class="post-meta">
@@ -298,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-07T21:11:58+08:00">
-                2018-08-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T16:52:03+08:00">
+                2018-08-27
               </time>
             
 
@@ -321,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/leetcode/" itemprop="url" rel="index">
-                    <span itemprop="name">leetcode</span>
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
                   </a>
                 </span>
 
@@ -358,31 +359,99 @@
       
 
       
-        <p>题目二：<br>给定两个非空链表来表示两个非负整数。位数按照逆序方式存储，它们的每个节点只存储单个数字。将两数相加返回一个新的链表。你可以假设除了数字 0 之外，这两个数字都不会以零开头。<br><a id="more"></a><br>示例：</p>
+        <p>Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。<br><a id="more"></a>  </p>
+<h2 id="设置下载中间件"><a href="#设置下载中间件" class="headerlink" title="设置下载中间件"></a>设置下载中间件</h2><ul>
+<li><p>当引擎传递请求给下载器的过程中，下载中间件可以对请求进行处理 （例如增加http header信息，增加proxy信息等）；</p>
+</li>
+<li><p>在下载器完成http请求，传递响应给引擎的过程中， 下载中间件可以对响应进行处理（例如进行gzip的解压等）</p>
+</li>
+</ul>
+<p>要激活下载器中间件组件，将其加入到 DOWNLOADER_MIDDLEWARES 设置中。 该设置是一个字典(dict)，键为中间件类的路径，值为其中间件的顺序(order)。</p>
+<p>这里是一个例子:</p>
 <blockquote>
-<pre><code>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)
-输出：7 -&gt; 0 -&gt; 8
-原因：342 + 465 = 807
+<pre><code>DOWNLOADER_MIDDLEWARES = {
+           &apos;mySpider.middlewares.MyDownloaderMiddleware&apos;: 543,
+  }
 </code></pre></blockquote>
-<p>分析：<br>在这之前先把链表的知识复习一下，以单链表为例，它是链表中最简单的一种形式，它的每个节点包含两个域，一个信息域（元素域）和一个链接域。这个链接指向链表中的下一个节点，而最后一个节点的链接域则指向一个空值。<br><img src="https://i.imgur.com/SXv0O3O.png" alt=""></p>
+<p>源码示例：<br><img src="https://i.imgur.com/jAeXWuy.png" alt=""></p>
+<p>方法介绍：<br><strong>1. process_request(self, request, spider)</strong> </p>
+<p>当每个request通过下载中间件时，该方法被调用。</p>
+<ul>
+<li>process_request() 必须返回以下其中之一：一个 None 、一个 Response 对象、一个 Request 对象或 raise IgnoreRequest:</li>
+</ul>
+<p>如果其返回 None ，Scrapy将继续处理该request，执行其他的中间件的相应方法，直到合适的下载器处理函数(download handler)被调用， 该request被执行(其response被下载)。</p>
+<p>如果其返回 Response 对象，Scrapy将不会调用 任何 其他的 process_request() 或 process_exception() 方法，或相应地下载函数； 其将返回该response。 已安装的中间件的 process_response() 方法则会在每个response返回时被调用。</p>
+<p>如果其返回 Request 对象，Scrapy则停止调用 process_request方法并重新调度返回的request。当新返回的request被执行后， 相应地中间件链将会根据下载的response被调用。</p>
+<p>如果其raise一个 IgnoreRequest 异常，则安装的下载中间件的 process_exception() 方法会被调用。如果没有任何一个方法处理该异常， 则request的errback(Request.errback)方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。  </p>
+<ul>
+<li>参数:  </li>
+</ul>
+<p>request (Request 对象) – 处理的request</p>
+<p>spider (Spider 对象) – 该request对应的spider</p>
+<p><strong>2. process_response(self, request, response, spider)</strong></p>
+<p>当下载器完成http请求，传递响应给引擎的时候调用</p>
+<ul>
+<li>process_request() 必须返回以下其中之一: 返回一个 Response 对象、 返回一个 Request 对象或raise一个 IgnoreRequest 异常。</li>
+</ul>
+<p>如果其返回一个 Response (可以与传入的response相同，也可以是全新的对象)， 该response会被在链中的其他中间件的 process_response() 方法处理。</p>
+<p>如果其返回一个 Request 对象，则中间件链停止， 返回的request会被重新调度下载。处理类似于 process_request() 返回request所做的那样。</p>
+<p>如果其抛出一个 IgnoreRequest 异常，则调用request的errback(Request.errback)。 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p>
+<ul>
+<li>参数:</li>
+</ul>
+<p>request (Request 对象) – response所对应的request</p>
+<p>response (Response 对象) – 被处理的response</p>
+<p>spider (Spider 对象) – response所对应的spider</p>
+<h2 id="几种scrapy中通常用来反爬虫的几种措施"><a href="#几种scrapy中通常用来反爬虫的几种措施" class="headerlink" title="几种scrapy中通常用来反爬虫的几种措施"></a>几种scrapy中通常用来反爬虫的几种措施</h2><p>这里因为暂时还没有项目涉及到，我就不写了，引用网上的资料参考。  </p>
+<ul>
+<li>创建middlewares.py文件</li>
+</ul>
+<p>Scrapy代理IP、Uesr-Agent的切换都是通过DOWNLOADER_MIDDLEWARES进行控制，我们在settings.py同级目录下创建middlewares.py文件，包装所有请求。<br><img src="https://i.imgur.com/KrjxbBW.png" alt=""></p>
+<p>为什么HTTP代理要使用base64编码：</p>
+<p>HTTP代理的原理很简单，就是通过HTTP协议与代理服务器建立连接，协议信令中包含要连接到的远程主机的IP和端口号，如果有需要身份验证的话还需要加上授权信息，服务器收到信令后首先进行身份验证，通过后便与远程主机建立连接，连接成功之后会返回给客户端200，表示验证通过，就这么简单，</p>
+<p>下面是具体的信令格式：</p>
 <blockquote>
-<pre><code>表元素域elem用来存放具体的数据。
-链接域next用来存放下一个节点的位置（python中的标识）
-变量p指向链表的头节点（首节点）的位置head，从p出发能找到表中的任意节点
+<pre><code>CONNECT 59.64.128.198:21 HTTP/1.1
+Host: 59.64.128.198:21
+Proxy-Authorization: Basic bGV2I1TU5OTIz
+User-Agent: OpenFetion
 </code></pre></blockquote>
-<p>链表的操作：</p>
+<p>其中Proxy-Authorization是身份验证信息，Basic后面的字符串是用户名和密码组合后进行base64编码的结果，也就是对username:password进行base64编码。</p>
 <blockquote>
-<pre><code>is_empty() 链表是否为空
-length() 链表长度
-travel() 遍历整个链表
-add(item) 链表头部添加元素
-append(item) 链表尾部添加元素
-insert(pos, item) 指定位置添加元素
-remove(item) 删除节点
-search(item) 查找节点是否存在
+<pre><code>HTTP/1.0 200 Connection established
+</code></pre><p>OK，客户端收到收面的信令后表示成功建立连接，接下来要发送给远程主机的数据就可以发送给代理服务器了，代理服务器建立连接后会在根据IP地址和端口号对应的连接放入缓存，收到信令后再根据IP地址和端口号从缓存中找到对应的连接，将数据通过该连接转发出去。</p>
+</blockquote>
+<p><strong>修改settings.py配置USER_AGENTS和PROXIES</strong></p>
+<ul>
+<li>添加USER_AGENTS：</li>
+</ul>
+<p><img src="https://i.imgur.com/E2dgdX0.png" alt=""></p>
+<ul>
+<li>添加代理IP设置PROXIES<br>免费代理IP可以网上搜索，或者付费购买一批可用的私密代理IP</li>
+</ul>
+<p><img src="https://i.imgur.com/eICOPL8.png" alt=""></p>
+<ul>
+<li>除非特殊需要，禁用cookies，防止某些网站根据Cookie来封锁爬虫</li>
+</ul>
+<blockquote>
+<pre><code>COOKIES_ENABLED = False
 </code></pre></blockquote>
-<p>使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。<br><img src="https://i.imgur.com/b7iQwXf.png" alt=""></p>
-<p>我们首先从最低有效位也就是列表l1和l2的表头开始相加。由于每位数字都应当处于0到9的范围内，我们计算两个数字的和时可能会出现“溢出”。例如，5 + 7 = 12。在这种情况下，我们会将当前位的数值设置为 2，并将进位 carry = 1带入下一次迭代。进位 carry 必定是 0 或 1，这是因为两个数字相加（考虑到进位）可能出现的最大和为 9 + 9 + 1 = 19。<br>我们考虑到了存在的进位情况，但是还可能出现链表长度不等，即两个加数位数不等。我们将题目拆分为两个情况，以三位数加五位数为例，前三位数和前三位数我们将进位carry初始化为0，遍历列表 l1 和 l2 直至到达它们的尾端，新列表l3就等于l1+l2+carry；carry满足大于10时进1。第四位第五位则是另一种情况；具体就是：前三位数范围内，对应位进行相加操作时附加上低位的进位；第四位第五位只用将该位加上低位的进位即可（或者理解成另一个三位数的高位为0）<br>执行代码如下：<br><img src="https://i.imgur.com/PnJsCoU.png" alt=""></p>
+<ul>
+<li>设置下载延迟</li>
+</ul>
+<blockquote>
+<pre><code>DOWNLOAD_DELAY = 3
+</code></pre></blockquote>
+<ul>
+<li>最后设置setting.py里的DOWNLOADER_MIDDLEWARES，添加自己编写的下载中间件类</li>
+</ul>
+<blockquote>
+<pre><code>DOWNLOADER_MIDDLEWARES = {
+      &apos;mySpider.middlewares.MyCustomDownloaderMiddleware&apos;: 543,
+      &apos;mySpider.middlewares.RandomUserAgent&apos;: 1,
+      &apos;mySpider.middlewares.ProxyMiddleware&apos;: 100
+}
+</code></pre></blockquote>
 
       
     </div>
@@ -400,7 +469,7 @@ search(item) 查找节点是否存在
       
         <div class="post-tags">
           
-            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
           
         </div>
       
@@ -413,8 +482,8 @@ search(item) 查找节点是否存在
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/07/JavaScript基础学习-二/" rel="next" title="JavaScript基础学习(二)">
-                <i class="fa fa-chevron-left"></i> JavaScript基础学习(二)
+              <a href="/2018/08/27/Scrapy框架学习之CrawlSpider/" rel="next" title="Scrapy框架学习之CrawlSpider">
+                <i class="fa fa-chevron-left"></i> Scrapy框架学习之CrawlSpider
               </a>
             
           </div>
@@ -422,10 +491,6 @@ search(item) 查找节点是否存在
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/08/08/python之json数据解析/" rel="prev" title="python之json基础">
-                python之json基础 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -477,8 +542,17 @@ search(item) 查找节点是否存在
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -595,6 +669,22 @@ search(item) 查找节点是否存在
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置下载中间件"><span class="nav-number">1.</span> <span class="nav-text">设置下载中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#几种scrapy中通常用来反爬虫的几种措施"><span class="nav-number">2.</span> <span class="nav-text">几种scrapy中通常用来反爬虫的几种措施</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

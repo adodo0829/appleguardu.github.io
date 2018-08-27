@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="scrapy," />
 
 
 
@@ -81,16 +81,22 @@
 
 
 
-<meta name="description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AppleGuard的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/page/2/index.html">
+<meta name="description" content="CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。">
+<meta name="keywords" content="scrapy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy框架学习之CrawlSpider">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/Scrapy框架学习之CrawlSpider/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta property="og:description" content="CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/xtMx6Ki.png">
+<meta property="og:image" content="https://i.imgur.com/6amTlHs.png">
+<meta property="og:image" content="https://i.imgur.com/QTBG9mC.png">
+<meta property="og:updated_time" content="2018-08-27T08:38:45.730Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AppleGuard的博客">
-<meta name="twitter:description" content="天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。">
+<meta name="twitter:title" content="Scrapy框架学习之CrawlSpider">
+<meta name="twitter:description" content="CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。">
+<meta name="twitter:image" content="https://i.imgur.com/xtMx6Ki.png">
 
 
 
@@ -120,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2018/page/2/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/Scrapy框架学习之CrawlSpider/"/>
 
 
 
 
 
-  <title>归档 | AppleGuard的博客</title>
+  <title>Scrapy框架学习之CrawlSpider | AppleGuard的博客</title>
   
 
 
@@ -145,7 +151,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -249,336 +255,260 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        OK! 目前共计 33 篇日志。 继续努力。
-      </span>
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/Scrapy框架学习之CrawlSpider/">
 
-      
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">Scrapy框架学习之CrawlSpider</h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-27T15:56:17+08:00">
+                2018-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/19/selenium爬取淘宝商品/" itemprop="url">
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
               
-                <span itemprop="name">Selenium爬取淘宝商品</span>
+                <span class="post-meta-item-text">分类于</span>
               
-            </a>
-        
-      </h2>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-19T13:28:28+08:00"
-              content="2018-08-19" >
-          08-19
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+          
 
+          
+          
 
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/19/爬虫的思路/" itemprop="url">
-              
-                <span itemprop="name">爬虫的思路</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-19T09:56:37+08:00"
-              content="2018-08-19" >
-          08-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/18/selenium的使用/" itemprop="url">
-              
-                <span itemprop="name">selenium的使用</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-18T17:10:04+08:00"
-              content="2018-08-18" >
-          08-18
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。<br><a id="more"></a>  </p>
+<h2 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读"></a>源码解读</h2><p>快速创建方式：scrapy genspider -t crawl tencent tencent.com </p>
+<p><img src="https://i.imgur.com/xtMx6Ki.png" alt=""><br><img src="https://i.imgur.com/6amTlHs.png" alt=""></p>
+<h2 id="CrawlSpider的属性和方法"><a href="#CrawlSpider的属性和方法" class="headerlink" title="CrawlSpider的属性和方法"></a>CrawlSpider的属性和方法</h2><p><strong>LinkExtractors</strong>  </p>
+<blockquote>
+<pre><code>class scrapy.linkextractors.LinkExtractor
+</code></pre></blockquote>
+<p>Link Extractors 的目的很简单: 提取链接｡</p>
+<p>每个LinkExtractor有唯一的公共方法是 extract_links()，它接收一个 Response 对象，并返回一个 scrapy.link.Link 对象。</p>
+<p>Link Extractors要实例化一次，并且 extract_links 方法会根据不同的 response 调用多次提取链接｡</p>
+<blockquote>
+<pre><code>class scrapy.linkextractors.LinkExtractor(
+    allow = (),
+    deny = (),
+    allow_domains = (),
+    deny_domains = (),
+    deny_extensions = None,
+    restrict_xpaths = (),
+    tags = (&apos;a&apos;,&apos;area&apos;),
+       attrs = (&apos;href&apos;),
+       canonicalize = True,
+    unique = True,
+    process_value = None
+)
+</code></pre></blockquote>
+<p>主要参数：</p>
+<ul>
+<li><p>allow：满足括号中“正则表达式”的值会被提取，如果为空，则全部匹配。</p>
+</li>
+<li><p>deny：与这个正则表达式(或正则表达式列表)不匹配的URL一定不提取。</p>
+</li>
+<li><p>allow_domains：会被提取的链接的domains。</p>
+</li>
+<li><p>deny_domains：一定不会被提取链接的domains。</p>
+</li>
+<li><p>restrict_xpaths：使用xpath表达式，和allow共同作用过滤链接。</p>
+</li>
+</ul>
+<p><strong>rules</strong><br>在rules中包含一个或多个Rule对象，每个Rule对爬取网站的动作定义了特定操作。如果多个rule匹配了相同的链接，则根据规则在本集合中被定义的顺序，第一个会被使用。  </p>
+<blockquote>
+<pre><code>class scrapy.spiders.Rule(
+    link_extractor, 
+    callback = None, 
+    cb_kwargs = None, 
+    follow = None, 
+    process_links = None, 
+    process_request = None
+)
+</code></pre></blockquote>
+<p>主要参数：  </p>
+<ul>
+<li><p>link_extractor：是一个Link Extractor对象，用于定义需要提取的链接。</p>
+</li>
+<li><p>callback： 从link_extractor中每获取到链接时，参数所指定的值作为回调函数，该回调函数接受一个response作为其第一个参数。</p>
+</li>
+</ul>
+<p>注意：当编写爬虫规则时，避免使用parse作为回调函数。由于CrawlSpider使用parse方法来实现其逻辑，如果覆盖了 parse方法，crawl spider将会运行失败。</p>
+<ul>
+<li><p>follow：是一个布尔(boolean)值，指定了根据该规则从response提取的链接是否需要跟进。 如果callback为None，follow 默认设置为True ，否则默认为False。</p>
+</li>
+<li><p>process_links：指定该spider中哪个的函数将会被调用，从link_extractor中获取到链接列表时将会调用该函数。该方法主要用来过滤。</p>
+</li>
+<li><p>process_request：指定该spider中哪个的函数将会被调用， 该规则提取到每个request时都会调用该函数。 (用来过滤request)</p>
+</li>
+</ul>
+<p>下面写一个实例：<br><img src="https://i.imgur.com/QTBG9mC.png" alt=""></p>
+<h2 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h2><p>Scrapy提供了log功能，可以通过 logging 模块使用。</p>
+<p>可以修改配置文件settings.py，任意位置添加下面两行，效果会清爽很多。</p>
+<blockquote>
+<pre><code>LOG_FILE = &quot;TencentSpider.log&quot;
+LOG_LEVEL = &quot;INFO&quot;
+</code></pre></blockquote>
+<p>Log levels<br>Scrapy提供5层logging级别:</p>
+<ul>
+<li>CRITICAL - 严重错误(critical)</li>
+<li>ERROR - 一般错误(regular errors)</li>
+<li>WARNING - 警告信息(warning messages)</li>
+<li>INFO - 一般信息(informational messages)</li>
+<li>DEBUG - 调试信息(debugging messages)</li>
+</ul>
+<p>logging设置<br>通过在setting.py中进行以下设置可以被用来配置logging:</p>
+<ul>
+<li>LOG_ENABLED 默认: True，启用logging</li>
+<li>LOG_ENCODING 默认: ‘utf-8’，logging使用的编码</li>
+<li>LOG_FILE 默认: None，在当前目录里创建logging输出文件的文件名</li>
+<li>LOG_LEVEL 默认: ‘DEBUG’，log的最低级别</li>
+<li>LOG_STDOUT 默认: False 如果为 True，进程所有的标准输出(及错误)将会被重定向到log中。例如，执行 print “hello” ，其将会在Scrapy log中显示。</li>
+</ul>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/16/Ajax数据的爬取/" itemprop="url">
-              
-                <span itemprop="name">Ajax数据的爬取</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-16T10:53:33+08:00"
-              content="2018-08-16" >
-          08-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/14/爬取猫眼电影信息/" itemprop="url">
-              
-                <span itemprop="name">爬取猫眼电影信息</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-14T15:52:36+08:00"
-              content="2018-08-14" >
-          08-14
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/12/python爬虫基本流程/" itemprop="url">
-              
-                <span itemprop="name">python爬虫基本流程</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-12T14:34:17+08:00"
-              content="2018-08-12" >
-          08-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/09/Python之数据结构与算法/" itemprop="url">
-              
-                <span itemprop="name">Python之数据结构与算法</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-09T20:24:47+08:00"
-              content="2018-08-09" >
-          08-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/08/08/python之json数据解析/" itemprop="url">
-              
-                <span itemprop="name">python之json基础</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-08T13:27:17+08:00"
-              content="2018-08-08" >
-          08-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/26/Scrapy抓取装修图片/" rel="next" title="Scrapy抓取装修图片">
+                <i class="fa fa-chevron-left"></i> Scrapy抓取装修图片
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/27/Scrapy框架学习之Downloader-Middlewares/" rel="prev" title="Scrapy框架学习之Downloader Middlewares">
+                Scrapy框架学习之Downloader Middlewares <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2018/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/2018/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2018/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2018/page/5/">5</a><a class="extend next" rel="next" href="/archives/2018/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -586,6 +516,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -606,8 +540,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -724,6 +667,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码解读"><span class="nav-number">1.</span> <span class="nav-text">源码解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CrawlSpider的属性和方法"><span class="nav-number">2.</span> <span class="nav-text">CrawlSpider的属性和方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Logging"><span class="nav-number">3.</span> <span class="nav-text">Logging</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -857,6 +816,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

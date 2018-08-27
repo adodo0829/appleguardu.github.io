@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-27T03:43:26.518Z</updated>
+  <updated>2018-08-27T09:30:06.326Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scrapy框架学习之Downloader Middlewares</title>
+    <link href="http://yoursite.com/2018/08/27/Scrapy%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E4%B9%8BDownloader-Middlewares/"/>
+    <id>http://yoursite.com/2018/08/27/Scrapy框架学习之Downloader-Middlewares/</id>
+    <published>2018-08-27T08:52:03.000Z</published>
+    <updated>2018-08-27T09:30:06.326Z</updated>
+    
+    <content type="html"><![CDATA[<p>Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。<br><a id="more"></a>  </p><h2 id="设置下载中间件"><a href="#设置下载中间件" class="headerlink" title="设置下载中间件"></a>设置下载中间件</h2><ul><li><p>当引擎传递请求给下载器的过程中，下载中间件可以对请求进行处理 （例如增加http header信息，增加proxy信息等）；</p></li><li><p>在下载器完成http请求，传递响应给引擎的过程中， 下载中间件可以对响应进行处理（例如进行gzip的解压等）</p></li></ul><p>要激活下载器中间件组件，将其加入到 DOWNLOADER_MIDDLEWARES 设置中。 该设置是一个字典(dict)，键为中间件类的路径，值为其中间件的顺序(order)。</p><p>这里是一个例子:</p><blockquote><pre><code>DOWNLOADER_MIDDLEWARES = {           &apos;mySpider.middlewares.MyDownloaderMiddleware&apos;: 543,  }</code></pre></blockquote><p>源码示例：<br><img src="https://i.imgur.com/jAeXWuy.png" alt=""></p><p>方法介绍：<br><strong>1. process_request(self, request, spider)</strong> </p><p>当每个request通过下载中间件时，该方法被调用。</p><ul><li>process_request() 必须返回以下其中之一：一个 None 、一个 Response 对象、一个 Request 对象或 raise IgnoreRequest:</li></ul><p>如果其返回 None ，Scrapy将继续处理该request，执行其他的中间件的相应方法，直到合适的下载器处理函数(download handler)被调用， 该request被执行(其response被下载)。</p><p>如果其返回 Response 对象，Scrapy将不会调用 任何 其他的 process_request() 或 process_exception() 方法，或相应地下载函数； 其将返回该response。 已安装的中间件的 process_response() 方法则会在每个response返回时被调用。</p><p>如果其返回 Request 对象，Scrapy则停止调用 process_request方法并重新调度返回的request。当新返回的request被执行后， 相应地中间件链将会根据下载的response被调用。</p><p>如果其raise一个 IgnoreRequest 异常，则安装的下载中间件的 process_exception() 方法会被调用。如果没有任何一个方法处理该异常， 则request的errback(Request.errback)方法会被调用。如果没有代码处理抛出的异常， 则该异常被忽略且不记录(不同于其他异常那样)。  </p><ul><li>参数:  </li></ul><p>request (Request 对象) – 处理的request</p><p>spider (Spider 对象) – 该request对应的spider</p><p><strong>2. process_response(self, request, response, spider)</strong></p><p>当下载器完成http请求，传递响应给引擎的时候调用</p><ul><li>process_request() 必须返回以下其中之一: 返回一个 Response 对象、 返回一个 Request 对象或raise一个 IgnoreRequest 异常。</li></ul><p>如果其返回一个 Response (可以与传入的response相同，也可以是全新的对象)， 该response会被在链中的其他中间件的 process_response() 方法处理。</p><p>如果其返回一个 Request 对象，则中间件链停止， 返回的request会被重新调度下载。处理类似于 process_request() 返回request所做的那样。</p><p>如果其抛出一个 IgnoreRequest 异常，则调用request的errback(Request.errback)。 如果没有代码处理抛出的异常，则该异常被忽略且不记录(不同于其他异常那样)。</p><ul><li>参数:</li></ul><p>request (Request 对象) – response所对应的request</p><p>response (Response 对象) – 被处理的response</p><p>spider (Spider 对象) – response所对应的spider</p><h2 id="几种scrapy中通常用来反爬虫的几种措施"><a href="#几种scrapy中通常用来反爬虫的几种措施" class="headerlink" title="几种scrapy中通常用来反爬虫的几种措施"></a>几种scrapy中通常用来反爬虫的几种措施</h2><p>这里因为暂时还没有项目涉及到，我就不写了，引用网上的资料参考。  </p><ul><li>创建middlewares.py文件</li></ul><p>Scrapy代理IP、Uesr-Agent的切换都是通过DOWNLOADER_MIDDLEWARES进行控制，我们在settings.py同级目录下创建middlewares.py文件，包装所有请求。<br><img src="https://i.imgur.com/KrjxbBW.png" alt=""></p><p>为什么HTTP代理要使用base64编码：</p><p>HTTP代理的原理很简单，就是通过HTTP协议与代理服务器建立连接，协议信令中包含要连接到的远程主机的IP和端口号，如果有需要身份验证的话还需要加上授权信息，服务器收到信令后首先进行身份验证，通过后便与远程主机建立连接，连接成功之后会返回给客户端200，表示验证通过，就这么简单，</p><p>下面是具体的信令格式：</p><blockquote><pre><code>CONNECT 59.64.128.198:21 HTTP/1.1Host: 59.64.128.198:21Proxy-Authorization: Basic bGV2I1TU5OTIzUser-Agent: OpenFetion</code></pre></blockquote><p>其中Proxy-Authorization是身份验证信息，Basic后面的字符串是用户名和密码组合后进行base64编码的结果，也就是对username:password进行base64编码。</p><blockquote><pre><code>HTTP/1.0 200 Connection established</code></pre><p>OK，客户端收到收面的信令后表示成功建立连接，接下来要发送给远程主机的数据就可以发送给代理服务器了，代理服务器建立连接后会在根据IP地址和端口号对应的连接放入缓存，收到信令后再根据IP地址和端口号从缓存中找到对应的连接，将数据通过该连接转发出去。</p></blockquote><p><strong>修改settings.py配置USER_AGENTS和PROXIES</strong></p><ul><li>添加USER_AGENTS：</li></ul><p><img src="https://i.imgur.com/E2dgdX0.png" alt=""></p><ul><li>添加代理IP设置PROXIES<br>免费代理IP可以网上搜索，或者付费购买一批可用的私密代理IP</li></ul><p><img src="https://i.imgur.com/eICOPL8.png" alt=""></p><ul><li>除非特殊需要，禁用cookies，防止某些网站根据Cookie来封锁爬虫</li></ul><blockquote><pre><code>COOKIES_ENABLED = False</code></pre></blockquote><ul><li>设置下载延迟</li></ul><blockquote><pre><code>DOWNLOAD_DELAY = 3</code></pre></blockquote><ul><li>最后设置setting.py里的DOWNLOADER_MIDDLEWARES，添加自己编写的下载中间件类</li></ul><blockquote><pre><code>DOWNLOADER_MIDDLEWARES = {      &apos;mySpider.middlewares.MyCustomDownloaderMiddleware&apos;: 543,      &apos;mySpider.middlewares.RandomUserAgent&apos;: 1,      &apos;mySpider.middlewares.ProxyMiddleware&apos;: 100}</code></pre></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Scrapy下载中间件是处于引擎(crawler.engine)和下载(crawler.engine.download())之间的一层组件，可以有多个下载中间件被加载运行；通常用来做异常处理和反爬处理。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="scrapy" scheme="http://yoursite.com/categories/scrapy/"/>
+    
+    
+      <category term="scrapy" scheme="http://yoursite.com/tags/scrapy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scrapy框架学习之CrawlSpider</title>
+    <link href="http://yoursite.com/2018/08/27/Scrapy%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0%E4%B9%8BCrawlSpider/"/>
+    <id>http://yoursite.com/2018/08/27/Scrapy框架学习之CrawlSpider/</id>
+    <published>2018-08-27T07:56:17.000Z</published>
+    <updated>2018-08-27T08:38:45.730Z</updated>
+    
+    <content type="html"><![CDATA[<p>CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。<br><a id="more"></a>  </p><h2 id="源码解读"><a href="#源码解读" class="headerlink" title="源码解读"></a>源码解读</h2><p>快速创建方式：scrapy genspider -t crawl tencent tencent.com </p><p><img src="https://i.imgur.com/xtMx6Ki.png" alt=""><br><img src="https://i.imgur.com/6amTlHs.png" alt=""></p><h2 id="CrawlSpider的属性和方法"><a href="#CrawlSpider的属性和方法" class="headerlink" title="CrawlSpider的属性和方法"></a>CrawlSpider的属性和方法</h2><p><strong>LinkExtractors</strong>  </p><blockquote><pre><code>class scrapy.linkextractors.LinkExtractor</code></pre></blockquote><p>Link Extractors 的目的很简单: 提取链接｡</p><p>每个LinkExtractor有唯一的公共方法是 extract_links()，它接收一个 Response 对象，并返回一个 scrapy.link.Link 对象。</p><p>Link Extractors要实例化一次，并且 extract_links 方法会根据不同的 response 调用多次提取链接｡</p><blockquote><pre><code>class scrapy.linkextractors.LinkExtractor(    allow = (),    deny = (),    allow_domains = (),    deny_domains = (),    deny_extensions = None,    restrict_xpaths = (),    tags = (&apos;a&apos;,&apos;area&apos;),       attrs = (&apos;href&apos;),       canonicalize = True,    unique = True,    process_value = None)</code></pre></blockquote><p>主要参数：</p><ul><li><p>allow：满足括号中“正则表达式”的值会被提取，如果为空，则全部匹配。</p></li><li><p>deny：与这个正则表达式(或正则表达式列表)不匹配的URL一定不提取。</p></li><li><p>allow_domains：会被提取的链接的domains。</p></li><li><p>deny_domains：一定不会被提取链接的domains。</p></li><li><p>restrict_xpaths：使用xpath表达式，和allow共同作用过滤链接。</p></li></ul><p><strong>rules</strong><br>在rules中包含一个或多个Rule对象，每个Rule对爬取网站的动作定义了特定操作。如果多个rule匹配了相同的链接，则根据规则在本集合中被定义的顺序，第一个会被使用。  </p><blockquote><pre><code>class scrapy.spiders.Rule(    link_extractor,     callback = None,     cb_kwargs = None,     follow = None,     process_links = None,     process_request = None)</code></pre></blockquote><p>主要参数：  </p><ul><li><p>link_extractor：是一个Link Extractor对象，用于定义需要提取的链接。</p></li><li><p>callback： 从link_extractor中每获取到链接时，参数所指定的值作为回调函数，该回调函数接受一个response作为其第一个参数。</p></li></ul><p>注意：当编写爬虫规则时，避免使用parse作为回调函数。由于CrawlSpider使用parse方法来实现其逻辑，如果覆盖了 parse方法，crawl spider将会运行失败。</p><ul><li><p>follow：是一个布尔(boolean)值，指定了根据该规则从response提取的链接是否需要跟进。 如果callback为None，follow 默认设置为True ，否则默认为False。</p></li><li><p>process_links：指定该spider中哪个的函数将会被调用，从link_extractor中获取到链接列表时将会调用该函数。该方法主要用来过滤。</p></li><li><p>process_request：指定该spider中哪个的函数将会被调用， 该规则提取到每个request时都会调用该函数。 (用来过滤request)</p></li></ul><p>下面写一个实例：<br><img src="https://i.imgur.com/QTBG9mC.png" alt=""></p><h2 id="Logging"><a href="#Logging" class="headerlink" title="Logging"></a>Logging</h2><p>Scrapy提供了log功能，可以通过 logging 模块使用。</p><p>可以修改配置文件settings.py，任意位置添加下面两行，效果会清爽很多。</p><blockquote><pre><code>LOG_FILE = &quot;TencentSpider.log&quot;LOG_LEVEL = &quot;INFO&quot;</code></pre></blockquote><p>Log levels<br>Scrapy提供5层logging级别:</p><ul><li>CRITICAL - 严重错误(critical)</li><li>ERROR - 一般错误(regular errors)</li><li>WARNING - 警告信息(warning messages)</li><li>INFO - 一般信息(informational messages)</li><li>DEBUG - 调试信息(debugging messages)</li></ul><p>logging设置<br>通过在setting.py中进行以下设置可以被用来配置logging:</p><ul><li>LOG_ENABLED 默认: True，启用logging</li><li>LOG_ENCODING 默认: ‘utf-8’，logging使用的编码</li><li>LOG_FILE 默认: None，在当前目录里创建logging输出文件的文件名</li><li>LOG_LEVEL 默认: ‘DEBUG’，log的最低级别</li><li>LOG_STDOUT 默认: False 如果为 True，进程所有的标准输出(及错误)将会被重定向到log中。例如，执行 print “hello” ，其将会在Scrapy log中显示。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;CrawlSpider是Spider的派生类，Spider类的设计原则是只爬取start_url列表中的网页，而CrawlSpider类定义了一些规则(rule)来提供跟进link的方便的机制，从爬取的网页中获取link并继续爬取。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="scrapy" scheme="http://yoursite.com/categories/scrapy/"/>
+    
+    
+      <category term="scrapy" scheme="http://yoursite.com/tags/scrapy/"/>
+    
+  </entry>
   
   <entry>
     <title>Scrapy抓取装修图片</title>
@@ -409,50 +453,6 @@
     
     
       <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python多任务之协程</title>
-    <link href="http://yoursite.com/2018/08/04/python%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%B9%8B%E5%8D%8F%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/08/04/python多任务之协程/</id>
-    <published>2018-08-04T12:36:02.000Z</published>
-    <updated>2018-08-04T13:04:00.847Z</updated>
-    
-    <content type="html"><![CDATA[<p>协程是啥呢？协程其实可以认为是比线程更小的执行单元。 为啥说他是一个执行单元，因为他自带CPU上下文。这样只要在合适的时机，我们可以把一个协程 切换到另一个协程。 只要这个过程中保存或恢复 CPU上下文那么程序还是可以运行的。<br><a id="more"></a><br>通俗的理解：在一个线程中的某个函数，可以在任何地方保存当前函数的一些临时变量等信息，然后切换到另外一个函数中执行(注意不是通过调用函数的方式做到的)并且切换的次数以及什么时候再切换到原来的函数都由<strong>开发者自己确定</strong>。  </p><h2 id="协程和线程差异"><a href="#协程和线程差异" class="headerlink" title="协程和线程差异"></a>协程和线程差异</h2><p>从刚才的了解，协程看起来比线程差不多。其实不然, 线程切换从系统层面远不止保存和恢复 CPU上下文这么简单。操作系统为了程序运行的高效性每个线程都有自己缓存Cache等等数据，操作系统还会帮你做这些数据的恢复操作。所以线程的切换非常耗性能。但是协程的切换只是单纯的操作CPU的上下文，所以一秒钟切换个上百万次系统都抗的住。但是协程有一个问题，就是系统并不感知，所以操作系统不会帮你做切换。那么谁来帮你做切换？让需要执行的协程更多的获得CPU时间才是问题的关键。  </p><p>目前的协程框架一般都是设计成 1:N 模式。所谓 1:N 就是一个线程作为一个容器里面放置多个协程。 那么谁来适时的切换这些协程？<br>答案是有协程自己主动让出CPU，也就是每个协程池里面有一个调度器， 这个调度器是被动调度的。意思就是他不会主动调度。而且当一个协程发现自己执行不下去了(比如异步等待网络的数据回来，但是当前还没有数据到)， 这个时候就可以由这个协程通知调度器，这个时候执行到调度器的代码，调度器根据事先设计好的调度算法找到当前最需要CPU的协程。 切换这个协程的CPU上下文把CPU的运行权交个这个协程，直到这个协程出现执行不下去需要等等的情况，或者它调用主动让出CPU的API之类，触发下一次调度。注意：假设这个线程中有一个协程是CPU密集型的他没有IO操作， 也就是自己不会主动触发调度器调度的过程，那么就会出现其他协程得不到执行的情况， 所以这种情况下需要自己避免。 </p><h2 id="协程的好处"><a href="#协程的好处" class="headerlink" title="协程的好处"></a>协程的好处</h2><p>在IO密集型的程序中由于IO操作远远慢于CPU的操作，所以往往需要CPU去等IO操作。 同步IO下系统需要切换线程，让操作系统可以在IO过程中执行其他的东西。 这样虽然代码是符合人类的思维习惯但是由于大量的线程切换带来了大量的性能的浪费，尤其是IO密集型的程序。</p><p>所以人们发明了异步IO。就是当数据到达的时候触发我的回调。来减少线程切换带来性能损失。 但是这样的坏处也是很大的，主要的坏处就是操作被 “分片” 了，代码写的不是 “一气呵成” 这种。 而是每次来段数据就要判断 数据够不够处理哇，够处理就处理吧，不够处理就在等等吧。这样代码的可读性很低，其实也不符合人类的习惯。</p><p>但是协程可以很好解决这个问题。比如 把一个IO操作 写成一个协程。当触发IO操作的时候就自动让出CPU给其他协程。要知道协程的切换很轻的。  </p><p>协程通过这种对异步IO的封装 既保留了性能也保证了代码的容易编写和可读性。在高IO密集型的程序下很好。但是高CPU密集型的程序下没啥好处(需要占用大量CPU的情况下，一般采用多线程)。</p><p><strong>协程的实现其实是采用了生成器的原理</strong><br>下面看一个协程实现的多任务打印实例：<br><img src="https://i.imgur.com/rBnmrpo.png" alt="">  </p><h2 id="协程-greenlet"><a href="#协程-greenlet" class="headerlink" title="协程-greenlet"></a>协程-greenlet</h2><p>为了更好使用协程来完成多任务，python中的greenlet模块对其封装，从而使得切换任务变的更加简单<br><img src="https://i.imgur.com/2lf5TUK.png" alt=""></p><h2 id="协程-gevent"><a href="#协程-gevent" class="headerlink" title="协程-gevent"></a>协程-gevent</h2><p>greenlet已经实现了协程，但是这个还的人工切换，是不是觉得太麻烦了，不要捉急，python还有一个比greenlet更强大的并且能够自动切换任务的模块gevent。</p><p>其原理是当一个greenlet遇到IO(指的是input output 输入输出，比如网络、文件操作等)操作时，比如访问网络，就自动切换到其他的greenlet，等到IO操作完成，再在适当的时候切换回来继续执行。<br>由于IO操作非常耗时，经常使程序处于等待状态，有了gevent为我们自动切换协程，就保证总有greenlet在运行，而不是等待IO。<br><strong>gevent的使用</strong><br><img src="https://i.imgur.com/OrGQERV.png" alt=""></p><p><strong>gevent切换执行</strong><br><img src="https://i.imgur.com/GlIdZ4U.png" alt=""></p><p><strong>gevent执行并发任务</strong><br>实际代码里，不会用gevent.sleep()去切换协程，而是在执行到IO操作时，gevent自动切换。<br><img src="https://i.imgur.com/tXaURig.png" alt=""></p><p>从上能够看到是先发送的获取baidu的相关信息，然后依次是sina、runoob，但是收到数据的先后顺序不一定与发送顺序相同，这也就体现出了异步，即不确定什么时候会收到数据，顺序不一定。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;协程是啥呢？协程其实可以认为是比线程更小的执行单元。 为啥说他是一个执行单元，因为他自带CPU上下文。这样只要在合适的时机，我们可以把一个协程 切换到另一个协程。 只要这个过程中保存或恢复 CPU上下文那么程序还是可以运行的。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="协程" scheme="http://yoursite.com/tags/%E5%8D%8F%E7%A8%8B/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python多任务之线程</title>
-    <link href="http://yoursite.com/2018/08/03/python%E5%A4%9A%E4%BB%BB%E5%8A%A1%E4%B9%8B%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://yoursite.com/2018/08/03/python多任务之线程/</id>
-    <published>2018-08-03T13:46:35.000Z</published>
-    <updated>2018-08-03T15:37:04.932Z</updated>
-    
-    <content type="html"><![CDATA[<p>进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。<br><a id="more"></a>  </p><h2 id="1-threading模块使用"><a href="#1-threading模块使用" class="headerlink" title="1.threading模块使用"></a>1.threading模块使用</h2><p>python的thread模块是比较底层的模块，python的threading模块是对thread做了一些包装的，可以更加方便的被使用。<br><strong>1.1单线程执行</strong><br><img src="https://i.imgur.com/x67NBCR.png" alt=""></p><p><strong>1.2多线程执行</strong><br><img src="https://i.imgur.com/rQH2Xtt.png" alt=""><br>经过对比，可以明显看出使用了多线程并发的操作，花费时间要短很多。  </p><p><strong>1.3主线程,子线程执行顺序</strong><br><img src="https://i.imgur.com/iX50xhn.png" alt=""></p><h2 id="2-线程执行代码的封装"><a href="#2-线程执行代码的封装" class="headerlink" title="2.线程执行代码的封装"></a>2.线程执行代码的封装</h2><p><strong>2.1线程子类</strong><br>通过使用threading模块能完成多任务的程序开发，为了让每个线程的封装性更完美，所以使用threading模块时，往往会定义一个新的子类class，只要继承threading.Thread就可以了，然后重写run方法.<br><img src="https://i.imgur.com/SQZGiNr.png" alt=""><br>python的threading.Thread类有一个run方法，用于定义线程的功能函数，可以在自己的线程类中覆盖该方法。<br>而创建自己的线程实例后，通过Thread类的start方法，可以启动该线程，交给python虚拟机进行调度，当该线程获得执行的机会时，就会调用run方法执行线程。<br><strong>2.2线程的执行顺序</strong><br><img src="https://i.imgur.com/2H0gsyC.png" alt=""><br>从代码和执行结果我们可以看出，多线程程序的执行顺序是不确定的。<br>当执行到sleep语句时，线程将被阻塞（Blocked），到sleep结束后，线程进入就绪（Runnable）状态，等待调度。而线程调度将自行选择一个线程执行。上面的代码中只能保证每个线程都运行完整个run函数，但是线程的启动顺序、run函数中每次循环的执行顺序都不能确定。  </p><p><strong>总结</strong><br>每个线程一定会有一个名字，尽管上面的例子中没有指定线程对象的name，但是python会自动为线程指定一个名字。<br>当线程的run()方法结束时该线程完成。<br>无法控制线程调度程序，但可以通过别的方式来影响线程调度的方式。<br>线程的几种状态:<br>新建，就绪，运行，等待（堵塞），死亡  </p><h2 id="3-多线程-共享全局变量"><a href="#3-多线程-共享全局变量" class="headerlink" title="3.多线程-共享全局变量"></a>3.多线程-共享全局变量</h2><p>实例1：<br><img src="https://i.imgur.com/kCgcdgP.png" alt=""></p><p>实例2：列表当做实参传递到线程中<br><img src="https://i.imgur.com/A27ZSCE.png" alt=""><br>在一个进程内的所有线程共享全局变量，能够在不适用其他方式的前提下完成多线程之间的数据共享（这点要比多进程要好）<br>缺点就是，线程是对全局变量随意遂改可能造成多线程之间对全局变量的混乱（即线程非安全）</p><h2 id="4-进程-线程对比"><a href="#4-进程-线程对比" class="headerlink" title="4.进程,线程对比"></a>4.进程,线程对比</h2><p><strong>4.1功能</strong>  </p><blockquote><pre><code>进程:能够完成多任务，比如 在一台电脑上能够同时运行多个QQ线程:能够完成多任务，比如 一个QQ中的多个聊天窗口</code></pre></blockquote><p><strong>4.2定义的不同</strong><br>进程是系统进行资源分配和调度的一个独立单位.<br>线程是进程的一个实体,是CPU调度和分派的基本单位,它是比进程更小的能独立运行的基本单位.线程自己基本上不拥有系统资源,只拥有一点在运行中必不可少的资源(如程序计数器,一组寄存器和栈),但是它可与同属一个进程的其他的线程共享进程所拥有的全部资源.</p><p><strong>4.3区别</strong><br>一个程序至少有一个进程,一个进程至少有一个线程.线程的划分尺度小于进程(资源比进程少)，使得多线程程序的并发性高。进程在执行过程中拥有独立的内存单元，而多个线程共享内存，从而极大地提高了程序的运行效率;线线程不能够独立执行，必须依存在进程中</p><p><strong>4.4优缺点</strong><br>线程和进程在使用上各有优缺点：线程执行开销小，但不利于资源的管理和保护；而进程正相反。</p><h2 id="5-同步的概念"><a href="#5-同步的概念" class="headerlink" title="5.同步的概念"></a>5.同步的概念</h2><p>在理解同步之前，先看一个问题。多线程开发可能遇到的问题：<br>假设两个线程t1和t2都要对num=0进行增1运算，t1和t2都各对num修改10次，num的最终的结果应该为20。但是由于是多线程访问，有可能出现下面情况：<br>在num=0时，t1取得num=0。此时系统把t1调度为”sleeping”状态，把t2转换为”running”状态，t2也获得num=0。然后t2对得到的值进行加1并赋给num，使得num=1。然后系统又把t2调度为”sleeping”，把t1转为”running”。线程t1又把它之前得到的0加1后赋值给num。这样，明明t1和t2都完成了1次加1工作，但结果仍然是num=1。<br>下面我们就来测试一下：<br><img src="https://i.imgur.com/RmnqU61.png" alt=""><br><img src="https://i.imgur.com/0wX6ZEp.png" alt=""></p><p>问题产生的原因就是没有控制多个线程对同一资源的访问，对数据造成破坏，操作系统在调度一个线程时，执行过程出现暂停，执行另一个线程<br>使得线程运行的结果不可预期。这种现象称为“线程不安全”。</p><p><strong>5.1何为同步</strong><br>同步就是协同步调，按预定的先后次序进行运行。<br>如进程、线程同步，可理解为进程或线程A和B一块配合，A执行到一定程度时要依靠B的某个结果，于是停下来，示意B运行; B依言执行，再将结果给A; A再继续操作。  </p><p><strong>5.2解决问题的思路</strong><br>对于上述提出的那个计算错误的问题，可以通过线程同步来进行解决思路，如下:</p><p>1.系统调用t1，然后获取到num的值为0，此时上一把锁，即不允许其他现在操作num。<br>2.对num的值进行+1<br>3.解锁，此时num的值为1，其他的线程就可以使用num了，而且是num的值不是0而是1<br>4.同理其他线程在对num进行修改时，都要先上锁，处理完后再解锁，在上锁的整个过程中不允许其他线程访问，就保证了数据的正确性  </p><p><strong>5.3互斥锁</strong><br>当多个线程几乎同时修改某一个共享数据的时候，需要进行同步控制线程同步能够保证多个线程安全访问竞争资源，最简单的同步机制是引入互斥锁。</p><p>互斥锁为资源引入一个状态：锁定/非锁定。</p><p>某个线程要更改共享数据时，先将其锁定，此时资源的状态为“锁定”，其他线程不能更改；直到该线程释放资源，将资源的状态变成“非锁定”，其他的线程才能再次锁定该资源。互斥锁保证了每次只有一个线程进行写入操作，从而保证了多线程情况下数据的正确性。<br>threading模块中定义了Lock类，可以方便的处理锁定：</p><blockquote><pre><code>#创建锁mutex = threading.Lock()#锁定mutex.acquire([blocking])#释放mutex.release()</code></pre><p>其中，锁定方法acquire可以有一个blocking参数。<br>如果设定blocking为True，则当前线程会堵塞，直到获取到这个锁为止（如果没有指定，那么默认为True）<br>如果设定blocking为False，则当前线程不会堵塞<br>还有一个timeout参数，用来设定超时时间的。  </p></blockquote><p><img src="https://i.imgur.com/MyvGbrW.png" alt=""><br><img src="https://i.imgur.com/BxN3GGz.png" alt=""><br>可以看到，加入互斥锁后，运行结果与预期相符。  </p><p>过程分析：<br>上锁解锁过程<br>当一个线程调用锁的acquire()方法获得锁时，锁就进入“locked”状态。每次只有一个线程可以获得锁。如果此时另一个线程试图获得这个锁，该线程就会变为“blocked”状态，称为“阻塞”，直到拥有锁的线程调用锁的release()方法释放锁之后，锁进入“unlocked”状态。<br>线程调度程序从处于同步阻塞状态的线程中选择一个来获得锁，并使得该线程进入运行（running）状态。</p><p>总结<br>锁的好处：确保了某段关键代码只能由一个线程从头到尾完整地执行<br>锁的坏处：阻止了多线程并发执行，包含锁的某段代码实际上只能以单线程模式执行，效率就大大地下降了<br>由于可以存在多个锁，不同的线程持有不同的锁，并试图获取对方持有的锁时，可能会造成死锁  </p><h2 id="6-死锁"><a href="#6-死锁" class="headerlink" title="6.死锁"></a>6.死锁</h2><p>在线程间共享多个资源的时候，如果两个线程分别占有一部分资源并且同时等待对方的资源，就会造成死锁。<br>死锁实例：<br><img src="https://i.imgur.com/Xb4rFqx.png" alt=""><br><img src="https://i.imgur.com/5q20yT9.png" alt=""><br>程序会进入死锁状态，如何避免呢？ 1.程序设计前要尽量避免，减少变量交叉调用 2.添加超时时间(timeout)等。  </p><h2 id="7-多线程-非共享数据"><a href="#7-多线程-非共享数据" class="headerlink" title="7.多线程-非共享数据"></a>7.多线程-非共享数据</h2><p>对于全局变量，在多线程中要格外小心，否则容易造成数据错乱的情况发生;那么对于非全局变量我们怎么处理呢？<br><img src="https://i.imgur.com/lD7PF52.png" alt=""></p><p>在多线程开发中，全局变量是多个线程都共享的数据，而局部变量等是各自线程的，是非共享的。  </p><h2 id="8-同步应用"><a href="#8-同步应用" class="headerlink" title="8.同步应用"></a>8.同步应用</h2><p><strong>8.1多个线程有序执行</strong><br>使用互斥锁完成多个任务，有序的进程工作，这就是线程的同步。<br><img src="https://i.imgur.com/lwoA6Hk.png" alt=""><br><img src="https://i.imgur.com/3MXMmEz.png" alt=""></p><h2 id="9-生产者与消费者模式"><a href="#9-生产者与消费者模式" class="headerlink" title="9.生产者与消费者模式"></a>9.生产者与消费者模式</h2><p>为什么要使用生产者和消费者模式？  </p><p>在线程世界里，生产者就是生产数据的线程，消费者就是消费数据的线程。在多线程开发当中，如果生产者处理速度很快，而消费者处理速度很慢，那么生产者就必须等待消费者处理完，才能继续生产数据。同样的道理，如果消费者的处理能力大于生产者，那么消费者就必须等待生产者。为了解决这个问题于是引入了生产者和消费者模式。</p><p>什么是生产者消费者模式？  </p><p>生产者消费者模式是通过一个容器来解决生产者和消费者的强耦合问题。生产者和消费者彼此之间不直接通讯，而通过阻塞队列来进行通讯，所以生产者生产完数据之后不用等待消费者处理，直接扔给阻塞队列，消费者不找生产者要数据，而是直接从阻塞队列里取，阻塞队列就相当于一个缓冲区，平衡了生产者和消费者的处理能力。<br><img src="https://i.imgur.com/aIvKYxg.png" alt=""><br>这个阻塞队列就是用来给生产者和消费者<strong>解耦</strong>的。</p><p>队列Queue的说明：</p><blockquote><pre><code>对于Queue，在多线程通信之间扮演重要的角色添加数据到队列中，使用put()方法从队列中取数据，使用get()方法判断队列中是否还有数据，使用qsize()方法</code></pre></blockquote><p>实例：<br><img src="https://i.imgur.com/lwVSBjD.png" alt=""><br><img src="https://i.imgur.com/klbL1LC.png" alt=""></p><h2 id="10-ThreadLocal"><a href="#10-ThreadLocal" class="headerlink" title="10.ThreadLocal"></a>10.ThreadLocal</h2><p>在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。为了解决这个问题，我们用到ThreadLocal。<br><img src="https://i.imgur.com/m07r1f6.png" alt="">  </p><p>全局变量local_school就是一个ThreadLocal对象，每个Thread对它都可以读写student属性，但互不影响。你可以把local_school看成全局变量，但每个属性如local_school.student都是线程的局部变量，可以任意读写而互不干扰，也不用管理锁的问题，ThreadLocal内部会处理。</p><p>可以理解为全局变量local_school是一个dict，不但可以用local_school.student，还可以绑定其他变量，如local_school.teacher等等。ThreadLocal最常用的地方就是为每个线程绑定一个数据库连接，HTTP请求，用户身份信息等，这样一个线程的所有调用到的处理函数都可以非常方便地访问这些资源。</p><p>一个ThreadLocal变量虽然是全局变量，但每个线程都只能读写自己线程的独立副本，互不干扰。ThreadLocal解决了参数在一个线程中各个函数之间互相传递的问题</p><h2 id="11-异步"><a href="#11-异步" class="headerlink" title="11.异步"></a>11.异步</h2><p>同步是按顺序执行，执行完一个再执行下一个，需要等待、协调运行。<br>与同步相反，异步就是彼此独立,在等待某事件的过程中继续做自己的事，不需要等待这一事件完成后再工作。<br><img src="https://i.imgur.com/meBycn5.png" alt=""><br>从返回结果看，父进程在执行time.sleep(5)时，被系统分配去做了其他事情(执行callback)，做完后才回来执行print</p><h2 id="12-GIL-全局解释器锁"><a href="#12-GIL-全局解释器锁" class="headerlink" title="12.GIL-全局解释器锁"></a>12.GIL-全局解释器锁</h2><p>Python代码的执行由Python 虚拟机(也叫解释器主循环，CPython版本)来控制，Python 在设计之初就考虑到要在解释器的主循环中，同时只有一个线程在执行，即在任意时刻，只有一个线程在解释器中运行。这大大影响了python多线程的性能。而这个解释器锁由于历史原因，现在几乎无法消除。</p><p>python GIL 之所以会影响多线程等性能，是因为在多线程的情况下，只有当线程获得了一个全局锁的时候，那么该线程的代码才能运行，而全局锁只有一个，所以使用python多线程，在同一时刻也只有一个线程在运行，因此在即使在多核的情况下也只能发挥出单核的性能。</p><p>既然python在同一时刻下只能运行一个线程的代码，那线程之间是如何调度的呢？ </p><p>对于有io操作的线程，当一个线程在做io操作的时候，因为io操作不需要cpu，所以，这个时候，python会释放python全局锁，这样其他需要运行的线程就会使用该锁。 </p><p>对于cpu密集型的线程，比如一个线程可能一直需要使用cpu做计算，那么python中会有一个执行指令的计数器，当一个线程执行了一定数量的指令时，该线程就会停止执行并让出当前的锁，这样其他的线程就可以执行代码了。 </p><p>由上面可知，至少有两种情况python会做线程切换，一是一但有IO操作时，会有线程切换，二是当一个线程连续执行了一定数量的指令时，会出现线程切换。当然此处的线程切换不一定就一定会切换到其他线程执行，因为如果当前线程 优先级比较高的话，可能在让出锁以后，又继续获得锁，并优先执行。</p><p>在做科学计算的时候是用的单线程，因为这种计算是需要CPU一直做计算的，如果用多线程反而会降低计算速度。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;进程可以理解为系统资源分配的单位，简单来说就是一段运行着的程序；那么线程就是系统调度的单位，可以理解为进程中执行代码的游标，系统的调度算法来决定其如何运行。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="系统编程" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E7%BC%96%E7%A8%8B/"/>
-    
-    
-      <category term="多线程" scheme="http://yoursite.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
     
   </entry>
   
