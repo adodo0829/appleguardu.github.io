@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mysql," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。">
+<meta name="keywords" content="mysql">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pyhton下的MySQL总结">
+<meta property="og:url" content="http://yoursite.com/2018/08/29/Pyhton下的MySQL总结/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/pZumaL0.jpg">
+<meta property="og:updated_time" content="2018-08-29T13:08:13.006Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Pyhton下的MySQL总结">
+<meta name="twitter:description" content="主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。">
+<meta name="twitter:image" content="https://i.imgur.com/pZumaL0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/29/Pyhton下的MySQL总结/"/>
+
+
+
+
+
+  <title>Pyhton下的MySQL总结 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/29/Pyhton下的MySQL总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Pyhton下的MySQL总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-29T19:33:21+08:00">
+                2018-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。<br><a id="more"></a></p>
+<h2 id="安装与启动"><a href="#安装与启动" class="headerlink" title="安装与启动"></a>安装与启动</h2><ul>
+<li>安装：sudo apt-get install mysql-server</li>
+<li>查看服务：ps ajx | grep mysql</li>
+<li>停止服务:sudo service mysql stop</li>
+<li>开启服务:sudo service mysql start</li>
+<li>重启服务:sudo service mysql restart</li>
+<li>链接数据库：mysql -uroot -p 输入密码</li>
+<li>查看版本：select version();</li>
+</ul>
+<h2 id="数据库常用语句"><a href="#数据库常用语句" class="headerlink" title="数据库常用语句"></a>数据库常用语句</h2><ul>
+<li>查看数据库：show databases;</li>
+<li>创建数据库：create database 库名 [charset = UTF8];</li>
+<li>查看建库语句：show create database 库名;</li>
+<li>使用数据库：use 库名;</li>
+<li>删除数据库：drop 库名;</li>
+</ul>
+<h2 id="数据库表的语句"><a href="#数据库表的语句" class="headerlink" title="数据库表的语句"></a>数据库表的语句</h2><ul>
+<li>查看表：show tables;</li>
+<li>查看表结构：desc 表名;</li>
+<li>创建表：<blockquote>
+<pre><code>CREATE TABLE table_name(
+  字段1 数据类型 其他属性,
+  字段2 datatype,
+  字段3 datatype,
+  .....
+  PRIMARY KEY(one or more columns)
+  );
+</code></pre></blockquote>
+</li>
+</ul>
+<blockquote>
+<pre><code>常用属性：
+-- auto_increment 表示自动增长
+-- not null 表示不为空
+-- primary key 表示为主键
+-- defaul 表示默认值
+</code></pre></blockquote>
+<ul>
+<li><p>删除表：drop table;</p>
+</li>
+<li><p>修改表结构：</p>
+<blockquote>
+<pre><code>添加字段：alter table 表名 add 列名 类型;
+修改字段(重命名)：alter table 表名 change 原名 新名 类型及约束;
+修改字段(不重命名)：alter table 表名 modify 列名 类型及约束;
+删除字段：alter table 表名 drop 列名;
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="常用增删改查"><a href="#常用增删改查" class="headerlink" title="常用增删改查"></a>常用增删改查</h2><h4 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h4><ul>
+<li>全列插入：insert into 表名 values(…); –需要给主键留下占位符,用0或null皆可。</li>
+<li>部分列插入：insert into 表名(列1,…) values(值1,…);</li>
+<li>插入多行全列数据：insert into 表名 values(…),(…)…;</li>
+<li>插入多行部分列数据：insert into 表名(列1,…) values(值1,…),(值1,…)…;   推荐使用这种</li>
+</ul>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><ul>
+<li>修改操作：update 表名 set 列1=值1,列2=值2… where 条件;</li>
+</ul>
+<h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul>
+<li>删除操作(不推荐)：delete from 表名 where 条件;</li>
+<li>逻辑删除(推荐)：update 字段名 set isdelete=0 where id=1; –设置删除字段,执行删除字段的操作即对该字段更新。</li>
+</ul>
+<h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><ul>
+<li><p>查询消除重复行：select distinct 列1,… from 表名;</p>
+</li>
+<li><p>条件查询</p>
+<blockquote>
+<pre><code>where条件查询：select * from 表名 where 条件;
+where可以与比较运算符、逻辑运算符、模糊查询、范围查询、空判断搭配使用
+1-比较运算符
+等于: =              select * from students where id = 1;
+大于: &gt;              select * from students where id &gt; 1;
+大于等于: &gt;=         例子就不举了
+小于: &lt;
+小于等于: &lt;=
+不等于: != 或 &lt;&gt;     select * from students where id != 1;
+2-逻辑运算符：
+and    select * from students where id &gt; 3 and gender=0;
+or     select * from students where id &lt; 4 or is_delete=0;
+not    select * from students where id not 4;
+</code></pre></blockquote>
+</li>
+<li><p>模糊查询：</p>
+<blockquote>
+<pre><code>like
+% 表示任意多个任意字符；  _ 表示一个任意字符
+select * from students where name like &apos;胡%&apos;;  --查询以胡字开头的内容
+select * from students where name like &apos;胡_&apos;;  --查询以胡字开头且后面只有一个字的内容
+select * from students where name like &apos;胡%&apos; or name like &apos;%华&apos;; -- 查询以胡字开头或以华字结尾的内容
+</code></pre></blockquote>
+</li>
+<li><p>范围查询：</p>
+<blockquote>
+<pre><code>in 表示在一个非连续的范围内                   select * from students where id in(1,3,8);  -- 查询 id 在 1,3,8 当中的内容
+not in 表示不在一个非连续的范围内              select * from students where id not in(1,3,8);-- 查询 id 不在 1,3,8 当中的内容
+between ... and ... 表示在一个连续的范围内    select * from students where id between 3 and 8; -- 查询 id 在3到8之间的内容
+REGEXP 表示正则查询，可以使用正则表达式查询数据  select * from students where name REGEXP &quot;^胡&quot;; -- 查询 name 是以胡字开头的内容 
+</code></pre></blockquote>
+</li>
+<li><p>空判断</p>
+<blockquote>
+<pre><code>判断是否为空 is null      select * from students where height is null; 
+</code></pre></blockquote>
+</li>
+</ul>
+<p><strong>注意：以上几种预算符优先级为:</strong></p>
+<p>优先级由高到低的顺序为：小括号、not、比较运算符、逻辑运算符。and 比 or 先运算，如果同时出现并希望先算or，需要结合()使用。</p>
+<ul>
+<li><p>排序</p>
+<blockquote>
+<pre><code>asc 升序 ; desc 降序
+select * from students order by age desc,height desc; --显示所有的学生信息，先按照年龄从大到小排序，当年龄相同时 按照身高从高到矮排序
+</code></pre></blockquote>
+</li>
+<li><p>聚合函数</p>
+<blockquote>
+<pre><code>count(*)查询总数
+max(列)表示求此列的最大值
+min(列)表示求此列的最小值
+sum(列)表示求此列的和
+avg(列)表示求此列的平均值
+对应举例：
+select count(*) from students;
+select max(id) from students where gender=2;
+select min(id) from students where is_delete=0;
+select sum(age) from students where gender=1;
+select sum(age)/count(*) from students where gender=1; --求平均年龄
+select avg(id) from students where is_delete=0 and gender=2;
+</code></pre></blockquote>
+</li>
+<li><p>分组</p>
+<blockquote>
+<pre><code>group by     将查询结果按照1个或多个字段进行分组，字段值相同的为一组
+group_concat 表示分组之后，根据分组结果，使用group_concat()来放置每一组的某字段的值的集合
+select gender,group_concat(name) from students group by gender; 每个gender字段字段后面会显示一个名字的集合
+</code></pre></blockquote>
+</li>
+<li><p>分页</p>
+<blockquote>
+<pre><code>select * from 表名 limit start,count
+select * from students where gender=1 limit 0,3;  --查询前三行的数据
+</code></pre></blockquote>
+</li>
+<li><p>连接查询</p>
+<blockquote>
+<pre><code>select * from 表1 inner/left/right join 表2 on 表1.列 = 表2.列
+</code></pre></blockquote>
+</li>
+</ul>
+<blockquote>
+<pre><code>inner join(内连接查询)：查询的结果为两个表匹配到的数据
+right join(右连接查询)：查询的结果为两个表匹配到的数据，右表特有的数据，对于左表中不存在的数据使用null填充
+left join(左连接查询)：查询的结果为两个表匹配到的数据，左表特有的数据，对于右表中不存在的数据使用null填充
+举例：
+select * from students inner join classes on students.cls_id = classes.id;
+select * from students as s left join classes as c on s.cls_id = c.id;
+select * from students as s right join classes as c on s.cls_id = c.id;
+</code></pre></blockquote>
+<ul>
+<li>子查询<blockquote>
+<pre><code>在一个 select 语句中,嵌入了另外一个 select 语句, 
+那么被嵌入的 select 语句称之为子查询语句。子查询可以和 in 搭配使用
+语法： 主查询 where 条件 in (子查询)
+</code></pre></blockquote>
+</li>
+</ul>
+<h4 id="数据库的备份与恢复"><a href="#数据库的备份与恢复" class="headerlink" title="数据库的备份与恢复"></a>数据库的备份与恢复</h4><ul>
+<li><p>数据库备份</p>
+<blockquote>
+<pre><code>mysqldump –uroot –p 数据库名 &gt; 备份文件名.sql;
+</code></pre></blockquote>
+</li>
+<li><p>数据库恢复</p>
+<blockquote>
+<pre><code>mysql -uroot –p 新数据库名 &lt; 备份文件名.sql
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="Python与mysql交互"><a href="#Python与mysql交互" class="headerlink" title="Python与mysql交互"></a>Python与mysql交互</h2><p><img src="https://i.imgur.com/pZumaL0.jpg" alt=""></p>
+<ul>
+<li><p>创建connection对象</p>
+<blockquote>
+<pre><code>connection = pymysql.connect(host, port, database, user, password, charset)
+其中参数如下：
+host：连接的mysql主机，如果本机是&apos;localhost&apos;
+port：连接的mysql主机的端口，默认是3306
+database：数据库的名称
+user：连接的用户名
+password：连接的密码
+charset：通信采用的编码方式，推荐使用utf8
+</code></pre></blockquote>
+</li>
+<li><p>创建cursor对象</p>
+<blockquote>
+<pre><code>cursor=connection.cursor()
+其中常用方法：
+close():关闭cursor
+execute(operation [, parameters ]):执行语句，返回受影响的行数，主要用于执行insert、update、delete语句，
+也可以执行create、alter、drop等语句。
+fetchone():执行查询语句时，获取查询结果集的第一个行数据，返回一个元组
+</code></pre><p>fetchall():执行查询时，获取结果集的所有行，一行构成一个元组，再将这些元组装入一个元组返回</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="mysql视图"><a href="#mysql视图" class="headerlink" title="mysql视图"></a>mysql视图</h2><p>视图是对若干张基本表的引用，一张虚表，查询语句执行的结果，不存储具体的数据。</p>
+<ul>
+<li><p>视图语句</p>
+<blockquote>
+<pre><code>创建视图:create view 视图名称 as select语句; --建议视图以v_开头
+查看视图：show tables;
+使用视图：select * from 视图名称;
+删除视图：drop view 视图名称;
+</code></pre></blockquote>
+</li>
+<li><p>视图作用</p>
+<blockquote>
+<pre><code>提高了重用性，就像一个函数
+对数据库重构，却不影响程序的运行
+提高了安全性能，可以对不同的用户
+让数据更加清晰
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h2><p>事务,它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p>
+<ul>
+<li><p>事务de特点</p>
+<blockquote>
+<pre><code>原子性: 一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能只执行其中的一部分操作，这就是事务的原子性。
+一致性: 数据库总是从一个一致性的状态转换到另一个一致性的状态。
+隔离性: 一个事务所做的修改在最终提交以前，对其他事务是不可见的。
+持久性: 一旦事务提交，则其所做的修改会永久保存到数据库。
+</code></pre></blockquote>
+</li>
+<li><p>事务相关命令</p>
+<blockquote>
+<pre><code>开启事务：start transaction; 或者 begin;
+提交事务：commit;
+回滚事务：rollback;
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="mysql索引"><a href="#mysql索引" class="headerlink" title="mysql索引"></a>mysql索引</h2><p>数据库索引好比是一本书前面的目录，能加快数据库的查询速度</p>
+<ul>
+<li>索引相关命令<blockquote>
+<pre><code>创建索引：create index 索引名称 on 表名(字段名称(长度)) --当指定索引的字段类型为字符串时，应填写长度
+查看索引：show index from 表名;
+删除索引：drop index 索引名称 on 表名;
+</code></pre></blockquote>
+</li>
+</ul>
+<p>注意:</p>
+<p>建立太多的索引将会影响更新和插入的速度，因为它需要同样更新每个索引文件。对于一个经常需要更新和插入的表格，就没有必要为一个很少使用的where字句单独建立索引了，对于比较小的表，排序的开销不会很大，也没有必要建立另外的索引。<br>建立索引会占用磁盘空间。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mysql/" rel="tag"># mysql</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/27/Scrapy框架学习之Downloader-Middlewares/" rel="next" title="Scrapy框架学习之Downloader Middlewares">
+                <i class="fa fa-chevron-left"></i> Scrapy框架学习之Downloader Middlewares
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/29/MySQL的数据类型/" rel="prev" title="MySQL的数据类型">
+                MySQL的数据类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装与启动"><span class="nav-number">1.</span> <span class="nav-text">安装与启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库常用语句"><span class="nav-number">2.</span> <span class="nav-text">数据库常用语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库表的语句"><span class="nav-number">3.</span> <span class="nav-text">数据库表的语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用增删改查"><span class="nav-number">4.</span> <span class="nav-text">常用增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新增"><span class="nav-number">4.0.1.</span> <span class="nav-text">新增</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改"><span class="nav-number">4.0.2.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">4.0.3.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询"><span class="nav-number">4.0.4.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库的备份与恢复"><span class="nav-number">4.0.5.</span> <span class="nav-text">数据库的备份与恢复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python与mysql交互"><span class="nav-number">5.</span> <span class="nav-text">Python与mysql交互</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql视图"><span class="nav-number">6.</span> <span class="nav-text">mysql视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql事务"><span class="nav-number">7.</span> <span class="nav-text">mysql事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql索引"><span class="nav-number">8.</span> <span class="nav-text">mysql索引</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

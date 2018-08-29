@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-27T09:30:06.326Z</updated>
+  <updated>2018-08-29T13:27:31.859Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MySQL的数据类型</title>
+    <link href="http://yoursite.com/2018/08/29/MySQL%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/"/>
+    <id>http://yoursite.com/2018/08/29/MySQL的数据类型/</id>
+    <published>2018-08-29T13:03:10.000Z</published>
+    <updated>2018-08-29T13:27:31.859Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇是对mysql数据库中数据的类型做一个详细的介绍，方便以后在创建字段时选择合适的数据类型。<br><a id="more"></a>  </p><h1 id="MySQL的数据类型"><a href="#MySQL的数据类型" class="headerlink" title="MySQL的数据类型"></a>MySQL的数据类型</h1><p>主要包括以下五大类：</p><p>整数类型：BIT、BOOL、TINY INT、SMALL INT、MEDIUM INT、 INT、 BIG INT</p><p>浮点数类型：FLOAT、DOUBLE、DECIMAL</p><p>字符串类型：CHAR、VARCHAR、TINY TEXT、TEXT、MEDIUM TEXT、LONGTEXT、TINY BLOB、BLOB、MEDIUM BLOB、LONG BLOB</p><p>日期类型：Date、DateTime、TimeStamp、Time、Year</p><p>其他数据类型：BINARY、VARBINARY、ENUM、SET、Geometry、Point、MultiPoint、LineString、MultiLineString、Polygon、GeometryCollection等</p><h2 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h2><p><img src="https://i.imgur.com/NdA0FLe.png" alt=""></p><p>取值范围如果加了unsigned，则最大值翻倍，如tinyint unsigned的取值范围为(0~256)。</p><p> int(m)里的m是表示SELECT查询结果集中的显示宽度，并不影响实际的取值范围，没有影响到显示的宽度，不知道这个m有什么用。</p><h2 id="浮点型-float和double"><a href="#浮点型-float和double" class="headerlink" title="浮点型(float和double)"></a>浮点型(float和double)</h2><p><img src="https://i.imgur.com/x3pW6dW.png" alt=""></p><p>设一个字段定义为float(6,3)，如果插入一个数123.45678,实际数据库里存的是123.457，但总个数还以实际为准，即6位。整数部分最大是3位，如果插入数12.123456，存储的是12.1234，如果插入12.12，存储的是12.1200.</p><h2 id="定点数decimal"><a href="#定点数decimal" class="headerlink" title="定点数decimal"></a>定点数decimal</h2><p>浮点型在数据库中存放的是近似值，而定点类型在数据库中存放的是精确值。 </p><p>decimal(m,d) 参数m&lt;65 是总个数，d&lt;30且 d&lt;m 是小数位。</p><h2 id="字符串-char-varchar-text"><a href="#字符串-char-varchar-text" class="headerlink" title="字符串(char,varchar,_text)"></a>字符串(char,varchar,_text)</h2><p><img src="https://i.imgur.com/MZB11ih.png" alt=""></p><h4 id="char和varchar："><a href="#char和varchar：" class="headerlink" title="char和varchar："></a>char和varchar：</h4><p>1.char(n) 若存入字符数小于n，则以空格补于其后，查询之时再将空格去掉。所以char类型存储的字符串末尾不能有空格，varchar不限于此。 </p><p>2.char(n) 固定长度，char(4)不管是存入几个字符，都将占用4个字节，varchar是存入的实际字符数+1个字节（n&lt;=255）或2个字节(n&gt;255)，</p><p>所以varchar(4),存入3个字符将占用4个字节。 </p><p>3.char类型的字符串检索速度要比varchar类型的快。</p><h4 id="varchar和text："><a href="#varchar和text：" class="headerlink" title="varchar和text："></a>varchar和text：</h4><p>1.varchar可指定n，text不能指定，内部存储varchar是存入的实际字符数+1个字节（n&lt;=255）或2个字节(n&gt;255)，text是实际字符数+2个字节。 </p><p>2.text类型不能有默认值。 </p><p>3.varchar可直接创建索引，text创建索引要指定前多少个字符。varchar查询速度快于text,在都创建索引的情况下，text的索引似乎不起作用。</p><h2 id="日期时间类型"><a href="#日期时间类型" class="headerlink" title="日期时间类型"></a>日期时间类型</h2><p><img src="https://i.imgur.com/Vn1Q8ZS.png" alt=""></p><p>若定义一个字段为timestamp，这个字段里的时间数据会随其他字段修改的时候自动刷新，所以这个数据类型的字段可以存放这条记录最后被修改的时间。</p><h1 id="数据类型的属性"><a href="#数据类型的属性" class="headerlink" title="数据类型的属性"></a>数据类型的属性</h1><p><img src="https://i.imgur.com/SPVnmcy.png" alt=""></p><h1 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h1><p>1、在指定数据类型的时候一般是采用从小原则，比如能用TINY INT的最好就不用INT，能用FLOAT类型的就不用DOUBLE类型，这样会对MYSQL在运行效率上提高很大，尤其是大数据量测试条件下。</p><p>2、不需要把数据表设计的太过复杂，功能模块上区分或许对于后期的维护更为方便，慎重出现大杂烩数据表</p><p>3、数据表和字段的起名字也是一门学问</p><p>4、设计数据表结构之前请先想象一下是你的房间，或许结果会更加合理、高效</p><p>5、数据库的最后设计结果一定是效率和可扩展性的折中，偏向任何一方都是欠妥的</p><h2 id="选择数据类型的基本原则"><a href="#选择数据类型的基本原则" class="headerlink" title="选择数据类型的基本原则"></a>选择数据类型的基本原则</h2><p>前提：使用适合存储引擎。</p><p>选择原则：根据选定的存储引擎，确定如何选择合适的数据类型。</p><h4 id="下面的选择方法按存储引擎分类："><a href="#下面的选择方法按存储引擎分类：" class="headerlink" title="下面的选择方法按存储引擎分类："></a>下面的选择方法按存储引擎分类：</h4><ul><li><p>MyISAM 数据存储引擎和数据列：MyISAM数据表，最好使用固定长度(CHAR)的数据列代替可变长度(VARCHAR)的数据列。</p></li><li><p>MEMORY存储引擎和数据列：MEMORY数据表目前都使用固定长度的数据行存储，因此无论使用CHAR或VARCHAR列都没有关系。两者都是作为CHAR类型处理的。</p></li><li><p>InnoDB 存储引擎和数据列：建议使用 VARCHAR类型。</p></li></ul><p>对于InnoDB数据表，内部的行存储格式没有区分固定长度和可变长度列（所有数据行都使用指向数据列值的头指针），因此在本质上，使用固定长度的CHAR列不一定比使用可变长度VARCHAR列简单。因而，主要的性能因素是数据行使用的存储总量。由于CHAR平均占用的空间多于VARCHAR，因 此使用VARCHAR来最小化需要处理的数据行的存储总量和磁盘I/O是比较好的。</p><h4 id="下面说一下固定长度数据列与可变长度的数据列。"><a href="#下面说一下固定长度数据列与可变长度的数据列。" class="headerlink" title="下面说一下固定长度数据列与可变长度的数据列。"></a>下面说一下固定长度数据列与可变长度的数据列。</h4><p><strong>char与varchar</strong>  </p><p>CHAR和VARCHAR类型类似，但它们保存和检索的方式不同。它们的最大长度和是否尾部空格被保留等方面也不同。在存储或检索过程中不进行大小写转换。</p><p>下面的表显示了将各种字符串值保存到CHAR(4)和VARCHAR(4)列后的结果，说明了CHAR和VARCHAR之间的差别：<br><img src="https://i.imgur.com/Km1R4Nx.png" alt=""></p><p>请注意上表中最后一行的值只适用不使用严格模式时；如果MySQL运行在严格模式，超过列长度不的值不保存，并且会出现错误。<br>从CHAR(4)和VARCHAR(4)列检索的值并不总是相同，因为检索时从CHAR列删除了尾部的空格。</p><p><strong>text和blob</strong>  </p><p>在使用text和blob字段类型时要注意以下几点，以便更好的发挥数据库的性能。</p><p>1.BLOB和TEXT值也会引起自己的一些问题，特别是执行了大量的删除或更新操作的时候。删除这种值会在数据表中留下很大的”空洞”，以后填入这些”空洞”的记录可能长度不同,为了提高性能,建议定期使用 OPTIMIZE TABLE 功能对这类表进行碎片整理.</p><p>2.使用合成的（synthetic）索引。合成的索引列在某些时候是有用的。一种办法是根据其它的列的内容建立一个散列值，并把这个值存储在单独的数据列中。接下来你就可以通过检索散列值找到数据行了。但是，我们要注意这种技术只能用于精确匹配的查询（散列值对于类似&lt;或&gt;=等范围搜索操作符 是没有用处的）。我们可以使用MD5()函数生成散列值，也可以使用SHA1()或CRC32()，或者使用自己的应用程序逻辑来计算散列值。请记住数值型散列值可以很高效率地存储。同样，如果散列算法生成的字符串带有尾部空格，就不要把它们存储在CHAR或VARCHAR列中，它们会受到尾部空格去除的影响。<br>合成的散列索引对于那些BLOB或TEXT数据列特别有用。用散列标识符值查找的速度比搜索BLOB列本身的速度快很多。</p><p>3.在不必要的时候避免检索大型的BLOB或TEXT值。例如，SELECT *查询就不是很好的想法，除非你能够确定作为约束条件的WHERE子句只会找到所需要的数据行。否则，你可能毫无目的地在网络上传输大量的值。这也是 BLOB或TEXT标识符信息存储在合成的索引列中对我们有所帮助的例子。你可以搜索索引列，决定那些需要的数据行，然后从合格的数据行中检索BLOB或 TEXT值。</p><p>4.把BLOB或TEXT列分离到单独的表中。在某些环境中，如果把这些数据列移动到第二张数据表中，可以让你把原数据表中 的数据列转换为固定长度的数据行格式，那么它就是有意义的。这会减少主表中的碎片，使你得到固定长度数据行的性能优势。它还使你在主数据表上运行 SELECT *查询的时候不会通过网络传输大量的BLOB或TEXT值。</p><p><strong>浮点数与定点数</strong></p><p>在mysql中float、double（或real）是浮点数，decimal（或numberic）是定点数。<br>浮点数相对于定点数的优点是在长度一定的情况下，浮点数能够表示更大的数据范围；它的缺点是会引起精度问题。在今后关于浮点数和定点数的应用中，大家要记住以下几点：</p><ul><li>浮点数存在误差问题；</li><li>对货币等对精度敏感的数据，应该用定点数表示或存储；</li><li>编程中，如果用到浮点数，要特别注意误差问题，并尽量避免做浮点数比较；</li><li>要注意浮点数中一些特殊值的处理。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇是对mysql数据库中数据的类型做一个详细的介绍，方便以后在创建字段时选择合适的数据类型。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pyhton下的MySQL总结</title>
+    <link href="http://yoursite.com/2018/08/29/Pyhton%E4%B8%8B%E7%9A%84MySQL%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2018/08/29/Pyhton下的MySQL总结/</id>
+    <published>2018-08-29T11:33:21.000Z</published>
+    <updated>2018-08-29T13:08:13.006Z</updated>
+    
+    <content type="html"><![CDATA[<p>主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。<br><a id="more"></a></p><h2 id="安装与启动"><a href="#安装与启动" class="headerlink" title="安装与启动"></a>安装与启动</h2><ul><li>安装：sudo apt-get install mysql-server</li><li>查看服务：ps ajx | grep mysql</li><li>停止服务:sudo service mysql stop</li><li>开启服务:sudo service mysql start</li><li>重启服务:sudo service mysql restart</li><li>链接数据库：mysql -uroot -p 输入密码</li><li>查看版本：select version();</li></ul><h2 id="数据库常用语句"><a href="#数据库常用语句" class="headerlink" title="数据库常用语句"></a>数据库常用语句</h2><ul><li>查看数据库：show databases;</li><li>创建数据库：create database 库名 [charset = UTF8];</li><li>查看建库语句：show create database 库名;</li><li>使用数据库：use 库名;</li><li>删除数据库：drop 库名;</li></ul><h2 id="数据库表的语句"><a href="#数据库表的语句" class="headerlink" title="数据库表的语句"></a>数据库表的语句</h2><ul><li>查看表：show tables;</li><li>查看表结构：desc 表名;</li><li>创建表：<blockquote><pre><code>CREATE TABLE table_name(  字段1 数据类型 其他属性,  字段2 datatype,  字段3 datatype,  .....  PRIMARY KEY(one or more columns)  );</code></pre></blockquote></li></ul><blockquote><pre><code>常用属性：-- auto_increment 表示自动增长-- not null 表示不为空-- primary key 表示为主键-- defaul 表示默认值</code></pre></blockquote><ul><li><p>删除表：drop table;</p></li><li><p>修改表结构：</p><blockquote><pre><code>添加字段：alter table 表名 add 列名 类型;修改字段(重命名)：alter table 表名 change 原名 新名 类型及约束;修改字段(不重命名)：alter table 表名 modify 列名 类型及约束;删除字段：alter table 表名 drop 列名;</code></pre></blockquote></li></ul><h2 id="常用增删改查"><a href="#常用增删改查" class="headerlink" title="常用增删改查"></a>常用增删改查</h2><h4 id="新增"><a href="#新增" class="headerlink" title="新增"></a>新增</h4><ul><li>全列插入：insert into 表名 values(…); –需要给主键留下占位符,用0或null皆可。</li><li>部分列插入：insert into 表名(列1,…) values(值1,…);</li><li>插入多行全列数据：insert into 表名 values(…),(…)…;</li><li>插入多行部分列数据：insert into 表名(列1,…) values(值1,…),(值1,…)…;   推荐使用这种</li></ul><h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><ul><li>修改操作：update 表名 set 列1=值1,列2=值2… where 条件;</li></ul><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><ul><li>删除操作(不推荐)：delete from 表名 where 条件;</li><li>逻辑删除(推荐)：update 字段名 set isdelete=0 where id=1; –设置删除字段,执行删除字段的操作即对该字段更新。</li></ul><h4 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h4><ul><li><p>查询消除重复行：select distinct 列1,… from 表名;</p></li><li><p>条件查询</p><blockquote><pre><code>where条件查询：select * from 表名 where 条件;where可以与比较运算符、逻辑运算符、模糊查询、范围查询、空判断搭配使用1-比较运算符等于: =              select * from students where id = 1;大于: &gt;              select * from students where id &gt; 1;大于等于: &gt;=         例子就不举了小于: &lt;小于等于: &lt;=不等于: != 或 &lt;&gt;     select * from students where id != 1;2-逻辑运算符：and    select * from students where id &gt; 3 and gender=0;or     select * from students where id &lt; 4 or is_delete=0;not    select * from students where id not 4;</code></pre></blockquote></li><li><p>模糊查询：</p><blockquote><pre><code>like% 表示任意多个任意字符；  _ 表示一个任意字符select * from students where name like &apos;胡%&apos;;  --查询以胡字开头的内容select * from students where name like &apos;胡_&apos;;  --查询以胡字开头且后面只有一个字的内容select * from students where name like &apos;胡%&apos; or name like &apos;%华&apos;; -- 查询以胡字开头或以华字结尾的内容</code></pre></blockquote></li><li><p>范围查询：</p><blockquote><pre><code>in 表示在一个非连续的范围内                   select * from students where id in(1,3,8);  -- 查询 id 在 1,3,8 当中的内容not in 表示不在一个非连续的范围内              select * from students where id not in(1,3,8);-- 查询 id 不在 1,3,8 当中的内容between ... and ... 表示在一个连续的范围内    select * from students where id between 3 and 8; -- 查询 id 在3到8之间的内容REGEXP 表示正则查询，可以使用正则表达式查询数据  select * from students where name REGEXP &quot;^胡&quot;; -- 查询 name 是以胡字开头的内容 </code></pre></blockquote></li><li><p>空判断</p><blockquote><pre><code>判断是否为空 is null      select * from students where height is null; </code></pre></blockquote></li></ul><p><strong>注意：以上几种预算符优先级为:</strong></p><p>优先级由高到低的顺序为：小括号、not、比较运算符、逻辑运算符。and 比 or 先运算，如果同时出现并希望先算or，需要结合()使用。</p><ul><li><p>排序</p><blockquote><pre><code>asc 升序 ; desc 降序select * from students order by age desc,height desc; --显示所有的学生信息，先按照年龄从大到小排序，当年龄相同时 按照身高从高到矮排序</code></pre></blockquote></li><li><p>聚合函数</p><blockquote><pre><code>count(*)查询总数max(列)表示求此列的最大值min(列)表示求此列的最小值sum(列)表示求此列的和avg(列)表示求此列的平均值对应举例：select count(*) from students;select max(id) from students where gender=2;select min(id) from students where is_delete=0;select sum(age) from students where gender=1;select sum(age)/count(*) from students where gender=1; --求平均年龄select avg(id) from students where is_delete=0 and gender=2;</code></pre></blockquote></li><li><p>分组</p><blockquote><pre><code>group by     将查询结果按照1个或多个字段进行分组，字段值相同的为一组group_concat 表示分组之后，根据分组结果，使用group_concat()来放置每一组的某字段的值的集合select gender,group_concat(name) from students group by gender; 每个gender字段字段后面会显示一个名字的集合</code></pre></blockquote></li><li><p>分页</p><blockquote><pre><code>select * from 表名 limit start,countselect * from students where gender=1 limit 0,3;  --查询前三行的数据</code></pre></blockquote></li><li><p>连接查询</p><blockquote><pre><code>select * from 表1 inner/left/right join 表2 on 表1.列 = 表2.列</code></pre></blockquote></li></ul><blockquote><pre><code>inner join(内连接查询)：查询的结果为两个表匹配到的数据right join(右连接查询)：查询的结果为两个表匹配到的数据，右表特有的数据，对于左表中不存在的数据使用null填充left join(左连接查询)：查询的结果为两个表匹配到的数据，左表特有的数据，对于右表中不存在的数据使用null填充举例：select * from students inner join classes on students.cls_id = classes.id;select * from students as s left join classes as c on s.cls_id = c.id;select * from students as s right join classes as c on s.cls_id = c.id;</code></pre></blockquote><ul><li>子查询<blockquote><pre><code>在一个 select 语句中,嵌入了另外一个 select 语句, 那么被嵌入的 select 语句称之为子查询语句。子查询可以和 in 搭配使用语法： 主查询 where 条件 in (子查询)</code></pre></blockquote></li></ul><h4 id="数据库的备份与恢复"><a href="#数据库的备份与恢复" class="headerlink" title="数据库的备份与恢复"></a>数据库的备份与恢复</h4><ul><li><p>数据库备份</p><blockquote><pre><code>mysqldump –uroot –p 数据库名 &gt; 备份文件名.sql;</code></pre></blockquote></li><li><p>数据库恢复</p><blockquote><pre><code>mysql -uroot –p 新数据库名 &lt; 备份文件名.sql</code></pre></blockquote></li></ul><h2 id="Python与mysql交互"><a href="#Python与mysql交互" class="headerlink" title="Python与mysql交互"></a>Python与mysql交互</h2><p><img src="https://i.imgur.com/pZumaL0.jpg" alt=""></p><ul><li><p>创建connection对象</p><blockquote><pre><code>connection = pymysql.connect(host, port, database, user, password, charset)其中参数如下：host：连接的mysql主机，如果本机是&apos;localhost&apos;port：连接的mysql主机的端口，默认是3306database：数据库的名称user：连接的用户名password：连接的密码charset：通信采用的编码方式，推荐使用utf8</code></pre></blockquote></li><li><p>创建cursor对象</p><blockquote><pre><code>cursor=connection.cursor()其中常用方法：close():关闭cursorexecute(operation [, parameters ]):执行语句，返回受影响的行数，主要用于执行insert、update、delete语句，也可以执行create、alter、drop等语句。fetchone():执行查询语句时，获取查询结果集的第一个行数据，返回一个元组</code></pre><p>fetchall():执行查询时，获取结果集的所有行，一行构成一个元组，再将这些元组装入一个元组返回</p></blockquote></li></ul><h2 id="mysql视图"><a href="#mysql视图" class="headerlink" title="mysql视图"></a>mysql视图</h2><p>视图是对若干张基本表的引用，一张虚表，查询语句执行的结果，不存储具体的数据。</p><ul><li><p>视图语句</p><blockquote><pre><code>创建视图:create view 视图名称 as select语句; --建议视图以v_开头查看视图：show tables;使用视图：select * from 视图名称;删除视图：drop view 视图名称;</code></pre></blockquote></li><li><p>视图作用</p><blockquote><pre><code>提高了重用性，就像一个函数对数据库重构，却不影响程序的运行提高了安全性能，可以对不同的用户让数据更加清晰</code></pre></blockquote></li></ul><h2 id="mysql事务"><a href="#mysql事务" class="headerlink" title="mysql事务"></a>mysql事务</h2><p>事务,它是一个操作序列，这些操作要么都执行，要么都不执行，它是一个不可分割的工作单位。</p><ul><li><p>事务de特点</p><blockquote><pre><code>原子性: 一个事务必须被视为一个不可分割的最小工作单元，整个事务中的所有操作要么全部提交成功，要么全部失败回滚，对于一个事务来说，不可能只执行其中的一部分操作，这就是事务的原子性。一致性: 数据库总是从一个一致性的状态转换到另一个一致性的状态。隔离性: 一个事务所做的修改在最终提交以前，对其他事务是不可见的。持久性: 一旦事务提交，则其所做的修改会永久保存到数据库。</code></pre></blockquote></li><li><p>事务相关命令</p><blockquote><pre><code>开启事务：start transaction; 或者 begin;提交事务：commit;回滚事务：rollback;</code></pre></blockquote></li></ul><h2 id="mysql索引"><a href="#mysql索引" class="headerlink" title="mysql索引"></a>mysql索引</h2><p>数据库索引好比是一本书前面的目录，能加快数据库的查询速度</p><ul><li>索引相关命令<blockquote><pre><code>创建索引：create index 索引名称 on 表名(字段名称(长度)) --当指定索引的字段类型为字符串时，应填写长度查看索引：show index from 表名;删除索引：drop index 索引名称 on 表名;</code></pre></blockquote></li></ul><p>注意:</p><p>建立太多的索引将会影响更新和插入的速度，因为它需要同样更新每个索引文件。对于一个经常需要更新和插入的表格，就没有必要为一个很少使用的where字句单独建立索引了，对于比较小的表，排序的开销不会很大，也没有必要建立另外的索引。<br>建立索引会占用磁盘空间。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要是对mysql常用命令的一些总结，首先的对sql语句熟悉，之后我们可以用navacat可视化工具来操作数据库，更快捷。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+      <category term="mysql" scheme="http://yoursite.com/tags/mysql/"/>
+    
+  </entry>
   
   <entry>
     <title>Scrapy框架学习之Downloader Middlewares</title>
@@ -402,50 +446,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;定时器&quot;&gt;&lt;a href=&quot;#定时器&quot; class=&quot;headerlink&quot; title=&quot;定时器&quot;&gt;&lt;/a&gt;定时器&lt;/h2&gt;&lt;p&gt;定时器在javascript中的作用:1、制作动画;2、异步操作;3、函数缓冲与节流。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="javascript" scheme="http://yoursite.com/categories/javascript/"/>
-    
-    
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>leetcode01-两数之和</title>
-    <link href="http://yoursite.com/2018/08/06/leetcode01-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
-    <id>http://yoursite.com/2018/08/06/leetcode01-两数之和/</id>
-    <published>2018-08-06T15:17:50.000Z</published>
-    <updated>2018-08-07T01:54:59.449Z</updated>
-    
-    <content type="html"><![CDATA[<p>题目一<br>给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。<br>你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。<br><a id="more"></a></p><blockquote><pre><code>示例：给定 nums = [2, 7, 11, 15], target = 9因为 nums[0] + nums[1] = 2 + 7 = 9所以返回 [0, 1]</code></pre></blockquote><p>分析：目的：找到数组中和为目标值的两个数，并返回他们的索引；这里可以用两个for循环来遍历数组nums，让他们的和等于target。代码如下：<br><img src="https://i.imgur.com/jIFzDnU.png" alt=""></p><p>提交结果：超出时间限制。哈哈，用时太长了。这里用了2层for循环，时间复杂度为O(n^2)。</p><p>那么有没有更好的方法呢？既然要返回元素的索引值，不妨试试把元素和其索引存放到字典里试一试。</p><blockquote><pre><code>first：通过创建字典，将nums里的值和序号对应起来second：创建另一个字典用来存储目标值（target-nums）的值，third：判断该值是否在nums内，并返回其对应索引值</code></pre></blockquote><p><img src="https://i.imgur.com/EiH22Fh.png" alt=""></p><p>提交结果：通过！！！这个方法只遍历了一次列表，显然降低了计算时间；时间复杂度降低为O(n)<br><img src="https://i.imgur.com/D3GRGgz.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;题目一&lt;br&gt;给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。&lt;br&gt;你可以假设每个输入只对应一种答案，且同样的元素不能被重复利用。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="leetcode" scheme="http://yoursite.com/categories/leetcode/"/>
-    
-    
-      <category term="leetcode" scheme="http://yoursite.com/tags/leetcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript基础语法</title>
-    <link href="http://yoursite.com/2018/08/06/JavaScript%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95(%E4%B8%80)/"/>
-    <id>http://yoursite.com/2018/08/06/JavaScript基础语法(一)/</id>
-    <published>2018-08-06T12:43:24.000Z</published>
-    <updated>2018-08-08T08:00:24.172Z</updated>
-    
-    <content type="html"><![CDATA[<p>JavaScript是运行在浏览器端的脚步语言，JavaScript主要解决的是前端与用户交互的问题，包括使用交互与数据交互；JavaScript是浏览器解释执行的，使浏览器页面呈现出特定的行为。<br><a id="more"></a>  </p><h2 id="JavaScript嵌入页面的方式"><a href="#JavaScript嵌入页面的方式" class="headerlink" title="JavaScript嵌入页面的方式"></a>JavaScript嵌入页面的方式</h2><p><strong>1.1行间事件（主要用于事件）</strong>  </p><blockquote><pre><code>&lt;input type=&quot;button&quot; name=&quot;&quot; onclick=&quot;aler(&apos;ok！&apos;);&quot;&gt;  </code></pre></blockquote><p><strong>1.2页面script标签嵌入</strong>  </p><blockquote><pre><code>&lt;script type=&quot;text/javascript&quot;&gt;          var a = &apos;hello！&apos;;  alert(a);&lt;/script&gt;  </code></pre></blockquote><p><strong>1.3外部引入</strong></p><blockquote><pre><code>&lt;script type=&quot;text/javascript&quot; src=&quot;js/index.js&quot;&gt;&lt;/script&gt;</code></pre></blockquote><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>JavaScript 是一种弱类型语言，javascript的变量类型由它的值来决定。 定义变量需要用关键字 ‘var’。<br><strong>2.1变量类型</strong><br>5种基本数据类型：<br>number、string、boolean、undefined、null</p><p>1种复合类型：<br>object</p><p><strong>2.2变量、函数、属性、函数参数命名规范</strong><br>1.区分大小写</p><p>2.第一个字符必须是字母、下划线（_）或者美元符号（$)</p><p>3.其他字符可以是字母、下划线、美元符或数字<br><strong>2.3元素属性操作</strong><br>可以使用内置对象document上的getElementById方法来获取页面上设置了id属性的元素，获取到的是一个html对象，然后将它赋值给一个变量。<br><img src="https://i.imgur.com/8EPx4l3.png" alt=""><br>获取的页面元素，就可以对页面元素的属性进行操作，属性的操作包括属性的读和写。<br>操作属性的方法  </p><blockquote><pre><code>1 “.” 操作2 “[ ]”操作</code></pre></blockquote><p>属性写法</p><blockquote><pre><code>1、html的属性和js里面属性写法一样2、“class” 属性写成 “className”3、“style” 属性里面的属性，有横杠的改成驼峰式，比如：“font-size”，改成”style.fontSize”  </code></pre></blockquote><p><img src="https://i.imgur.com/uLkjIe2.png" alt=""></p><p><img src="https://i.imgur.com/hxo7iZn.png" alt=""></p><p><img src="https://i.imgur.com/46MCQHv.png" alt=""></p><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数就是重复执行的代码片。  </p><p><strong>3.1函数定义与执行</strong><br><img src="https://i.imgur.com/FxoRgqW.png" alt=""></p><p><strong>3.2变量与函数预解析</strong><br>JavaScript解析过程分为两个阶段，先是编译阶段，然后执行阶段，在编译阶段会将function定义的函数提前，并且将var定义的变量声明提前，将它赋值为undefined。<br><img src="https://i.imgur.com/FklDbHT.png" alt=""></p><p><strong>3.3提取行间事件</strong><br>在html行间调用的事件可以提取到javascript中调用，从而做到结构与行为分离。<br><img src="https://i.imgur.com/H1RHnep.png" alt=""></p><p><strong>3.4匿名函数</strong><br>定义的函数可以不给名称，这个叫做匿名函数，可以将匿名函数直接赋值给元素绑定的事件来完成匿名函数的调用。<br><img src="https://i.imgur.com/0OikuMg.png" alt=""></p><p><strong>3.5函数传参</strong><br><img src="https://i.imgur.com/HtgTIl5.png" alt=""></p><p><strong>3.6 return</strong><br>函数中’return’关键字的作用：</p><blockquote><pre><code>1、返回函数执行的结果2、结束函数的运行3、阻止默认行为</code></pre></blockquote><p><img src="https://i.imgur.com/bG7Mv99.png" alt=""></p><h2 id="条件语句"><a href="#条件语句" class="headerlink" title="条件语句"></a>条件语句</h2><p>通过条件来控制程序的走向，就需要用到条件语句。<br><img src="https://i.imgur.com/T4pE7nQ.png" alt=""></p><h2 id="数组及操作方法"><a href="#数组及操作方法" class="headerlink" title="数组及操作方法"></a>数组及操作方法</h2><p>数组就是一组数据的集合，javascript中，数组里面的数据可以是不同类型的。  </p><p><strong>5.1定义数组的方法</strong>  </p><blockquote><pre><code>//对象的实例创建 var aList = new Array(1,2,3);//直接量创建var aList2 = [1,2,3,&apos;asd&apos;];</code></pre></blockquote><p><strong>5.2操作数组中数据的常用方法</strong><br><img src="https://i.imgur.com/AEeTdkI.png" alt=""></p><h2 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h2><p>程序中进行有规律的重复性操作，需要用到循环语句。主要以 for 循环为主。  </p><p>实例1：<br><img src="https://i.imgur.com/TNFemIb.png" alt=""></p><p>实例2：<br><img src="https://i.imgur.com/0gKNFFn.png" alt=""></p><h2 id="字符串处理方法"><a href="#字符串处理方法" class="headerlink" title="字符串处理方法"></a>字符串处理方法</h2><p><img src="https://i.imgur.com/WnrsXI6.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;JavaScript是运行在浏览器端的脚步语言，JavaScript主要解决的是前端与用户交互的问题，包括使用交互与数据交互；JavaScript是浏览器解释执行的，使浏览器页面呈现出特定的行为。&lt;br&gt;
     
     </summary>
     
