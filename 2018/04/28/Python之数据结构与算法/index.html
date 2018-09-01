@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="要作为一名程序员，数据结构和算法是必备基本功；这篇文章主要是介绍Python常用的数据结构和算法，记录自己在学习中的一些心得体会。">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python之数据结构与算法">
+<meta property="og:url" content="http://yoursite.com/2018/04/28/Python之数据结构与算法/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="要作为一名程序员，数据结构和算法是必备基本功；这篇文章主要是介绍Python常用的数据结构和算法，记录自己在学习中的一些心得体会。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/3YRVUoa.png">
+<meta property="og:image" content="https://i.imgur.com/Sqq0QtA.png">
+<meta property="og:image" content="https://i.imgur.com/Nc4TasW.png">
+<meta property="og:image" content="https://i.imgur.com/GQLMtHf.png">
+<meta property="og:image" content="https://i.imgur.com/VrJl6Tn.png">
+<meta property="og:image" content="https://i.imgur.com/58Yjdx7.png">
+<meta property="og:image" content="https://i.imgur.com/ccmB4na.png">
+<meta property="og:image" content="https://i.imgur.com/cV3MVv2.png">
+<meta property="og:image" content="https://i.imgur.com/jJOvR99.png">
+<meta property="og:image" content="https://i.imgur.com/n5v7yDM.png">
+<meta property="og:image" content="https://i.imgur.com/SzIvatC.png">
+<meta property="og:image" content="https://i.imgur.com/9Gsl0JA.png">
+<meta property="og:image" content="https://i.imgur.com/2VVqSQs.png">
+<meta property="og:image" content="https://i.imgur.com/etxxj3g.png">
+<meta property="og:image" content="https://i.imgur.com/8kW2WnG.png">
+<meta property="og:image" content="https://i.imgur.com/jtGFv51.png">
+<meta property="og:image" content="https://i.imgur.com/YR2BUsv.png">
+<meta property="og:image" content="https://i.imgur.com/GQYdeju.png">
+<meta property="og:image" content="https://i.imgur.com/ubeX9gK.png">
+<meta property="og:image" content="https://i.imgur.com/hJ2xsbR.png">
+<meta property="og:image" content="https://i.imgur.com/iqY2vxB.png">
+<meta property="og:image" content="https://i.imgur.com/ifKJNTN.png">
+<meta property="og:image" content="https://i.imgur.com/IYWCdDG.png">
+<meta property="og:image" content="https://i.imgur.com/oAeUqKg.png">
+<meta property="og:image" content="https://i.imgur.com/2Lb0Vnx.png">
+<meta property="og:image" content="https://i.imgur.com/ZYR7kGw.png">
+<meta property="og:image" content="https://i.imgur.com/q2Poq9L.png">
+<meta property="og:image" content="https://i.imgur.com/C9iBDuU.gif">
+<meta property="og:image" content="https://i.imgur.com/ExAbEid.gif">
+<meta property="og:image" content="https://i.imgur.com/HN0QK6D.png">
+<meta property="og:image" content="https://i.imgur.com/Vxu7QQq.gif">
+<meta property="og:image" content="https://i.imgur.com/y5DKsYP.png">
+<meta property="og:image" content="https://i.imgur.com/jcumXAQ.gif">
+<meta property="og:image" content="https://i.imgur.com/f9Fcr7Q.png">
+<meta property="og:image" content="https://i.imgur.com/Ka39vOj.png">
+<meta property="og:image" content="https://i.imgur.com/m7YiNn8.png">
+<meta property="og:image" content="https://i.imgur.com/WviXeBC.png">
+<meta property="og:image" content="https://i.imgur.com/IxhlZ91.png">
+<meta property="og:updated_time" content="2018-09-01T15:48:32.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python之数据结构与算法">
+<meta name="twitter:description" content="要作为一名程序员，数据结构和算法是必备基本功；这篇文章主要是介绍Python常用的数据结构和算法，记录自己在学习中的一些心得体会。">
+<meta name="twitter:image" content="https://i.imgur.com/3YRVUoa.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/28/Python之数据结构与算法/"/>
+
+
+
+
+
+  <title>Python之数据结构与算法 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/Python之数据结构与算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python之数据结构与算法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T20:24:47+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构和算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构和算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>要作为一名程序员，数据结构和算法是必备基本功；这篇文章主要是介绍Python常用的数据结构和算法，记录自己在学习中的一些心得体会。<br><a id="more"></a>  </p>
+<h2 id="算法的概念"><a href="#算法的概念" class="headerlink" title="算法的概念"></a>算法的概念</h2><p>算法是计算机处理信息的本质，因为计算机程序本质上是一个算法来告诉计算机确切的步骤来执行一个指定的任务。一般地，当算法在处理信息时，会从输入设备或数据的存储地址读取数据，把结果写入输出设备或某个存储地址供以后再调用。  <strong>算法是独立存在的一种解决问题的方法和思想。</strong><br>算法的五大特性:  </p>
+<blockquote>
+<pre><code>1.输入: 算法具有0个或多个输入
+2.输出: 算法至少有1个或多个输出
+3.有穷性: 算法在有限的步骤之后会自动结束而不会无限循环，并且每一个步骤可以在可接受的时间内完成
+4.确定性：算法中的每一步都有确定的含义，不会出现二义性
+5.可行性：算法的每一步都是可行的，也就是说每一步都能够执行有限的次数完成
+</code></pre></blockquote>
+<h2 id="算法效率衡量"><a href="#算法效率衡量" class="headerlink" title="算法效率衡量"></a>算法效率衡量</h2><p><strong>时间复杂度与“大O记法”</strong><br>定义：  </p>
+<p><strong>大O记法：</strong>对于单调的整数函数f，如果存在一个整数函数g和实常数c&gt;0，使得对于充分大的n总有f(n)&lt;=c*g(n)，就说函数g是f的一个渐近函数（忽略常数），记为f(n)=O(g(n))。也就是说，在趋向无穷的极限意义下，函数f的增长速度受到函数g的约束，亦即函数f与函数g的特征相似。</p>
+<p><strong>时间复杂度：</strong>假设存在函数g，使得算法A处理规模为n的问题示例所用时间为T(n)=O(g(n))，则称O(g(n))为算法A的渐近时间复杂度，简称时间复杂度，记为T(n)。  </p>
+<p>估计看了概念还是一脸不知所措，哈哈，正常，我刚刚看的时候也是。<br>通俗的理解就是：对于算法的时间性质和空间性质，最重要的是其数量级和趋势，这些是分析算法效率的主要部分。而计量算法基本操作数量的规模函数中那些常量因子可以忽略不计。例如，可以认为3n2和100n2属于同一个量级，如果两个算法处理同样规模实例的代价分别为这两个函数，就认为它们的效率“差不多”，都为n2级。<br><strong>时间复杂度的计算规则：</strong>  </p>
+<blockquote>
+<pre><code>1.基本操作，即只有常数项，认为其时间复杂度为O(1)
+2.顺序结构，时间复杂度按加法进行计算
+3.循环结构，时间复杂度按乘法进行计算
+4.分支结构，时间复杂度取最大值
+5.判断一个算法的效率时，往往只需要关注操作数量的最高次项，其它次要项和常数项可以忽略
+</code></pre></blockquote>
+<p>示例：<br><img src="https://i.imgur.com/3YRVUoa.png" alt=""><br><strong>常见时间复杂度</strong><br><img src="https://i.imgur.com/Sqq0QtA.png" alt=""></p>
+<h2 id="数据结构的概念"><a href="#数据结构的概念" class="headerlink" title="数据结构的概念"></a>数据结构的概念</h2><p>在学习数据结构概念之前我们先想一个问题，假设如果现在有一个需求，要用Python中的数据类型来保存一个班的学生信息，而且要快速的通过学生姓名获取其信息。<br>实际上当我们在思考这个问题的时候，我们已经用到了数据结构。列表和字典都可以存储一个班的学生信息，但是想要在列表中获取一名同学的信息时，就要遍历这个列表，其时间复杂度为O(n)，而使用字典存储时，可将学生姓名作为字典的键，学生信息作为值，进而查询时不需要遍历便可快速获取到学生信息，其时间复杂度为O(1)。<br>那么我们为了解决问题，需要将数据保存下来，然后根据数据的存储方式来设计算法实现进行处理，那么数据的存储方式不同就会导致需要不同的算法进行处理。我们希望算法解决问题的效率越快越好，于是我们就需要考虑数据究竟如何保存的问题，这就是数据结构。<br><strong>概念</strong><br>数据是一个抽象的概念，将其进行分类后得到程序设计语言中的基本类型。如：int，float，char等。数据元素之间不是独立的，存在特定的关系，这些关系便是结构。数据结构指数据对象中数据元素之间的关系。</p>
+<p>Python给我们提供了很多现成的数据结构类型，这些系统自己定义好的，不需要我们自己去定义的数据结构叫做Python的内置数据结构，比如列表、元组、字典。而有些数据组织方式，Python系统里面没有直接定义，需要我们自己去定义实现这些数据的组织方式，这些数据组织方式称之为Python的扩展数据结构，比如栈，队列等。</p>
+<p><strong>小结：</strong><br><strong>算法是为了解决实际问题而设计的，数据结构是算法需要处理的问题载体。</strong><br><strong>数据结构只是静态的描述了数据元素之间的关系。</strong><br>这里讲一下常用的数据运算：插入，删除，修改，查找，排序，这也是后面内容要经常提到的。</p>
+<h2 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h2><p>在程序中，经常需要将一组（通常是同为某个类型的）数据元素作为整体管理和使用，需要创建这种元素组，用变量记录它们，传进传出函数等。一组数据中包含的元素个数可能发生变化（可以增加或删除元素）。</p>
+<p>对于这种需求，最简单的解决方案便是将这样一组元素看成一个序列，用元素在序列里的位置和顺序，表示实际应用中的某种有意义的信息，或者表示数据之间的某种关系。</p>
+<p>这样的一组序列元素的组织形式，我们可以将其抽象为线性表。一个线性表是某类元素的一个集合，还记录着元素之间的一种顺序关系。线性表是最基本的数据结构之一，在实际程序中应用非常广泛，它还经常被用作更复杂的数据结构的实现基础。<br>根据线性表的实际存储方式，分为两种实现模型：</p>
+<blockquote>
+<pre><code>顺序表，将元素顺序地存放在一块连续的存储区里，元素间的顺序关系由它们的存储顺序自然表示。
+链表，将元素存放在通过链接构造起来的一系列存储块中。
+</code></pre></blockquote>
+<p><strong>顺序表的基本形式</strong><br><img src="https://i.imgur.com/Nc4TasW.png" alt=""></p>
+<p>图a表示的是顺序表的基本形式，数据元素本身连续存储，每个元素所占的存储单元大小固定相同，元素的下标是其逻辑地址，而元素存储的物理地址（实际内存地址）可以通过存储区的起始地址Lo(e0)加上逻辑地址（第i个元素）与存储单元大小（c）的乘积计算而得，即：</p>
+<p>Lo(ei) = Lo(e0) + c*i</p>
+<p>所以，访问指定元素时无需从头遍历，通过计算便可获得对应地址，其时间复杂度为O(1)。  </p>
+<p>另外，如果<strong>元素的大小不统一</strong>，则须采用图b的元素外置的形式，将实际数据元素另行存储，而顺序表中各单元位置保存对应元素的地址信息（即链接）。由于每个链接所需的存储量相同，通过上述公式，可以计算出元素链接的存储位置，而后顺着链接找到实际存储的数据元素。注意，图b中的c不再是数据元素的大小，而是存储一个链接地址所需的存储量，这个量通常很小。</p>
+<p><strong>顺序表的结构与实现</strong><br><img src="https://i.imgur.com/GQLMtHf.png" alt="">  </p>
+<p>一个顺序表的完整信息包括两部分，一部分是表中的元素集合，另一部分是为实现正确操作而需记录的信息，即有关表的整体情况的信息，这部分信息主要包括元素存储区的容量和当前表中已有的元素个数两项。</p>
+<p><strong>顺序表的两种基本实现方式</strong><br><img src="https://i.imgur.com/VrJl6Tn.png" alt="">  </p>
+<p>图a为一体式结构，存储表信息的单元与元素存储区以连续的方式安排在一块存储区里，两部分数据的整体形成一个完整的顺序表对象。<br>一体式结构整体性强，易于管理。但是由于数据元素存储区域是表对象的一部分，顺序表创建后，元素存储区就固定了。</p>
+<p>图b为分离式结构，表对象里只保存与整个表有关的信息（即容量和元素个数），实际数据元素存放在另一个独立的元素存储区里，通过链接与基本表对象关联。</p>
+<p><strong>元素存储区替换</strong><br>一体式结构由于顺序表信息区与数据区连续存储在一起，所以若想更换数据区，则只能整体搬迁，即整个顺序表对象（指存储顺序表的结构信息的区域）改变了。</p>
+<p>分离式结构若想更换数据区，只需将表信息区中的数据区链接地址更新即可，而该顺序表对象不变。<br><strong>元素存储区扩充</strong><br>采用分离式结构的顺序表，若将数据区更换为存储空间更大的区域，则可以在不改变表对象的前提下对其数据存储区进行了扩充，所有使用这个表的地方都不必修改。只要程序的运行环境（计算机系统）还有空闲存储，这种表结构就不会因为满了而导致操作无法进行。我们把采用这种技术实现的顺序表称为动态顺序表，因为其容量可以在使用中动态变化。  </p>
+<p>扩充的两种策略:<br>1.每次扩充增加固定数目的存储位置，如每次扩充增加10个元素位置，这种策略可称为线性增长。<br>特点：节省空间，但是扩充操作频繁，操作次数多。</p>
+<p>2.每次扩充容量加倍，如每次扩充增加一倍存储空间。<br>特点：减少了扩充操作的执行次数，但可能会浪费空间资源。以空间换时间，推荐的方式。</p>
+<p><strong>顺序表的操作</strong><br><strong>1.增加元素</strong><br>如图所示，为顺序表增加新元素111的三种方式<br><img src="https://i.imgur.com/58Yjdx7.png" alt=""></p>
+<blockquote>
+<pre><code>a. 尾端加入元素，时间复杂度为O(1)
+b. 非保序的加入元素（不常见），时间复杂度为O(1)
+c. 保序的元素加入，时间复杂度为O(n)
+</code></pre></blockquote>
+<p><strong>2.删除元素</strong><br><img src="https://i.imgur.com/ccmB4na.png" alt=""></p>
+<blockquote>
+<pre><code>a. 删除表尾元素，时间复杂度为O(1)
+b. 非保序的元素删除（不常见），时间复杂度为O(1)
+c. 保序的元素删除，时间复杂度为O(n)
+</code></pre></blockquote>
+<h2 id="Python中的顺序表"><a href="#Python中的顺序表" class="headerlink" title="Python中的顺序表"></a>Python中的顺序表</h2><p>Python中的list和tuple两种类型采用了顺序表的实现技术，具有前面讨论的顺序表的所有性质。tuple是不可变类型，即不变的顺序表，因此不支持改变其内部状态的任何操作，而其他方面，则与list的性质类似。</p>
+<p><strong>list的基本实现技术</strong><br>Python标准类型list就是一种元素个数可变的线性表，可以加入和删除元素，并在各种操作中维持已有元素的顺序（即保序），而且还具有以下行为特征：  </p>
+<blockquote>
+<pre><code>1.基于下标（位置）的高效元素访问和更新，时间复杂度应该是O(1)；
+为满足该特征，应该采用顺序表技术，表中元素保存在一块连续的存储区中。
+</code></pre></blockquote>
+<blockquote>
+<pre><code>2.允许任意加入元素，而且在不断加入元素的过程中，表对象的标识（函数id得到的值）不变。
+为满足该特征，就必须能更换元素存储区，并且为保证更换存储区时list对象的标识id不变，只能采用分离式实现技术。
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/cV3MVv2.png" alt=""></p>
+<p><img src="https://i.imgur.com/jJOvR99.png" alt=""><br>在Python的官方实现中，<strong>list就是一种采用分离式技术实现的动态顺序表。</strong>这就是为什么用list.append(x) （或 list.insert(len(list), x)，即尾部插入）比在指定位置插入元素效率高的原因。</p>
+<p>在Python的官方实现中，list实现采用了如下的策略：在建立空表（或者很小的表）时，系统分配一块能容纳8个元素的存储区；在执行插入操作（insert或append）时，如果元素存储区满就换一块4倍大的存储区。但如果此时的表已经很大（目前的阀值为50000），则改变策略，采用加一倍的方法。引入这种改变策略的方式，是为了避免出现过多空闲的存储位置。</p>
+<h2 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h2><p>由于顺序表的构建需要预先知道数据大小来申请连续的存储空间，而在进行扩充时又需要进行数据的搬迁，所以使用起来并不是很灵活。<br>链表结构可以充分利用计算机内存空间，实现灵活的内存动态管理。  </p>
+<p><strong>链表的定义</strong><br>链表（Linked list）是一种常见的基础数据结构，是一种线性表，但是不像顺序表一样连续存储数据，而是在每一个节点（数据存储单元）里存放下一个节点的位置信息（即地址）。<br><img src="https://i.imgur.com/n5v7yDM.png" alt=""></p>
+<p><strong>单向链表</strong><br>单向链表也叫单链表，是链表中最简单的一种形式，它的每个节点包含两个域，一个信息域（元素域）和一个链接域。这个链接指向链表中的下一个节点，而最后一个节点的链接域则指向一个空值。<br><img src="https://i.imgur.com/SzIvatC.png" alt="">  </p>
+<blockquote>
+<pre><code>1.表元素域elem用来存放具体的数据。
+2.链接域next用来存放下一个节点的位置（python中的标识）
+3.变量p指向链表的头节点（首节点）的位置，从p出发能找到表中的任意节点。
+</code></pre></blockquote>
+<h2 id="链表的实现"><a href="#链表的实现" class="headerlink" title="链表的实现"></a>链表的实现</h2><p>像顺序表中list有很多方法，比如增删改查，排序，遍历等；那么在链表中也能实现这些功能，这里需要用python程序来实现。<br><strong>单链表的相关操作</strong>  </p>
+<blockquote>
+<pre><code>1. is_empty()        链表是否为空
+2. length()          链表长度
+3. travel()          遍历整个链表
+4. add(item)         链表头部添加元素
+5. append(item)      链表尾部添加元素
+6. insert(pos, item) 指定位置添加元素
+7. remove(item)      删除节点
+8. search(item)      查找节点是否存在  
+</code></pre></blockquote>
+<p><strong>单链表的实现:</strong><br>链表是由很多节点组成，我们可以先把节点用一个Node类封装起来。  链表中节点之间通过将自身的next区指向下一节点的elem区来实现节点之间的链接。 例如下图中Node1与Node2之间的关系。<br><img src="https://i.imgur.com/9Gsl0JA.png" alt=""></p>
+<p>链表实现的实例：<br><img src="https://i.imgur.com/2VVqSQs.png" alt=""><br><img src="https://i.imgur.com/etxxj3g.png" alt=""><br><img src="https://i.imgur.com/8kW2WnG.png" alt=""><br><img src="https://i.imgur.com/jtGFv51.png" alt=""><br><img src="https://i.imgur.com/YR2BUsv.png" alt=""></p>
+<h2 id="链表与顺序表的对比"><a href="#链表与顺序表的对比" class="headerlink" title="链表与顺序表的对比"></a>链表与顺序表的对比</h2><p>链表失去了顺序表随机读取的优点，同时链表由于增加了结点的指针域，空间开销比较大，但对存储空间的使用要相对灵活。<br>链表与顺序表的各种操作复杂度如下所示：<br><img src="https://i.imgur.com/GQYdeju.png" alt="">  </p>
+<p>链表和顺序表在插入和删除时进行的是完全不同的操作。链表的主要耗时操作是遍历查找，删除和插入操作本身的复杂度是O(1)。顺序表查找很快，主要耗时的操作是拷贝覆盖。因为除了目标元素在尾部的特殊情况，顺序表进行插入和删除时需要对操作点之后的所有元素进行前后移位操作，只能通过拷贝和覆盖的方法进行。</p>
+<p>另外，出了单链表之外，还有单向循环链表和双向链表，这里只做一下介绍。实现的原理可以根据上面内容进行类比。  </p>
+<p><strong>单向循环链表</strong><br>单链表的一个变形是单向循环链表，即链表中最后一个节点的next域不再为None，而是指向链表的头节点。<br><img src="https://i.imgur.com/ubeX9gK.png" alt=""></p>
+<p>定义类时，节点的属性还是只有elem和next，链表需要指定头节点head。</p>
+<p><strong>双向链表</strong><br>双向链表：每个节点有两个链接：一个指向前一个节点，当此节点为第一个节点时，指向空值；而另一个指向下一个节点，当此节点为最后一个节点时，指向空值。</p>
+<p><img src="https://i.imgur.com/hJ2xsbR.png" alt=""></p>
+<p>与单链表相比，他的节点多了一个指向前节点next的prev区属性。</p>
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>栈作为一种数据结构，既可以用顺序表实现，也可以用链表实现。栈的特性就像弹夹一样，子弹先进后出，栈里面的元素也是先进后出。<br><strong>栈的相关操作</strong>  </p>
+<blockquote>
+<pre><code>1. Stack() 创建一个新的空栈
+2. push(item) 添加一个新的元素item到栈顶
+3. pop() 弹出栈顶元素
+4. peek() 返回栈顶元素
+5. is_empty() 判断栈是否为空
+6. size() 返回栈的元素个数
+</code></pre></blockquote>
+<p><strong>顺序表实现栈</strong><br><img src="https://i.imgur.com/iqY2vxB.png" alt=""></p>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><p>队列（queue）是只允许在一端进行插入操作，而在另一端进行删除操作的线性表。</p>
+<p>队列是一种先进先出的（First In First Out）的线性表，简称FIFO。允许插入的一端为队尾，允许删除的一端为队头。队列不允许在中间部位进行操作！假设队列是q=（a1，a2，……，an），那么a1就是队头元素，而an是队尾元素。这样我们就可以删除时，总是从a1开始，而插入时，总是在队列最后。这也比较符合我们通常生活中的习惯，排在第一个的优先出列，最后来的当然排在队伍最后。</p>
+<p><strong>队列的实现</strong>   </p>
+<blockquote>
+<pre><code>队列相关操作: 
+1. Queue() 创建一个空的队列
+2. enqueue(item) 往队列中添加一个item元素
+3. dequeue() 从队列头部删除一个元素
+4. is_empty() 判断一个队列是否为空
+5. size() 返回队列的大小
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/ifKJNTN.png" alt=""></p>
+<p><strong>双端队列</strong><br>双端队列（deque，全名double-ended queue），是一种具有队列和栈的性质的数据结构。<br>双端队列中的元素可以从两端弹出，其限定插入和删除操作在表的两端进行。双端队列可以在队列任意一端入队和出队。<br><img src="https://i.imgur.com/IYWCdDG.png" alt=""></p>
+<p><strong>相关操作</strong>  </p>
+<blockquote>
+<pre><code>1. Deque() 创建一个空的双端队列
+2. add_front(item) 从队头加入一个item元素
+3. add_rear(item) 从队尾加入一个item元素
+4. remove_front() 从队头删除一个item元素
+5. remove_rear() 从队尾删除一个item元素
+6. is_empty() 判断双端队列是否为空
+7. size() 返回队列的大小
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/oAeUqKg.png" alt=""></p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><p>排序算法（Sorting algorithm）是一种能将一串数据依照特定顺序进行排列的一种算法。  </p>
+<p><strong>1.冒泡排序</strong><br>冒泡排序（Bubble Sort）是一种简单的排序算法。它重复地遍历要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。遍历数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成。这个算法的名字由来是因为越小的元素会经由交换慢慢“浮”到数列的顶端。</p>
+<p>冒泡排序算法的运作如下：</p>
+<blockquote>
+<pre><code>比较相邻的元素。如果第一个比第二个大（升序），就交换他们两个。
+对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。
+针对所有的元素重复以上的步骤，除了最后一个。
+持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
+</code></pre></blockquote>
+<p>交换过程图示(第一次)：<br><img src="https://i.imgur.com/2Lb0Vnx.png" alt=""></p>
+<p>那么我们需要进行n-1次冒泡过程，每次对应的比较次数如下图所示：<br><img src="https://i.imgur.com/ZYR7kGw.png" alt=""></p>
+<p>代码示例：<br><img src="https://i.imgur.com/q2Poq9L.png" alt=""></p>
+<p>时间复杂度：  </p>
+<blockquote>
+<pre><code>最优时间复杂度：O(n) （表示遍历一次发现没有任何可以交换的元素，排序结束。）  
+最坏时间复杂度：O(n2)。  
+稳定性：稳定  
+</code></pre></blockquote>
+<p>冒泡排序的演示：  </p>
+<p><img src="https://i.imgur.com/C9iBDuU.gif" alt=""></p>
+<p><strong>2.选择排序</strong><br>选择排序（Selection sort）是一种简单直观的排序算法。它的工作原理如下。首先在未排序序列中找到最小元素，存放到排序序列的起始位置，然后，再从剩余未排序元素中继续寻找最小元素，然后放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。<br>选择排序中前面部分为有序固定的，后面时无序的，每次从后面无序部分找到最小值往前送。<br>原理动图：<br><img src="https://i.imgur.com/ExAbEid.gif" alt=""></p>
+<p>代码示例：<br><img src="https://i.imgur.com/HN0QK6D.png" alt=""></p>
+<p>时间复杂度</p>
+<blockquote>
+<pre><code>最优时间复杂度：O(n2)
+最坏时间复杂度：O(n2)
+稳定性：不稳定（考虑升序每次选择最大的情况）
+</code></pre></blockquote>
+<p><strong>3.插入排序</strong><br>插入排序（Insertion Sort）是一种简单直观的排序算法。它的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应位置并插入。插入排序在实现上，在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<p>原理示意：<br><img src="https://i.imgur.com/Vxu7QQq.gif" alt=""></p>
+<p>代码示例：<br><img src="https://i.imgur.com/y5DKsYP.png" alt=""><br>这里可以将代码做一下优化，把内层的while循环换成for循环，去掉<code>i -= 1</code>和break。因为如果碰上最理想的情况，也就是目标序列时有序的，while循环还是需要判断，计算i -= 1，这里可以用<code>for i in range(j, 0, -1):</code></p>
+<p>效果图：<br><img src="https://i.imgur.com/jcumXAQ.gif" alt=""></p>
+<p><strong>4.快速排序</strong><br>快速排序（Quick sort），又称划分交换排序（partition-exchange sort），通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
+<p>步骤为：</p>
+<blockquote>
+<pre><code>1.从数列中挑出一个元素，称为&quot;基准&quot;（pivot），
+2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。
+在这个分区结束之后，该基准就处于数列的中间位置。这个称为分区（partition）操作。
+3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序。
+</code></pre></blockquote>
+<p><strong>代码示例</strong><br><img src="https://i.imgur.com/f9Fcr7Q.png" alt=""></p>
+<p>时间复杂度</p>
+<blockquote>
+<pre><code>最优时间复杂度：O(nlogn)
+最坏时间复杂度：O(n2)
+稳定性：不稳定
+</code></pre></blockquote>
+<p>另外，除了以上几种排序方法外，还有希尔排序和归并排序，这里就不一一说了。  </p>
+<h2 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h2><p>搜索是在一个项目集合中找到一个特定项目的算法过程。搜索通常的答案是真的或假的，因为该项目是否存在。 搜索的几种常见方法：顺序查找、二分法查找、二叉树查找、哈希查找 。  </p>
+<p><strong>二分法查找</strong><br>二分查找又称折半查找，优点是比较次数少，查找速度快，平均性能好；其缺点是要求待查表为有序表，且插入删除困难。因此，折半查找方法适用于不经常变动而查找频繁的有序列表。  </p>
+<p>代码示例：<br><img src="https://i.imgur.com/Ka39vOj.png" alt=""></p>
+<h2 id="树的概念"><a href="#树的概念" class="headerlink" title="树的概念"></a>树的概念</h2><p>树（tree）是一种抽象数据类型（ADT）或是实作这种抽象数据类型的数据结构，用来模拟具有树状结构性质的数据集合。它是由n（n&gt;=1）个有限节点组成一个具有层次关系的集合。把它叫做“树”是因为它看起来像一棵倒挂的树，也就是说它是根朝上，而叶朝下的。它具有以下的特点：</p>
+<blockquote>
+<pre><code>1.每个节点有零个或多个子节点；
+2.没有父节点的节点称为根节点；
+3.每一个非根节点有且只有一个父节点；
+4.除了根节点外，每个子节点可以分为多个不相交的子树；
+</code></pre></blockquote>
+<p>树的结构示意图：</p>
+<p><img src="https://i.imgur.com/m7YiNn8.png" alt=""></p>
+<p><strong>二叉树的基本概念</strong><br>二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”（left subtree）和“右子树”（right subtree）  </p>
+<p><strong>二叉树的性质(特性)</strong>  </p>
+<blockquote>
+<pre><code>性质1: 在二叉树的第i层上至多有2^(i-1)个结点（i&gt;0）
+性质2: 深度为k的二叉树至多有2^k - 1个结点（k&gt;0）
+性质3: 对于任意一棵二叉树，如果其叶结点数为N0，而度数为2的结点总数为N2，则N0=N2+1;
+性质4:具有n个结点的完全二叉树的深度必为 log2(n+1)
+性质5:对完全二叉树，若从上至下、从左至右编号，则编号为i 的结点，其左孩子编号必为2i，其右孩子编号必为2i＋1；其双亲的编号必为i/2（i＝1 时为根,除外）
+</code></pre></blockquote>
+<p><strong>二叉树的遍历</strong><br>树的遍历是树的一种重要的运算。所谓遍历是指对树中所有结点的信息的访问，即依次对树中每个结点访问一次且仅访问一次，我们把这种对所有节点的访问称为遍历（traversal）。那么树的两种重要的遍历模式是深度优先遍历和广度优先遍历,深度优先一般用递归，广度优先一般用队列。一般情况下能用递归实现的算法大部分也能用堆栈来实现。</p>
+<p><strong>深度优先遍历</strong>  </p>
+<p>对于一颗二叉树，深度优先搜索(Depth First Search)是沿着树的深度遍历树的节点，尽可能深的搜索树的分支。<br>那么深度遍历有重要的三种方法。这三种方式常被用于访问树的节点，它们之间的不同在于访问每个节点的次序不同。这三种遍历分别叫做先序遍历（preorder），中序遍历（inorder）和后序遍历（postorder）。</p>
+<blockquote>
+<pre><code>1.先序遍历  根节点-&gt;左子树-&gt;右子树
+2.中序遍历  左子树-&gt;根节点-&gt;右子树
+3.左子树-&gt;右子树-&gt;根节点
+</code></pre><p><img src="https://i.imgur.com/WviXeBC.png" alt=""></p>
+</blockquote>
+<p>中序和后序只是把elem的顺序往下排。</p>
+<p><strong>广度优先遍历(层次遍历)</strong>  </p>
+<p>从树的root开始，从上到下从从左到右遍历整个树的节点<br><img src="https://i.imgur.com/IxhlZ91.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/24/Python学习之反射机制/" rel="next" title="Python学习之反射机制">
+                <i class="fa fa-chevron-left"></i> Python学习之反射机制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/02/Pyhton下的MySQL总结/" rel="prev" title="Pyhton下的MySQL总结">
+                Pyhton下的MySQL总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法的概念"><span class="nav-number">1.</span> <span class="nav-text">算法的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法效率衡量"><span class="nav-number">2.</span> <span class="nav-text">算法效率衡量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据结构的概念"><span class="nav-number">3.</span> <span class="nav-text">数据结构的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#顺序表"><span class="nav-number">4.</span> <span class="nav-text">顺序表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python中的顺序表"><span class="nav-number">5.</span> <span class="nav-text">Python中的顺序表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表"><span class="nav-number">6.</span> <span class="nav-text">链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表的实现"><span class="nav-number">7.</span> <span class="nav-text">链表的实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#链表与顺序表的对比"><span class="nav-number">8.</span> <span class="nav-text">链表与顺序表的对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈"><span class="nav-number">9.</span> <span class="nav-text">栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列"><span class="nav-number">10.</span> <span class="nav-text">队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法"><span class="nav-number">11.</span> <span class="nav-text">排序算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索"><span class="nav-number">12.</span> <span class="nav-text">搜索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树的概念"><span class="nav-number">13.</span> <span class="nav-text">树的概念</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

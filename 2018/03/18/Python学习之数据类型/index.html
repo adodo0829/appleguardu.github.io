@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据类型," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Python中有六个标准的数据类型，它们分别为Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。">
+<meta name="keywords" content="数据类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python学习之数据类型">
+<meta property="og:url" content="http://yoursite.com/2018/03/18/Python学习之数据类型/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="Python中有六个标准的数据类型，它们分别为Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/jjIB0do.png">
+<meta property="og:image" content="https://i.imgur.com/Rn7JbLo.png">
+<meta property="og:image" content="https://i.imgur.com/Y8zvoT5.png">
+<meta property="og:updated_time" content="2018-09-01T15:39:49.403Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python学习之数据类型">
+<meta name="twitter:description" content="Python中有六个标准的数据类型，它们分别为Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。">
+<meta name="twitter:image" content="https://i.imgur.com/jjIB0do.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/18/Python学习之数据类型/"/>
+
+
+
+
+
+  <title>Python学习之数据类型 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/18/Python学习之数据类型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python学习之数据类型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-18T08:35:25+08:00">
+                2018-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python基础/" itemprop="url" rel="index">
+                    <span itemprop="name">python基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Python中有六个标准的数据类型，它们分别为<br>Number（数字），String（字符串），List（列表），Tuple（元组），Set（集合），Dictionary（字典）。<br><a id="more"></a><br>我们在编写代码无时无刻不在与这些数据类型打交道，所以必须对它们的结构和常用方法非常熟悉。    </p>
+<h2 id="1-数字类型"><a href="#1-数字类型" class="headerlink" title="1.数字类型"></a>1.数字类型</h2><p>常用到主要是int、float、bool（布尔）、complex（复数）这几种，一般用于给变量赋值和计算。算术运算符如下：<br><img src="https://i.imgur.com/jjIB0do.png" alt="">   </p>
+<h2 id="2-字符串类型"><a href="#2-字符串类型" class="headerlink" title="2.字符串类型"></a>2.字符串类型</h2><p>Python中的字符串用单引号 ‘ 或双引号 “ 括起来，双引号或者单引号中的数据，就是字符串。<br><strong>字符串输入</strong>：使用input()函数从外部获取，通过它能够完成从键盘获取数据，然后保存到指定的变量中；这里要注意input获取的数据，都以字符串的方式进行保存，即使输入的是<strong>数字</strong>，那么也是以字符串方式保存。<br><strong>字符串输出:</strong> 以名字为例，<code>name = &#39;huhua&#39;</code> , <code>print(&quot;姓名：%s&quot;%name)</code><br>这样可以输出我们定义的字符串，另外这里讲一下格式化输出，%s,%d,%f分别对应到字符串，数字，以及小数的输出。python3中使用format()方法， <code>print(&#39;{0} 和 {1}&#39;.format(&#39;Google&#39;, &#39;Runoob&#39;))</code>  </p>
+<p>字符串常用操作和方法：<br><strong>1. 下标索引</strong><br>下标从0开始起，name = ‘huhua’，name[0]会返回第一个字符h。<br><strong>2. 切片</strong><br>切片是指对操作的对象截取其中一部分的操作。字符串、列表、元组都支持切片操作。<br>切片的语法：[起始:结束:步长]，截取内容为起始位到结束位前一位，切片可以正序来切，也可反过来切，例如name[:3:1]取前三位；name[-1::-1]为反着取，步长的符号决定是正着取还是反着取。<br><strong>3. find，index</strong><br>检测 str 是否包含在 mystr中，如果是，则返回开始的索引值，否则返回-1 。 语法：mystr.find(str, start=0, end=len(mystr))，后面两个参数可省略<br><strong>4. count</strong><br>  返回 str在start和end之间 在 mystr里面出现的次数；语法为mystr.count(str, start=0, end=len(mystr))，当字符串中有重复的字符时，可用count来计算该字符出现的次数。<br><strong>5. replace</strong><br>把 mystr 中的 str1 替换成 str2,如果 count 指定，则替换不超过 count 次.<br>mystr.replace(str1, str2,  mystr.count(str1))。<br><strong>6. split</strong><br>以 str 为分隔符切片 mystr，分隔符会被切掉，如果 maxsplit有指定值，则仅分隔 maxsplit 个子字符串，返回的是一个列表；语法：mystr.split(str=” “, 2) ，这里注意，split()方法如果不指定参数会默认以\n,\t,空格作为分隔符，一般我们在处理网页多行文本信息时会用到。<br><strong>7. capitalize，title</strong><br>前者是将字符串第一个字母大写，后者时将每个单词首字母大写。<br><strong>8. startswith，endswith</strong><br>mystr.startswith(obj)，检查字符串是否是以 obj 开头, 是则返回 True，否则返回 False；mystr.endswith(obj)，检查字符串是否以obj结束，如果是返回True,否则返回 False。<br><strong>9. lower，upper</strong><br>mystr.lower() ，转换 mystr 中所有大写字符为小写；后者时小写转化为大写。<br><strong>10. ljust, rjust, center</strong><br>mystr.ljust(width),返回一个原字符串左对齐,并使用空格填充至长度 width 的新字符串;后两者为右对齐和中间对齐。<br><strong>11. lstrip, rstrip, strip</strong><br>mystr.lstrip(),删除 mystr 左边的空白字符；strip()方法可以删除字符串两端的空白字符，比如\n,\t，这个在后续爬虫文本处理时常用到。<br><strong>12. isalpha，isdigit，isalnum，isspace</strong><br>mystr.isalpha()：如果 mystr 所有字符都是字母 则返回 True,否则返回 False<br>mystr.isdigit()：如果 mystr 只包含数字则返回 True 否则返回 False.<br>mystr.isalnum()：如果 mystr 所有字符都是字母或数字则返回 True,否则返回 False<br>mystr.isspace()：如果 mystr 中只包含空格，则返回 True，否则返回 False.<br><strong>13. join </strong><br>mystr.join(str)，mystr 中每个字符后面插入str,构造出一个新的字符串，join方法常用来构造新字符串，比如有一个列表li = [‘hello’, ‘my’, ‘girl’],使用’ ‘.join(li)则可以将列表中字符串连接起来，结果为hello my girl，这个也是常用到的。  </p>
+<h2 id="3-列表类型"><a href="#3-列表类型" class="headerlink" title="3.列表类型"></a>3.列表类型</h2><p>序列是Python中最基本的数据结构。序列中的每个元素都分配一个数字 - 它的位置，或索引，第一个索引是0，第二个索引是1，依此类推。<br>Python有6个序列的内置类型，但最常见的是列表和元组。<br>序列都可以进行的操作包括索引，切片，加，乘，检查成员。<br>此外，Python已经内置确定序列的长度以及确定最大和最小的元素的方法。<br>列表是最常用的Python数据类型，它可以作为一个方括号内的逗号分隔值出现。<br>列表的数据项不需要具有相同的类型<br>创建一个列表，只要把逗号分隔的不同的数据项使用方括号括起来即可。如下所示：<br>list = [‘Google’, ‘华仔’, 1997, 2000]<br>列表常用的操作：<br><strong>1. 添加元素(“增”append, extend, insert)</strong><br>通过append可以向列表添加元素，如list.append(‘haha’);通过extend可以将另一个集合中的元素逐一添加到列表中,如list.extend([1,2]),这里注意extend会将集合中的元素转化为list元素后分开放入其中，其结果为[‘Google’, ‘华仔’, 1997, 2000，1，2];insert(index, object) 在指定位置index前插入元素object。<br><strong>2. 修改元素(“改”)</strong><br>修改元素的时候，要通过下标来确定要修改的是哪个元素，然后才能进行修改，如list[0]=’python’，list中第一个元素会被修改。<br><strong>3. 查找元素(“查”in, not in, index, count)</strong><br>python中查找的常用方法为：<br>in（存在）,如果存在那么结果为true，否则为false；<br>not in（不存在），如果不存在那么结果为true，否则false。index和count与字符串中的用法相同。<br><strong>4. 删除元素(“删”del, pop, remove)</strong><br>del：根据下标进行删除， del list[0]<br>pop：删除最后一个元素， list.pop()<br>remove：根据元素的值进行删除,  list.remove(‘Google’)<br><strong>5. 排序(sort, reverse)</strong><br>sort方法是将list按特定顺序重新排列，默认为由小到大，参数reverse=True可改为倒序，由大到小。reverse方法是将list逆置。  这里注意sort和reverse不返回值。<br><strong>6. 列表的嵌套</strong><br>一个列表中的元素又是一个列表，那么这就是列表的嵌套，如  </p>
+<blockquote>
+<pre><code>schoolNames = [[&apos;北京大学&apos;,&apos;清华大学&apos;],[&apos;南开大学&apos;,&apos;天津大学&apos;,&apos;天津师范大学&apos;],[&apos;山东大学&apos;,&apos;中国海洋大学&apos;]]  
+</code></pre></blockquote>
+<h2 id="4-元组"><a href="#4-元组" class="headerlink" title="4.元组"></a>4.元组</h2><p>Python的元组与列表类似，不同之处在于元组的元素不能修改。元组使用小括号，列表使用方括号。Tuple = (‘et’,77,99.9)<br><strong>1. 元组访问</strong><br>直接通过下标，Tuple[0]对应的为et这个元素。<br><strong>2. 元组的内置函数count, index</strong><br>index和count与字符串和列表中的用法相同，这里不过多做介绍了。<br>注意，当元组中只有一个元素时，接的价格逗号来区分，比如tuple(1,)。</p>
+<h2 id="5-字典"><a href="#5-字典" class="headerlink" title="5.字典"></a>5.字典</h2><p>字典是另一种可变容器模型，且可存储任意类型对象。<br>字典的每个键值(key=&gt;value)对用冒号(:)分割，每个对之间用逗号(,)分割，整个字典包括在花括号({})中 ,格式如下所示：  </p>
+<blockquote>
+<pre><code>dict = {key1 : value1, key2 : value2 }  
+</code></pre><p>键必须是唯一的，但值则不必。值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。<br>字典的常见操作1<br><strong><1>修改元素</1></strong>：字典的每个元素中的数据是可以修改的，只要通过key找到，即可修改，如dict[key1] = new便可更新其值。<br><strong><2>添加元素</2></strong>：如果在使用 变量名[‘键’] = 数据 时，这个“键”在字典中，不存在，那么就会新增这个元素。<br><strong><3>删除元素</3></strong>：del删除指定的元素，del dict[key1];del删除整个字典,del dict.   clear清空整个字典, dict.clear()。<br>字典的常见操作2<br><strong><1>len(dict)</1></strong>：测量字典中，键值对的个数<br><strong><2>dict.keys()</2></strong>：返回一个包含字典所有KEY的列表<br><strong><3>dict.values()</3></strong>：返回一个包含字典所有value的列表<br><strong><4>dict.items()</4></strong>：返回一个包含所有（键，值）元祖的列表  </p>
+</blockquote>
+<h2 id="6-集合"><a href="#6-集合" class="headerlink" title="6.集合"></a>6.集合</h2><p>集合（set）是一个无序不重复元素的序列,基本功能包括关系测试和消除重复元素。<br>可以使用大括号 { } 或者 set() 函数创建集合，注意：创建一个空集合必须用 set() 而不是 { }，因为 { } 是用来创建一个空字典。创建格式：<br>parame = {value01,value02,…}或者set(value)<br>集合的基本操作<br><strong>1.添加元素</strong><br>s.add(x)，将元素 x 添加到集合 s 中，如果元素已存在，则不进行任何操作。还有一个方法，也可以添加元素，且参数可以是列表，元组，字典等，语法格式如下：<br>s.update(x)，x 可以有多个，用逗号分开<br><strong>2.移除元素</strong><br>s.remove(x)，将元素 x 添加到集合 s 中移除，如果元素不存在，则会发生错误。<br>此外还有一个方法也是移除集合中的元素，且如果元素不存在，不会发生错误。格式如下所示：s.discard(x)。<br><strong>3.清空集合</strong><br>s.clear()，清空指定集合s。</p>
+<h2 id="7-公共方法"><a href="#7-公共方法" class="headerlink" title="7.公共方法"></a>7.公共方法</h2><p><strong>1.遍历</strong><br>通过for … in …:的语法结构，我们可以遍历字符串、列表、元组、字典等数据结构。  </p>
+<blockquote>
+<p>在字典中遍历时，关键字和对应的值可以使用 items() 方法同时解读出来.<br>在序列中遍历时，索引位置和对应值可以使用 enumerate() 函数同时得到.<br>同时遍历两个或更多的序列，可以使用 zip() 组合.<br>要反向遍历一个序列，首先指定这个序列，然后调用 reversed() 函数.<br>要按顺序遍历一个序列，使用 sorted() 函数返回一个已排序的序列，并不修改原值.    </p>
+</blockquote>
+<p><strong>2.运算符</strong><br><img src="https://i.imgur.com/Rn7JbLo.png" alt=""><br>3.python内置函数<br><img src="https://i.imgur.com/Y8zvoT5.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据类型/" rel="tag"># 数据类型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/13/JavaScript基础学习-二/" rel="next" title="JavaScript基础学习(二)">
+                <i class="fa fa-chevron-left"></i> JavaScript基础学习(二)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/22/python学习之循环判断/" rel="prev" title="python学习之循环判断">
+                python学习之循环判断 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-数字类型"><span class="nav-number">1.</span> <span class="nav-text">1.数字类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-字符串类型"><span class="nav-number">2.</span> <span class="nav-text">2.字符串类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-列表类型"><span class="nav-number">3.</span> <span class="nav-text">3.列表类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-元组"><span class="nav-number">4.</span> <span class="nav-text">4.元组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-字典"><span class="nav-number">5.</span> <span class="nav-text">5.字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-集合"><span class="nav-number">6.</span> <span class="nav-text">6.集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-公共方法"><span class="nav-number">7.</span> <span class="nav-text">7.公共方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

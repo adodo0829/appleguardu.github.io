@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="设计模式," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="有时候写代码总想着如果有现成模板的话写起来不就方便很多吗？于是我开始在论坛和python相关的网站上搜索，看到python下的设计模式，于是乎将其转化为自己的笔记。这篇主要是归纳的创建型设计模式。">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python下的设计模式一">
+<meta property="og:url" content="http://yoursite.com/2018/05/22/Python下的设计模式一/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="有时候写代码总想着如果有现成模板的话写起来不就方便很多吗？于是我开始在论坛和python相关的网站上搜索，看到python下的设计模式，于是乎将其转化为自己的笔记。这篇主要是归纳的创建型设计模式。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/QHdivGQ.png">
+<meta property="og:image" content="https://i.imgur.com/LAVNQLD.png">
+<meta property="og:image" content="https://i.imgur.com/c6Z7lSl.png">
+<meta property="og:image" content="https://i.imgur.com/9Adtnsm.png">
+<meta property="og:image" content="https://i.imgur.com/eTPN7Mc.png">
+<meta property="og:updated_time" content="2018-09-01T16:10:46.876Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python下的设计模式一">
+<meta name="twitter:description" content="有时候写代码总想着如果有现成模板的话写起来不就方便很多吗？于是我开始在论坛和python相关的网站上搜索，看到python下的设计模式，于是乎将其转化为自己的笔记。这篇主要是归纳的创建型设计模式。">
+<meta name="twitter:image" content="https://i.imgur.com/QHdivGQ.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/22/Python下的设计模式一/"/>
+
+
+
+
+
+  <title>Python下的设计模式一 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Python下的设计模式一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python下的设计模式一</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T15:36:19+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有时候写代码总想着如果有现成模板的话写起来不就方便很多吗？于是我开始在论坛和python相关的网站上搜索，看到python下的设计模式，于是乎将其转化为自己的笔记。这篇主要是归纳的创建型设计模式。<br><a id="more"></a></p>
+<h2 id="什么是设计模式"><a href="#什么是设计模式" class="headerlink" title="什么是设计模式"></a>什么是设计模式</h2><p>设计模式是经过总结、优化的，对我们经常会碰到的一些编程问题的可重用解决方案。一个设计模式并不像一个类或一个库那样能够直接作用于我们的代码。反之，设计模式更为高级，它是一种必须在特定情形下实现的一种方法模板。设计模式不会绑定具体的编程语言。一个好的设计模式应该能够用大部分编程语言实现(如果做不到全部的话，具体取决于语言特性)。最为重要的是，设计模式也是一把双刃剑，如果设计模式被用在不恰当的情形下将会造成灾难，进而带来无穷的麻烦。然而如果设计模式在正确的时间被用在正确地地方，它将是你的救星。</p>
+<p>起初，你会认为“模式”就是为了解决一类特定问题而特别想出来的明智之举。说的没错，看起来的确是通过很多人一起工作，从不同的角度看待问题进而形成的一个最通用、最灵活的解决方案。也许这些问题你曾经见过或是曾经解决过，但是你的解决方案很可能没有模式这么完备。</p>
+<p>虽然被称为“设计模式”，但是它们同“设计“领域并非紧密联系。设计模式同传统意义上的分析、设计与实现不同，事实上设计模式将一个完整的理念根植于程序中，所以它可能出现在分析阶段或是更高层的设计阶段。很有趣的是因之创建为设计模式的具体体现是程序代码，因此可能会让你认为它不会在具体实现阶段之前出现(事实上在进入具体实现阶段之前你都没有意识到正在使用具体的设计模式)。</p>
+<p>可以通过程序设计的基本概念来理解模式：增加一个抽象层。抽象一个事物就是隔离任何具体细节，这么做的目的是为了将那些不变的核心部分从其他细节中分离出来。当你发现你程序中的某些部分经常因为某些原因改动，而你不想让这些改动的部分引发其他部分的改动，这时候你就需要思考那些不会变动的设计方法了。这么做不仅会使代码可维护性更高，而且会让代码更易于理解，从而降低开发成本。</p>
+<p>这里列举了三种最基本的设计模式：</p>
+<ul>
+<li>创建模式，提供实例化的方法，为适合的状况提供相应的对象创建方法。</li>
+<li>结构化模式，通常用来处理实体之间的关系，使得这些实体能够更好地协同工作。</li>
+<li>行为模式，用于在不同的实体建进行通信，为实体之间的通信提供更容易，更灵活的通信方法。</li>
+</ul>
+<p><strong>创建型</strong></p>
+<ol>
+<li><p>Factory Method（工厂方法）</p>
+</li>
+<li><p>Abstract Factory（抽象工厂）</p>
+</li>
+<li><p>Builder（建造者）</p>
+</li>
+<li><p>Prototype（原型）</p>
+</li>
+<li><p>Singleton（单例）</p>
+</li>
+</ol>
+<p><strong>结构型</strong></p>
+<ol start="6">
+<li><p>Adapter Class/Object（适配器）</p>
+</li>
+<li><p>Bridge（桥接）</p>
+</li>
+<li><p>Composite（组合）</p>
+</li>
+<li><p>Decorator（装饰）</p>
+</li>
+<li><p>Facade（外观）</p>
+</li>
+<li><p>Flyweight（享元）</p>
+</li>
+<li><p>Proxy（代理）</p>
+</li>
+</ol>
+<p><strong>行为型</strong></p>
+<ol start="13">
+<li><p>Interpreter（解释器）</p>
+</li>
+<li><p>Template Method（模板方法）</p>
+</li>
+<li><p>Chain of Responsibility（责任链）</p>
+</li>
+<li><p>Command（命令）</p>
+</li>
+<li><p>Iterator（迭代器）</p>
+</li>
+<li><p>Mediator（中介者）</p>
+</li>
+<li><p>Memento（备忘录）</p>
+</li>
+<li><p>Observer（观察者）</p>
+</li>
+<li><p>State（状态）</p>
+</li>
+<li><p>Strategy（策略）</p>
+</li>
+<li><p>Visitor（访问者）</p>
+</li>
+</ol>
+<h2 id="创建型"><a href="#创建型" class="headerlink" title="创建型"></a>创建型</h2><p><strong>Factory Method（工厂方法）</strong></p>
+<p><img src="https://i.imgur.com/QHdivGQ.png" alt=""></p>
+<p>意图：</p>
+<p>定义一个用于创建对象的接口，让子类决定实例化哪一个类。Factory Method 使一个类的实例化延迟到其子类。</p>
+<p>适用性：</p>
+<blockquote>
+<pre><code>当一个类不知道它所必须创建的对象的类的时候。
+当一个类希望由它的子类来指定它所创建的对象的时候。
+当类将创建对象的职责委托给多个帮助子类中的某一个，
+并且你希望将哪一个帮助子类是代理者这一信息局部化的时候。
+</code></pre></blockquote>
+<p>实现：</p>
+<pre><code>class ChinaGetter:
+    &quot;&quot;&quot;A simple localizer a la gettext&quot;&quot;&quot;
+    def __init__(self):
+        self.trans = dict(dog=u&quot;小狗&quot;, cat=u&quot;小猫&quot;)
+
+    def get(self, msgid):
+        &quot;&quot;&quot;We&apos;ll punt if we don&apos;t have a translation&quot;&quot;&quot;
+        try:
+            return self.trans[msgid]
+        except KeyError:
+            return str(msgid)
+
+
+class EnglishGetter:
+    &quot;&quot;&quot;Simply echoes the msg ids&quot;&quot;&quot;
+    def get(self, msgid):
+        return str(msgid)
+
+
+def get_localizer(language=&quot;English&quot;):
+    &quot;&quot;&quot;The factory method&quot;&quot;&quot;
+    languages = dict(English=EnglishGetter, China=ChinaGetter)
+    return languages[language]()
+
+# Create our localizers
+e, g = get_localizer(&quot;English&quot;), get_localizer(&quot;China&quot;)
+# Localize some text
+for msgid in &quot;dog parrot cat bear&quot;.split():
+    print(e.get(msgid), g.get(msgid))
+</code></pre><p><strong>Abstract Factory（抽象工厂）</strong></p>
+<p><img src="https://i.imgur.com/LAVNQLD.png" alt=""></p>
+<p>意图：</p>
+<p>提供一个创建一系列相关或相互依赖对象的接口，而无需指定它们具体的类。 </p>
+<p>适用性：</p>
+<blockquote>
+<pre><code>一个系统要独立于它的产品的创建、组合和表示时。
+一个系统要由多个产品系列中的一个来配置时。
+当你要强调一系列相关的产品对象的设计以便进行联合使用时。
+当你提供一个产品类库，而只想显示它们的接口而不是实现时。
+</code></pre></blockquote>
+<p>实现：  </p>
+<pre><code>import random
+
+class PetShop:
+    &quot;&quot;&quot;A pet shop&quot;&quot;&quot;
+
+    def __init__(self, animal_factory=None):
+        &quot;&quot;&quot;pet_factory is our abstract factory.
+        We can set it at will.&quot;&quot;&quot;
+
+        self.pet_factory = animal_factory
+
+    def show_pet(self):
+        &quot;&quot;&quot;Creates and shows a pet using the
+        abstract factory&quot;&quot;&quot;
+
+        pet = self.pet_factory.get_pet()
+        print(&quot;This is a lovely&quot;, str(pet))
+        print(&quot;It says&quot;, pet.speak())
+        print(&quot;It eats&quot;, self.pet_factory.get_food())
+
+
+# Stuff that our factory makes
+
+class Dog:
+    def speak(self):
+        return &quot;woof&quot;
+
+    def __str__(self):
+        return &quot;Dog&quot;
+
+
+class Cat:
+    def speak(self):
+        return &quot;meow&quot;
+
+    def __str__(self):
+        return &quot;Cat&quot;
+
+
+# Factory classes
+
+class DogFactory:
+    def get_pet(self):
+        return Dog()
+
+    def get_food(self):
+        return &quot;dog food&quot;
+
+
+class CatFactory:
+    def get_pet(self):
+        return Cat()
+
+    def get_food(self):
+        return &quot;cat food&quot;
+
+
+# Create the proper family
+def get_factory():
+    &quot;&quot;&quot;Let&apos;s be dynamic!&quot;&quot;&quot;
+    return random.choice([DogFactory, CatFactory])()
+
+
+# Show pets with various factories
+if __name__ == &quot;__main__&quot;:
+    shop = PetShop()
+    for i in range(3):
+        shop.pet_factory = get_factory()
+        shop.show_pet()
+        print(&quot;=&quot; * 20)
+</code></pre><p><strong>Builder（建造者)</strong></p>
+<p>意图：</p>
+<p>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+<p>适用性：</p>
+<blockquote>
+<pre><code>当创建复杂对象的算法应该独立于该对象的组成部分以及它们的装配方式时。
+当构造过程必须允许被构造的对象有不同的表示时。
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/c6Z7lSl.png" alt=""><br>实现：  </p>
+<pre><code># Director
+class Director(object):
+    def __init__(self):
+        self.builder = None
+
+    def construct_building(self):
+        self.builder.new_building()
+        self.builder.build_floor()
+        self.builder.build_size()
+
+    def get_building(self):
+        return self.builder.building
+
+
+# Abstract Builder
+class Builder(object):
+    def __init__(self):
+        self.building = None
+
+    def new_building(self):
+        self.building = Building()
+
+
+# Concrete Builder
+class BuilderHouse(Builder):
+    def build_floor(self):
+        self.building.floor = &apos;One&apos;
+
+    def build_size(self):
+        self.building.size = &apos;Big&apos;
+
+
+class BuilderFlat(Builder):
+    def build_floor(self):
+        self.building.floor = &apos;More than One&apos;
+
+    def build_size(self):
+        self.building.size = &apos;Small&apos;
+
+
+# Product
+class Building(object):
+    def __init__(self):
+        self.floor = None
+        self.size = None
+
+    def __repr__(self):
+        return &apos;Floor: %s | Size: %s&apos; % (self.floor, self.size)
+
+
+# Client
+if __name__ == &quot;__main__&quot;:
+    director = Director()
+    director.builder = BuilderHouse()
+    director.construct_building()
+    building = director.get_building()
+    print(building)
+    director.builder = BuilderFlat()
+    director.construct_building()
+    building = director.get_building()
+    print(building)
+</code></pre><p><strong>Prototype（原型）</strong></p>
+<p>意图：</p>
+<p>用原型实例指定创建对象的种类，并且通过拷贝这些原型创建新的对象。</p>
+<p>适用性：</p>
+<p>当要实例化的类是在运行时刻指定时，例如，通过动态装载；或者为了避免创建一个与产品类层次平行的工厂类层次时；或者当一个类的实例只能有几个不同状态组合中的一种时。建立相应数目的原型并克隆它们可能比每次用合适的状态手工实例化该类更方便一些。  </p>
+<p><img src="https://i.imgur.com/9Adtnsm.png" alt=""></p>
+<pre><code>import copy
+
+class Prototype:
+    def __init__(self):
+        self._objects = {}
+
+    def register_object(self, name, obj):
+        &quot;&quot;&quot;Register an object&quot;&quot;&quot;
+        self._objects[name] = obj
+
+    def unregister_object(self, name):
+        &quot;&quot;&quot;Unregister an object&quot;&quot;&quot;
+        del self._objects[name]
+
+    def clone(self, name, **attr):
+        &quot;&quot;&quot;Clone a registered object and update inner attributes dictionary&quot;&quot;&quot;
+        obj = copy.deepcopy(self._objects.get(name))
+        obj.__dict__.update(attr)
+        return obj
+
+
+def main():
+    class A:
+        def __str__(self):
+            return &quot;I am A&quot;
+
+    a = A()
+    prototype = Prototype()
+    prototype.register_object(&apos;a&apos;, a)
+    b = prototype.clone(&apos;a&apos;, a=1, b=2, c=3)
+
+    print(a)
+    print(b.a, b.b, b.c)
+
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><p><strong>Singleton（单例）</strong></p>
+<p>意图：</p>
+<p>保证一个类仅有一个实例，并提供一个访问它的全局访问点。</p>
+<p>适用性：</p>
+<blockquote>
+<pre><code>当类只能有一个实例而且客户可以从一个众所周知的访问点访问它时。
+当这个唯一实例应该是通过子类化可扩展的，并且客户应该无需更改代码就能使用一个扩展的实例时。  
+</code></pre></blockquote>
+<p><img src="https://i.imgur.com/eTPN7Mc.png" alt=""></p>
+<p>示例：</p>
+<pre><code>import threading
+
+class Singleton(object):
+    _instance_lock = threading.Lock()
+
+    def __init__(self):
+        pass
+
+
+    def __new__(cls, *args, **kwargs):
+        if not hasattr(Singleton, &quot;_instance&quot;):
+            with Singleton._instance_lock:
+                if not hasattr(Singleton, &quot;_instance&quot;):
+                    Singleton._instance = object.__new__(cls)
+        return Singleton._instance
+
+obj1 = Singleton()
+obj2 = Singleton()
+print(obj1,obj2)
+
+def task(arg):
+    obj = Singleton()
+    print(obj)
+
+for i in range(10):
+    t = threading.Thread(target=task,args=[i,])
+    t.start()
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/python多任务之协程/" rel="next" title="python多任务之协程">
+                <i class="fa fa-chevron-left"></i> python多任务之协程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/03/Scrapy框架基础学习/" rel="prev" title="Scrapy框架学习之入门案例">
+                Scrapy框架学习之入门案例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是设计模式"><span class="nav-number">1.</span> <span class="nav-text">什么是设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建型"><span class="nav-number">2.</span> <span class="nav-text">创建型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

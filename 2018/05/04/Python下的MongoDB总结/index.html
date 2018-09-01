@@ -1,0 +1,1250 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="mongodb," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 将数据存储为一个文档，数据结构由键值(key=&amp;gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。下面是对mongodb的一些经验总结。">
+<meta name="keywords" content="mongodb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python下的MongoDB总结">
+<meta property="og:url" content="http://yoursite.com/2018/05/04/Python下的MongoDB总结/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 将数据存储为一个文档，数据结构由键值(key=&amp;gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。下面是对mongodb的一些经验总结。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-01T15:55:37.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python下的MongoDB总结">
+<meta name="twitter:description" content="MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 将数据存储为一个文档，数据结构由键值(key=&amp;gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。下面是对mongodb的一些经验总结。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/04/Python下的MongoDB总结/"/>
+
+
+
+
+
+  <title>Python下的MongoDB总结 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/04/Python下的MongoDB总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python下的MongoDB总结</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-04T10:31:56+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MongoDB 是由C++语言编写的，是一个基于分布式文件存储的开源数据库系统。在高负载的情况下，添加更多的节点，可以保证服务器性能。MongoDB 将数据存储为一个文档，数据结构由键值(key=&gt;value)对组成。MongoDB 文档类似于 JSON 对象。字段值可以包含其他文档，数组及文档数组。下面是对mongodb的一些经验总结。<br><a id="more"></a></p>
+<h2 id="mongo服务"><a href="#mongo服务" class="headerlink" title="mongo服务"></a>mongo服务</h2><ul>
+<li><p>可视化管理工具</p>
+<blockquote>
+<pre><code>NoSQL Manager for MongoDB 或者 robomongo
+</code></pre></blockquote>
+</li>
+<li><p>服务指令</p>
+<blockquote>
+<pre><code>查看帮助：mongod –help
+启动服务：sudo service mongod start
+停止服务：sudo service mongod stop
+重启服务：sudo service mongod restart
+查看进程：ps ajx|grep mongod
+配置文件的位置：/etc/mongod.conf
+默认端口：27017
+日志的位置：/var/log/mongodb/mongod.log
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="数据库的相关操作"><a href="#数据库的相关操作" class="headerlink" title="数据库的相关操作"></a>数据库的相关操作</h2><ul>
+<li><p>数据库操作</p>
+<blockquote>
+<pre><code>查看当前的数据库：db
+查看所有的数据库：show dbs  /show databases
+切换数据库：use 数据库名
+删除当前的数据库：db.dropDatabase()
+</code></pre></blockquote>
+</li>
+<li><p>集合操作  </p>
+<blockquote>
+<pre><code>当集合不存在时，插入任何一条数据集合自动创建。或者手动创建集合
+db.createCollection(name,[options])
+
+其中options：  
+参数capped： 默认值为false表示不设置上限,值为true表示设置上限
+参数size： 当capped值为true时,需要指定此参数,表示上限大小,当文档达到上限时,会将之前的数据覆盖,单位为字节
+
+当集合存在时：
+查看集合：show collections
+删除集合：db.集合名称.drop()
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><blockquote>
+<pre><code>Object ID：文档ID
+String： 字符串,最常使用,必须是有效的UTF-8
+Boolean： 存储一个布尔值,true或false
+Integer： 整数可以是32位或64位,这取决于服务器
+Double： 存储浮点值
+Arrays： 数组或列表， 多个值存储到一个键
+Object： 用于嵌入式的文档， 即一个值为一个文档
+Null： 存储Null值
+Timestamp： 时间戳,表示从1970-1-1到现在的总秒数
+Date： 存储当前日期或时间的UNIX时间格式
+注意点：
+创建日期语句如下 ：参数的格式为YYYY-MM-DD
+比如             new Date(&apos;2017-12-20&apos;)
+
+每个文档都有一个属性,为_id,保证每个文档的唯一性，可以自己去设置_id插入文档,如果没有提供,那么MongoDB为每个⽂档提供了一个独特的_id,类型为objectID。
+objectID是一个12字节的十六进制数：
+前4个字节为当前时间戳
+接下来3个字节的机器ID
+接下来的2个字节中MongoDB的服务进程id
+最后3个字节是简单的增量值
+</code></pre></blockquote>
+<h2 id="数据的相关操作"><a href="#数据的相关操作" class="headerlink" title="数据的相关操作"></a>数据的相关操作</h2><ul>
+<li><p>增加</p>
+<blockquote>
+<pre><code>插入数据(字段_id存在就报错)：db.集合名称.insert(document)
+插入数据(字段_id存在就更新)：db.集合名称.save(document)
+for instance:
+插入文档时,如果不指定_id参数,MongoDB会为文档分配一个唯一的ObjectId
+db.people.insert({name:&quot;huhua&quot;,age:&quot;8&quot;})
+
+插入文档时,可以指定_id参数
+db.people.insert({_id:&quot;1000&quot;,name:&quot;huhua&quot;,age:&quot;18&quot;})
+
+更新了上面_id为1000的文档
+db.people.save({_id:&quot;10001&quot;,name:&quot;huhua&quot;,age:&quot;28&quot;})
+</code></pre></blockquote>
+</li>
+<li><p>更新</p>
+<blockquote>
+<pre><code>更新数据：db.集合名称.update(&lt;query&gt; ,&lt;update&gt;,{multi: &lt;boolean&gt;})
+参数query:查询条件
+参数update:更新操作符
+参数multi:可选,默认是false,表示只更新找到的第一条记录,值为true表示把满足条件的文档全部更新
+for instance：
+原有内容：
+{
+  &quot;_id&quot; : ObjectId(&quot;5b66f05f1194e110103bc283&quot;),
+  &quot;name&quot;: &quot;huhua&quot;,
+  &quot;age&quot;: &quot;20&quot;
+  }
+将name为xianyuplus的值替换为xianyuplus1
+db.people.update({name:&quot;huhua&quot;},{name:&quot;haha&quot;})
+
+操作后内容：
+{
+  &quot;_id&quot; : ObjectId(&quot;5b66f05f1194e110103bc283&quot;),
+  &quot;name&quot;: &quot;xianyuplus1&quot;
+  }
+ 可以看到单单使用update更新数据会导致原有数据被新数据替换，所以我们应该搭配$set使用,指定更新对应的键值。
+ for intance1:
+ 原有内容：
+</code></pre><p>  {</p>
+<pre><code>  &quot;_id&quot; : ObjectId(&quot;5b66f05f1194e110103bc283&quot;),
+  &quot;name&quot;: &quot;hehe&quot;,
+  &quot;age&quot;: &quot;18&quot;
+  }
+将name为hehe的值更新为huohuo
+db.people.update({name:&quot;hehe&quot;},{$set:{name:&quot;huohuo&quot;}})
+操作后内容：
+</code></pre><p>  {</p>
+<pre><code>  &quot;_id&quot; : ObjectId(&quot;5b66f05f1194e110103bc283&quot;),
+  &quot;name&quot;: &quot;huohuo&quot;,
+  &quot;age&quot;: &quot;18&quot;
+  }
+更新多条数据：使用参数multi:true
+for instance2：
+更新全部数据的name值为huhua
+db.people.update({},{$set:{name:&quot;huhua&quot;}},{multi:true})
+注意：multi update only works with $ operators 即multi只要和$搭配使用时才能起效。
+</code></pre></blockquote>
+</li>
+<li><p>删除</p>
+<blockquote>
+<pre><code>删除数据：db.集合名称.remove(&lt;query&gt;,{justOne: &lt;boolean&gt;})
+参数query:可选,删除的文档的条件
+参数justOne:可选,如果设为true或1,则只删除一条,默认fals,表示删除多条
+for instance:
+把name值为huhua的数据全部删掉
+db.people.remove({name:&quot;huhua&quot;})
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><ul>
+<li><p>查询方法</p>
+<blockquote>
+<pre><code>查询文档：db.集合名称.find({条件文档})
+查询一条数据:db.集合名称.findOne({条件文档})
+格式化查询：db.集合名称.find({条件文档}).pretty()
+</code></pre></blockquote>
+</li>
+<li><p>比较运算符</p>
+<blockquote>
+<pre><code>等于：name:huhua
+大于：$gt ( greater than )
+大于等于：$gte ( greater than equal )
+小于：$lt ( less than )
+小于等于：$lte ( less than equal )
+不等于：$ne ( not equal )
+for instaces: 
+查询age大于20的数据
+db.stu.find({age:{$gt:20}})
+查询age大于等于20的数据
+db.stu.find({age:{$gte:20}})
+查询age小于20的数据
+db.stu.find({age:{$lt:20}})
+查询age小于等于20的数据
+db.stu.find({age:{$lte:20}})
+查询age不等于20的数据
+db.stu.find({age:{$ne:20}})
+</code></pre></blockquote>
+</li>
+<li><p>逻辑运算符</p>
+<blockquote>
+<pre><code>and：在find条件文档中写入多个字段条件即可
+or：使用 $or
+for instance: 
+查找name为huhua且age为20的数据
+db.stu.find({name:&quot;huhua&quot;,age:20})
+查找name为dabao或age为20的数据
+db.stu.find({$or:[{name:&quot;dabao&quot;},{age:20}]})
+查找age大于等于20或gender为男并且name为huhua的数据
+db.stu.find({$or:[{gender:&quot;true&quot;},{age:{$gte:18}}],name:&quot;huhua&quot;})
+</code></pre></blockquote>
+</li>
+<li><p>范围运算符</p>
+<blockquote>
+<pre><code>使用$in与$nin判断是否在某一范围内
+for instance
+查询年龄为18、28的数据
+db.stu.find({age:{$in:[18,28]}})
+</code></pre></blockquote>
+</li>
+<li><p>使用正则表达式</p>
+<blockquote>
+<pre><code>使用//或$regex编写正则表达式
+for instance:
+查询name以hu开头的数据
+db.stu.find({name:/^hu/})
+db.stu.find({name:{$regex:&apos;^hu&apos;}})
+</code></pre></blockquote>
+</li>
+<li><p>分页与跳过</p>
+<blockquote>
+<pre><code>查询前n条数据：db.集合名称.find().limit(NUMBER)
+跳过n条数据：db.集合名称.find().skip(NUMBER)
+for instance:
+查询前3条数据
+db.stu.find().limit(3)
+查询3条后的数据
+db.stu.find().skip(3)
+skip和limit可以搭配使用,查询第4,5,6条数据
+db.stu.find().skip(3).limit(3)
+</code></pre></blockquote>
+</li>
+<li><p>自定义查询</p>
+<blockquote>
+<pre><code>使用$where自定义查询,这里使用的是js语法
+for instance
+//查询age大于30的数据
+db.stu.find({
+  $where:function() {
+      return this.age&gt;30;}
+  })
+</code></pre></blockquote>
+</li>
+<li><p>投影</p>
+<blockquote>
+<pre><code>在查询结果中只显示你想要看到的数据字段内容。
+语法：db.集合名称.find({},{字段名称:1,...})
+想显示的字段设置为1,不想显示的字段不设置,而_id这个字段比较特殊,想要他不显示需要设置_id为0。
+for instance：
+查询结果中只显示name字段，不显示age
+db.stu.find({},{name:1})
+</code></pre></blockquote>
+</li>
+<li><p>排序</p>
+<blockquote>
+<pre><code>db.集合名称.find().sort({字段:1,...})
+将需要排序的字段设置值：升序为1,降序为-1
+for instance:
+先按照性别降序排列再按照年龄升序排列
+db.stu.find().sort({gender:-1,age:1})
+</code></pre></blockquote>
+</li>
+<li><p>计数</p>
+<blockquote>
+<pre><code>统计数目：db.集合名称.find({条件}).count()
+        db.集合名称.count({条件})
+for instance
+查询age为20的数据个数
+db.stu.find({age:20}).count()
+查询age大于20，且性别为男的数据个数
+db.stu.count({age:{$gt:20},gender:true})
+</code></pre></blockquote>
+</li>
+<li><p>去重</p>
+<blockquote>
+<pre><code>去重：db.集合名称.distinct(&apos;去重字段&apos;,{条件})
+for instance:
+去除家乡相同，且年龄大于18的数据
+db.stu.distinct(&apos;hometown&apos;,{age:{$gt:18}})
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="管道-amp-聚合"><a href="#管道-amp-聚合" class="headerlink" title="管道&amp;聚合"></a>管道&amp;聚合</h2><p>聚合(aggregate)是基于数据处理的聚合管道，每个文档通过一个由多个阶段（stage）组成的管道，可以对每个阶段的管道进行分组、过滤等功能，然后经过一系列的处理，输出相应的结果。</p>
+<blockquote>
+<pre><code>语法：db.集合名称.aggregate({管道:{表达式}})
+</code></pre></blockquote>
+<ul>
+<li><p>常用管道</p>
+<blockquote>
+<pre><code>$group： 将集合中的文档分组， 可用于统计结果
+$match： 过滤数据， 只输出符合条件的文档
+$project： 修改输出文档的结构， 如重命名、 增加、 删除字段、 创建计算结果
+$sort： 将输出文档排序后输出
+$limit： 限制聚合管道返回的文档数
+$skip： 跳过指定数量的文档， 并返回余下的文档
+$unwind： 将数组类型的字段进行拆分    
+</code></pre></blockquote>
+</li>
+<li><p>常用表达式</p>
+<blockquote>
+<pre><code>表达式：&quot;列名&quot;
+$sum： 计算总和， $sum:1 表示以一倍计数
+$avg： 计算平均值
+$min： 获取最小值
+$max： 获取最大值
+$push： 在结果文档中插入值到一个数组中
+$first： 根据资源文档的排序获取第一个文档数据
+$last： 根据资源文档的排序获取最后一个文档数据
+</code></pre></blockquote>
+</li>
+</ul>
+<p>下面是聚合的一些实例：</p>
+<ul>
+<li><p>$group</p>
+<blockquote>
+<pre><code>group:将文档进行分组以便于统计数目
+用法：_id表示分组依据,_id:&quot;$字段名&quot;
+for instance:
+按照hometown分组，并计数
+db.stu.aggregate({$group:{_id:&quot;$hometown&quot;, count:{$sum:1}}})
+将集合中所有的内容分为一组，统计个数
+db.stu.aggregate({$group:{_id:null, count:{$sum:1}}})
+</code></pre></blockquote>
+</li>
+<li><p>$project</p>
+<blockquote>
+<pre><code>project：修改输入文档的结构,如：重命名,增加、删除字段等
+for instance
+先按照hometown分组，并计数
+分组输出，只显示count字段
+db.stu.aggregate(
+  {$group:{_id:&quot;$hometown&quot;, count:{$sum:1}}},
+  {$project:{_id:0,count:1}}
+  )
+</code></pre></blockquote>
+</li>
+<li><p>$match</p>
+<blockquote>
+<pre><code>match: 用于过滤数据,只输出符合条件的文档,功能和find类似,但是match是管道命令，能将结果交给后一个管道，但是find不可以。
+for instance:
+查询age大于20
+按照hometown分组，并计数
+分组输出，只显示count字段
+db.stu.aggregate(
+  {$match:{age:{$gte:20}}},
+  {$group:{_id:&quot;$hometown&quot;, count:{$sum:1}}},
+  {$project:{_id:0,count:1}}
+   )
+</code></pre></blockquote>
+</li>
+<li><p>$sort</p>
+<blockquote>
+<pre><code>sort: 将输入文档排序后输出
+for instance:
+查询age大于20
+按照hometown分组，并计数
+分组输出，只显示count字段
+按照计数升序排序
+db.stu.aggregate(
+  {$match:{age:{$gte:20}}},
+  {$group:{_id:&quot;$hometown&quot;, count:{$sum:1}}},
+  {$project:{_id:0,count:1}},
+  {$sort:{count:1}}
+   )
+</code></pre></blockquote>
+</li>
+<li><p>$limit与$skip</p>
+<blockquote>
+<pre><code>limit:限制聚合管道返回的文档数
+skip:跳过指定数量的文档数,返回剩下的文档
+for instance：
+查询age大于20
+按照hometown分组，并计数
+按照计数升序排序
+跳过前一个文档,返回第二个
+db.stu.aggregate(
+  {$match:{age:{$gte:20}}},
+  {$group:{_id:&quot;$hometown&quot;, count:{$sum:1}}},
+  {$sort:{count:1}},
+  {$skip:1},
+  {$limit:1}
+   )
+</code></pre></blockquote>
+</li>
+<li><p>$unwind</p>
+<blockquote>
+<pre><code>unwind：将文档中的某一个数组类型字段拆分成多条， 每条包含数组中的一个值
+db.集合名称.aggregate({$unwind:&apos;$字段名称&apos;})
+db.stu.insert({_id:1,item:&apos;t-shirt&apos;,size:[&apos;S&apos;,&apos;M&apos;,&apos;L&apos;]})
+db.stu.aggregate({$unwind:&apos;$size&apos;})
+输出：
+{ &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;S&quot; }
+{ &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;M&quot; }
+{ &quot;_id&quot; : 1, &quot;item&quot; : &quot;t-shirt&quot;, &quot;size&quot; : &quot;L&quot; } 
+</code></pre></blockquote>
+</li>
+<li><p>聚合使用注意事项</p>
+<blockquote>
+<pre><code>$group对应的字典中有几个键，结果中就有几个键
+分组依据需要放到_id后面
+取不同的字段的值需要使用$,$gender,$age
+取字典嵌套的字典中的值的时候$_id.country
+能够同时按照多个键进行分组{$group:{_id:{country:&quot;$字段&quot;,province:&quot;$字段&quot;}}}
+</code></pre></blockquote>
+</li>
+</ul>
+<h2 id="mongodb索引"><a href="#mongodb索引" class="headerlink" title="mongodb索引"></a>mongodb索引</h2><p>用法：db.集合.ensureIndex({属性:1})，1表示升序， -1表示降序</p>
+<p>创建唯一索引:db.集合.ensureIndex({“属性”:1},{“unique”:true})<br>创建唯一索引并消除：<br>db.集合.ensureIndex({“属性”:1},{“unique”:true,”dropDups”:true})</p>
+<p>建立联合索引：db.集合.ensureIndex({属性:1,age:1})<br>查看当前集合的所有索引：db.集合.getIndexes()<br>删除索引：db.集合.dropIndex(‘索引名称’)</p>
+<h2 id="数据备份与恢复"><a href="#数据备份与恢复" class="headerlink" title="数据备份与恢复"></a>数据备份与恢复</h2><p>mongodb数据备份<br>备份：mongodump -h dbhost -d dbname -o dbdirectory</p>
+<blockquote>
+<pre><code>-h： 服务器地址,也可以指定端口号
+-d： 需要备份的数据库名称
+-o： 备份的数据存放位置,此目录中存放着备份出来的数据
+</code></pre></blockquote>
+<p>mongodb数据恢复<br>恢复：mongorestore -h dbhost -d dbname –dir dbdirectory</p>
+<blockquote>
+<pre><code>-h： 服务器地址
+-d： 需要恢复的数据库实例
+--dir： 备份数据所在位置
+</code></pre></blockquote>
+<h2 id="mongodb与python交互"><a href="#mongodb与python交互" class="headerlink" title="mongodb与python交互"></a>mongodb与python交互</h2><ul>
+<li><p>实例化</p>
+<blockquote>
+<pre><code>实例化对象以链接数据库,连接对象有host,port两个参数。
+from pymongo import MongoClient
+class clientMongo:
+  def __init__(self):
+    client = MongoClient(host=&quot;127.0.0.1&quot;, port=27017)
+</code></pre></blockquote>
+<pre><code>#使用[]括号的形式选择数据库和集合
+self.cliention = client[&quot;student&quot;][&quot;stu&quot;]
+</code></pre></li>
+<li><p>插入数据</p>
+<blockquote>
+<pre><code>插入单条数据：返回ObjectId
+def item_inser_one(self):
+   ret = self.cliention.insert({&quot;name&quot;:&quot;huhua&quot;,&quot;age&quot;:20})
+   print(ret)
+插入多条数据：
+def item_insert_many(self):
+   item_list = [{&quot;name&quot;:&quot;huhua{}&quot;.format(i)} for i in range(100)]
+   items = self.cliention.insert_many(item_list)
+</code></pre></blockquote>
+</li>
+<li><p>查询数据</p>
+<blockquote>
+<pre><code>查询单条数据：
+def item_find_one(self):
+  ret = self.cliention.find_one({&quot;name&quot;:&quot;huhua&quot;})
+  print(ret)
+查询多条数据：
+def item_find_many(self):
+  ret = self.cliention.find({&quot;name&quot;:&quot;huhua&quot;})
+  for i in ret:
+    print(i)
+</code></pre></blockquote>
+</li>
+<li><p>更新数据</p>
+<blockquote>
+<pre><code>更新一条数据：
+def item_update_one(self):
+  self.cliention.update_one({&quot;name&quot;:&quot;python&quot;},{&quot;$set&quot;:{&quot;name&quot;:&quot;java&quot;}})
+更新全部数据：
+def item_update(self):
+  self.cliention.update_many({&quot;name&quot;:&quot;hu&quot;},{&quot;$set&quot;:{&quot;name&quot;:&quot;haha&quot;}})
+</code></pre></blockquote>
+</li>
+<li><p>删除数据</p>
+<blockquote>
+<pre><code>删除一条数据：
+def item_delete_one(self):
+  self.cliention.delete_one({&quot;name&quot;:&quot;huhua&quot;})
+删除符合条件的数据：
+def item_delete_many(self):
+  self.cliention.delete_many({&quot;name&quot;:&quot;haha&quot;})
+</code></pre></blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/mongodb/" rel="tag"># mongodb</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/MySQL的数据类型/" rel="next" title="MySQL的数据类型">
+                <i class="fa fa-chevron-left"></i> MySQL的数据类型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/08/Python下的Redis总结/" rel="prev" title="Python下的Redis总结">
+                Python下的Redis总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mongo服务"><span class="nav-number">1.</span> <span class="nav-text">mongo服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库的相关操作"><span class="nav-number">2.</span> <span class="nav-text">数据库的相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">3.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的相关操作"><span class="nav-number">4.</span> <span class="nav-text">数据的相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询"><span class="nav-number">5.</span> <span class="nav-text">查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#管道-amp-聚合"><span class="nav-number">6.</span> <span class="nav-text">管道&amp;聚合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb索引"><span class="nav-number">7.</span> <span class="nav-text">mongodb索引</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据备份与恢复"><span class="nav-number">8.</span> <span class="nav-text">数据备份与恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mongodb与python交互"><span class="nav-number">9.</span> <span class="nav-text">mongodb与python交互</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

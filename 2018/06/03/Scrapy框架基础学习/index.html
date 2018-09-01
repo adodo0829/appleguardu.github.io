@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="scrapy," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Scrapy是一个用纯Python实现，为了爬取网站数据、提取结构性数据而编写的应用框架；我们只需要定制开发几个模块就可以轻松的实现一个爬虫，用来抓取网页内容以及各种图片，非常之方便。Scrapy 使用了Twisted多线程异步网络框架来处理网络通讯，可以加快我们的下载速度，不用自己去实现异步框架，并且包含了各种中间件接口，可以灵活的完成各种需求。">
+<meta name="keywords" content="scrapy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrapy框架学习之入门案例">
+<meta property="og:url" content="http://yoursite.com/2018/06/03/Scrapy框架基础学习/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="Scrapy是一个用纯Python实现，为了爬取网站数据、提取结构性数据而编写的应用框架；我们只需要定制开发几个模块就可以轻松的实现一个爬虫，用来抓取网页内容以及各种图片，非常之方便。Scrapy 使用了Twisted多线程异步网络框架来处理网络通讯，可以加快我们的下载速度，不用自己去实现异步框架，并且包含了各种中间件接口，可以灵活的完成各种需求。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/vNUUr2S.png">
+<meta property="og:image" content="https://i.imgur.com/blWwfGE.png">
+<meta property="og:image" content="https://i.imgur.com/n2EJ8hO.png">
+<meta property="og:image" content="https://i.imgur.com/cOhEe1R.png">
+<meta property="og:image" content="https://i.imgur.com/yBzpX75.png">
+<meta property="og:image" content="https://i.imgur.com/6PrClK0.png">
+<meta property="og:image" content="https://i.imgur.com/C0tjdXD.png">
+<meta property="og:image" content="https://i.imgur.com/BvG1S5X.png">
+<meta property="og:image" content="https://i.imgur.com/pI4YD37.png">
+<meta property="og:image" content="https://i.imgur.com/AmBVtAr.png">
+<meta property="og:image" content="https://i.imgur.com/ITitSws.png">
+<meta property="og:image" content="https://i.imgur.com/ViRiqt5.png">
+<meta property="og:updated_time" content="2018-09-01T15:59:24.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scrapy框架学习之入门案例">
+<meta name="twitter:description" content="Scrapy是一个用纯Python实现，为了爬取网站数据、提取结构性数据而编写的应用框架；我们只需要定制开发几个模块就可以轻松的实现一个爬虫，用来抓取网页内容以及各种图片，非常之方便。Scrapy 使用了Twisted多线程异步网络框架来处理网络通讯，可以加快我们的下载速度，不用自己去实现异步框架，并且包含了各种中间件接口，可以灵活的完成各种需求。">
+<meta name="twitter:image" content="https://i.imgur.com/vNUUr2S.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/03/Scrapy框架基础学习/"/>
+
+
+
+
+
+  <title>Scrapy框架学习之入门案例 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/03/Scrapy框架基础学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Scrapy框架学习之入门案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-03T20:50:37+08:00">
+                2018-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/scrapy/" itemprop="url" rel="index">
+                    <span itemprop="name">scrapy</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Scrapy是一个用纯Python实现，为了爬取网站数据、提取结构性数据而编写的应用框架；我们只需要定制开发几个模块就可以轻松的实现一个爬虫，用来抓取网页内容以及各种图片，非常之方便。Scrapy 使用了Twisted多线程异步网络框架来处理网络通讯，可以加快我们的下载速度，不用自己去实现异步框架，并且包含了各种中间件接口，可以灵活的完成各种需求。<br><a id="more"></a>  </p>
+<h1 id="Scrapy架构图"><a href="#Scrapy架构图" class="headerlink" title="Scrapy架构图"></a>Scrapy架构图</h1><p>——————————–<img src="https://i.imgur.com/vNUUr2S.png" alt=""></p>
+<p>它可以分为以下几个部分：  </p>
+<ul>
+<li><strong>Scrapy Engine(引擎):</strong> 负责Spider、ItemPipeline、Downloader、Scheduler中间的通讯，信号、数据传递等。</li>
+<li><strong>Scheduler(调度器):</strong> 它负责接受<code>引擎</code>发送过来的Request请求，并按照一定的方式进行整理排列，入队，当<code>引擎</code>需要时，交还给<code>引擎</code>。</li>
+<li><strong>Downloader（下载器)：</strong>负责下载<code>Scrapy Engine(引擎)</code>发送的所有Requests请求，并将其获取到的Responses交还给<code>Scrapy Engine(引擎)</code>，由<code>引擎</code>交给<code>Spider</code>来处理。</li>
+<li><strong>spiders（爬虫）：</strong>它负责处理所有Responses,从中分析提取数据，获取Item字段需要的数据，并将需要跟进的URL提交给<code>引擎</code>，再次进入<code>Scheduler(调度器)</code>。</li>
+<li><strong>Item Pipeline(管道)：</strong>它负责处理<code>Spider</code>中获取到的Item，并进行进行后期处理（详细分析、过滤、存储等）的地方.</li>
+<li><strong>Downloader Middlewares（下载中间件）：</strong>你可以当作是一个可以自定义扩展下载功能的组件。</li>
+<li><strong>Spider Middlewares（Spider中间件）：</strong>你可以理解为是一个可以自定扩展和操作<code>引擎</code>和<code>Spider</code>中间<code>通信</code>的功能组件（比如进入<code>Spider</code>的Responses;和从<code>Spider</code>出去的Requests）。</li>
+</ul>
+<h1 id="Scrapy的运作流程"><a href="#Scrapy的运作流程" class="headerlink" title="Scrapy的运作流程"></a>Scrapy的运作流程</h1><p>代码写好，程序开始运行…</p>
+<ol>
+<li><code>引擎</code>：Hi！<code>Spider</code>, 你要处理哪一个网站？</li>
+<li><code>Spider</code>：老大要我处理xxxx.com。</li>
+<li><code>引擎</code>：你把第一个需要处理的URL给我吧。</li>
+<li><code>Spider</code>：给你，第一个URL是xxxxxxx.com。</li>
+<li><code>引擎</code>：Hi！<code>调度器</code>，我这有request请求你帮我排序入队一下。</li>
+<li><code>调度器</code>：好的，正在处理你等一下。</li>
+<li><code>引擎</code>：Hi！<code>调度器</code>，把你处理好的request请求给我。</li>
+<li><code>调度器</code>：给你，这是我处理好的request。</li>
+<li><code>引擎</code>：Hi！下载器，你按照老大的<code>下载中间件</code>的设置帮我下载一下这个request请求</li>
+<li><code>下载器</code>：好的！给你，这是下载好的东西。（如果失败：sorry，这个request下载失败了。然后<code>引擎</code>告诉<code>调度器</code>，这个request下载失败了，你记录一下，我们待会儿再下载）</li>
+<li><code>引擎</code>：Hi！<code>Spider</code>，这是下载好的东西，并且已经按照老大的<code>下载中间件</code>处理过了，你自己处理一下（注意！这儿responses默认是交给<code>def parse()</code>这个函数处理的）</li>
+<li><code>Spider</code>：（处理完毕数据之后对于需要跟进的URL），Hi！<code>引擎</code>，我这里有两个结果，这个是我需要跟进的URL，还有这个是我获取到的Item数据。</li>
+<li><code>引擎</code>：Hi ！<code>管道</code>我这儿有个item你帮我处理一下！<code>调度器</code>！这是需要跟进URL你帮我处理下。然后从第四步开始循环，直到获取完老大需要全部信息。</li>
+<li><code>管道`</code>调度器`：好的，现在就做！</li>
+</ol>
+<p><strong>注意！只有当</strong> <code>调度器</code> <strong>中不存在任何request了，整个程序才会停止，（也就是说，对于下载失败的URL，Scrapy也会重新下载。）</strong></p>
+<h1 id="Scrapy-爬虫步骤："><a href="#Scrapy-爬虫步骤：" class="headerlink" title="Scrapy 爬虫步骤："></a>Scrapy 爬虫步骤：</h1><ul>
+<li>新建项目 (scrapy startproject xxx)：在终端中执行命令，新建一个爬虫项目，会创建一个xxx文件夹</li>
+<li>明确目标 （编写items.py）：明确你想要抓取的目标，定义爬取的数据结构</li>
+<li>制作爬虫 （spiders/xxspider.py）：制作爬虫开始爬取网页</li>
+<li>存储内容 （pipelines.py）：设计管道存储爬取内容</li>
+</ul>
+<p>下面来就来讲一个简单的案例来熟悉以下scrapy的操作：  </p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>创建一个Scrapy项目</li>
+<li>定义提取的结构化数据(Item)</li>
+<li>编写爬取网站的 Spider 并提取出结构化数据(Item)</li>
+<li>编写 Item Pipelines 来存储提取到的Item(即结构化数据)</li>
+</ul>
+<h2 id="一-新建项目-scrapy-startproject-studyScrapy"><a href="#一-新建项目-scrapy-startproject-studyScrapy" class="headerlink" title="一. 新建项目(scrapy startproject studyScrapy)"></a>一. 新建项目(scrapy startproject studyScrapy)</h2><ul>
+<li><p>在开始爬取之前，必须创建一个新的Scrapy项目。进入自定义的项目目录中，比如我的是<strong>F:\spider_projects</strong> 运行下列命令：</p>
+<blockquote>
+<pre><code>scrapy startproject studyScrapy
+</code></pre></blockquote>
+</li>
+<li><p>其中， studyScrapy 为项目名称，可以看到将会创建一个 studyScrapy 的文件夹，目录结构大致如下：<br><img src="https://i.imgur.com/blWwfGE.png" alt=""></p>
+</li>
+</ul>
+<p>下面来简单介绍一下各个主要文件的作用：  </p>
+<ul>
+<li><p>studyScrapy/spiders/ ：存储爬虫代码的文件夹</p>
+</li>
+<li><p>studyScrapy/ ：该项目的Python模块，需要从这里引入；即import</p>
+</li>
+<li><p>studyScrapy/items.py ：定义项目的目标文件，即需要爬取的数据</p>
+</li>
+<li><p>studyScrapy/middlewares.py： 定义爬取时的中间件</p>
+</li>
+<li><p>studyScrapy/pipelines.py ：项目的管道文件，</p>
+</li>
+<li><p>studyScrapy/settings.py ：项目的设置文件</p>
+</li>
+<li><p>scrapy.cfg ：scrapy部署时的配置文件</p>
+</li>
+</ul>
+<h2 id="二-创建QuotesSpider类-studyScrapy-spiders"><a href="#二-创建QuotesSpider类-studyScrapy-spiders" class="headerlink" title="二. 创建QuotesSpider类(studyScrapy/spiders)"></a>二. 创建QuotesSpider类(studyScrapy/spiders)</h2><p>我们打算抓取谚语网：<a href="http://quotes.toscrape.com" target="_blank" rel="noopener">http://quotes.toscrape.com</a> 。使用命令行生成一个Spider：  </p>
+<blockquote>
+<pre><code>scrapy genspider quotes quotes.toscrape.com
+</code></pre></blockquote>
+<p>cd 到studyScrapy文件目录下，执行上述语句，然后我们在spiders文件下发现一个quotes.py文件。</p>
+<p><img src="https://i.imgur.com/n2EJ8hO.png" alt=""></p>
+<p>这个类必须继承scrapy.Spider， 这里有三个属性，和一个方法。</p>
+<ul>
+<li><code>name = &quot;&quot;</code>：这个爬虫的识别名称，必须是唯一的，在不同的爬虫必须定义不同的名字。</li>
+<li><code>allow_domains = []</code>是搜索的域名范围，也就是爬虫的约束区域，规定爬虫只爬取这个域名下的网页，不存在的URL会被忽略。</li>
+<li><code>start_urls = []</code>：爬取的URL的列表。爬虫从这里开始抓取数据，所以，第一次下载的数据将会从这些urls开始。其他子URL将会从这些起始URL中继承性生成。</li>
+<li><code>parse(self, response)</code>：解析的方法，每个初始URL完成下载后将被调用，调用的时候传入从每一个URL传回的Response对象来作为唯一参数，主要作用如下：<ol>
+<li>负责解析返回的网页数据(response.body)，提取结构化数据(生成item)</li>
+<li>生成需要下一页的URL请求；</li>
+<li></li>
+</ol>
+</li>
+</ul>
+<h2 id="三-创建Item类"><a href="#三-创建Item类" class="headerlink" title="三. 创建Item类"></a>三. 创建Item类</h2><ol>
+<li>打开studyScrapy目录下的items.py</li>
+<li>Item 定义结构化数据字段，用来保存爬取到的数据，有点像Python中的dict，但是提供了一些额外的保护机制来减少错误。</li>
+<li>创建Item需要继承scrapy.Item类，并且定义类型为scrapy.Field的字段。</li>
+<li>接下来，创建一个QuoteItem类，定义我们要获取的内容字段，text， author， tags。</li>
+</ol>
+<p>此时，将items.py修改如下：</p>
+<p><img src="https://i.imgur.com/cOhEe1R.png" alt=""></p>
+<h2 id="四-修改parse-方法，解析Response"><a href="#四-修改parse-方法，解析Response" class="headerlink" title="四. 修改parse()方法，解析Response"></a>四. 修改parse()方法，解析Response</h2><p>parse方法中的参数response是start_urls里面的链接爬取的结果；所以我们可直接对response变量中的内容进行解析。<br>首先我们看一下网页结构，每一页都有class为quote的区块，每个区块里包含了text，author，tags，我们先找出所有quote，在提取出里面的信息。<br><img src="https://i.imgur.com/yBzpX75.png" alt=""></p>
+<p>这里需要使用上面创建的Item，可以将它理解为一个字典，不过在声明的时候需要实例化。然后再将图中的结果解析出来赋值给Item中的每个字段，最后使用yield返回即可。</p>
+<p><img src="https://i.imgur.com/6PrClK0.png" alt=""></p>
+<p>这样就获取了初始页面的内容了。 这里为什么用yield而不用return呢？这里要从parse()方法的工作机制来说：</p>
+<blockquote>
+<pre><code>因为使用的是yield，parse函数将会被当做一个生成器使用。scrapy会逐一获取parse方法中生成的结果，并判断该结果是一个什么样的类型；
+如果是request则加入爬取队列，如果是item类型则使用pipeline处理，其他类型则返回错误信息。
+scrapy取到第一部分的request不会立马就去发送这个request，只是把这个request放到队列里，然后接着从生成器里获取；
+取完第一部分的request，然后再获取第二部分的item，取到item了，就会放到对应的pipeline里处理；
+parse()方法作为回调函数(callback)赋值给了Request，指定parse()方法来处理这些请求 scrapy.Request(url, callback=self.parse)
+Request对象经过调度，执行生成 scrapy.http.response()的响应对象，并送回给parse()方法，直到调度器中没有Request（递归的思路）
+取完之后，parse()工作结束，引擎再根据队列和pipelines中的内容去执行相应的操作；
+程序在取得各个页面的items前，会先处理完之前所有的request队列里的请求，然后再提取items。
+</code></pre></blockquote>
+<h2 id="五-处理后续的Request"><a href="#五-处理后续的Request" class="headerlink" title="五. 处理后续的Request"></a>五. 处理后续的Request</h2><p>上面知识完成了首页的抓取，那么下一页怎么来完成了，以前我写的爬虫都是分析了url请求的规律，然后构造请求再取获取页面内容。这里我们需要从当前页面找到信息来生成下一个请求，然后再下一个请求中寻找信息构造下下一个请求。就这样循环迭代，实现整个网站的爬取。</p>
+<p><img src="https://i.imgur.com/C0tjdXD.png" alt=""></p>
+<p>将网页下拉到底部，查看下一页按钮，链接为/page/2/， 完整的URL就是 <a href="http://quotes.toscrape.com/page/2/" target="_blank" rel="noopener">http://quotes.toscrape.com/page/2/</a><br>我们现在就可以构造RUL请求了，这里又要用到一个新函数<strong>scrapy.Requst</strong>。它有两个参数—-url， callback。  </p>
+<blockquote>
+<pre><code>url: 新的请求链接
+callback： 回调函数，当指定了该回调函数的请求完成后，获取到响应，引擎会将该响应作为参数传递给这个回调函数。 
+回调函数进行解析或者生成下一个请求，这里的回调函数就是上面的parse()函数。
+</code></pre></blockquote>
+<p>这里由于parse()就是解析text，author，tags的方法，并且下一页面的结构与刚才解析的页面是一样的，所以我们可以再次使用parse来解析页面。接下来我们先利用选择器得到下一页的URL，生成新请求；在parse()方法后面追加如下代码即可：  </p>
+<p><img src="https://i.imgur.com/BvG1S5X.png" alt=""></p>
+<h2 id="六-运行"><a href="#六-运行" class="headerlink" title="六. 运行"></a>六. 运行</h2><p>然后，进入项目所在目录，直接运行 <strong>scrapy crawl quotes</strong>，Scrapy就开始进行抓取啦，当然我们还没设置中间件Middlewares和Piplines里面的内容，后面写其他项目会细细说明的。<br><img src="https://i.imgur.com/pI4YD37.png" alt=""></p>
+<p>另外，可以在项目的根目录下新建main.py文件,在爬虫代码中设置好断点，用于调试 </p>
+<blockquote>
+<pre><code>from scrapy import cmdline
+cmdline.execute(&apos;scrapy crawl quotes&apos;.split())
+</code></pre></blockquote>
+<h2 id="七-保存结果-Item-Pipeline"><a href="#七-保存结果-Item-Pipeline" class="headerlink" title="七.保存结果(Item Pipeline)"></a>七.保存结果(Item Pipeline)</h2><p><strong>保存到文件</strong> </p>
+<p>针对小项目数据，我们可以直接保存成文件格式。</p>
+<p>scrapy保存信息的最简单的方法主要有以下几种，-o 输出指定格式的文件，命令如下：</p>
+<ul>
+<li><p>scrapy crawl quotes -o quotes.json # 输出json文件</p>
+</li>
+<li><p>scrapy crawl quotes -o quotes.csv  # 输出csv文件</p>
+</li>
+<li><p>scrapy crawl quotes -o quotes.xml  # 输出xml格式文件</p>
+</li>
+<li><p>scrapy crawl quotes -o <a href="ftp://user:passwd@ftp.xxxx.com/path/to/quotes.csv" target="_blank" rel="noopener">ftp://user:passwd@ftp.xxxx.com/path/to/quotes.csv</a>  </p>
+</li>
+</ul>
+<p>同时还支持ftp， s3等远程输出。</p>
+<p><strong>保存到数据库</strong><br>如果想输出到数据库中的话，以mongoDB为例，我们可以定义<strong>项目管道Item Pipelin</strong>e进行操作。<br>当Item在Spider中被收集之后，它将会被传递到Item Pipeline，这些Item Pipeline组件按定义的顺序处理Item。<br>每个Item Pipeline都是实现了简单方法的Python类，比如决定此Item是丢弃而存储。以下是item pipeline的常用处理操作：</p>
+<blockquote>
+<pre><code>1. 清理HTML数据
+2. 验证爬虫数据，检查爬虫字段
+3. 查重并丢弃重复内容
+4. 将爬取结果保存到数据库中
+</code></pre></blockquote>
+<p>编写item pipeline很简单，item pipiline组件是一个独立的Python类，其中process_item()方法必须实现。<br>下面是一些方法示例：<br><img src="https://i.imgur.com/AmBVtAr.png" alt=""></p>
+<p>下面为实际的代码：<br><img src="https://i.imgur.com/ITitSws.png" alt=""><br><img src="https://i.imgur.com/ViRiqt5.png" alt=""></p>
+<p>这样我们便完成了一个入门案例了，正式踏入Scrapy框架的学习之路。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/22/Python下的设计模式一/" rel="next" title="Python下的设计模式一">
+                <i class="fa fa-chevron-left"></i> Python下的设计模式一
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/05/Scrapy框架学习之scrapy-shell和selector/" rel="prev" title="Scrapy框架学习之scrapy shell和selector">
+                Scrapy框架学习之scrapy shell和selector <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy架构图"><span class="nav-number">1.</span> <span class="nav-text">Scrapy架构图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy的运作流程"><span class="nav-number">2.</span> <span class="nav-text">Scrapy的运作流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy-爬虫步骤："><span class="nav-number">3.</span> <span class="nav-text">Scrapy 爬虫步骤：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标"><span class="nav-number">3.1.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一-新建项目-scrapy-startproject-studyScrapy"><span class="nav-number">3.2.</span> <span class="nav-text">一. 新建项目(scrapy startproject studyScrapy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-创建QuotesSpider类-studyScrapy-spiders"><span class="nav-number">3.3.</span> <span class="nav-text">二. 创建QuotesSpider类(studyScrapy/spiders)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-创建Item类"><span class="nav-number">3.4.</span> <span class="nav-text">三. 创建Item类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四-修改parse-方法，解析Response"><span class="nav-number">3.5.</span> <span class="nav-text">四. 修改parse()方法，解析Response</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五-处理后续的Request"><span class="nav-number">3.6.</span> <span class="nav-text">五. 处理后续的Request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六-运行"><span class="nav-number">3.7.</span> <span class="nav-text">六. 运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七-保存结果-Item-Pipeline"><span class="nav-number">3.8.</span> <span class="nav-text">七.保存结果(Item Pipeline)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
