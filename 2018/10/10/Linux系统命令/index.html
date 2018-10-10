@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="关于Linux系统的常用命令记录。">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统命令">
+<meta property="og:url" content="http://yoursite.com/2018/10/10/Linux系统命令/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="关于Linux系统的常用命令记录。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-10T03:59:37.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统命令">
+<meta name="twitter:description" content="关于Linux系统的常用命令记录。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/10/Linux系统命令/"/>
+
+
+
+
+
+  <title>Linux系统命令 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/Linux系统命令/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统命令</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-10T11:21:45+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于Linux系统的常用命令记录。<br><a id="more"></a></p>
+<h2 id="目录相关命令"><a href="#目录相关命令" class="headerlink" title="目录相关命令"></a>目录相关命令</h2><ul>
+<li>mkdir：创建目录，参数-p　　当需要创建父目录时创建父目录　　-v　　每次创建一个目录返回一个信息</li>
+<li>ls：查看目录，参数-l　　长格式显示具体属性　　-d　　只查看目录本身　　-a　　显示隐藏文件和目录　　-F　　显示结果加上对应结束符　　-r　　降序排序　　-t　　按修改时间排序　　-h　　显示占用的空间大小　　-i　　显示索引节点inode节点号　　–time-style　　格式化时间(–time-style=long-iso)</li>
+<li>cd：切换目录</li>
+<li>pwd：显示当前目录的绝对路径，参数-L　　显示系统变量PWD的值，为逻辑路径，默认使用该参数　　-P　　显示物理路径，链接文件会显示其指向的文件路径</li>
+<li>mv：移动文件或目录到指定位置，移动目录时结尾不要加/</li>
+<li>tree：以树形图形式显示目录结构，参数-a　　显示目录的所有内容　　-d　　只显示目录　　-L　　显示目录层级，可以接数字指定　　-f　　显示每个文件的完整路径　　-i　　不显示横线　　-F　　显示结果加上相应结束符</li>
+</ul>
+<h2 id="文件相关命令"><a href="#文件相关命令" class="headerlink" title="文件相关命令"></a>文件相关命令</h2><ul>
+<li>cat：查看文件内容，参数-n　　显示行号，特别用法：cat  文件1 文件2 &gt; 文件3   将文件内容上下合并并重定向到新文件中</li>
+<li>touch：创建文件和更新时间戳，参数-a　　只更新访问时间　　-m　　只更新修改时间</li>
+<li>vim：文本编辑器，由vi扩展而来，一般用于开发，有四种工作模式且每种模式有各自的命令集。</li>
+<li>echo：输出指定字符串，参数-n　与下一个echo的输出在同一行显示　　-e　　支持转义字符(\t,\n等)</li>
+<li>cp：复制文件或目录，参数-r　　递归复制　　-p　　保持文件或目录的属性　　-f　　强制复制　　-d　　如果源文件是链接文件则拷贝链接文件而不是其指向的目标文件　　-a　　相当于-rpd　</li>
+<li>rm：删除文件或目录，参数-f　　强制删除　　-r　　递归删除，用于删除目录</li>
+<li>grep：过滤结果，Linux三剑客之一，参数-i　　不区分大小写　　-v　　排除　　-E　　过滤多个关键词　　–color　　匹配结果显示颜色　　-n　　显示行号　　-o　　只显示匹配的内容　　-B　　显示匹配行及其之前的n行　　-A　　显示匹配行及其之后的n行　　-C　　显示匹配行及其前后各n行</li>
+<li>head：获取文件头部指定多少行的内容，参数-n　　指定需要获取的总行数，可以简写为-2,-3等，默认获取前十行</li>
+<li>tail：获取文件尾部指定多少行的内容，参数-n　　指定需要获取的总行数，可以简写，默认获取最后十行</li>
+<li>sed：过滤结果，Linux三剑客之一，参数-n　　取消默认输出　　-i　　修改文件　　-e　　允许多项编辑　　-r　　使用扩展的正则表达式，功能参数p　　打印(^打印首行，$打印尾行)　　s　　替换　　g　　全局</li>
+<li>awk：过滤结果，Linux三剑客之一，参数-F　　指定分隔符(指定多个分隔符需要将多个分隔符写在方括号中在方括号后跟上+号，如指定两个分隔符空格和冒号  [ :]+)，内置变量NR　　用于显示数据行的编号，可用于过滤文件，统计目录内的文件数等</li>
+<li>cut：分割数据，参数-d　　指定分隔符　　-f　　指定获取分割结果的哪些位置的字段　　-c　　指定获取哪些位置的字符</li>
+<li>stat：查看文件详细属性，参数-c　　以指定的格式输出(%a：获取文件的权限并以八进制数字显示，%A：获取文件的权限并以可读的方式显示)</li>
+<li>nl：查看文件时显示行号</li>
+<li>less：分页显示文件内容，参数-N　　显示行号</li>
+<li>more：分页显示内容，无法向前翻页</li>
+<li>chattr：设置文件或目录的属性，参数-i　　设定文件不能被删除、改名、设定链接关系，同时不能写入或新增内容</li>
+<li>tr：删除，替换，压缩标准输入中的字符，参数-d　　删除指定字符　　-c　　一般与-d参数配合使用删除指定字符外的所有字符　　-s　　指定字符如果重复出现则只显示一个　</li>
+<li>rename：文件重命名</li>
+<li>rev：将字符串的第一个字符和最后一个字符位置互换</li>
+<li>tac：将文件内容按行上下位置互换</li>
+<li>split：用于切割文件内容，命令格式split 被切割的文件 新文件的文件名前缀，参数-l 　　指定文件切割的行数　　 -a 　　指定新文件后缀长度 　　-b 　　指定文件切割的大小(单位K、M。。。) 　　-d 　　使用数字后缀</li>
+<li>paste：用于将两个文件的内容合并，命令格式paste 文件1 文件2，将文件左右合并，参数-d 　　指定文件内容之间的分隔符 -　　s　　 一行内容以一列的形式显示</li>
+<li>dos2unix：将Windows文件格式转换为unix文件格式</li>
+<li>diff：比较文件或目录的不同，结果中a为add c为change d为delete</li>
+</ul>
+<h2 id="网络相关命令"><a href="#网络相关命令" class="headerlink" title="网络相关命令"></a>网络相关命令</h2><ul>
+<li>ifconfig：查看服务器网卡信息，参数-a　　显示所有网卡信息</li>
+<li>ifdown：禁用指定网卡</li>
+<li>ifup：启用指定网卡</li>
+<li>ip：一般用于查看网卡和路由信息，用法ip  addr查看网卡信息　　ip  route查看路由信息</li>
+<li>netstat：查看端口状态，参数-a　　显示所有开启的端口　　-n　　以数字形式显示　　-t　　只显示TCP连接　　-p　　显示进程名　　-l　　只显示监听状态的端口</li>
+<li>ping：检测与指定IP间是否连通，参数-t　　Ping 指定的IP直到中断　　-n　　指定ping包个数　　-a　　将IP解析为主机名　　-l　　指定ping包大小，最大值是65,527字节　　-w　　ping的超时时间</li>
+<li>mtr：路由追踪，参数-s　　指定数据包大小　　-n　　不做域名解析　　-a　　指定发送数据包的IP(服务器有多个IP时使用)　　-i　　指定ping的时间间隔，单位秒　</li>
+<li>telnet：检测远程主机端口连通性，用法telnet　　IP　　端口</li>
+<li>nmap：检测远程主机端口开放情况，用法namp　　ip</li>
+<li>route：查询与设置路由信息，参数-n　　以数字形式显示　　-f　　清空路由　　add　　添加路由信息　　del　　删除路由信息　　-net　　目标网络　　-host　　目标主机　　netmask　　目标网络的子网掩码　　dev　　指定路由生效的网卡　　default　　默认路由　　gw　　设置网关　　　reject　　屏蔽的路由</li>
+</ul>
+<h2 id="用户与用户组相关命令"><a href="#用户与用户组相关命令" class="headerlink" title="用户与用户组相关命令"></a>用户与用户组相关命令</h2><ul>
+<li>useradd：新建用户账号，参数-c　　添加注释信息　　-U　　指定用户组　　-u　　指定UID　　-d　　指定家目录　　-e　　指定账号失效时间　　-g　　指定GID　　-G　　指定附加组　　-M　　不创建家目录　　-s　　指定shell环境</li>
+<li>userdel：删除账号，参数-r　　删除该账号下所有文件和信息</li>
+<li>usermod：修改账号属性，参数-l　　修改用户名　　-L　　锁定账号　　-U　　解锁账号</li>
+<li>chage：修改密码有效期，参数-l　　列出密码有效期信息　　-E　　指定密码失效时间　　-I　　密码失效后多久锁定账号　　-m　　密码最短多久需要修改　　-M　　密码最长多久需要修改　　-m　　用户家目录不存在就创建</li>
+<li>passwd：设置修改密码，参数–stdin　　从标准输入获取密码　　-d　　清除用户密码　　-l　　锁定账号　　-u　　解锁账号　　-S　　查看账号状态</li>
+<li>id：查看用户ID</li>
+<li>su：切换用户，用法su  -  用户名，不加用户名默认切换到root,参数-　 切换系统环境变量到当前用户下　　-c　　以指定用户身份执行单条命令</li>
+<li>chmod：修改文件或目录的权限设置，参数-R　　权限设置对目录下所有文件和子目录生效</li>
+<li>chown：修改文件或目录的属主</li>
+<li>chgrp：修改文件或目录的属组</li>
+<li>groupadd：增加用户组，参数-g　　指定GID</li>
+<li>groupdel：删除用户组</li>
+</ul>
+<h2 id="打包压缩相关命令"><a href="#打包压缩相关命令" class="headerlink" title="打包压缩相关命令"></a>打包压缩相关命令</h2><ul>
+<li>tar：打包命令，参数–exclude　　打包时排除指定文件　　-c　　创建归档文件　　-x　　解开归档文件　　-C　　指定释放目录　　-f　　使用归档文件　　-z　　使用gzip压缩和解压　　-j　　使用bzip2压缩和解压　　-v　　显示打包和解包的过程　　-t　　查看归档文件中包含哪些文件</li>
+</ul>
+<h2 id="搜索操作相关命令"><a href="#搜索操作相关命令" class="headerlink" title="搜索操作相关命令"></a>搜索操作相关命令</h2><ul>
+<li>find：查询命令，命令格式find  查找的目标路径  参数  -exec  命令  {}\;，参数-type　　按类型查找，f文件,d目录,c字符,l符号链接,sSocket文件,b块设备　　-mtime　　按修改时间查找+n表示多少天之前修改的，n表示第几天修改的，-n表示多少天内修改的　　-！　　取反(需写在取反条件之前，如-！ -name ‘test.txt’)　　-name　　按名字查找　　-size　　文件大小(+nM|K　　大于nM，n　　等于nM,-n　　小于nM)　　-a　　表示左右条件同时满足　　-o　　表示左右条件满足一个即可　　-exec　　用于对查询结果做进一步处理 　　-delete　　删除，详细参数说明<a href="http://man.linuxde.net/find" target="_blank" rel="noopener">http://man.linuxde.net/find</a></li>
+<li>which：查询扩展命令的绝对路径</li>
+</ul>
+<h2 id="命令帮助相关命令"><a href="#命令帮助相关命令" class="headerlink" title="命令帮助相关命令"></a>命令帮助相关命令</h2><ul>
+<li>man：查询扩展命令的帮助信息</li>
+<li>help：查询内置命令的帮助信息　</li>
+</ul>
+<h2 id="服务器信息相关命令"><a href="#服务器信息相关命令" class="headerlink" title="服务器信息相关命令"></a>服务器信息相关命令</h2><ul>
+<li>top：查看系统实时运行状态信息，参数-H　　显示线程信息　　-p　　显示指定进程号的进程信息　　-u　　显示指定用户的进程信息　　-i　　指定刷新时间间隔，功能选项k　　杀死指定进程号的进程　　q　　退出</li>
+<li>strace：跟踪显示进程的系统调用信息，参数-p　　显示指定进程的系统调用信息</li>
+<li>uname：显示系统信息，参数-a　　显示所有信息　　-m　　显示操作系统位数　　-n　　显示主机名　　-r　　显示内核版本　　-s　　显示操作系统名称　　-p　　显示处理器位数</li>
+<li>whoami：查看当前用户用户名</li>
+<li>who：查看所有登陆用户的登陆信息</li>
+<li>hostname：查看和临时设置主机名</li>
+<li>runlevel：查看系统运行级别</li>
+<li>dmesg：查看系统故障信息</li>
+<li>env：查看系统环境变量</li>
+<li>history：显示命令行历史记录，参数-c　　清空历史记录　　-d　　删除指定编号的命令行历史</li>
+<li>hwclock：查看设置硬件时间，参数-w　　与系统时间同步　　-r　　显示当前硬件时间</li>
+<li>date：查看设置系统时间，参数-s　　设置系统时间　　+时间日期格式　　以指定格式显示时间，date命令详细说明</li>
+<li>ulimit：查看和修改系统限制，参数-a　　显示系统所有限制信息　　-n　　查看或设置系统最大可用文件描述符(ulimit  -n  65535)　　</li>
+<li>dumpe2fs：查看文件系统信息</li>
+<li>df：查看磁盘空间以及inode节点使用信息，参数-h　　可读的格式显示大小　　-i　　显示inode信息</li>
+<li>du：查看目录或文件占用的空间大小，参数-s　　只显示指定目录占用空间的大小总和　　-h　　以可读的方式显示大小</li>
+<li>lsof：列出被进程调用的文件的信息，一般用于查看某个端口是否已启用，参数-i　　列出符号条件的进程(4即ipv4，6即ipv6，协议，:端口，@IP)，详细参数说明<a href="http://man.linuxde.net/lsof" target="_blank" rel="noopener">http://man.linuxde.net/lsof</a></li>
+<li>last:显示用户最近登陆信息</li>
+<li>lastlog：显示所有用户最近一次登陆信息</li>
+</ul>
+<h2 id="安全相关命令"><a href="#安全相关命令" class="headerlink" title="安全相关命令"></a>安全相关命令</h2><ul>
+<li>sudo：使普通用户可以使用超出权限的命令，用法sudo  cmd,比如sudo  /etc/init.d/network restart，参数-l　　查看当前用户被授权执行的命令　　-v　　追踪最新的时间戳　　-u　　指定用户身份执行命令　　-k　　删除时间戳</li>
+<li>visudo： 配置sudo权限的编辑命令，参数-c　　检查配置文件语法是否正确</li>
+<li>getenforce：查看selinux运行级别</li>
+<li>setenforce：设置selinux运行级别</li>
+</ul>
+<h2 id="进程相关命令"><a href="#进程相关命令" class="headerlink" title="进程相关命令"></a>进程相关命令</h2><ul>
+<li>ps：查看当前服务器运行中的进程，参数-e　　显示系统所有进程　　-f　　以完整格式显示　　-a　　显示当前终端下的所有进程　　-u　　以用户为主的格式显示　　-x　　显示当前用户在所有终端下的进程</li>
+</ul>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><ul>
+<li>xargs：用于从标准输入获取内容，并将该内容作为后面命令的参数，主要用于将前面命令产生的多行结果合并为一行再让其后的命令进行处理，参数-n　　表示分组数，没有该参数默认在一行显示　　-i　　将标准输入的内容与{}关联起来</li>
+<li>seq：生成数字序列，命令格式seq  参数  起始数字  步长  结束数字，参数-s　　指定分隔符，默认是换行符</li>
+<li>sort：排序命令，参数-r　　降序排序　　-n　　按数值排序　　-k　　指定按第几列的数据排序　　-u　　排除所有重复行　　-t　　指定每列的分隔符</li>
+<li>uniq：报告或排除重复数据，参数-c　　统计数据行重复次数　　-d　　只显示重复的数据行　　-u　　显示只出现一次的数据行</li>
+<li>alias：查询和设置命令别名，命令格式alias  别名=‘命令’，直接执行alias可查询所有已设置的别名</li>
+<li>unalias：取消别名，命令格式unalias  别名</li>
+<li>rz：上传文件，该命令由包lrzsz提供</li>
+<li>sz：下载文件，该命令由包lrzsz提供</li>
+<li>init：修改系统运行级别</li>
+<li>shutdown：关闭与重启系统，参数-h　　关机　　-r　　重启</li>
+<li>halt：关机</li>
+<li>reboot：重启</li>
+<li>chkconfig：查看与设置开机启动服务，参数–list　　显示指定服务所有级别下的自启动设置，不加服务名显示所有服务　　–add　　将指定服务添加到自启动管理　　–del　　将指定服务从自启动管理中删除　　–level　　指定服务在哪些运行级别自启动，比如chkconfig  –level  35 mysqld on,该命令行不加–level参数表示mysqld服务在所有运行级别自启动</li>
+<li>source：用于执行shell程序，shell程序中新建和修改的变量会影响当前shell环境，可以用.代替source</li>
+<li>sh：用于执行shell程序，新建子shell环境并执行shell程序，shell程序中新建和修改的变量不影响当前shell环境</li>
+<li>export：修改环境变量</li>
+<li>mount：挂载设备，参数-t　　设备类型(iso9660：光盘或镜像，vfat：fat32设备，ntfs：ntfs设备，nfs：unix网络共享，cifs：Windows网络共享)　　-o　　挂载方式(loop：将文件作为磁盘分区，ro：只读，rw：读写，iocharset：指定访问文件系统所用字符集,例如iocharset=utf8，remount：重新挂载)</li>
+<li>umount：取消挂载</li>
+<li>ntpdate：网络时间同步，参数-u　　越过防火墙与时间同步服务器进行时间同步(ntp.api.bz，上海的时间同步服务器)</li>
+<li>basename：获取路径中最后一个路径分隔符后的内容</li>
+<li>dirname：获取路径中最后一个路径分隔符前的内容</li>
+<li>file：查看文件类型</li>
+<li>ln：创建链接文件，参数-s　　创建软链接</li>
+<li>readlink：获取符号链接所指向的源文件文件名</li>
+<li>md5sum：生成和校验md5值，参数-c　　从指定文件获取md5值并校验　　–status　　校验成功是不输出任何信息　　-w　　当校验不正确时输出警告信息</li>
+<li>wc：参数-l 　　查看行数 　　-L 　　查看最长一行的字符数</li>
+<li>tee：内容输出到屏幕同时重定向到指定文件中，参数-a 　　追加</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/16/MySQL的一些优化/" rel="next" title="MySQL的一些优化">
+                <i class="fa fa-chevron-left"></i> MySQL的一些优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录相关命令"><span class="nav-number">1.</span> <span class="nav-text">目录相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件相关命令"><span class="nav-number">2.</span> <span class="nav-text">文件相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络相关命令"><span class="nav-number">3.</span> <span class="nav-text">网络相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户与用户组相关命令"><span class="nav-number">4.</span> <span class="nav-text">用户与用户组相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包压缩相关命令"><span class="nav-number">5.</span> <span class="nav-text">打包压缩相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索操作相关命令"><span class="nav-number">6.</span> <span class="nav-text">搜索操作相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令帮助相关命令"><span class="nav-number">7.</span> <span class="nav-text">命令帮助相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器信息相关命令"><span class="nav-number">8.</span> <span class="nav-text">服务器信息相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全相关命令"><span class="nav-number">9.</span> <span class="nav-text">安全相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程相关命令"><span class="nav-number">10.</span> <span class="nav-text">进程相关命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他命令"><span class="nav-number">11.</span> <span class="nav-text">其他命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
