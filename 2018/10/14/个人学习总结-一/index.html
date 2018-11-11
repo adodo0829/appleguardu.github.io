@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="杂谈," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="写这篇博客的目的在于对之前几个月的python学习做一个阶段性的总结，当然在这几个月自学过程中确实踩了不少坑，不过令人欣慰的是，也收获到在编程道路上的一些学习经验和教训。">
+<meta name="keywords" content="杂谈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊一段自学经历的感受">
+<meta property="og:url" content="http://yoursite.com/2018/10/14/个人学习总结-一/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="写这篇博客的目的在于对之前几个月的python学习做一个阶段性的总结，当然在这几个月自学过程中确实踩了不少坑，不过令人欣慰的是，也收获到在编程道路上的一些学习经验和教训。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-10T12:50:19.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊聊一段自学经历的感受">
+<meta name="twitter:description" content="写这篇博客的目的在于对之前几个月的python学习做一个阶段性的总结，当然在这几个月自学过程中确实踩了不少坑，不过令人欣慰的是，也收获到在编程道路上的一些学习经验和教训。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/10/14/个人学习总结-一/"/>
+
+
+
+
+
+  <title>聊聊一段自学经历的感受 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/14/个人学习总结-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">聊聊一段自学经历的感受</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-14T09:33:23+08:00">
+                2018-10-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/个人随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">个人随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>写这篇博客的目的在于对之前几个月的python学习做一个阶段性的总结，当然在这几个月自学过程中确实踩了不少坑，不过令人欣慰的是，也收获到在编程道路上的一些学习经验和教训。<br><a id="more"></a></p>
+<h2 id="经历"><a href="#经历" class="headerlink" title="经历"></a>经历</h2><p>在接触python这门语言之前，自己工作内容中涉及到的编程主要是plc编程，主要应用于自动化行业，用来控制机器人，非标设备，生产线的正常运转。但与互联网行业中软件编程是完全不同的概念。  </p>
+<p>所以在最开始的学习阶段，我采用主要学习方式还是跟当初在学校时学习模式一样，一边看着视频教程，一边在笔记本上写笔记，花在敲代码的时间比较少。(这种学习方法也为后面埋下很多坑)，当时就是一直按照这种学习节奏，一般最开始学习新东西的时候积极性特别高，所以每天的下班的时间和周末的休息时间都用来学习，就这样断断续续的从三月份学到了六月份，把python的基础内容学完了。然后就跟领导提了辞职，说了一下自己的想法，领导人也挺不错的，马上就同意放人了。  </p>
+<p>python相关岗位有web开发，爬虫，数据分析，自动化运维等方向，我当时觉得爬虫挺好玩的，通过运行自己写的程序能够把别人网站的数据爬下来，所以就打算往这个方向发展。之后就在GitHub上找了一些项目，想着自己把它实现一遍，然后写在简历上方便以后找工作。但是在后面写项目的时候，啥都写不出来，脑子一片空白，不知从哪里下手，当时我就意识到一定是自己得到学习方法出了问题。因为周围的同学要么是做java开发的，要么是前端开发，在python方面都没有经验，我也没人去交流，当时就想无头苍蝇一样，没有方向，后来还是一位好朋友的哥哥介绍了一位python方面比较精通的前辈给我认识，在跟他聊天的过程中，确实感觉到自己跟他差距很大，谈吐之间就体现出一个程序员的专业素养，从逻辑思维，对问题的认识深度，以及业务流程，职业发展方向的大局观上等各方面都可以反应出来。之后那个人帮我指出身上存在的一些问题。</p>
+<h2 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h2><p>之后我也对自身存在的一些问题做了一些总结。  </p>
+<ul>
+<li>1.学习模式上<br>写笔记学习的方式，效率真的太低，写10行笔记还不如在编辑器上敲上一行代码。个人认为比较有效的学习方法就是：先构建知识体系，框架，然后填充具体内容；在理解的内容的基础上一定要多注重实践，多敲代码才是正道。现在回想一下当初学习的时候，笔记写了100多张a4纸，感觉真的SB。</li>
+<li>2.思维的转变<br>之前写代码不知道从何下手，没有头绪，发现自己的思维方式没有转变过来。要用编程思维去看待一个问题，以往工作模式很多都只是停留在事物，问题的表面，现在我们需要要用计算机的思维去看待一个问题。就是先将问题进行分解成小步骤，然后抽象成自己熟悉的模式，最后再设计这些步骤去解决问题。</li>
+<li>3.思想的转变<br>之前很多代码都是跟着书上的内容敲出来的，结果前一秒把书一关，后一秒就不知道怎么敲了；作为一个程序员，一定要有自己独立的思考方式，要培养自己的逻辑思维能力，独立的去完成代码功能的实现。遇到需求或问题首先要学会自己主动去思考，解决问题，实在搞不定可以咨询别人，完全依赖书本或他人是完全万万行不通的。因为以后工作中是没人可以依靠的，可能工作以后遇到不懂问题我们依靠最多回事百度和Google。</li>
+<li>4.做事要有明确的目标和方向  </li>
+<li>5.定期对自己做一个自我反思。要清楚自己的定位。</li>
+</ul>
+<h2 id="寄语"><a href="#寄语" class="headerlink" title="寄语"></a>寄语</h2><ul>
+<li>既然选择了做技术，就一定学会自主，持续，高效的去学习新知识，互联网行业技术更新迭代的速度很快，不学习很快就被淘汰了。</li>
+<li>多关注行业技术发展，优秀博文，与大牛交流。。。</li>
+<li>加油！！！！！！   </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/10/Linux系统命令/" rel="next" title="Linux系统命令">
+                <i class="fa fa-chevron-left"></i> Linux系统命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/17/html相关知识点/" rel="prev" title="html相关知识点">
+                html相关知识点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#经历"><span class="nav-number">1.</span> <span class="nav-text">经历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感悟"><span class="nav-number">2.</span> <span class="nav-text">感悟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寄语"><span class="nav-number">3.</span> <span class="nav-text">寄语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
