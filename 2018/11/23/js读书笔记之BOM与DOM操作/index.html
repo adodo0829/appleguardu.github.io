@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="BOM和DOM," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本文主要记录js中一些BOM与DOM的操作方法…">
+<meta name="keywords" content="BOM和DOM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js程序设计读书笔记之BOM与DOM操作">
+<meta property="og:url" content="http://yoursite.com/2018/11/23/js读书笔记之BOM与DOM操作/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="本文主要记录js中一些BOM与DOM的操作方法…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/uogEo0u.png">
+<meta property="og:image" content="https://i.imgur.com/veJihts.png">
+<meta property="og:image" content="https://i.imgur.com/w1kYkxg.png">
+<meta property="og:image" content="https://i.imgur.com/K1UYjDV.png">
+<meta property="og:image" content="https://i.imgur.com/C2vXX6l.png">
+<meta property="og:image" content="https://i.imgur.com/k305E5z.jpg">
+<meta property="og:updated_time" content="2018-11-23T01:24:32.101Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="js程序设计读书笔记之BOM与DOM操作">
+<meta name="twitter:description" content="本文主要记录js中一些BOM与DOM的操作方法…">
+<meta name="twitter:image" content="https://i.imgur.com/uogEo0u.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/23/js读书笔记之BOM与DOM操作/"/>
+
+
+
+
+
+  <title>js程序设计读书笔记之BOM与DOM操作 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/23/js读书笔记之BOM与DOM操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">js程序设计读书笔记之BOM与DOM操作</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-23T09:19:13+08:00">
+                2018-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端学习/" itemprop="url" rel="index">
+                    <span itemprop="name">前端学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文主要记录js中一些BOM与DOM的操作方法…<br><a id="more"></a></p>
+<h1 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h1><p>关于JS操作文档内容,可以总结为网页元素的增删改查</p>
+<h2 id="网页节点操作"><a href="#网页节点操作" class="headerlink" title="网页节点操作"></a>网页节点操作</h2><ul>
+<li>查</li>
+</ul>
+<hr>
+<p>所谓的查找元素, 可以理解为从文档中获取元素…  </p>
+<ul>
+<li>常用的网页元素获取方式  </li>
+</ul>
+<p><img src="https://i.imgur.com/uogEo0u.png" alt=""></p>
+<ul>
+<li>获取元素文本/元素内容   </li>
+</ul>
+<p><img src="https://i.imgur.com/veJihts.png" alt=""></p>
+<ul>
+<li>DOM节点</li>
+</ul>
+<p><img src="https://i.imgur.com/w1kYkxg.png" alt=""></p>
+<ul>
+<li>节点和元素的获取</li>
+</ul>
+<p><img src="https://i.imgur.com/K1UYjDV.png" alt="">  </p>
+<ul>
+<li><p>属性的获取  </p>
+<blockquote>
+<p>1.点语法</p>
+</blockquote>
+<p>  1-1 获取行内标准属性(不能获取行外属性和自定义属性)<br>  1-2动态添加属性和修改其值   </p>
+</li>
+</ul>
+<blockquote>
+<p>2.attribute语法 (<strong>应用场景1:tab栏切换效果</strong>)  </p>
+</blockquote>
+<pre><code>获取属性方法: 元素.getAttribute(&apos;属性名&apos;)  
+设置属性方法: 元素.setAttribute(&apos;属性名&apos;, 属性值)  
+2-1 可以获取行内标准属性和行内自定义属性(**常用**), 不可以获取行外和点语法动态添加的属性...
+</code></pre><ul>
+<li>增</li>
+</ul>
+<hr>
+<p>增加元素: 要思考增加哪些元素? 新创建的元素, 已存在的, 带子元素的父元素(已存在的元素只是移动,原来的位置消失)</p>
+<pre><code>// 创建元素: document.createElement(&apos;标签名&apos;) 
+var p = document.createElement(&apos;p&apos;) //传入标签名
+p.innerText = &apos;hello world&apos;;   // 传入相应文本
+box.appendChild(p);   //添加到想加入的父元素, 尾部插入
+
+// 插入元素 insertBefore(new, 父元素的子元素节点) 插入到父元素
+ ul2.insertBefore(ul1, li7); 
+
+//还可以通过innerHTML赋值的方式来设置元素的内容,这个方法可以解析标签
+
+//innerText是获取文本,也可以设置文本; 它不能解析标签...
+</code></pre><ul>
+<li>改</li>
+</ul>
+<hr>
+<p>修改, 即替换子元素  </p>
+<pre><code>// 插入元素 replaceChild(new, 父元素的子元素节点) 插入到父元素
+   ul2.replaceChild(ul1, li7); 
+</code></pre><ul>
+<li>删</li>
+</ul>
+<hr>
+<p>即删除父元素下的子元素</p>
+<pre><code>/ 移除子元素 removeChild(子元素)
+    // 只能自己移除自己的子元素
+    ul2.removeChild(li7);
+</code></pre><ul>
+<li>注意</li>
+</ul>
+<hr>
+<p>以上的增,删,改都是基于父元素的基础上来做操作!!!   </p>
+<p><strong>一般父元素都是一个伪数组,我们在操作其子元素时,特别时for循环遍历使用时,别忘了数组的长度是会动态变化的,所以要注意循环增量的处理; 像比较常见的删除,循环加入到另一个元素中等等…</strong></p>
+<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><p>BOM定义了一套操作浏览器窗口的API</p>
+<h2 id="BOM对象"><a href="#BOM对象" class="headerlink" title="BOM对象"></a>BOM对象</h2><p>Bom对象主要由五大对象组成：</p>
+<pre><code>window:浏览器核心对象
+location：包含当前页面的URL信息
+history：history对象主要用于记录你当前窗口的历史记录
+navigator：包含当前浏览器的信息，例如用的什么浏览器，操作系统版本等
+screen：获取用户电脑的屏幕分辨率(这个一般不用)
+</code></pre><ul>
+<li><p>window对象 </p>
+<pre><code>指的是当前浏览器窗口，它是JS中的顶级对象(所有全局变量都是它的属性)
+他有一个特殊的属性name; 无论怎么赋值,都是一个字符串...  
+1.常用的方法
+    open():打开一个窗口 params:URL,默认_blank,特征大小,true/false, 返回值:新打开的window对象...
+    close(关闭对象):关闭一个窗口, window.open(&quot; &quot;,&quot;_self&quot;).close();防拦截
+
+2.window对象的三个事件
+    1.window.onload:界面上所有的内容加载完毕之后才触发这个事件
+
+    2.window.onbeforeunload:界面在关闭之前会触发这个事件//常用来存储重要的数据
+
+    3.window.onunload:界面在关闭的那一瞬间会触发这个事件
+</code></pre></li>
+<li><p>location对象  </p>
+<pre><code>包含当前页面的URL信息
+1.打开新网页：location.assign(&apos;你要打开的新网页的url&apos;)  
+2.替换当前网页：location.replace(&apos;要替换的网页url&apos;)  
+3.刷新当前网页: location.reload() //刷新
+</code></pre></li>
+<li><p>history对象</p>
+<pre><code>history对象主要用于记录你当前窗口的历史记录
+主要作用就是前进和后退网页（相当于浏览器的左上角前进后退按钮功能）
+history.forward():前进
+history.back():后退
+</code></pre></li>
+<li><p>navigator对象</p>
+<pre><code>navigator对象：包含当前浏览器的信息
+工作中应用场景：用户信息统计（统计我这个网站平台的用户群体分布，什么浏览器，windows什么版本等）
+
+//使用场景：判断用户当前使用哪种浏览器
+if(navigator.userAgent.indexOf(&apos;Chrome&apos;) != -1){
+console.log ( &quot;谷歌浏览器&quot; );
+}else if(navigator.userAgent.indexOf(&apos;Firefox&apos;) != -1){
+console.log ( &quot;火狐浏览器&quot; );
+}else{
+console.log ( &quot;IE浏览器&quot; );//也有可能是其他小众浏览器，可以忽略不计
+}
+</code></pre></li>
+</ul>
+<h1 id="动画部分"><a href="#动画部分" class="headerlink" title="动画部分"></a>动画部分</h1><h2 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h2><ul>
+<li><p>setInterval</p>
+<pre><code>1.一旦创建立即计时，必须要手动停止，否则会无限的每隔一段时间执行代码
+2.创建定时器：setInterval(函数,时间间隔)
+    1.返回这个定时器的id
+    2.时间间隔的单位是毫秒
+    3.每隔一段时间就会执行函数中的代码
+3.移除定时器：clearInterval(定时器id)
+4.常用案例  
+    电商网页上的秒杀时间, 时钟, 电子表等...动画的实现也是依靠定时器来完成的...
+</code></pre></li>
+<li><p>setTimeout(函数,时间间隔)  </p>
+<pre><code>与setInterval唯一的区别就是这个定时器只会执行一次，之后会自动移除
+</code></pre></li>
+</ul>
+<h2 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h2><pre><code>1.结构上: 一个盒子包含着一个ul标签,嵌套多个浮动的li标签(每个里标签中放一张图片);
+还包括两个切换键, 多个页码显示键...
+
+2.实现思路: 基于需求出发, 盒子中只显示当前图片, 鼠标移入切换键显示;点击切换键
+会往左或往右切换图片,在实现以上手动轮播功能后加入定时器实现自动轮播...
+
+3.代码实现: 从交互事件出发, 分析需求实现的步骤...足以实现功能
+
+分析过程:
+    第一步:鼠标移入盒子,切换键显示,移出则消失:
+            父盒子.onmouseover/onmouseout
+
+    第二步:设置一个全局变量index来给每个图片添加编号,
+             给切换键绑定事件,点击下一张则编号+1,上一张则编号-1
+                next.onclick; 则index++
+                pre.onclick; 则index--
+        这里完成上下页切换时要注意几点:
+                因为ul是由若干个图片浮动成一行显示的;所以超出的部分给父盒子设置一个overflow:hidden来消除;
+                每次点击切换键时,ul会移动一张图片的宽度;每张图片都有编号,编号*图片宽度即为位移宽度;
+                盒子的宽度为真实宽度;**需要用offsetWidth来获取**; 位移方式我们用定时器来做;
+                最后,ul的移动还需要设置边界检测...注意第一页和最后一页的处理;
+                同时还要完成页码的高亮显示(排他思想实现...添加自定义属性值,然后与图片编号对比)
+    第三步: 
+        手动无限轮播: 
+            这里主要是处理第一张图片和最后一张:
+                下一页:手动设置ul的位置为第一张;重置index的值...
+                上一页:手动设置ul的位置为最后一张图片的位置;重置index的值为最后一张的索引...
+                同时,因为位置的变化时突变的;无法实现动画滑动的效果;这里需要做一个视觉欺骗的效果;
+                给ul最后再添加一张图片来实现滑动效果...
+    第四步:
+        实现点击页码跳转到对应的图片,点击后动画移动对应的位移:-index*图片宽度
+
+    第五步:
+        自动无限轮播实现:
+            相当于每隔一段时间,自动触发点击下一页的功能
+            这里可以将轮播部分代码封装成一个函数,放在定时器中,每隔一段时间执行此函数,鼠标移入停止轮播;
+            即清除定时器;移出后启动定时器...
+</code></pre><h2 id="缓动动画"><a href="#缓动动画" class="headerlink" title="缓动动画"></a>缓动动画</h2><p>缓动动画可以理解为元素某些属性的渐变效果,实现元素属性值非匀速的变化,使元素在视觉上给人一种缓慢变化的感觉</p>
+<ul>
+<li><p>缓动动画的核心思想</p>
+<pre><code>1. 开启定时器
+2. 获取需要改变的属性值
+3. 每次的变化值(我习惯叫做 步长step) = (目标值 - 当前值)/10 //核心公式
+4. 判断变化方向(正/父)// 正:步长向上取整; 负:步长向下取整
+5. 改变元素的属性值(重新赋值) // 注意有些元素的单位  要做+ &apos;px&apos;处理
+6. 终点检测
+// 当然以上步骤只是一个大概的步骤, 下面再来补充...
+</code></pre></li>
+<li><p>缓动动画注意点</p>
+<pre><code>1.缓动动画要求我们动态地改变元素的属性值,要做到多个元素复用,必须要封装...
+
+2.函数参数处理: 
+    2-1元素的属性和值用对象来储存
+    2-2属性值的获取: 使用window.getComputerStyle()来获取//需要做兼容IE8
+                    // 注意对象的点语法取值 和 字符串语法取值[&apos;str&apos;]
+    2-3属性分类处理: 如果定位层级zIndex,背景色这类瞬变的属性, 在遍历时进行判断后,直接赋值
+                   如果是透明度opacity这类0~1直接变化的属性, 需要单独进行放大缩小处理//parseFloat
+                   如果是宽高,垂直水平方向距离这类按一般步骤处理即可
+
+3.保证多个属性都达到目标值:
+    开关思想来实现; 在遍历参数加上一个开关,每次循环遍历一遍后进行判断,只要有一个属性没到目标值,就继续遍历,
+    直到所有属性都达到目标值
+
+4.回调函数callback
+    在动画结束后,我们可以在运行一个函数,来实现动画结束后的其他特效, 只需要往函数传入回调函数名即可    
+</code></pre></li>
+<li><p>缓动动画示例代码</p>
+</li>
+</ul>
+<pre><code>// 获取元素
+var box = document.getElementById(&apos;box&apos;);
+var btn = document.getElementById(&apos;btn&apos;);
+// btn绑定点击事件
+btn.onclick = function () {
+    // 同一盒子的不同属性用对象来存储
+    var ele_attrs = {
+        // 键值对: 键为元素的属性名, 值为移动的目标位置 
+        top: 500,
+        left: 500,
+        width: 300,
+        height: 300,
+        zIndex: 2, //层级属性
+        opacity: 0.5, //透明度
+    };
+
+    // 回调函数的参数
+    var ele_attrs1 = {
+        backgroundColor: &apos;yellow&apos;,
+    }
+    // 这里传一个函数的引用即可
+    var callback1 = function() {
+        // alert(&apos;hello world&apos;);
+        animation_move(box, ele_attrs1)
+    }
+
+    animation_move(box, ele_attrs, callback1);
+};
+
+// 这里给动画函数再传一个函数参数: 用来执行此次动画结束后继续执行下一回调函数
+function animation_move(ele, attrs, callback) {
+    // 用定时器来完成缓动动画,先清除之前的定时器
+    clearInterval(ele.tid);
+    ele.tid = setInterval(function () {
+        // 定时器里用到的值都是attrs里面的, 我们要遍历传入的attrs对象
+        var flag = true;
+        for (var key in attrs) {
+            // 这里要对层级属性进行单独处理; 背景色也是..,
+            if (key == &apos;zIndex&apos; || key == &apos;backgroundColor&apos;) {
+                // 如果存在,则直接赋值...
+                ele.style[key] = attrs[key];
+            } 
+            else if (key == &apos;opacity&apos;) {
+                // 透明度(0~1的小数)的数值要放大处理
+                var target = attrs[key]*100;
+                var cur = parseFloat(get_style(ele, key))*100; 
+                var step = (target - cur)/10;
+                step = cur &lt; target ? Math.ceil(step) : Math.floor(step);
+                cur += step;
+                // 赋值给对象,更新其属性值
+                ele.style[key] = cur/100;
+                if (cur != target) {
+                    flag = false;
+                }
+            }
+            else {
+               // 此时的目标位置相当于key对应的值, 我们取出来
+                var target = attrs[key]; // 对对象中的属性进行动画操作
+                var cur = parseInt(get_style(ele, key)); //带单位需转化
+                var step = (target - cur)/10;//存在小数
+                step = cur &lt; target ? Math.ceil(step) : Math.floor(step);
+                cur += step;
+                // 赋值给对象,更新其属性值
+                ele.style[key] = cur + &apos;px&apos;; //这里只能采用对象字符串的方法来赋值/取值
+
+                if (cur != target) {
+                    // 如果有一个元素没到达目标位置,让循环继续走, 直到每一个属性都走完
+                    flag = false;
+                } 
+            }
+        };
+        if (flag) {
+            clearInterval(ele.tid);
+            // 这里要对函数进行判断
+            if (typeof callback == &apos;function&apos;) {
+                callback();
+            }
+        }
+    }, 50);
+};
+
+function get_style(ele, attr) {
+    //兼容性处理,能力检测,这里要使用window.getComputerStyle()
+    if (window.getComputedStyle) {
+        return window.getComputedStyle(ele, null)[attr];//对象的取值法
+    }else {
+        // IE8的方法
+        return ele.currentStyle[attr];
+    };
+};
+</code></pre><ul>
+<li><p>旋转木马思路</p>
+<pre><code>旋转木马实现: 将盒子中所有li元素的属性用数组存储,每次点击切换键,只需要交换li元素的属性, 
+然后动态的取改变每个li元素的属性值...
+主要代码:
+
+// 点击事件绑定
+arrRight.onclick = function () {
+    // 点击切换下一个li标签, 数组中的元素位置轮换,然后每个样式的属性都进行动态的变化
+    // 第一个样式放到最后一个位置
+    li_style.push(li_style.shift());
+    // 位置互换后,开始动态变化
+    for(var i=0; i&lt;ul1.children.length; i++) {
+        animation_move(ul1.children[i], li_style[i]);
+    };
+};
+arrLeft.onclick = function () {
+    // 点击切换下一个li标签, 数组中的元素位置轮换,然后每个样式的属性都进行动态的变化
+    // 最后一个样式放到第一个位置
+    li_style.unshift(li_style.pop());
+    // 位置互换后,开始动态变化
+    for(var i=0; i&lt;ul1.children.length; i++) {
+        animation_move(ul1.children[i], li_style[i]);
+    };
+};    
+</code></pre></li>
+</ul>
+<h2 id="元素的几个常用的坐标属性"><a href="#元素的几个常用的坐标属性" class="headerlink" title="元素的几个常用的坐标属性"></a>元素的几个常用的坐标属性</h2><p><strong>这里JS中各种宽高属性值的一些介绍</strong><br><a href="https://juejin.im/entry/582eb783d203090067037b70" title="JavaScript 中的各种宽高属性" target="_blank" rel="noopener">https://juejin.im/entry/582eb783d203090067037b70</a></p>
+<ul>
+<li><p>offset属性</p>
+<pre><code>1.offsetWidth与offsetHeight：获取的是元素的实际宽高 = width + border + padding
+2.offsetParent:获取最近的定位父元素 （自己定位参照的父元素）
+3.offsetLeft:获取自己左外边框与offsetParent的左内边框的距离
+  offsetTop:获取自己上外边框与offsetParent的上内边框的距离
+</code></pre></li>
+<li><p>scroll属性</p>
+<pre><code>1.scrollWidth和scrollHeight：元素内容真实的宽高(包括padding)
+2.scrollLeft和scrollTop：元素在滚动时超出内容区域的部分
+3.滚动事件:onscroll:元素的滚动条事件
+
+一般来说,我们经常会对浏览器整个页面进行滚动操作window.onscroll...如固定导航或者搜索框; 这里要注意元素脱标后的影响, 需要给下面的盒子加margintop值
+页面获取的方式(存在兼容性):  
+    谷歌/火狐 ： window.pageXOffset （左） window. pageYOffset（上）
+    IE浏览器： document.documentElement.scrollLeft/Top
+    某些情况下:document.body.scrollLeft/Top
+代码:
+    function getPageScroll(){
+        return {
+        scrollTop : window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,
+        scrollLeft :  window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0
+        };
+    }
+</code></pre></li>
+<li><p>client属性</p>
+<pre><code>clientWidth/clientHeight：获取可视区域的宽高(可视内容+padding)
+clientTop/clientLeft:不常用，其实就是左边框border-left和上边框border-top
+
+属性的获取:
+    getClientSize = function (  ) {
+        return {
+        clientWidth : window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth || 0,
+        clientHeight : window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight || 0,
+        }
+    }
+监听浏览器窗口变化的事件: window.onresize()//常用于判断终端设备界面大小, 响应式布局中常用到
+</code></pre></li>
+</ul>
+<h1 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h1><p><img src="https://i.imgur.com/C2vXX6l.png" alt="">  </p>
+<h2 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h2><p>事件对象event:当某一个事件被触发时,此时浏览器会记录触发时的某些信息， 例如你是在哪个位置点击的,浏览器把这些所有的信息放到一个变量中存储，这个变量的数据类型是对象，所以称之为事件对象.</p>
+<ul>
+<li><p>获取事件对象</p>
+<pre><code>document.getElementById(&apos;box&apos;).onclick = function ( e ) {
+//IE8及之前用window.event获取，可以用逻辑或的短路运算解决浏览器兼容性问题
+e = e || window.event;
+console.log (e);
+}
+</code></pre></li>
+<li><p>事件对象中的三大坐标</p>
+<pre><code>//事件对象里面的常用的三个坐标
+var box = document.getElementById(&quot;box&quot;);
+box.onclick = function (e) {
+e = e || window.event;
+
+//电脑屏幕的左上角
+console.log(&quot;e.screenX:&quot;+e.screenX+&quot;---e.screenY:&quot;+ e.screenY);
+
+//浏览器可视区域
+console.log(&quot;e.clientX:&quot;+e.clientX+&quot;---e.clientY:&quot;+ e.clientY);
+
+//页面的原点位置
+//浏览器兼容问题：IE8及之前不支持
+console.log(&quot;e.pageX:&quot;+e.pageX+&quot;---e.pageY:&quot;+ e.pageY);
+console.log ( getPagePoint ( e ).pageX, getPagePoint (e).pageY );
+}
+
+//pageX和pageY的兼容
+//pageX/Y坐标系相对于页面左上角，实际上就是界面滚定出去的距离 + 可视区域的距离
+function getPagePoint ( e ) {
+    e = e || window.event;//事件对象兼容
+    return {
+    pageX : e.pageX || getScroll().scrollLeft + e.clientX,
+    pageY : e.pageY || getScroll().scrollTop + e.clientY,
+    }
+}
+</code></pre></li>
+<li><p>盒子拖拽注意点<br>以事件对象的pagex为基础出发,找到盒子移动的left和鼠标点击位置之间的关系…<br>另外,这是针对定位元素<br><img src="https://i.imgur.com/k305E5z.jpg" alt="">        </p>
+</li>
+</ul>
+<p>另外,如果盒子带外边距,定位的元素会将外边距也算进去,所以在最后计算定位的left和top时,若要让鼠标的位置在内容区,需要减去margin值…<br>还有就是鼠标松开事件,要清除文档的鼠标移动事件…</p>
+<ul>
+<li><p>获取事件触发点相对于元素的位置</p>
+<pre><code>在控制元素的某些移动效果时,针对定位的元素,我们一般都是去修改其定位的属性值;  如left,top来实现元素位置的动态变化,
+那么常用的几个坐标值会经常用到;
+    1.事件对象的坐标:
+        pageX, pageY 触发点相对页面的原点的值
+        clientX,clientY 触发点相对于浏览器可视区域的点的值
+    2.元素自身的一些属性值
+        三大属性值: offset,  scroll , client
+        两个方向: box.style.left, box.style.top //带单位的,以上都是不带单位的,所以最后赋值时要加px...
+</code></pre></li>
+<li><p>事件冒泡</p>
+<pre><code>1.事件冒泡：
+如果一个元素的事件被触发，该元素所有的父元素的同名事件会被依次触发
+冒泡的顺序: 元素 -&gt; 父元素 -&gt;body -&gt;html -&gt; document -&gt;window -&gt; null
+
+2.冒泡的优点:
+    应用场景: 当一个父元素的所有子元素(如ul&gt;li*5)都要注册同名事件时,只需要给父元素注册即可...
+    这里可以使用事件的一个属性来完成
+        **注意前提时获取事件对象e**
+         e.target : 事件触发源  (真正触发父元素事件的那个子元素) // IE8: e.srcElement
+            e.currentTarget : 与this一样的，不同点：currentTarget有浏览器兼容性，this没有
+         this:谁调用这个方法this代表谁
+
+3.冒泡的缺点
+    可能导致子元素与父元素出现事件冲突,影响需求; 
+    如何规避:
+        // 注意先获取事件对象e
+        阻止事件冒泡:在子元素触发事件后,调用事件对象的e.stopPrapagation()方法...
+
+4.注册/删除多个同名事件
+    // 注册
+    addEventListener(&apos;事件类型&apos;,函数名, false/true)
+    // 事件类型不需要加on, 第三个参数默认为false:冒泡方式;true:事件捕捉
+    // 删除
+        removeEventListener(type, 函数名)
+
+** 这两个方法需要做兼容性处理
+&apos;&apos;&apos;/** @description 元素多个同名事件监听
+    * @param ele事件对象,即元素
+    * @param type,事件类型 (str)
+    * @param func,事件处理函数
+    * @return func的结果
+*/
+   function addEvent(ele, type, func) {
+    // 能力检测
+    if (ele.addEventListener) {
+    //执行函数
+    ele.addEventListener(type, func);
+        }
+    else if (ele.attachEvent) {
+    // IE8, 方法需要加on
+    ele.attachEvent(&apos;on&apos;+type, func);
+    }
+    else {
+    // 其他
+    ele[&apos;on&apos;+type] = func;
+    }
+};
+/** @description 元素多个同名事件移除
+    * @param ele事件对象,即元素
+    * @param type,事件类型
+    * @param func,事件处理函数
+    * @return func的结果
+    */
+function removeEvent(ele, type, func) {
+       // 能力检测
+    if (ele.removeEventListener) {
+    //执行函数
+    ele.addEventListener(type, func);
+    }
+    else if (ele.detachEvent) {
+    // IE8, 方法需要加on
+    ele.detachEvent(&apos;on&apos;+type, func);
+        }
+    else {
+    // 其他
+    ele[&apos;on&apos;+type] = null;
+    }
+};    
+</code></pre></li>
+<li><p>事件捕捉</p>
+<pre><code>1.事件捕获：如果一个元素的事件被触发，先从最顶级元素往下依次触发，直到目标元素
+window-&gt;document-&gt;html-&gt;body-&gt;父元素-&gt;元素
+
+2.只有一种方式注册事件才是捕获：addEventListener方式注册并且第三个参数为true
+
+3.1.事件三个阶段
+    1：捕获阶段
+    2：目标阶段
+    3：冒泡阶段
+ 3.2.获取事件的阶段：  e.eventPhase
+
+3.3事件类型: e.type
+</code></pre></li>
+<li><p>键盘事件</p>
+<pre><code>1.键盘事件
+    键盘按下： onkeydown
+    键盘松开：onkeyup
+    键盘按下：onkeypress
+
+  2.获取键盘按键
+    e.keyCode  || e.char Code  ||  e.which
+    注意: 默认获取的是ASCII码 ： 键盘上每一个按键对应一个数字，这个数字就是ASCII码
+    另外:ASCII码转字符串:  String.fromCharCode ( ascii码 )
+
+  3.onkeydown和onkeypress（常用）的区别
+    onkeydown: (1)不区分大小写，大写   （2）不过滤特殊按键 （f1-f12 ctrk）
+    onkeypress: （1）区分大小写    2）过滤特殊按键
+
+4.如果是对本次操作进行取值 / 或者是循环注册多个事件; 一定要注意**this关键字**的使用!!!!!!!!
+</code></pre></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BOM和DOM/" rel="tag"># BOM和DOM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/10/js程序设计读书笔记之ECMAScript/" rel="next" title="js程序设计读书笔记之ECMAScript">
+                <i class="fa fa-chevron-left"></i> js程序设计读书笔记之ECMAScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DOM操作"><span class="nav-number">1.</span> <span class="nav-text">DOM操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网页节点操作"><span class="nav-number">1.1.</span> <span class="nav-text">网页节点操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BOM"><span class="nav-number">2.</span> <span class="nav-text">BOM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#BOM对象"><span class="nav-number">2.1.</span> <span class="nav-text">BOM对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#动画部分"><span class="nav-number">3.</span> <span class="nav-text">动画部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定时器"><span class="nav-number">3.1.</span> <span class="nav-text">定时器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轮播图"><span class="nav-number">3.2.</span> <span class="nav-text">轮播图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#缓动动画"><span class="nav-number">3.3.</span> <span class="nav-text">缓动动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元素的几个常用的坐标属性"><span class="nav-number">3.4.</span> <span class="nav-text">元素的几个常用的坐标属性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#事件"><span class="nav-number">4.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件对象"><span class="nav-number">4.1.</span> <span class="nav-text">事件对象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
