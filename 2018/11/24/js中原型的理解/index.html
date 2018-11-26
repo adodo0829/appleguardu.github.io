@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="原型," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="AppleGuard的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本篇主要是记录一下对js中对于原型的理解…">
+<meta name="keywords" content="原型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于js中原型的理解">
+<meta property="og:url" content="http://yoursite.com/2018/11/24/js中原型的理解/index.html">
+<meta property="og:site_name" content="AppleGuard的博客">
+<meta property="og:description" content="本篇主要是记录一下对js中对于原型的理解…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.imgur.com/zltNIlG.jpg">
+<meta property="og:image" content="https://i.imgur.com/R2wyeQf.png">
+<meta property="og:image" content="https://i.imgur.com/p9p92gl.png">
+<meta property="og:image" content="https://i.imgur.com/xmwylPu.png">
+<meta property="og:updated_time" content="2018-11-26T05:36:57.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于js中原型的理解">
+<meta name="twitter:description" content="本篇主要是记录一下对js中对于原型的理解…">
+<meta name="twitter:image" content="https://i.imgur.com/zltNIlG.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/24/js中原型的理解/"/>
+
+
+
+
+
+  <title>关于js中原型的理解 | AppleGuard的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">AppleGuard的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/24/js中原型的理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huhua">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/123.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="AppleGuard的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于js中原型的理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T19:39:26+08:00">
+                2018-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端学习/" itemprop="url" rel="index">
+                    <span itemprop="name">前端学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本篇主要是记录一下对js中对于原型的理解…<br><a id="more"></a></p>
+<h1 id="原型"><a href="#原型" class="headerlink" title="原型"></a>原型</h1><p>原型涉及到构造函数, 原型对象, 实例化对象三者之间的关系…</p>
+<hr>
+<ul>
+<li><p>构造函数</p>
+<pre><code>function Person (name,age) {
+    //(1)创建一个空对象： {}
+    //(2)将this指向这个空对象 : this = {}
+    //(3)执行构造函数赋值代码（完成对象的赋值）
+    this.name = name;
+    this.age = age;
+    this.sayHi = function () {
+        console.log(this.name + &apos;hello world&apos;);
+    };
+    //(4)返回这个对象
+};
+var man = new Person(&apos;huahua&apos;,18); 
+
+1.何为构造函数?
+    构造函数：首先，它是函数，并且任何的函数都可以作为构造函数存在，它的本质是初始化对象。
+    构造函数都是和new关键词一起使用的。 new就是在创建对象，从声明开始一共做了4件事(如上)，构造函数就是在为初始化的对象添加属性和方法(成员)
+
+2.构造函数的特点：
+    a:构造函数的首字母必须大写，用来区分于普通函数
+    b:内部使用的this对象，来指向即将要生成的实例对象
+    c:使用New来生成实例对象
+</code></pre></li>
+<li><p>实例对象</p>
+<pre><code>1.上面的 man 就是通过Person这个构造函数实例化出来一个对象,我们称为 **实例化对象**;何为对象的实例化呢? 
+
+2.在我看来就是给一个空对象添加了一些属性和方法,使其具有了一些特征和行为...也就是上面new关键字干的事;跟面向对象中的一些概念比较类似...
+面向对象编程: 面向对象就是对现实中的事物进行抽象化...然后再给其设置特征属性和行为使之具体化; 面向对象就是对面向过程进行封装后的结果...
+
+3.实例对象中存在一个__proto__属性; 这个属性指向了构造函数的原型prototype...  
+注意: 实例对象访问成员的规则：先看自己有没有这个成员，如果有则访问，没有则访问原型的  
+</code></pre></li>
+<li><p>原型对象</p>
+<pre><code>上面已经聊过构造函数和实例化对象了,那么原型对象又是什么呢?
+    当我们在声明一个函数时, 系统会帮我们创建一个与该函数对应的属性prototype,我们称它为原型对象;
+    以上面的Person为例,这个prototype是该函数的一个属性,我们可以调用Person.prototype来修改其成员或者进行重写;
+
+    原型对象中有一个构造器指针constructor属性来指向对应的构造函数,他的作用是可以让实例对象知道自己是哪一个构造函数生成的;
+    如 man.constructor 即man.__proto__.constructor指向了 Person. 
+</code></pre></li>
+<li><p>下面用一张图来表示他们之间的关系…</p>
+<p>  <img src="https://i.imgur.com/zltNIlG.jpg" alt=""></p>
+<p>  原型对象中可以存储很多成员属性和方法,多个实例对象之间就能共享这些属性和方法; 类似实现了面向对象中 <strong>继承</strong> 的效果…</p>
+<p>  <strong>面向对象的三大特性:</strong>  </p>
+<pre><code>封装：将功能代码封装到对象中，只暴露外部接口(API),使用者无需关心内部实现
+继承：一个对象拥有另一个对象所有的成员变量(属性和方法)
+多态: 一个对象在不同情况下的多种状态; 一个对象经过不同操作后会有不同的行为....
+     (js从语法的角度上来说没有多态，因为js是基于对象的语言)
+
+js实现继承的方式:
+    1. 我们可以遍历父对象,将父对象的属性动态添加到子对象中 (适用于一个子对象的继承)
+        for (var key in father){
+            son[key]  = father[key];
+         };
+    2. 替换原型：将父对象作为子对象构造函数的原型(但是会丢失之前的原型对象的成员)
+         // 子对象用构造函数来实例化
+         function Son(name, age) {
+             this.name = name;
+             this,age = age;
+         }
+         Son.prototype.father = {
+             parent: &apos;laosong&apos;,
+             age: 47,
+         } // Son 原型对象中的成员
+         var son = new Son(&apos;xiaowang&apos;, 24)
+         var father = {
+             name: &apos;laowang&apos;,
+             age: 48,
+         }
+         Son.prototype = father; // 相当于Son的原型被重新赋值,替换了,laosong不在了
+
+    3. 综合上面两种情况: 将父对象的成员动态添加到子对象的原型中, 这样就不会丢失了
+        for (var key in father){
+            Son.prototype[key]  = father[key];
+         };
+
+        /**混合式继承封装
+        @param method:子对象的构造函数
+         @param father:要继承的父对象
+         */
+        function extendMehtd ( method,father ) {
+            for (var key in father){
+                method.prototype[key] = father[key];
+            }
+        };
+</code></pre></li>
+</ul>
+<h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><blockquote>
+<p><strong>js中, 每一个实例对象都存在一个__proto__属性指向了自己的原型prototype; 但是原型本身也是一个对象,</strong><br><strong>也有自己的__proto__属性,指向自己的原型，以此类推就形成一个链式结构，称之为原型链…</strong></p>
+<p>对象访问原型链中成员规则：<strong>就近原则</strong><br><strong>先看对象自己有没有，有则访问，没有则看原型有没有，有则访问，没有则看原型的原型有没有，以此类推…直到原型链的终点（null）;</strong><br>如果还没有 ：  <strong>如果是访问属性：则返回undefined   如果访问的是方法：则会报错   xxxx is not a function</strong></p>
+</blockquote>
+<ul>
+<li><p>图解原型链</p>
+<p>  以数组对象为例:</p>
+<p>  <img src="https://i.imgur.com/R2wyeQf.png" alt=""></p>
+</li>
+<li><p>DOM中的原型链</p>
+<p>  <img src="https://i.imgur.com/p9p92gl.png" alt=""></p>
+</li>
+</ul>
+<h2 id="图解完整原型链"><a href="#图解完整原型链" class="headerlink" title="图解完整原型链"></a>图解完整原型链</h2><p><img src="https://i.imgur.com/xmwylPu.png" alt="JS中原型链完整图"></p>
+<p>以上便是JS中完整的原型链图解了…</p>
+<h2 id="关于对象的一些知识点补充"><a href="#关于对象的一些知识点补充" class="headerlink" title="关于对象的一些知识点补充"></a>关于对象的一些知识点补充</h2><pre><code>1.静态成员和实例成员
+    静态成员: 函数对象持有的成员(属性,方法)
+    实例成员: 构造函数实例化出来的对象持有的成员
+
+2.instanceof 关键字
+    语法: 对象 instanceof 构造函数
+    作用: 用来检测右边函数的原型 是否 在左边对象的原型链中(true/false)
+    如: Object instanceof Object // true
+
+3.Object.prototype(对象原型)
+    --所有对象的原型链中都会指向它;所以所有的对象都可以访问Object.prototype原型中的成员
+
+    常用几个成员:
+        1.hasOwnProperty(): 检查对象是否包含某个成员;
+            条件: 自己的成员
+        2.isPrototypeOf(): 检查(左边)一个对象是不是(右边)另一个对象的原型
+
+        3.propertyIsEnumerable(): 检查对象是否可以枚举某个属性
+            条件: （1）是自己的成员  （2）可以被for-in循环遍历 （自己的和原型的）    
+
+4.Function.prototype(函数对象Function的原型)
+    --所有的函数对象原型都会指向Function构造函数的原型,所有的函数对象都可以访问Function.prototype中的成员
+
+    常用的一些成员:
+        1. name:获取函数名 (比较鸡肋)
+
+        2.caller:获取调用本函数的引用;通过console.log(fn.caller)可以知道自己在哪个地方被人调用(全局调用函数,这里的caller指向null)
+
+        3.length：获取函数形参的数量; fun.length 可以知道函数设置的形参个数
+
+        4.arguments:获取函数所有的实参; 
+            可以理解为函数内部一个隐藏的形参,作用是获取函数所有的实参，与形参一一对应...
+
+            arguments对象的两个常用属性:
+                1.callee:指向函数自身, 应用于匿名函数的递归调用...
+                  arguments.callee === fn //true
+
+                2. length: 实参的个数
+                  arguments是一个伪数组...
+
+        5.给内置的构造函数原型添加自定义成员
+            当内置构造函数自带的方法不够用，无法实现需求时,我们就需要给添加自定义方法;直接添加可能会出现多个人员操作出现相同的方法名,导致被覆盖掉了
+            所以需要采用安全的方法添加来避免覆盖...
+
+            使用替换原型继承(自定义构造函数，将原型指向内置对象)
+                // 通过构造函数的方式来添加;
+                function NewArr(name) {
+                    this.name = name;
+                };
+
+                NewArr.prototype = []; // 修改为一个空数组对象;此时NewArr的原型拥有数组对象所有的方法
+                NewArr.prototype.hello = {
+                    name: &apos;hello world&apos;,
+                };
+                NewArr.prototype.min = function () {
+                    var min = Infinity;
+                    for(var i=0; i&lt; this.length; i++) {
+                        if (this[i] &lt; min) {
+                            min = this[i];
+                        }
+                    };
+                    return min;
+                };
+
+                // 创建一个新对象
+                var arr1 = new NewArr(&apos;huhua&apos;);
+                var arr3 = new NewArr();
+                arr3.push(1,2,3,-1);
+
+                console.log(arr3.min());
+                console.log(arr1);
+                console.log(arr1.__proto__);
+                console.log(NewArr);
+                console.log(NewArr.prototype);
+                console.log(NewArr.__proto__.constructor);
+
+                var arr2 = [12,241,21];
+                console.log(arr2.min());  // 不能访问
+
+                Array.prototype：对象类型赋值的时候拷贝的是地址，修改了NewArr的原型之后，Array.prototype也会修改
+                []：  由于空数组的原型会指向Array.prototype，根据原型链中成员访问规则，NewArr实例对象可以访问数组成员的成员
+                      并且，修改MyArr的原型对象，本质上是修改这个空数组，不会对Array.protpotype造成影响
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/原型/" rel="tag"># 原型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/20/js读书笔记之BOM与DOM操作/" rel="next" title="js程序设计读书笔记之BOM与DOM操作">
+                <i class="fa fa-chevron-left"></i> js程序设计读书笔记之BOM与DOM操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/123.jpg"
+                alt="huhua" />
+            
+              <p class="site-author-name" itemprop="name">huhua</p>
+              <p class="site-description motion-element" itemprop="description">天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/appleguardu" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:appleguardu@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.runoob.com/" title="菜鸟教程" target="_blank">菜鸟教程</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.v2ex.com/" title="V2EX" target="_blank">V2EX</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pythontab.com/" title="Python社区" target="_blank">Python社区</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://e.xitu.io/" title="掘金酱" target="_blank">掘金酱</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#原型"><span class="nav-number">1.</span> <span class="nav-text">原型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原型链"><span class="nav-number">2.</span> <span class="nav-text">原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图解完整原型链"><span class="nav-number">2.1.</span> <span class="nav-text">图解完整原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于对象的一些知识点补充"><span class="nav-number">2.2.</span> <span class="nav-text">关于对象的一些知识点补充</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huhua</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
