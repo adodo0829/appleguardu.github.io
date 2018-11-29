@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://i.imgur.com/R2wyeQf.png">
 <meta property="og:image" content="https://i.imgur.com/p9p92gl.png">
 <meta property="og:image" content="https://i.imgur.com/xmwylPu.png">
-<meta property="og:updated_time" content="2018-11-26T05:36:57.841Z">
+<meta property="og:updated_time" content="2018-11-29T05:09:59.490Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于js中原型的理解">
 <meta name="twitter:description" content="本篇主要是记录一下对js中对于原型的理解…">
@@ -448,6 +448,22 @@ js实现继承的方式:
                 method.prototype[key] = father[key];
             }
         };
+
+    4. 构造函数实现继承
+        // 通过更改this的指向来实现
+        function Person(name, age) {
+            this.name = name || &apos;hello&apos;;
+            this.age = age || 200;
+        };
+        function Stu(sex, name, age) {
+            this.sex = sex;
+            // 调用Person构造函数，修改Person中的this指向为当前Student这个构造函数中new创建的对象
+            // 继承Person中默认的初始化属性
+            Person.call(this, name, age);
+        };
+
+        var s = new Stu(&apos;male&apos;);
+        console.log(s); // age: 200,name: &quot;hello&quot;,sex: &quot;male&quot;
 </code></pre></li>
 </ul>
 <h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><blockquote>
@@ -670,7 +686,7 @@ js实现继承的方式:
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -681,7 +697,7 @@ js实现继承的方式:
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">12</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -692,7 +708,7 @@ js实现继承的方式:
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
