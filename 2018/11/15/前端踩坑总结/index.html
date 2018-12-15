@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇文章主要记录自己在前端三大基础HTML, CSS, JS学习过程中总结的一些注意事项,思维方向和自己习惯犯的一些错误及误区;本文将会持续更新…等到积累一定数量的错误再几种做一下归纳分类…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-07T07:38:12.767Z">
+<meta property="og:updated_time" content="2018-12-15T00:45:03.113Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日常踩坑总结">
 <meta name="twitter:description" content="本篇文章主要记录自己在前端三大基础HTML, CSS, JS学习过程中总结的一些注意事项,思维方向和自己习惯犯的一些错误及误区;本文将会持续更新…等到积累一定数量的错误再几种做一下归纳分类…">
@@ -385,7 +385,17 @@
 <li>踩过的坑</li>
 </ul>
 <hr>
-<h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><ul>
+<pre><code>1.居中方式
+    a. 居中元素定宽高适用
+        absolute + 负margin(自身尺寸的一半)
+        absolute + margin auto + (l t r b: 0)
+
+    b. 居中元素不定宽高
+        absolute(各50%) + transform: translate(各-50%)
+        lineheight: 父盒子高度
+        writing-mode: 竖直
+        flex, grid
+</code></pre><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><ul>
 <li>注意事项</li>
 </ul>
 <hr>
@@ -547,7 +557,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -558,7 +568,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -569,7 +579,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
