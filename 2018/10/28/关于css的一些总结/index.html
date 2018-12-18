@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="关于css阶段性的学习总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-12T01:04:26.889Z">
+<meta property="og:updated_time" content="2018-12-18T02:29:50.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css一些基础性的总结">
 <meta name="twitter:description" content="关于css阶段性的学习总结…">
@@ -410,16 +410,7 @@ margin:0 auto
 <blockquote>
 <p>  1-浮动的元素，实现了模式的转换（拥有了行内块的特点）<br>  2-浮动的元素，顺序与结构代码有关，依次排列。<br>  3-浮动的元素，脱离了标准流，层级比标准流高，会浮在标准元素之上,标准          流会去占据浮动元素的位置。<br>  4-浮动元素是顶部对齐。<br>  5-浮动的父元素会把子元素带跑<br>  6-浮动的子元素依旧会在父元素范围内<br>  7-如果浮动的元素前面有标准流，那么浮动元素只能在标准流之后浮动</p>
 </blockquote>
-<p><strong>浮动的影响和解决</strong><br>在项目中，我们使用嵌套盒子时，一般不会给父盒子设高度，当父盒子是标准流时，若子盒子又浮动起来，脱离了标准流，父盒子就会丧失高度，其他标准流的元素就会来占据他的位置，造成布局混乱。<br>解决措施：给父盒子清除浮动：高度法，单双伪元素法，添加overflow属性  </p>
-<blockquote>
-<p>   这里写一个单伪元素法,5个属性！！！<br>     <code>.clearfix:after {
-        content：&quot;.&quot;;
-        display: block;
-           clear: both;
-           visibility: hidden;
-           height: 0;
-    }</code></p>
-</blockquote>
+<p><strong>浮动的影响和解决</strong><br>在项目中，我们使用嵌套盒子时，一般不会给父盒子设高度，当父盒子是标准流时，若子盒子又浮动起来，脱离了标准流，父盒子就会丧失高度，其他标准流的元素就会来占据他的位置，造成布局混乱。<br>解决措施：给父盒子清除浮动：高度法，单双伪元素法，添加overflow属性<br>        这里写一个单伪元素法,5个属性！！！<br>        .clearfix:after {<br>            content：”.”;<br>            display: block;<br>            clear: both;<br>            visibility: hidden;<br>            height: 0;<br>        }</p>
 <h2 id="关于定位"><a href="#关于定位" class="headerlink" title="关于定位"></a>关于定位</h2><ul>
 <li>相对定位<br>不会转换显示模式，没有脱离标准流，还会保留原来的位置，但是显示的层级会变高，一般用于配合绝对定位。  </li>
 <li>固定定位<br>实现了模式转化，具有行内块的特点；脱离了标准流，不会占据标准流的位置；<br>位移参照物为body。</li>

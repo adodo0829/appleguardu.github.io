@@ -84,14 +84,14 @@
 <meta name="description" content="在日常开发中经常遇到布局的问题，下面我总结几种常用的css布局方案,直接用代码展示">
 <meta name="keywords" content="布局">
 <meta property="og:type" content="article">
-<meta property="og:title" content="页面中常使用的布局方式">
+<meta property="og:title" content="常用布局方式">
 <meta property="og:url" content="http://yoursite.com/2018/12/17/页面常用的布局方式/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="在日常开发中经常遇到布局的问题，下面我总结几种常用的css布局方案,直接用代码展示">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-17T13:56:35.866Z">
+<meta property="og:updated_time" content="2018-12-18T12:43:21.127Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="页面中常使用的布局方式">
+<meta name="twitter:title" content="常用布局方式">
 <meta name="twitter:description" content="在日常开发中经常遇到布局的问题，下面我总结几种常用的css布局方案,直接用代码展示">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>页面中常使用的布局方式 | AppleGuard的博客</title>
+  <title>常用布局方式 | AppleGuard的博客</title>
   
 
 
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">页面中常使用的布局方式</h1>
+          <h1 class="post-title" itemprop="name headline">常用布局方式</h1>
         
 
         <div class="post-meta">
@@ -452,7 +452,7 @@
 }
 </code></pre></li>
 <li><p>多列定宽，一列自适应</p>
-<pre><code>/* 1.float + overflow: hidden */
+<pre><code>/* 1.浮动加overfloat; float + overflow: hidden */
 .parent {
     background: #ccc;
 }
@@ -463,6 +463,140 @@
 }
 .auto {
     overflow: hidden;
+}
+
+/* 2. flex方式实现 */
+.parent {
+    display: flex;
+}
+.box1,.box2 {
+    width: 200px;
+    padding-right: 20px;
+}
+.auto {
+    flex: 1;
+}
+</code></pre></li>
+<li><p>等分布局</p>
+<pre><code>.parent {
+    height: 300px;
+    /* margin-left: -10px; */
+}
+.box {
+    float: left;
+    /* 等分父盒子宽度 */
+    width: 25%;
+    height: 100%;
+    padding-left: 10px;
+    /* 子元素盒子尺寸:为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。 */
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+</code></pre></li>
+<li><p>等高布局</p>
+<pre><code>1. 浮动 + overflow实现
+.parent {
+    overflow: hidden;
+}
+.left {
+    float: left;
+    width: 300px;
+    background: #ccc;
+}
+.right {
+    overflow: hidden;
+    background: #0f0;
+}
+</code></pre></li>
+<li><p>三栏式圣杯布局</p>
+<pre><code>将中间的模块放在dom树前面，可以实现浏览器在做重绘的时候有限显示
+
+**圣杯布局的主要内容是放在 中间main这个盒子中**
+
+/* 圣杯布局: 浮动 + 相对定位 + padding */
+.container {
+    width: 1000px;
+    margin: 100px auto;
+    text-align: center;
+}
+/* 头部 &amp;&amp; 底部 */
+.header,
+.footer {
+    height: 100px;
+    background-color: yellow;
+}
+/* 中间主体内容, padding保证中间盒子居中 */
+.wrapper {
+    padding: 0 100px;
+}
+.col {
+    float: left;
+    position: relative;
+}
+/* 主要内容 */
+.main {
+    width: 100%;
+    height: 400px;
+    background: red;
+}
+/* 左边内容栏: 定宽=父盒子的padding */
+.left {
+    width: 100px;
+    height: 400px;
+    /* 负margin 回到最左边 */
+    margin-left: -100%;
+    left: -100px;
+    background: #0f0;
+}
+/* 右边内容栏: 定宽=父盒子的padding */
+.right {
+    background: pink;
+    width: 100px;
+    height: 400px;
+    /* 负margin 回到最右边 */
+    margin-left: -100px;
+    right: -100px;
+}
+</code></pre></li>
+<li><p>三栏式的双飞翼布局</p>
+<pre><code>双飞翼布局: 同上面的圣杯一样, 也是将主体内容浮动起来, 中间设置margin, 两侧设置负margin
+
+/* 双飞翼布局: 浮动  */
+.container {
+    width: 1000px;
+    margin: 100px auto;
+    text-align: center;
+}
+/* 头尾部分 */
+.header,
+.footer {
+    height: 100px;
+    background: greenyellow;
+}
+/* 主体 */
+.col {
+    float: left;
+    height: 400px;
+}
+.main {
+    width: 100%;
+}
+/* main-wrap居中: */
+.main-wrap {
+    margin: 0 200px;
+    background: red;
+    height: 400px;
+}
+/* 两侧布局 */
+.left {
+    width: 200px;
+    margin-left: -100%;
+    background: pink;
+}
+.right {
+    width: 200px;
+    margin-left: -200px;
+    background: pink;
 }
 </code></pre></li>
 </ul>
