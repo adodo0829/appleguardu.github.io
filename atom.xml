@@ -171,6 +171,28 @@
   </entry>
   
   <entry>
+    <title>js基础思维导图</title>
+    <link href="http://yoursite.com/2018/11/27/js%E5%9F%BA%E7%A1%80%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/"/>
+    <id>http://yoursite.com/2018/11/27/js基础思维导图/</id>
+    <published>2018-11-27T02:53:33.000Z</published>
+    <updated>2018-12-20T00:42:12.999Z</updated>
+    
+    <content type="html"><![CDATA[<p>一篇关于js基础的思维导图,虽然自己页总结了,感觉这个更好一点,这里是引用别人的…<a href="https://segmentfault.com/a/1190000011151972" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011151972</a><br><a id="more"></a></p><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p><img src="https://i.imgur.com/hI7IgLn.gif" alt=""></p><h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><p><img src="https://i.imgur.com/KX3T1mT.gif" alt=""></p><h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><p><img src="https://i.imgur.com/KcsykKX.gif" alt=""></p><h2 id="函数基础"><a href="#函数基础" class="headerlink" title="函数基础"></a>函数基础</h2><p><img src="https://i.imgur.com/zEuI9GS.gif" alt=""></p><h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><p><img src="https://i.imgur.com/aU4x1QQ.gif" alt=""></p><h2 id="数组操作"><a href="#数组操作" class="headerlink" title="数组操作"></a>数组操作</h2><p><img src="https://i.imgur.com/ATXVDSY.gif" alt=""></p><h2 id="DOM操作"><a href="#DOM操作" class="headerlink" title="DOM操作"></a>DOM操作</h2><p><img src="https://i.imgur.com/leuQYL9.gif" alt=""></p><h2 id="正则操作"><a href="#正则操作" class="headerlink" title="正则操作"></a>正则操作</h2><p><img src="https://i.imgur.com/Exfsb7K.gif" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一篇关于js基础的思维导图,虽然自己页总结了,感觉这个更好一点,这里是引用别人的…&lt;a href=&quot;https://segmentfault.com/a/1190000011151972&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://segmentfault.com/a/1190000011151972&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端学习" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="js基础" scheme="http://yoursite.com/tags/js%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>js中隐式转换</title>
     <link href="http://yoursite.com/2018/11/26/js%E4%B8%AD%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
     <id>http://yoursite.com/2018/11/26/js中的隐式转换/</id>
@@ -431,28 +453,6 @@
     
     
       <category term="反爬虫" scheme="http://yoursite.com/tags/%E5%8F%8D%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>python之json基础</title>
-    <link href="http://yoursite.com/2018/07/19/python%E4%B9%8Bjson%E6%95%B0%E6%8D%AE%E8%A7%A3%E6%9E%90/"/>
-    <id>http://yoursite.com/2018/07/19/python之json数据解析/</id>
-    <published>2018-07-19T05:27:17.000Z</published>
-    <updated>2018-09-01T16:07:40.743Z</updated>
-    
-    <content type="html"><![CDATA[<p>当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。<br><a id="more"></a>  </p><h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><p>JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation）；是一种轻量级的文本数据交换格式；适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。  </p><p>简单来说json就是javascript中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构：  </p><blockquote><pre><code>1.对象：对象在js中表示为{ }括起来的内容，数据结构为 { key：value, key：value, ... }的键值对的结构，在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是数字、字符串、数组、对象这几种。</code></pre></blockquote><blockquote><pre><code>2.数组：数组在js中是中括号[ ]括起来的内容，数据结构为 [&quot;Python&quot;, &quot;javascript&quot;, &quot;C++&quot;, ...]，取值方式和所有语言中一样，使用索引获取，字段值的类型可以是 数字、字符串、数组、对象几种。</code></pre></blockquote><h2 id="JSON模块"><a href="#JSON模块" class="headerlink" title="JSON模块"></a>JSON模块</h2><p>Python中提供了json模块，总共有四个方法：dumps、dump、loads、load，用于字符串 和 python数据类型间进行转换。<br><strong>1.json.loads()</strong><br>对数据进行解码，把Json格式字符串 解码 转换成Python对象 。<br><img src="https://i.imgur.com/gFu4n1P.png" alt=""></p><p>实例：<br><img src="https://i.imgur.com/3zOg7fE.png" alt=""></p><p><strong>2.json.dumps()</strong><br>对数据进行编码，返回一个str对象，把一个Python对象编码转换成Json字符串。如果直接将dict类型的数据写入json文件中会发生报错，因此在将数据写入时需要用到该函数。<br><img src="https://i.imgur.com/foRbCB5.png" alt=""></p><p>实例：<br><img src="https://i.imgur.com/N5ids9K.png" alt=""></p><p><strong>3.json.dump()</strong><br>json.dump()用于将dict类型的数据转成str，并写入到json文件中  </p><p><img src="https://i.imgur.com/b06PiXX.png" alt=""></p><p><strong>4.json.load()</strong><br>json.load()直接从json文件中读取数据，并将str转为dict类型</p><p>实例：<br><img src="https://i.imgur.com/bBO2Wo7.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="爬虫" scheme="http://yoursite.com/categories/%E7%88%AC%E8%99%AB/"/>
-    
-    
-      <category term="json" scheme="http://yoursite.com/tags/json/"/>
     
   </entry>
   
