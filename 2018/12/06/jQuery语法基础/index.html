@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇内容是对jQuery和原生JS进行了对比和归纳,主要是总结一些jQuery的常用知识点…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-10T15:56:40.301Z">
+<meta property="og:updated_time" content="2018-12-24T12:10:52.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery常用知识总结">
 <meta name="twitter:description" content="本篇内容是对jQuery和原生JS进行了对比和归纳,主要是总结一些jQuery的常用知识点…">
@@ -658,13 +658,13 @@ $(&apos;#foo&apos;).slideUp(300).delay(800).fadeIn(400); // 在.slideUp() 和 .f
 <li><p>on注册事件</p>
 <pre><code>1. on注册简单事件
 // 表示给$(selector)绑定事件，并且由自己触发，不支持动态绑定。
-$(selector).on( &apos;click&apos;, function() {
+$(selector).on(&apos;click&apos;, function() {
     alert(&apos;hello world);
 }); 
 
 2. on注册事件委托
 // 表示给$(selector)绑定代理事件，当必须是它的内部元素span才能触发这个事件，支持动态绑定
-$(selector).on( &apos;click&apos;,&apos;span&apos;, function() {
+$(selector).on(&apos;click&apos;,&apos;span&apos;, function() {
     alert(&apos;span的父元素下的后来创建的span元素都有可以触发这个函数&apos;);
 })
 </code></pre></li>
@@ -900,7 +900,7 @@ console.log(_$.fn.jquery);//3.0.0
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -922,7 +922,7 @@ console.log(_$.fn.jquery);//3.0.0
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
