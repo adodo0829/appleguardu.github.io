@@ -91,7 +91,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/gxdAtNS.png">
 <meta property="og:image" content="https://i.imgur.com/SAkMEA9.png">
-<meta property="og:updated_time" content="2018-12-25T01:12:29.047Z">
+<meta property="og:updated_time" content="2018-12-25T06:15:18.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于php的一些知识点">
 <meta name="twitter:description" content="主要是总结一些网页中php的使用方式…">
@@ -685,7 +685,10 @@ Date:生成响应的日期和时间；Content-Type:指定了MIME类型的HTML(te
 <p>一般这个值会有个时间限制，超时后毁掉这个值，默认30分钟。</p>
 <p>当用户在应用程序的 Web页间跳转时，存储在 Session 对象中的变量不会丢失而是在整个用户会话中一直存在下去。<br>Session的实现方式和Cookie有一定关系。建立一个连接就生成一个session id，打开几个页面就好几个了，这里就用到了Cookie，把session id存在Cookie中，每次访问的时候将Session id带过去就可以识别了.</p>
 </blockquote>
-<h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
+<pre><code>设置session的过期时间:
+    1. 修改服务端中配置的session生命周期
+    2. 通过时间戳来手动删除(unset)session值
+</code></pre><h4 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h4><ul>
 <li><p>cookie </p>
 <p>  登录网站，今输入用户名密码登录了，第二天再打开很多情况下就直接打开了。这个时候用到的一个机制就是cookie。</p>
 </li>

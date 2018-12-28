@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-24T15:55:26.458Z">
+<meta property="og:updated_time" content="2018-12-27T12:06:45.347Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax相关总结">
 <meta name="twitter:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..">
@@ -636,7 +636,24 @@ $(&quot;#btn3&quot;).click(function () {
 })
 </code></pre></li>
 </ul>
+<h2 id="ajax的一些注意事项"><a href="#ajax的一些注意事项" class="headerlink" title="ajax的一些注意事项"></a>ajax的一些注意事项</h2><pre><code>1.面向接口编程:
+    当网站数据变化时,页面需要动态的向服务器去发送局部请求(异步方式)数据,这时我们需要弄清楚:
+        a. 请求的接口(即一个url)
+        b. 请求方式(get, post, 其他....)
+        c. 请求的参数(data: {data1: xxxx, data2: yyyy,....})
+        d. 请求的响应体格式; (jQuery中的&quot;jsonp&quot;格式 是发送的跨域请求)
+        e. 回调函数(obj): 也就是我们去处理响应内容的方式...
 
+        // 一般就是拿到响应体后, 取出响应体的数据,去动态给网页上要变化的标签元素赋值,
+        // 对于同类型的网页元素模块我们可以使用模板去赋值,(script标签中导入模板, 准备模板(数据填入模板),) 这样可以节省开发时间 模板template(&apos;元素id&apos;, {data1: xxx, data2: yyy}) 传多个值
+
+2.页码刷新内容
+    通过a标签的href属性, href=&quot;javascript: func(page值)&quot;, 来实现传参,并发送请求, 完成页面刷新
+
+3.动态加载的元素的事件注册问题
+    当元素是动态异步加载的时候,事先的事件注册不会实现给后来加载的元素
+    这里一般要用到 委托注册(冒泡原理: 当元素的事件触发时,父级的同名事件也会依次触发...)给父元素注册即可
+</code></pre>
       
     </div>
     
@@ -867,7 +884,7 @@ $(&quot;#btn3&quot;).click(function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Ajax"><span class="nav-number">1.</span> <span class="nav-text">什么是Ajax?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的使用步骤"><span class="nav-number">2.</span> <span class="nav-text">Ajax的使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax中传输的数据格式JSON"><span class="nav-number">3.</span> <span class="nav-text">Ajax中传输的数据格式JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML格式"><span class="nav-number">4.</span> <span class="nav-text">XML格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">5.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过模板动态添加网页元素"><span class="nav-number">6.</span> <span class="nav-text">通过模板动态添加网页元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的封装"><span class="nav-number">7.</span> <span class="nav-text">Ajax的封装</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Ajax"><span class="nav-number">1.</span> <span class="nav-text">什么是Ajax?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的使用步骤"><span class="nav-number">2.</span> <span class="nav-text">Ajax的使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax中传输的数据格式JSON"><span class="nav-number">3.</span> <span class="nav-text">Ajax中传输的数据格式JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML格式"><span class="nav-number">4.</span> <span class="nav-text">XML格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">5.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过模板动态添加网页元素"><span class="nav-number">6.</span> <span class="nav-text">通过模板动态添加网页元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的封装"><span class="nav-number">7.</span> <span class="nav-text">Ajax的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax的一些注意事项"><span class="nav-number">8.</span> <span class="nav-text">ajax的一些注意事项</span></a></li></ol></div>
             
 
           </div>
