@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..">
+<meta name="description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..日常使用中的一些注意事项">
 <meta name="keywords" content="Ajax">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ajax相关总结">
 <meta property="og:url" content="http://yoursite.com/2018/12/13/Ajax基础/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..">
+<meta property="og:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..日常使用中的一些注意事项">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-27T12:06:45.347Z">
+<meta property="og:updated_time" content="2019-01-02T11:54:04.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ajax相关总结">
-<meta name="twitter:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..">
+<meta name="twitter:description" content="本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..日常使用中的一些注意事项">
 
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <p>本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..<br><a id="more"></a></p>
+        <p>本篇是关于Ajax内容的总结,主要是总结一些基本用法和注意事项…以及封装的方法..日常使用中的一些注意事项<br><a id="more"></a></p>
 <h2 id="什么是Ajax"><a href="#什么是Ajax" class="headerlink" title="什么是Ajax?"></a>什么是Ajax?</h2><p>一般来说,我们向服务器发送一次HTTP请求就会对应一个页面。如果要让用户留在当前页面中，同时发出新的HTTP请求，就必须用JavaScript发送这个新请求，接收到数据后，再用JavaScript更新页面，这样一来，用户就感觉自己仍然停留在当前页面，但是数据却可以不断地更新。  </p>
 <p>通俗的来讲,Ajax是一种技术, 一种可以让网页某个局部部分动态地给服务器发起请求，而不用整个页面刷新。是一种可以<strong>局部发请求</strong>的技术…</p>
 <h2 id="Ajax的使用步骤"><a href="#Ajax的使用步骤" class="headerlink" title="Ajax的使用步骤"></a>Ajax的使用步骤</h2><pre><code>1.首先我们要确定好需求(使用场景), 也就是什么时候(在事件中使用,或者达到某一条件时)去使用Ajax...
@@ -636,11 +636,11 @@ $(&quot;#btn3&quot;).click(function () {
 })
 </code></pre></li>
 </ul>
-<h2 id="ajax的一些注意事项"><a href="#ajax的一些注意事项" class="headerlink" title="ajax的一些注意事项"></a>ajax的一些注意事项</h2><pre><code>1.面向接口编程:
+<h2 id="Ajax应用中的一些注意事项"><a href="#Ajax应用中的一些注意事项" class="headerlink" title="Ajax应用中的一些注意事项"></a>Ajax应用中的一些注意事项</h2><pre><code>1.面向接口编程:
     当网站数据变化时,页面需要动态的向服务器去发送局部请求(异步方式)数据,这时我们需要弄清楚:
         a. 请求的接口(即一个url)
         b. 请求方式(get, post, 其他....)
-        c. 请求的参数(data: {data1: xxxx, data2: yyyy,....})
+        c. 请求的参数(data: {data1: xxxx, data2: yyyy,....}); 键值对的形式
         d. 请求的响应体格式; (jQuery中的&quot;jsonp&quot;格式 是发送的跨域请求)
         e. 回调函数(obj): 也就是我们去处理响应内容的方式...
 
@@ -648,11 +648,101 @@ $(&quot;#btn3&quot;).click(function () {
         // 对于同类型的网页元素模块我们可以使用模板去赋值,(script标签中导入模板, 准备模板(数据填入模板),) 这样可以节省开发时间 模板template(&apos;元素id&apos;, {data1: xxx, data2: yyy}) 传多个值
 
 2.页码刷新内容
-    通过a标签的href属性, href=&quot;javascript: func(page值)&quot;, 来实现传参,并发送请求, 完成页面刷新
+    a.通过a标签的href属性, href=&quot;javascript: func(page值)&quot;, 来实现传参,并发送请求, 完成页面刷新;
+    b.通过button标签的添加行内点击事件实现,调用一个Ajax请求函数
+        如: &lt;button onclick=&quot;update_all(&apos;approved&apos;)&quot; class=&quot;btn btn-info btn-sm&quot;&gt;批量批准&lt;/button&gt;
+
 
 3.动态加载的元素的事件注册问题
     当元素是动态异步加载的时候,事先的事件注册不会实现给后来加载的元素
     这里一般要用到 委托注册(冒泡原理: 当元素的事件触发时,父级的同名事件也会依次触发...)给父元素注册即可
+
+4.分页组件, 页面动态加载
+
+    a.前端分页的实现: 适用于数据较少/分页较少的情况。
+        在前端分页的实现中，通过接口一次性获取列表的所有内容，根据数据的总长度和每页需展示的个数计算总页数；
+        之后的每次加载操作（滚动/点击）中，依次执行数据截取、DOM 渲染、插入结构的过程，直至最后一页。
+
+    b.在后端分页的实现:
+        在加载时，前端通过页码page来拉数据，若返回非空数组，则进行 DOM 渲染，插入接口的操作；
+        若返回空数组，则说明当前请求的为最后一页的数据，无需再发送请求。
+        将需要的字段通过sql语句查询出来; 返回一个data数组,和数据的长度用来当作总页数;
+
+    c.注意事项: 
+        1.当遇到多级分页时, 一种实现的方式是, 将SQL语句进行分离,判断,和拼接;不同情况使用不同的语句;
+
+        2.select表单元素的值: 如果有value属性, 通过方法获取的值会是value值; 
+        而不是元素标签中的文本值; 所以要想动态获取option的去掉标签的value属性
+
+        3.模板的使用: twbsPagination插件; 导入jQuery,和bootstrap;
+
+        // 这个分页插件只会默认初始化一次; 要解决页码变化的问题:
+            // 调用模板的初始化方法, 传入destroy, 可以清除上一次的分页状态, 下一次重新生成新的分页
+            $(&apos;.pagination&apos;).twbsPagination(&apos;destroy&apos;);
+
+            $(&apos;.pagination&apos;).twbsPagination({
+                    totalPages: obj.total_page,
+                    visiblePages: 5,
+                    initiateStartPageClick: false,
+                    first: &quot;首页&quot;,
+                    prev: &quot;上一页&quot;,
+                    next: &quot;下一页&quot;,
+                    last: &quot;尾页&quot;,
+                    startPage: page, // 高亮页设置
+                    onPageClick: function (event, page) {
+                        // 每次点击时会自动加载
+                        load_post(page);
+                    }
+                })
+                }
+            })
+
+5.批量操作表格数据 tr
+    一般每个tr都会对应着一条数据; 那么在动态批量操作时需要注意:
+    a.需要将数据库中设置的id值赋值给每一行的标签的一个属性上 作为这条数据的标识;
+    b.然后前端在操作行数据时, 获取目标行的状态和id值(jQuery中使用each方法:each(function (index, ele) {xxxxx}操作比较好)
+    然后将获取的值传给后端, 后端通过sql语句的in语法来批量修改字段值;
+    // 注意一些特殊处理: 一般就是末页数据加载的问题, 末页单行数据操作等等.....
+
+6. FormData对象
+// 前提是form表单中&amp;&amp;带name属性的 input标签:
+    js中 FormData对象在实例化的时候传入一个表单对象，那么它就会自动获取到表单中所有带name属性的表单元素提交给服务器
+    jQuery里的表单序列化(serialize): $(&apos;#ajaxForm&apos;).serialize()，但是表单序列化不能拿到文件file，所以是无法做文件异步上传的
+
+    可是FormData是可以获取文件的; 一般在做表单数据上传时,
+    // 先获取页面表单的内容, 这里直接通过 FormData 对象来拿到表单里面的数据; 
+    var fm = new FormData($(&apos;form&apos;)[0]); 传入的为DOM对象!!!!
+    // 非表单标签元素: 如富文本插件内容 需要手动添加, 并设置对应的 key值, 即字段值
+    fm.append(&quot;content&quot;, editor.txt.html());
+
+    // 上面讲到的富文本插件:  导入模板, 调用对应的api方法生成即可
+    // 实例化一个editor对象
+    var editor = new wangEditor(&apos;#content&apos;);
+    // 调用create方法创建
+    editor.create();
+
+// 注意事项:
+    使用ajax发送 post提交请求时, 不要忘记 加上下面两个参数
+    data: fm,
+    // 使用FormData时; 需要加上两个参数: 内容格式和数据处理 都为false
+    contentType: false,
+    processData: false,
+
+// 表单元素file
+    // file表单元素:  files属性: files[0];  上传多个文件 + multiple属性; 提交多个文件给服务器保存时需要注明name=&quot;icon[]&quot;
+    console.dir(this.files[0]); //可以打印出文件详细的属性信息
+    当上传文件为图片时:
+    要实现图片的预览功能: 可以给file表单添加: onchange事件, 当值改变时, 给img标签添加 src属性 
+    // 图片保存方案:
+    a.临时url方案: URL.createObjectURL(表单.files[0])
+    b.永久url方案: 将上传图片发送到服务器, 服务器保存; 下次在返回路径
+
+7.混编时数据的添加
+    数据库中查找出的数据: 由于返回的是二维数组:
+        a.当页面渲染时只要添加一组数据时, 直接取出来做操作arr[0];
+        b.当页面需要添加多组数据时, 需要遍历二维数组中的内容arr, 将每项内容添加到指定位置
+    关于点赞数的局部刷新: 将数据库中字段值取出来存在 行内属性上,点击后将新数据提交给服务器,自己+1
+    文章阅读数+1: 页面加载一次则+1, 然后更新到数据库中
 </code></pre>
       
     </div>
@@ -683,8 +773,8 @@ $(&quot;#btn3&quot;).click(function () {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/13/CSS3特性学习总结/" rel="next" title="CSS3新特性学习">
-                <i class="fa fa-chevron-left"></i> CSS3新特性学习
+              <a href="/2018/12/06/jQuery语法基础/" rel="next" title="jQuery常用知识总结">
+                <i class="fa fa-chevron-left"></i> jQuery常用知识总结
               </a>
             
           </div>
@@ -693,8 +783,8 @@ $(&quot;#btn3&quot;).click(function () {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/15/PHP相关知识点/" rel="prev" title="关于php的一些知识点">
-                关于php的一些知识点 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/13/CSS3特性学习总结/" rel="prev" title="CSS3新特性学习">
+                CSS3新特性学习 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -776,7 +866,7 @@ $(&quot;#btn3&quot;).click(function () {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -798,7 +888,7 @@ $(&quot;#btn3&quot;).click(function () {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -884,7 +974,7 @@ $(&quot;#btn3&quot;).click(function () {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Ajax"><span class="nav-number">1.</span> <span class="nav-text">什么是Ajax?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的使用步骤"><span class="nav-number">2.</span> <span class="nav-text">Ajax的使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax中传输的数据格式JSON"><span class="nav-number">3.</span> <span class="nav-text">Ajax中传输的数据格式JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML格式"><span class="nav-number">4.</span> <span class="nav-text">XML格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">5.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过模板动态添加网页元素"><span class="nav-number">6.</span> <span class="nav-text">通过模板动态添加网页元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的封装"><span class="nav-number">7.</span> <span class="nav-text">Ajax的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax的一些注意事项"><span class="nav-number">8.</span> <span class="nav-text">ajax的一些注意事项</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是Ajax"><span class="nav-number">1.</span> <span class="nav-text">什么是Ajax?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的使用步骤"><span class="nav-number">2.</span> <span class="nav-text">Ajax的使用步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax中传输的数据格式JSON"><span class="nav-number">3.</span> <span class="nav-text">Ajax中传输的数据格式JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XML格式"><span class="nav-number">4.</span> <span class="nav-text">XML格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跨域问题"><span class="nav-number">5.</span> <span class="nav-text">跨域问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过模板动态添加网页元素"><span class="nav-number">6.</span> <span class="nav-text">通过模板动态添加网页元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax的封装"><span class="nav-number">7.</span> <span class="nav-text">Ajax的封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ajax应用中的一些注意事项"><span class="nav-number">8.</span> <span class="nav-text">Ajax应用中的一些注意事项</span></a></li></ol></div>
             
 
           </div>
@@ -904,7 +994,7 @@ $(&quot;#btn3&quot;).click(function () {
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
