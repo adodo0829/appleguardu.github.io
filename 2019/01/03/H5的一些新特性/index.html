@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇内容是关于html5的一些新的特性和方法总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-04T06:31:18.712Z">
+<meta property="og:updated_time" content="2019-01-05T06:32:28.979Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于H5的一些新特性总结">
 <meta name="twitter:description" content="本篇内容是关于html5的一些新的特性和方法总结…">
@@ -411,7 +411,7 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
             原来没这个类就加上，原来有这个类就去掉。一种开关效果;
 
     classList.contains(); 是否有某个类，如果有返回true，没有返回false
-</code></pre><p>3.localStorage属性：本地存储;可以存储一些数据到本地（存到浏览器端, 而且不像cookie,他没有失效时间</p>
+</code></pre><p>3.localStorage属性：本地存储;可以存储一些数据到本地（存到浏览器端, 而且不像cookie,他没有失效时间<br>4.sessionStorage属性: 作用同上; 只不过不能永久存储,浏览器关闭回自动清空(适用 多个页面临时传值…)</p>
 <pre><code>几个方法:
    setItem(key: value): 存储一个数据到浏览器。
             严格来讲只能存字符串，如果传入复杂类型，会调用复杂类型的toString方法得到字符串再存
@@ -434,12 +434,28 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
         一般读取值进行的操作:
             a. 判空处理
             b. 判断是否已存在 if not existed: xxx
-</code></pre><p>4.地理定位</p>
+</code></pre><p>5.地理定位</p>
 <pre><code>navigator.geolocation.getCurrentPosition(function (loc) {
     console.log(loc)
     // 经纬度
     console.log(loc.coords.longitude, loc.coords.latitude);
 })
+</code></pre><p>6.获取目标元素距离可视区的距离</p>
+<pre><code>getBoundingClientRect().top
+getBoundingClientRect().left
+// 获取鼠标点击相对于自身的位置距离
+可以用事件对象的clientX - 元素.getBoundingClientRect().left
+</code></pre><h2 id="新增的一些事件"><a href="#新增的一些事件" class="headerlink" title="新增的一些事件"></a>新增的一些事件</h2><p>1.鼠标拖拽事件<br>    // 先给拖动元素加 draggable属性为true</p>
+<pre><code>// 跟拖动的元素相关的
+ondrag:  当拖动元素过程中触发
+ondragstart:  当拖动操作开始时触发 
+ondragend:  当拖动操作结束时触发 
+
+// 跟容器（目标元素）有关的事件：
+ondragenter:有元素进入时触发
+ondragleave：有元素离开时触发
+ondragover：有元素在容器范围内时不断触发，但这个事件主要是阻止默认行为，好方便让drop事件能得到触发
+ondrop：当有元素在容器范围内被放置时触发，需要先阻止over的默认行为才能触发
 </code></pre>
       
     </div>
@@ -470,8 +486,8 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/30/ES6入门读书总结/" rel="next" title="ECMAScript6入门读书总结">
-                <i class="fa fa-chevron-left"></i> ECMAScript6入门读书总结
+              <a href="/2018/12/30/ES6入门读书总结1/" rel="next" title="ECMAScript6入门读书总结(一)">
+                <i class="fa fa-chevron-left"></i> ECMAScript6入门读书总结(一)
               </a>
             
           </div>
@@ -479,6 +495,10 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/05/ajs中编程技巧总结/" rel="prev" title="常用的一些编程技巧总结">
+                常用的一些编程技巧总结 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -559,7 +579,7 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -581,7 +601,7 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -667,7 +687,7 @@ info.dataset[&apos;myHeight&apos;] = &apos;188cm&apos;;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#H5中的新特性"><span class="nav-number">1.</span> <span class="nav-text">H5中的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的一些标签"><span class="nav-number">1.1.</span> <span class="nav-text">新增的一些标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增表单类型"><span class="nav-number">1.2.</span> <span class="nav-text">新增表单类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的一些属性和webAPI-DOM方法"><span class="nav-number">1.3.</span> <span class="nav-text">新增的一些属性和webAPI(DOM方法)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#H5中的新特性"><span class="nav-number">1.</span> <span class="nav-text">H5中的新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的一些标签"><span class="nav-number">1.1.</span> <span class="nav-text">新增的一些标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增表单类型"><span class="nav-number">1.2.</span> <span class="nav-text">新增表单类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的一些属性和webAPI-DOM方法"><span class="nav-number">1.3.</span> <span class="nav-text">新增的一些属性和webAPI(DOM方法)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增的一些事件"><span class="nav-number">1.4.</span> <span class="nav-text">新增的一些事件</span></a></li></ol></li></ol></div>
             
 
           </div>

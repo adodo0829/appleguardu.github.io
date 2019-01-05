@@ -90,7 +90,7 @@
 <meta property="og:description" content="关于css3的新特性学习总结…当然c3属性的使用要考虑到浏览器的兼容性问题…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/Y0HTfzS.png">
-<meta property="og:updated_time" content="2018-12-17T13:56:08.443Z">
+<meta property="og:updated_time" content="2019-01-05T11:33:13.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS3新特性学习">
 <meta name="twitter:description" content="关于css3的新特性学习总结…当然c3属性的使用要考虑到浏览器的兼容性问题…">
@@ -496,7 +496,8 @@ img {
 <pre><code>一般情况下，该属性即transition必须规定2项内容
 
 指定要添加效果的css属性（这样才能识别做哪个方向的过渡，通常是width、height）
-指定效果的持续时间（默认持续时间为0，所以必须要指定）
+指定效果的持续时间（默认持续时间为0，所以必须要指定;
+还有运动的类型(匀速linear,ease-in...), 还有steps()参数, 分几步完成过渡
 </code></pre><blockquote>
 <p>  <strong>注意：该属性必须结合伪类:hover来使用</strong>。</p>
 </blockquote>
@@ -582,7 +583,38 @@ img {
 .invert {filter: invert(1)}  /* 反转输入图像: 0-1之间  曝光效果*/
 .sepia {filter: sepia(1)}  /* 转为深褐色: 0-1之间, 怀旧风格 */
 </code></pre><p>C3属性就先写到这,以后用到再继续更新…</p>
+<h2 id="伪元素-伪类选择器"><a href="#伪元素-伪类选择器" class="headerlink" title="伪元素,伪类选择器"></a>伪元素,伪类选择器</h2><pre><code>1.伪元素选择器
+    ::before,::after
+        可以在不改变html结构的情况下，给某个元素里面再加内容
+        我们一般用它做清除浮动带来的影响
+    ::first-letter
+            设置首字母样式
+    ::first-line
+            设置首行样式
+    ::selection
+            设置选中样式
 
+2.伪类选择器(类选择)
+    // a标签类
+    :hover 相当于鼠标悬停的效果
+    :active：a标签点击时的样式（按下去没松手那个状态）
+    :link   默认样式
+    :visited 访问之后的样式
+
+    // 匹配标签元素
+    // 搭配其他选择器组成交集选择器（常用的写法）如 li:first-child
+    :first-child：找到第一个子元素
+    :nth-child：找到某一个
+                可以传入具体的数字，就代表找到第几哥。例：传8，就代表找到第8个
+                可以传n，代表找到所有
+                可以传odd，代表找到奇数
+                可以传even，代表找到偶数
+                mn：代表找到m的倍数，例：3n代表找到3和3的倍数，3,6,9……………………
+                n+m：代表从m开始一直到最后，例：n+12 从12开始到最后
+    :last-child：找到最后一个
+    :not() 排除()中的元素
+    :focus 设置获得焦点时的样式
+</code></pre>
       
     </div>
     
@@ -612,8 +644,8 @@ img {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/13/Ajax基础/" rel="next" title="Ajax相关总结">
-                <i class="fa fa-chevron-left"></i> Ajax相关总结
+              <a href="/2018/12/06/jQuery语法基础/" rel="next" title="jQuery常用知识总结">
+                <i class="fa fa-chevron-left"></i> jQuery常用知识总结
               </a>
             
           </div>
@@ -622,8 +654,8 @@ img {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/15/PHP相关知识点/" rel="prev" title="关于php的一些知识点">
-                关于php的一些知识点 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/13/Ajax基础/" rel="prev" title="Ajax相关总结">
+                Ajax相关总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -705,7 +737,7 @@ img {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">61</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -727,7 +759,7 @@ img {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -813,7 +845,7 @@ img {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#css3新特性学习"><span class="nav-number">1.</span> <span class="nav-text">css3新特性学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边框系列"><span class="nav-number">1.1.</span> <span class="nav-text">边框系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景系列"><span class="nav-number">1.2.</span> <span class="nav-text">背景系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变系列"><span class="nav-number">1.3.</span> <span class="nav-text">渐变系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-2d转换"><span class="nav-number">1.4.</span> <span class="nav-text">transform 2d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-3d转换"><span class="nav-number">1.5.</span> <span class="nav-text">transform 3d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-过渡"><span class="nav-number">1.6.</span> <span class="nav-text">transition 过渡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation动画"><span class="nav-number">1.7.</span> <span class="nav-text">animation动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片处理"><span class="nav-number">1.8.</span> <span class="nav-text">图片处理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#css3新特性学习"><span class="nav-number">1.</span> <span class="nav-text">css3新特性学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边框系列"><span class="nav-number">1.1.</span> <span class="nav-text">边框系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景系列"><span class="nav-number">1.2.</span> <span class="nav-text">背景系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变系列"><span class="nav-number">1.3.</span> <span class="nav-text">渐变系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-2d转换"><span class="nav-number">1.4.</span> <span class="nav-text">transform 2d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-3d转换"><span class="nav-number">1.5.</span> <span class="nav-text">transform 3d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-过渡"><span class="nav-number">1.6.</span> <span class="nav-text">transition 过渡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation动画"><span class="nav-number">1.7.</span> <span class="nav-text">animation动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片处理"><span class="nav-number">1.8.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪元素-伪类选择器"><span class="nav-number">1.9.</span> <span class="nav-text">伪元素,伪类选择器</span></a></li></ol></li></ol></div>
             
 
           </div>
