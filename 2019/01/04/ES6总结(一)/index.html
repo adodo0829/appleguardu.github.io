@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="scrapy," />
+  <meta name="keywords" content="ES6," />
 
 
 
@@ -81,21 +81,18 @@
 
 
 
-<meta name="description" content="Scrapy终端是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试XPath或CSS表达式，查看他们的工作方式，方便我们爬取的网页中提取的数据。">
-<meta name="keywords" content="scrapy">
+<meta name="description" content="本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…">
+<meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Scrapy框架学习之scrapy shell和selector">
-<meta property="og:url" content="http://yoursite.com/2018/06/05/Scrapy框架学习之scrapy-shell和selector/index.html">
+<meta property="og:title" content="ES6入门读书总结(一)">
+<meta property="og:url" content="http://yoursite.com/2019/01/04/ES6总结(一)/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="Scrapy终端是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试XPath或CSS表达式，查看他们的工作方式，方便我们爬取的网页中提取的数据。">
+<meta property="og:description" content="本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/F45RBJ9.png">
-<meta property="og:image" content="https://i.imgur.com/z6EN1U1.png">
-<meta property="og:updated_time" content="2018-09-01T15:59:47.655Z">
+<meta property="og:updated_time" content="2019-01-08T15:38:38.201Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Scrapy框架学习之scrapy shell和selector">
-<meta name="twitter:description" content="Scrapy终端是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试XPath或CSS表达式，查看他们的工作方式，方便我们爬取的网页中提取的数据。">
-<meta name="twitter:image" content="https://i.imgur.com/F45RBJ9.png">
+<meta name="twitter:title" content="ES6入门读书总结(一)">
+<meta name="twitter:description" content="本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…">
 
 
 
@@ -125,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/05/Scrapy框架学习之scrapy-shell和selector/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/04/ES6总结(一)/"/>
 
 
 
 
 
-  <title>Scrapy框架学习之scrapy shell和selector | AppleGuard的博客</title>
+  <title>ES6入门读书总结(一) | AppleGuard的博客</title>
   
 
 
@@ -268,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/05/Scrapy框架学习之scrapy-shell和selector/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/04/ES6总结(一)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -285,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Scrapy框架学习之scrapy shell和selector</h1>
+          <h1 class="post-title" itemprop="name headline">ES6入门读书总结(一)</h1>
         
 
         <div class="post-meta">
@@ -297,8 +294,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-05T20:10:32+08:00">
-                2018-06-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T10:53:33+08:00">
+                2019-01-04
               </time>
             
 
@@ -320,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/scrapy/" itemprop="url" rel="index">
-                    <span itemprop="name">scrapy</span>
+                  <a href="/categories/前端学习/" itemprop="url" rel="index">
+                    <span itemprop="name">前端学习</span>
                   </a>
                 </span>
 
@@ -357,41 +354,171 @@
       
 
       
-        <p>Scrapy终端是一个交互终端，我们可以在未启动spider的情况下尝试及调试代码，也可以用来测试XPath或CSS表达式，查看他们的工作方式，方便我们爬取的网页中提取的数据。<br><a id="more"></a>  </p>
-<h1 id="Scrapy-Shell"><a href="#Scrapy-Shell" class="headerlink" title="Scrapy Shell"></a>Scrapy Shell</h1><p>进入项目的根目录，执行下列命令来启动shell:</p>
-<blockquote>
-<pre><code>scrapy shell &quot;http://www.itcast.cn/channel/teacher.shtml&quot;
-</code></pre></blockquote>
-<p><img src="https://i.imgur.com/F45RBJ9.png" alt=""></p>
-<p>Scrapy Shell根据下载的页面会自动创建一些方便使用的对象，例如 Response 对象，以及 Selector 对象 (对HTML及XML内容)。</p>
-<p>当shell载入后，将得到一个包含response数据的本地 response 变量，输入 response.body将输出response的包体，输出 response.headers 可以看到response的报头。</p>
-<p>输入 response.selector 时， 将获取到一个response 初始化的类 Selector 的对象，此时可以通过使用 response.selector.xpath()或response.selector.css() 来对 response 进行查询。<br>Xpath对象：<br><img src="https://i.imgur.com/z6EN1U1.png" alt=""></p>
-<h1 id="Selectors选择器"><a href="#Selectors选择器" class="headerlink" title="Selectors选择器"></a>Selectors选择器</h1><p>Scrapy Selectors 内置 XPath 和 CSS Selector 表达式机制；Selector有四个基本的方法，最常用的还是xpath:</p>
+        <p>本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…<br><a id="more"></a></p>
+<h1 id="ECMAScript-6-语法总结"><a href="#ECMAScript-6-语法总结" class="headerlink" title="ECMAScript 6 语法总结"></a>ECMAScript 6 语法总结</h1><h2 id="let和const声明变量"><a href="#let和const声明变量" class="headerlink" title="let和const声明变量"></a>let和const声明变量</h2><pre><code>// 块级作用域
+ES5中: 
+    不合理场景1: 局部内层变量 可能覆盖掉 全局变量
+    合理场景2: for循环中 用var声明的 变量i; 会泄露成全局变量,循环结束并没有消失
+
+ES6中:
+**使用严格模式: &apos;use strict&apos;;
+
+1.声明的变量a的作用域为块级,并且只在自己所在的块级作用域起作用; 外层作用域不能访问内层, 内层可以访问外层的;
+2.内&amp;&amp;外层的同名变量互不干扰; 内层重新赋值也不会对外层造成影响;
+3.变量必须先声明,再使用,否则报错...(暂时性死区特性), 没有所谓的变量提升
+4.同一作用域不能重复声明同一个变量; 函数function第一层作用域变量声明不能和形参一样; 否则报错
+
+//注意:
+1. es5中var声明变量的特性:
+    a. var命令会发生”变量提升“现象，即变量可以在声明之前使用，值为undefined。
+    b. es5中变量只有两种作用域: 全局 和 局部(函数内声明)
+    c. es6中可以使用var, 特性还是同es5一样
+
+2. es6中,变量在for循环中的使用
+    每一轮的i值 只在当前的循环中有效; 相当于每一次循环i都是一个新变量 
+    // 1.循环变量在设置的时候是: 一个父作用域
+    // 2.循环体内部又是一个单独的子作用域
+    // 3.所以当同时两个块级作用域如使用相同的变量i,循环体内部会使用自己作用域声明的i
+
+3.ES6 规定，块级作用域之中，函数声明语句的行为类似于let，在块级作用域之外不可引用。
+    // 1.避免在块级作用域内使用函数时声明的方式(function fn(){xxx})声明函数
+    // 2.可以使用表达式方式 let f = function(){}
+    // 也就是外层无法调用内层声明的函数...
+
+4.const声明一个常量: 该变量不能变化,是一个恒定值
+    const i = 100; // 定义时就需要初始化
+
+    // const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。
+    // 值类型:   数据就 等同于 这个常量的地址的值
+    // 引用类型: 这个常量 是一直指向一个固定的地址, 不能变的(修改指向就保错,即赋值操作); 只不过对象本身可变
+</code></pre><h2 id="变量的解构赋值"><a href="#变量的解构赋值" class="headerlink" title="变量的解构赋值"></a>变量的解构赋值</h2><p>解构赋值,我按照字面意思就是 解析数据解构, 然后给一一对应的变量进行赋值的一种语法</p>
 <ul>
-<li>xpath(): 传入xpath表达式，返回该表达式所对应的所有节点的selector list列表</li>
-<li>extract(): 序列化该节点为Unicode字符串并返回list</li>
-<li>extract_first(): 取出上述节点中的第一个元素，可以传入默认值。</li>
-<li>css(): 传入CSS表达式，返回该表达式所对应的所有节点的selector list列表，语法同 BeautifulSoup4 </li>
-<li>re(): 根据传入的正则表达式对数据进行提取，返回Unicode字符串list列表  </li>
+<li><p>解构的语法:</p>
+<pre><code>=号左边是: 匹配模式; =号右边是: 实际的数据(或者数据对应的变量);
+
+解构的结果:
+    解构成功: 左边变量的值 就是右边对应变量的值
+    解构不成功: 即没有对应值匹配, 变量的值变为undefined
+    不完全解构: 左边的模式之匹配到右边数组的一部分
+</code></pre></li>
 </ul>
-<p>XPath表达式的一些例子及对应的含义:</p>
-<blockquote>
-<pre><code>/html/head/title: 选择&lt;HTML&gt;文档中 &lt;head&gt; 标签内的 &lt;title&gt; 元素
-/html/head/title/text(): 选择上面提到的 &lt;title&gt; 元素的文字
-//td: 选择所有的 &lt;td&gt; 元素
-//div[@class=&quot;mine&quot;]: 选择所有具有 class=&quot;mine&quot; 属性的 div 元素
-</code></pre></blockquote>
-<p>css表达式的一些例子及对应的含义:  </p>
-<blockquote>
-<pre><code>a[href=&quot;image.html&quot;] img: href熟悉为image.html的a节点下的img节点
-a[href=&quot;image.html&quot;]::text: 获取href为image.html属性a节点下的文本
-a[href=&quot;image.html&quot;] img::attr(src): 上述img节点下src的属性 
-</code></pre></blockquote>
-<p>另外，Selector还支持正则re，可以与xpath， css搭配使用</p>
-<blockquote>
-<pre><code>response.xpath(&apos;//a/text()&apos;).re(&apos;name:\s(.*)&apos;) 
-注意response不能直接调用re，可以先使用xpath和css匹配后，在使用re
-</code></pre></blockquote>
+<ul>
+<li><p>变量是复杂数据类型(数组,对象)</p>
+<pre><code>1.数组解构赋值
+    1.右边的值需要能够被遍历 
+    2.允许左边给默认值: let [x=1, y=x] = [&apos;xxxx&apos;];
+    3.支持嵌套结构的 解构赋值
+注意:
+    let [x, y=true] = [&apos;xxxx&apos;]; // 右边数组对应成员要 === undefined
+    // console.log(x,y); // 如果是null, 则默认值不会生效;
+    // 如果右边 不是undefined, 则左边 会取到值
+
+2.对象的解构赋值
+    1.对象本身就是无序的, 是根据左右同名变量 来做赋值操作,匹配规则和数组类似
+    // 对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者
+    例: let { foo: foo, bar: bar } = { foo: &quot;aaa&quot;, bar: &quot;bbb&quot; };
+    2.持嵌套结构的 解构赋值
+        let obj = {};
+        let arr = [];
+        ({foo: obj.num, bool: arr[0]} = {foo: 123, bool: true}); // 圆括号
+        console.log(obj, arr);
+
+3.对象的解构赋值，可以很方便地将现有对象的方法，赋值到某个变量,几个例子
+    3-1 let {sin, cos} = Math; // 将math对象中方法给对象
+    3-2 取出数组的首尾2项
+        let list = [1,2,323,123,12,2];
+        let {0: first, [list.length-1]: last} = list;
+</code></pre></li>
+<li><p>变量是简单数据类型(字符串,数值,布尔值)</p>
+<pre><code>1.字符串的解构赋值
+    字符串被转换成了一个类似数组的对象: 可以理解未伪数组
+    let [a,b,c,d,e] = &apos;hello&apos;; // 每个变量对应一个字符
+
+2.数值和布尔值的解构赋值
+    解构赋值的规则: 只要等号右边的值不是对象或数组，就先将其转为对象。由于undefined 和 null无法转为对象，所以对它们进行解构赋值，都会报错
+    所以, 数值和布尔值会先转成其包装对象Number 和 Boolean对象;然后可以赋值对象的属性
+</code></pre></li>
+<li><p>函数参数的解构</p>
+<pre><code>1.会将实参与形参一一对应
+console.log([[1, 2], [3, 4]].map(([a, b]) =&gt; a + b));
+</code></pre></li>
+<li><p>圆括号注意事项</p>
+<pre><code>// 圆括号问题
+// 解构模式中不能使用圆括号的情况
+// 1.变量声明语句
+// 2.函数参数也属于变量声明，因此不能带有圆括号
+// 3.赋值语句的模式; 左边的匹配模式不能使用圆括号
+
+可以使用圆括号
+// 可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。
+</code></pre></li>
+<li><p>常用的使用场景</p>
+<pre><code>变量之间值的交换; 函数中传参和接受返回值; 对象遍历...
+
+1.交换变量的值
+let v100 = 100;
+let v1 = 1;
+
+[v1, v100] = [v100, v1];
+console.log(v1, v100);
+
+2.接受函数的多个返回值: 比如数组,对象
+// 函数只能返回一个值，如果要返回多个值，只能将它们放在数组或对象里返回。
+// 有了解构赋值，取出这些值就非常方便。
+function example() {
+return [1, 2, 3];
+}
+// let [a, b, c] = example();
+
+3.函数传参
+// 解构赋值可以方便地将一组参数与变量名对应起来
+// 参数是一组有次序的值
+function f([x, y, z]) {  }
+f([1, 2, 3]);
+
+// 参数是一组无次序的值
+function f({x, y, z}) {  }
+f({z: 3, y: 2, x: 1});
+
+4.json数据的处理
+// 解构赋值对提取 JSON 对象中的数据，尤其有用。
+let jsonData = {
+id: 42,
+status: &quot;OK&quot;,
+data: [867, 5309]
+};
+
+let {id, status, data: arr1} = jsonData;
+console.log(id, status, arr1);
+
+5.设置函数参数的默认值
+// 避免了在函数体内部再写var foo = config.foo || &apos;default foo&apos;;
+// 在传参时; 特别是传一个对象参数时, 可以事先配置好参数的默认值
+// func({参数1 = true, 参数2 = false, ...} = {外部实参没有传值的就是用默认值}){}
+
+6.遍历 Map 结构
+// 可迭代对象, 都可以用for...of 来遍历
+const map = new Map();
+map.set(&apos;first&apos;, &apos;hello&apos;);
+map.set(&apos;second&apos;, &apos;world&apos;);
+
+for (let [key, value] of map) {
+console.log(key + &quot; is &quot; + value);
+}
+// 获取键名
+for (let [key] of map) {
+    console.log(key);
+}
+// 获取键值
+for (let [,value] of map) {
+    console.log(value);
+}
+
+7.模块导入
+// 加载模块时，往往需要指定输入哪些方法。解构赋值使得输入语句非常清晰
+// const { SourceMapConsumer, SourceNode } = require(&quot;source-map&quot;); 
+</code></pre></li>
+</ul>
 
       
     </div>
@@ -409,7 +536,7 @@ a[href=&quot;image.html&quot;] img::attr(src): 上述img节点下src的属性
       
         <div class="post-tags">
           
-            <a href="/tags/scrapy/" rel="tag"># scrapy</a>
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
           
         </div>
       
@@ -422,8 +549,8 @@ a[href=&quot;image.html&quot;] img::attr(src): 上述img节点下src的属性
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/03/Scrapy框架基础学习/" rel="next" title="Scrapy框架学习之入门案例">
-                <i class="fa fa-chevron-left"></i> Scrapy框架学习之入门案例
+              <a href="/2019/01/03/H5的一些新特性/" rel="next" title="关于H5的一些新特性总结">
+                <i class="fa fa-chevron-left"></i> 关于H5的一些新特性总结
               </a>
             
           </div>
@@ -432,8 +559,8 @@ a[href=&quot;image.html&quot;] img::attr(src): 上述img节点下src的属性
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/06/10/Scrapy框架学习之Spider/" rel="prev" title="Scrapy框架学习之Spider">
-                Scrapy框架学习之Spider <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/05/ajs中编程技巧总结/" rel="prev" title="常用的一些编程技巧总结">
+                常用的一些编程技巧总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -623,7 +750,7 @@ a[href=&quot;image.html&quot;] img::attr(src): 上述img节点下src的属性
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrapy-Shell"><span class="nav-number">1.</span> <span class="nav-text">Scrapy Shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Selectors选择器"><span class="nav-number">2.</span> <span class="nav-text">Selectors选择器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#let和const声明变量"><span class="nav-number">1.1.</span> <span class="nav-text">let和const声明变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的解构赋值"><span class="nav-number">1.2.</span> <span class="nav-text">变量的解构赋值</span></a></li></ol></li></ol></div>
             
 
           </div>

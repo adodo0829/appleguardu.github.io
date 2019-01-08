@@ -90,7 +90,7 @@
 <meta property="og:description" content="关于css3的新特性学习总结…当然c3属性的使用要考虑到浏览器的兼容性问题…">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/Y0HTfzS.png">
-<meta property="og:updated_time" content="2019-01-05T11:33:13.629Z">
+<meta property="og:updated_time" content="2019-01-08T15:33:29.374Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CSS3新特性学习">
 <meta name="twitter:description" content="关于css3的新特性学习总结…当然c3属性的使用要考虑到浏览器的兼容性问题…">
@@ -376,6 +376,7 @@ div {
     /* 阴影水平偏移距离, 垂直偏移, 模糊半径, 阴影背景色 */
     box-shadow: 10px 10px 10px #ccc,20px 20px 10px green;
 }
+
 文字阴影text-shadow和上面一样, 也可以同时叠加多个阴影...
 </code></pre></li>
 </ul>
@@ -387,6 +388,8 @@ div {
         background: url(&quot;../messi.jpg&quot;) no-repeat right top,
         url(&quot;../xiaoxin.jpg&quot;) no-repeat left bottom,
         #ccc;
+
+        // 背景连写中可以使用 / cover或者contain来等比例缩放图片,也可以写尺寸
 
         /* 可以改变背景图尺寸 */
         background-size: 25% 25%;
@@ -421,6 +424,7 @@ div {
 其中形状还可以是circle（圆形）、大小还可以是choset-side和closest-corner和farthest-side。
 
 语法:background: radial-gradient(center, shape size, start-color, ..., last-color);
+// 还可以写成 (半径 at 方位值, 渐变颜色 开始渐变位置 渐变结束位置,....)
 
 .radial {
     width: 400px;
@@ -476,6 +480,7 @@ img {
     transform: skew(20deg, 0deg);
 
     /* 转换的基点属性: 默认为中心 */
+    // 也可以给方位值,top, right bottom left
     /* transform-origin：0 0；表示以左上角为原点
     transform-origin：100% 0；表示以右上角为原点
     transform-origin：0 100%；表示以左下角为原点
@@ -486,10 +491,17 @@ img {
 <pre><code>.box1 {
     /* 2d的rotate()方法只是在平面内顺时针旋转,相当于rotateZ() */
     /* 3d的方法绕X,Y,Z轴进行空间旋转 */
-    transform: rotateX(30deg);  
+    transform: rotateX(30deg) perspective(600-800px);  
     transform: rotateY(30deg);  
     transform: rotateZ(30deg);  
 }
+
+// 加上一个perspective(600-800px)立体效果更好看一些; 
+// 注意: 视距perspective属性要给 不参与运动的 父元素加 动画效果比较合理
+// 还需要开启3D效果, transform-style: preserve-3d;
+
+// 通过3D转换 + animation属性可以实现比较炫酷的动画效果; 一般都是通过将元素向X,Y,Z方向平移或者旋转进行组合;
+注意transform属性中将 rotate,translate等...连写起来组合效果.
 </code></pre></li>
 </ul>
 <h2 id="transition-过渡"><a href="#transition-过渡" class="headerlink" title="transition 过渡"></a>transition 过渡</h2><p>这个属性可以轻松的实现从某种效果到另一种效果的渐变过程</p>
@@ -529,10 +541,12 @@ img {
 <p><img src="https://i.imgur.com/Y0HTfzS.png" alt=""></p>
 <pre><code>animation-name: wobble;/*动画属性名，也就是我们前面keyframes定义的动画名*/
 animation-duration: 10s;/*动画周期持续时间*/
-animation-timing-function: ease-in-out; /*动画频率，先加速再减速, 匀速为linear*/
+animation-timing-function: ease-in-out; /*动画频率，匀速为linear, 分步为steps*/ 
 animation-delay: 2s;/*动画延迟时间*/
 animation-iteration-count: 10;/*定义循环次数，infinite为无限次*/
 animation-direction: alternate;/*动作方式:往返*/
+animation-play-state: 播放状态
+animation-fill-mode: 是否停留在动画最终样子 
 当然, 一般都会采用连写方式,下面举例说明
 </code></pre><blockquote>
 <p>2.再来规定动画的名称 @keyframes 动画名 {阶段值}</p>
@@ -546,11 +560,20 @@ animation-direction: alternate;/*动作方式:往返*/
     }
 
  @keyframes showHide 
+
+ // 注意
+ /* 百分比表示从0到动画时长的百分之多少, 执行{}中的动画; */
+ /* 注意,执行多种动画效果,需要将{}前面阶段的属性在写一遍; 不然会覆盖同类属性 */
+ /* 如果只写到80%阶段; 剩下的时间则用来复原到初始状态 */
+
     {
         0% {opacity: 1;}
         50% {opacity: 0.1;}
         100% {opacity: 1;}
     }
+// 还可以使用form to语法
+// 多个动画使用逗号,隔开
+// 一般可以使用封装好的动画库
 </code></pre><h2 id="图片处理"><a href="#图片处理" class="headerlink" title="图片处理"></a>图片处理</h2><p>img来添加border-radius属性，可以添加border属性，可以添加padding属性（注意：img是行内元素，但是也可以添加padding属性）。<br>我们还可以制作响应式图片。并且可以在图片上添加文本。以及图片滤镜。和响应式图片相册。</p>
 <pre><code>img {
         /* 图片添加边框,padding,圆角,阴影属性 */
@@ -614,6 +637,31 @@ img {
     :last-child：找到最后一个
     :not() 排除()中的元素
     :focus 设置获得焦点时的样式
+</code></pre><h2 id="css3动态计算元素的高度及宽度"><a href="#css3动态计算元素的高度及宽度" class="headerlink" title="css3动态计算元素的高度及宽度"></a>css3动态计算元素的高度及宽度</h2><pre><code>1、px
+    　　像素，我们在网页布局中一般都是用px。
+2、百分比
+　　百分比一般宽泛的讲是相对于父元素，自适应网页布局越来越多，百分比也经常用到了
+3、Viewport
+
+　　　当已知一个div的高度时，它的同胞div高度是根据窗口高度减去已知div高度而得到，此时就需要calc函数
+
+    　　viewport：可视窗口，也就是浏览器。
+    　　vw Viewport宽度， 1vw 等于viewport宽度的1%
+    　　vh Viewport高度， 1vh 等于viewport高的的1%
+
+CSS3使用Calc
+calc()使用通用的数学运算规则，但是也提供更智能的功能：
+
+    &gt;使用“+”、“-”、“*” 和 “/”四则运算；
+    &gt;可以使用百分比、px、em、rem等单位；
+    &gt;可以混合使用各种单位进行计算；
+    &gt;表达式中有“+”和“-”时，其前后必须要有空格，如&quot;width: calc(12%+5em)&quot;这种没有空格的写法是错误的；
+    &gt;表达式中有“*”和“/”时，其前后可以没有空格，但建议留有空格。
+
+    例如 ：设置div元素的高度为 当前窗口高度-100px
+    div{
+    height: calc(100vh - 100px);     
+    }
 </code></pre>
       
     </div>
@@ -644,8 +692,8 @@ img {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/06/jQuery语法基础/" rel="next" title="jQuery常用知识总结">
-                <i class="fa fa-chevron-left"></i> jQuery常用知识总结
+              <a href="/2018/12/13/Ajax基础/" rel="next" title="Ajax相关总结">
+                <i class="fa fa-chevron-left"></i> Ajax相关总结
               </a>
             
           </div>
@@ -654,8 +702,8 @@ img {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/13/Ajax基础/" rel="prev" title="Ajax相关总结">
-                Ajax相关总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/12/15/PHP相关知识点/" rel="prev" title="关于php的一些知识点">
+                关于php的一些知识点 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -737,7 +785,7 @@ img {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -845,7 +893,7 @@ img {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#css3新特性学习"><span class="nav-number">1.</span> <span class="nav-text">css3新特性学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边框系列"><span class="nav-number">1.1.</span> <span class="nav-text">边框系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景系列"><span class="nav-number">1.2.</span> <span class="nav-text">背景系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变系列"><span class="nav-number">1.3.</span> <span class="nav-text">渐变系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-2d转换"><span class="nav-number">1.4.</span> <span class="nav-text">transform 2d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-3d转换"><span class="nav-number">1.5.</span> <span class="nav-text">transform 3d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-过渡"><span class="nav-number">1.6.</span> <span class="nav-text">transition 过渡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation动画"><span class="nav-number">1.7.</span> <span class="nav-text">animation动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片处理"><span class="nav-number">1.8.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪元素-伪类选择器"><span class="nav-number">1.9.</span> <span class="nav-text">伪元素,伪类选择器</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#css3新特性学习"><span class="nav-number">1.</span> <span class="nav-text">css3新特性学习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#边框系列"><span class="nav-number">1.1.</span> <span class="nav-text">边框系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景系列"><span class="nav-number">1.2.</span> <span class="nav-text">背景系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渐变系列"><span class="nav-number">1.3.</span> <span class="nav-text">渐变系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-2d转换"><span class="nav-number">1.4.</span> <span class="nav-text">transform 2d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transform-3d转换"><span class="nav-number">1.5.</span> <span class="nav-text">transform 3d转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#transition-过渡"><span class="nav-number">1.6.</span> <span class="nav-text">transition 过渡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#animation动画"><span class="nav-number">1.7.</span> <span class="nav-text">animation动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片处理"><span class="nav-number">1.8.</span> <span class="nav-text">图片处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伪元素-伪类选择器"><span class="nav-number">1.9.</span> <span class="nav-text">伪元素,伪类选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css3动态计算元素的高度及宽度"><span class="nav-number">1.10.</span> <span class="nav-text">css3动态计算元素的高度及宽度</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本片文章是关于js基础语法中的一些总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-11T02:59:49.494Z">
+<meta property="og:updated_time" content="2019-01-07T07:05:02.321Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js程序设计读书笔记之ECMAScript">
 <meta name="twitter:description" content="本片文章是关于js基础语法中的一些总结…">
@@ -663,20 +663,20 @@ console.log(mapArray)
 //[100, 200, 300, 400, 500, 600, 700, 800, 900, 0, 900, 800, 700, 6500, 500, 400, 3300, 2100, 100, 100, 2300, 300, 400]
 //返回返回值组成的新数组
 
-7-6 reduce()
+7-6 reduce() // reduce() 方法接收一个函数作为累加器，数组中的每个值（从左到右）开始缩减，最终为一个值
+    接受2个参数:
+    1.callback（一个在数组中每一项上调用的函数，接受四个函数：）
+        previousValue（上一次调用回调函数时的返回值，或者初始值）
+        currentValue（当前正在处理的数组元素）
+        currentIndex（当前正在处理的数组元素下标）
+        array（调用reduce()方法的数组）
+    2.initialValue（可选的初始值。作为第一次调用回调函数时传给previousValue的值）
 
-var numbers=[1,2,3,4,5,6,7,8,9,0,9,8,7,65,5,4,33,21,1,1,23,3,4];
-var allArray=numbers.reduce(function(prev,cur,index,arr){
-    return (prev+cur);
-})
-console.log(allArray);//229
-reduceRight()
-
-var numbers=[1,2,3,4,5,6,7,8,9,0,9,8,7,65,5,4,33,21,1,1,23,3,4];
-var allArrayRight=numbers.reduceRight(function(prev,cur,index,arr){
-    return (prev+cur);
-})
-console.log(allArrayRight);//229
+    var numbers=[1,2,3,4,5,6,7,8,9,0,9,8,7,65,5,4,33,21,1,1,23,3,4];
+    var allArray=numbers.reduce(function(prev,cur,index,arr){
+        return (prev+cur);
+    })
+    console.log(allArray);//229
 </code></pre><h2 id="对象的理解"><a href="#对象的理解" class="headerlink" title="对象的理解"></a>对象的理解</h2><pre><code>1.声明对象  
     构造函数的方式; 字面量声明, 内置函数初始化, 工厂模式...原型模式
     声明完成后赋值上属性和方法... 
@@ -908,7 +908,7 @@ console.log(allArrayRight);//229
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
