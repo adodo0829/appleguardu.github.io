@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="这一篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
+<meta name="description" content="第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6入门读书总结(二)">
 <meta property="og:url" content="http://yoursite.com/2019/01/07/ES6总结(二)/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="这一篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
+<meta property="og:description" content="第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T02:14:50.932Z">
+<meta property="og:updated_time" content="2019-01-09T12:07:04.633Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6入门读书总结(二)">
-<meta name="twitter:description" content="这一篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
+<meta name="twitter:description" content="第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
 
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <p>这一篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…<br><a id="more"></a></p>
+        <p>第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…<br><a id="more"></a></p>
 <h1 id="ECMAScript-6-语法总结"><a href="#ECMAScript-6-语法总结" class="headerlink" title="ECMAScript 6 语法总结"></a>ECMAScript 6 语法总结</h1><h2 id="字符串方法"><a href="#字符串方法" class="headerlink" title="字符串方法"></a>字符串方法</h2><pre><code>1. 处理4个字节存储的单个字符
 // 测试一个字符由两个字节还是由四个字节组成的最简单方法 (Unicode 编号大于0xFFFF)
 // codePointAt(下标): 返回10机制字节码;
@@ -424,10 +424,112 @@ console.log(Math.trunc(3.1));
 // Math.sign()
 // 判断正负, 还是0; 对非数值,能转化的转化; 不能转的就是NaN
 // 返回值: 正 +1; 负 -1; 0; -0; 其他值 NaN
-</code></pre><h2 id="数组类型的方法"><a href="#数组类型的方法" class="headerlink" title="数组类型的方法"></a>数组类型的方法</h2><pre><code>1.Array.from(param1, param2)方法用于将两类对象转为真正的数组：
+</code></pre><h2 id="数组的扩展方法"><a href="#数组的扩展方法" class="headerlink" title="数组的扩展方法"></a>数组的扩展方法</h2><p>ES6将数组空位转为undefined</p>
+<pre><code>1.Array.from(param1, param2)方法用于将两类对象转为真正的数组：
     参数1: 一个对象 ==&gt; 伪数组对象和可遍历（iterable）的对象
-    参数2: 类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。
-    返回值: 一个数组
+    参数2: 回调函数 ==&gt; 类似于数组的map方法，对每个元素进行处理，将处理后的值放入返回的数组。
+    return值: 一个数组;
+示例:
+    let arrayLike = {
+        &apos;0&apos;: &apos;a&apos;,
+        &apos;1&apos;: &apos;b&apos;,
+        &apos;2&apos;: &apos;c&apos;,
+        length: 3
+        // 0: &apos;a&apos;,
+        // 1: &apos;b&apos;,
+        // 2: &apos;c&apos;,
+        // length: 3
+    };
+    let real_arr = Array.from(arrayLike);
+
+2.Array.of(传一组数值); 用于将一组值，转换为数组。弥补了构造函数Array()传数值的缺点
+    参数: 一组数值,如: 1,2,3,4...
+    return值: 一个数组
+
+3.实例方法
+
+    3.1 arr.find(): 类似过滤函数filter(function(value, index, arr))
+        使用: 传入一个回调函数, 返回第一个符合要求的成员
+        示例: var res = [1,2,3,4,-100].find( n =&gt; n &lt; 0 ); // -100
+
+    3.2 arr.findIndex(): 同上,只不过是返回第一个符合条件的数组成员的位置
+        注意: 第二个参数是传一个对象，回调函数中若使用了 this, 则指向这个对象
+
+    3.3 arr.includes(): 判断数组中是否包含我们给定的值;这样以后就不用indexOf了
+
+    3.4 实例数组的遍历方法: entries()，keys() 和 values() 用于遍历数组 返回一个遍历器对象
+            // keys()是对键名的遍历:   对应索引
+            // values()是对键值的遍历: 对应值
+            // entries()是对键值对的遍历: 索引+值
+</code></pre><h2 id="对象的扩展"><a href="#对象的扩展" class="headerlink" title="对象的扩展"></a>对象的扩展</h2><p>这里主要介绍一下对象的多种遍历方法;其他内容在扩展运算符…中总结.</p>
+<pre><code>1.for...in
+    for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
+
+2.Object.keys(obj),values(obj),entries(obj)
+    返回一个数组，包括对象自身的（不含继承的）所有可枚举属性（不含 Symbol 属性）的键名,值,键值对。
+
+3.Object.getOwnPropertyNames(obj)
+    返回一个数组，包含对象自身的所有属性（不含 Symbol 属性，但是包括不可枚举属性）的键名。
+
+4.Object.getOwnPropertySymbols(obj)
+    返回一个数组，包含对象自身的所有 Symbol 属性的键名。
+
+5.Reflect.ownKeys(obj)
+    返回一个数组，包含对象自身的所有键名，不管键名是 Symbol 或字符串，也不管是否可枚举。
+</code></pre><h2 id="扩展运算符…"><a href="#扩展运算符…" class="headerlink" title="扩展运算符…"></a>扩展运算符…</h2><pre><code>1.扩展运算符是什么?
+    扩展运算符用三个点...表示: 相当于函数rest参数的逆运算, 可以将数组,对象中的成员序列化出来
+    我这里暂且把它理解为一种运算符吧, 用来解析各种数据类型的成员
+
+2.扩展运算符的使用场景?
+    2.1 将数组成员转为一个逗号分隔的参数序列:
+        这样调用一些数组的API时; 可以直接传一个...arr进去,省去了传参的麻烦
+        例1: console.log(...[1,2,3]); // 1 2 3
+        例2: var date = new Date(...[2015, 01, 01]); 
+            console.log(date); // 2015-01-31T16:00:00.000Z
+
+    2.2 取代apply方法: 
+        // ES5 的写法
+        let max1 = Math.max.apply(null, [14, 3, 77]);
+        // ES6 的写法
+        let max2 = Math.max(...[14, 3, 77]);
+
+    2.3 数组的深拷贝: 将对象全部拷贝一份,是一个独立的内存空间
+        let arr1 = [0, 1], arr2 = [...arr1]; // 用变量去接受经过扩展运算符运算的数组
+        arr1[0] = 100; // 修改数组arr1
+        console.log(arr1); // [ 100, 1 ] 发送改变
+        console.log(arr2); // [ 0, 1 ]   未改变
+
+    2.4 数组的合并
+        注意: 合并操作是浅拷贝: 是对数组中对象成员的引用
+        浅拷贝: (分为简单数据类型引用: 修改数据另一个不会变; 复杂数据类型引用: 修改后会改变)
+        arr3 = [...arr1, ...arr2]; // 此时arr3 为一个新数组; [ 100, 1, 0, 1 ],因为内部成员都是数值,
+        所以修改了arr1或者arr2中的元素也不会变
+
+        那么,如果数组中成员是对象; 则会改变成员属性,合并生成的数组成员也会变
+        const a1 = [{ foo: 1 }];
+        const a2 = [{ bar: 2 }];
+        const a3 = [...a1, ...a2];
+
+        console.log(a3); // [ { foo: 1 }, { bar: 2 } ]
+        a1[0].foo = 100;
+        console.log(a3); // [ { foo: 100 }, { bar: 2 } ]
+
+    2.5 可以和变量的解构赋值一起使用; 右边是对象也是可以的
+        let [first, second, ...rest] = [1,2,3,4,5,6];
+        console.log(first); // 1
+        console.log(second); // 2
+        console.log(rest); // [3,4,5,6]
+
+    2.6 还有与Array.from()方法类似的作用, 将 类似数组的对象和可迭代对象 转为真数组
+        console.log([...&apos;hello&apos;]); // [ &quot;h&quot;, &quot;e&quot;, &quot;l&quot;, &quot;l&quot;, &quot;o&quot; ]
+        注意: 如果涉及到操作四个字节的 Unicode 字符的函数; 可以使用[...string], ...能够识别;
+
+    2.7 扩展运算符在对象中的使用
+        // 解构赋值, 如果右边数据是undefined或null 则解构会失败
+        let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }; // x,1; y,2; z,{a:3, b:4}
+
+        // 注意: 如果扩展运算符后面不是对象，则会自动将其转为对象。
+        {...1}, {...true}, {...undefined}, {...null} 都会转为 空对象{}
 </code></pre>
       
     </div>
@@ -458,8 +560,8 @@ console.log(Math.trunc(3.1));
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/05/ajs中编程技巧总结/" rel="next" title="常用的一些编程技巧总结">
-                <i class="fa fa-chevron-left"></i> 常用的一些编程技巧总结
+              <a href="/2019/01/05/js简洁编程/" rel="next" title="js简洁编程技巧总结">
+                <i class="fa fa-chevron-left"></i> js简洁编程技巧总结
               </a>
             
           </div>
@@ -467,6 +569,10 @@ console.log(Math.trunc(3.1));
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/09/ES6总结(三)/" rel="prev" title="ES6入门读书总结(三)">
+                ES6入门读书总结(三) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -547,7 +653,7 @@ console.log(Math.trunc(3.1));
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -655,7 +761,7 @@ console.log(Math.trunc(3.1));
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串方法"><span class="nav-number">1.1.</span> <span class="nav-text">字符串方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模板字符串"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">模板字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值类型方法"><span class="nav-number">1.2.</span> <span class="nav-text">数值类型方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组类型的方法"><span class="nav-number">1.3.</span> <span class="nav-text">数组类型的方法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串方法"><span class="nav-number">1.1.</span> <span class="nav-text">字符串方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#模板字符串"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">模板字符串</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数值类型方法"><span class="nav-number">1.2.</span> <span class="nav-text">数值类型方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组的扩展方法"><span class="nav-number">1.3.</span> <span class="nav-text">数组的扩展方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的扩展"><span class="nav-number">1.4.</span> <span class="nav-text">对象的扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扩展运算符…"><span class="nav-number">1.5.</span> <span class="nav-text">扩展运算符…</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T15:38:38.201Z">
+<meta property="og:updated_time" content="2019-01-09T11:54:44.496Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6入门读书总结(一)">
 <meta name="twitter:description" content="本篇是关于阮一峰的es6入门书籍的读书总结; 第一篇关于let和const关键字, 块级作用域, 以及变量的解构赋值…">
@@ -371,7 +371,7 @@ ES6中:
 //注意:
 1. es5中var声明变量的特性:
     a. var命令会发生”变量提升“现象，即变量可以在声明之前使用，值为undefined。
-    b. es5中变量只有两种作用域: 全局 和 局部(函数内声明)
+    b. es5中变量只有两种作用域: 全局 和 局部(函数内声明); 全局和局部都有变量提升现象;先提前,再进行赋值.
     c. es6中可以使用var, 特性还是同es5一样
 
 2. es6中,变量在for循环中的使用
@@ -453,7 +453,7 @@ console.log([[1, 2], [3, 4]].map(([a, b]) =&gt; a + b));
 // 可以使用圆括号的情况只有一种：赋值语句的非模式部分，可以使用圆括号。
 </code></pre></li>
 <li><p>常用的使用场景</p>
-<pre><code>变量之间值的交换; 函数中传参和接受返回值; 对象遍历...
+<pre><code>变量之间值的交换; 函数中传参和接受返回值(对象的方式); 对象遍历...
 
 1.交换变量的值
 let v100 = 100;
@@ -559,8 +559,8 @@ for (let [,value] of map) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/01/05/ajs中编程技巧总结/" rel="prev" title="常用的一些编程技巧总结">
-                常用的一些编程技巧总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/01/05/js简洁编程/" rel="prev" title="js简洁编程技巧总结">
+                js简洁编程技巧总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -642,7 +642,7 @@ for (let [,value] of map) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
