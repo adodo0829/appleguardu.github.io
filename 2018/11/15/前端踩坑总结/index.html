@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="本篇文章主要记录自己在前端三大基础HTML, CSS, JS学习过程中总结的一些注意事项,思维方向和自己习惯犯的一些错误及误区;本文将会持续更新…等到积累一定数量的错误再几种做一下归纳分类…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-10T11:43:59.629Z">
+<meta property="og:updated_time" content="2019-01-13T13:38:15.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="编程日常注意事项">
 <meta name="twitter:description" content="本篇文章主要记录自己在前端三大基础HTML, CSS, JS学习过程中总结的一些注意事项,思维方向和自己习惯犯的一些错误及误区;本文将会持续更新…等到积累一定数量的错误再几种做一下归纳分类…">
@@ -361,6 +361,7 @@
 <hr>
 <pre><code>1.独立的组件或者内容尽量使用单独的DIV盒子来包裹;
 2.最外层父盒子类名 常使用container和wrap来设置;
+3.尽量使用H5中的语义化标签: header, nav, main, footer, section等...
 </code></pre><ul>
 <li>踩过的坑</li>
 </ul>
@@ -382,6 +383,8 @@
 3.关于布局
     在写布局之前,先观察需求模板,抽离出公共部分将css写成一个可复用的组件,当需要对
     图片进行动画时, 尽可能设置div盒子背景图的形式...方便操作
+
+    一般在相邻块级元素加边框时, 可以使用 li ~ li选择器; 表示选择li以后的所有兄弟元素
 </code></pre><ul>
 <li>踩过的坑</li>
 </ul>
@@ -405,6 +408,8 @@
 
     当盒子设置了背景图片,我们需要以背景图片作为定位基准时; 注意背景图的方位值;
     最好以背景图片的方位值作为我们定位的基准边.
+
+3.元素定位后脱离标准流,会失去宽度; 所以需要填充屏幕时需要 重新设置宽度为100%
 </code></pre><h2 id="JS"><a href="#JS" class="headerlink" title="JS"></a>JS</h2><ul>
 <li>注意事项</li>
 </ul>
