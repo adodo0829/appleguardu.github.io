@@ -84,14 +84,14 @@
 <meta name="description" content="关于css阶段性的学习总结…">
 <meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="css相关总结">
+<meta property="og:title" content="css基础性总结">
 <meta property="og:url" content="http://yoursite.com/2018/10/28/关于css的一些总结/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="关于css阶段性的学习总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-13T13:44:38.010Z">
+<meta property="og:updated_time" content="2019-01-13T13:54:09.120Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="css相关总结">
+<meta name="twitter:title" content="css基础性总结">
 <meta name="twitter:description" content="关于css阶段性的学习总结…">
 
 
@@ -128,7 +128,7 @@
 
 
 
-  <title>css相关总结 | AppleGuard的博客</title>
+  <title>css基础性总结 | AppleGuard的博客</title>
   
 
 
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">css相关总结</h1>
+          <h1 class="post-title" itemprop="name headline">css基础性总结</h1>
         
 
         <div class="post-meta">
@@ -357,32 +357,49 @@
         <p>关于css阶段性的学习总结…<br><a id="more"></a></p>
 <h2 id="css选择器"><a href="#css选择器" class="headerlink" title="css选择器"></a>css选择器</h2><p>css选择器是用于对网页中的元素进行样式的控制，比如文字，背景，图片等等…  </p>
 <ul>
-<li>选择器的分类<br>用的比较多的是标签，类，id，像*，！important这些比较少用</li>
-<li>复合选择器<br>后代选择器，交集选择器(li.name,提高元素控制精确度，少用)，并集选择器(,)，伪类选择器(a:hover/li:nth-child等…),子代选择器(li&gt;a)</li>
-<li>注意: 在使用选择器作用某一个元素时，选择器不要太冗长，一般1-3个，对用属性相同的元素类名可以复用，还要注意复合选择器的权重和优先级。</li>
+<li><p>选择器的分类 </p>
+<pre><code>用的比较多的是标签，类，id，像*，！important这些比较少用
+</code></pre></li>
+<li><p>复合选择器  </p>
+<pre><code>后代选择器，交集选择器(li.name,提高元素控制精确度，少用)，并集选择器(,)，伪类选择器(a:hover/li:nth-child等...),子代选择器(li&gt;a)
+</code></pre></li>
+<li><p>注意: 在使用选择器作用某一个元素时，选择器不要太冗长，一般1-3个</p>
+<pre><code>对用属性相同的元素类名可以复用，还要注意复合选择器的权重和优先级。
+</code></pre></li>
 </ul>
 <h2 id="css的三大特性"><a href="#css的三大特性" class="headerlink" title="css的三大特性"></a>css的三大特性</h2><p>继承，层叠，优先级 </p>
 <ul>
-<li>层叠性<br>  多个选择器(权重相同情况下)作用到同一标签，发生属性冲突，后来者居上</li>
-<li>继承性<br>  存在嵌套关系的元素，子元素会继承父元素的部分属性<br>  特殊性（a标签的颜色，h标签的大小）</li>
-<li>优先级<br>  继承 &lt; 通配符 &lt; 标签选择器 &lt; 类选择器 &lt; id选择器 &lt; 行内式 &lt; ！important</li>
+<li><p>层叠性 </p>
+<pre><code>多个选择器(权重相同情况下)作用到同一标签，发生属性冲突，后来者居上
+</code></pre></li>
+<li><p>继承性</p>
+<pre><code>存在嵌套关系的元素，子元素会继承父元素的部分属性
+特殊性（a标签的颜色，h标签的大小）
+</code></pre></li>
+<li><p>优先级  </p>
+<pre><code>继承 &lt; 通配符 &lt; 标签选择器 &lt; 类选择器 &lt; id选择器 &lt; 行内式 &lt; ！important
+</code></pre></li>
 </ul>
-<h2 id="css中的元素的显示模式"><a href="#css中的元素的显示模式" class="headerlink" title="css中的元素的显示模式"></a>css中的元素的显示模式</h2><ul>
-<li>行内元素<br>一行显示多个，不能设置宽高；如标签span a ins strong del…..</li>
-<li>块级元素<br> 单独占据一行，可以设置宽高；如标签div h p ul li…..</li>
-<li>行内块元素<br> 具有以上两者的特点，一行显示多个，可以设置宽高；如标签img input……</li>
-<li>模式之间的转化<br>可以通过display: inline block inline-block进行模式转化</li>
-</ul>
+<h2 id="css中的元素的显示模式"><a href="#css中的元素的显示模式" class="headerlink" title="css中的元素的显示模式"></a>css中的元素的显示模式</h2><p>行内元素: 一行显示多个，不能设置宽高；如标签span a ins strong del…..</p>
+<p>块级元素: 单独占据一行，可以设置宽高；如标签div h p ul li…..</p>
+<p>行内块元素: 具有以上两者的特点，一行显示多个，可以设置宽高；如标签img input……</p>
+<p>模式之间的转化: 可以通过display: inline block inline-block进行模式转化</p>
 <h2 id="css中常用的样式属性"><a href="#css中常用的样式属性" class="headerlink" title="css中常用的样式属性"></a>css中常用的样式属性</h2><ul>
-<li>字体<br>大小，字体库，颜色，style，行高lh（文字居中的关键，也可调节多行文字的间距）</li>
-<li>背景<br>bgc(可以写颜色名,rgb,rgba,注意transparent的使用)<br>尽量使用连写方式，bg：url 是否平铺 位置(可以是xy坐标，可以是方位) 颜色<br>注意：bga：fixed；下拉滚动条，背景不动  </li>
-<li>插入图片和背景图片的区别<ol>
-<li>插入图片 我们用的最多 比如产品展示类  移动位置只能靠盒模型 padding margin</li>
-<li>背景图片我们一般用于小图标背景 或者 超大背景图片  背景图片 只能通过  background-position</li>
-<li>图片去除间隙方法：转为块级；vertical-align<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2>盒子的组成：内容，边框border，内边距padding（内容与边框的距离），外边距margin（盒子之间的距离）<br>margin，padding，border都有四边，属性连写顺序顺时针方向top right bottom left,页面布局中经常用到，学会合理的使用！！！</li>
-</ol>
-</li>
+<li><p>字体  </p>
+<pre><code>大小，字体库，颜色，style，行高lh（文字居中的关键，也可调节多行文字的间距）
+</code></pre></li>
+<li><p>背景  </p>
+<pre><code>bgc(可以写颜色名,rgb,rgba,注意transparent的使用)
+尽量使用连写方式，bg：url 是否平铺 位置(可以是xy坐标，可以是方位) 颜色
+注意：bga：fixed；下拉滚动条，背景不动  
+</code></pre></li>
+<li><p>插入图片和背景图片的区别</p>
+<pre><code>1. 插入图片 我们用的最多 比如产品展示类  移动位置只能靠盒模型 padding margin
+2. 背景图片我们一般用于小图标背景 或者 超大背景图片  背景图片 只能通过  background-position
+3. 图片去除间隙方法：转为块级； vertical-align
+</code></pre></li>
 </ul>
+<h2 id="盒子模型"><a href="#盒子模型" class="headerlink" title="盒子模型"></a>盒子模型</h2><p>盒子的组成：内容，边框border，内边距padding（内容与边框的距离），外边距margin（盒子之间的距离）<br>margin，padding，border都有四边，属性连写顺序顺时针方向top right bottom left,页面布局中经常用到，学会合理的使用！！！</p>
 <p><strong>对于盒子的理解：</strong><br>网页中的标签元素其实都可以看作一个盒子，我们可以把盒子看作是一个存放内容（图片，文本，链接…）的容器，这个容器有它的高宽，内容，还有和内容的间距，以及容器之间的间距。最常用的盒子：div标签</p>
 <p><strong>盒子的真实宽高</strong> = content-width/height + padding + border   </p>
 <blockquote>
@@ -412,12 +429,21 @@ margin:0 auto
 </blockquote>
 <p><strong>浮动的影响和解决</strong><br>在项目中，我们使用嵌套盒子时，一般不会给父盒子设高度，当父盒子是标准流时，若子盒子又浮动起来，脱离了标准流，父盒子就会丧失高度，其他标准流的元素就会来占据他的位置，造成布局混乱。<br>解决措施：给父盒子清除浮动：高度法，单双伪元素法，添加overflow属性<br>        这里写一个单伪元素法,5个属性！！！<br>        .clearfix:after {<br>            content：”.”;<br>            display: block;<br>            clear: both;<br>            visibility: hidden;<br>            height: 0;<br>        }</p>
 <h2 id="关于定位"><a href="#关于定位" class="headerlink" title="关于定位"></a>关于定位</h2><ul>
-<li>相对定位<br>不会转换显示模式，没有脱离标准流，还会保留原来的位置，但是显示的层级会变高，一般用于配合绝对定位。  </li>
-<li>固定定位<br>实现了模式转化，具有行内块的特点；脱离了标准流，不会占据标准流的位置；<br>位移参照物为body。</li>
-<li>绝对定位<br>实现了模式转化，具有行内块的特点；脱离了标准流，不会占据标准流的位置；<br>位移参照物为最近的具有定位属性的父盒子。  </li>
-<li>显示层级<br>定位 &gt;  浮动  &gt;  标准流</li>
+<li><p>相对定位  </p>
+<pre><code>不会转换显示模式，没有脱离标准流，还会保留原来的位置，但是显示的层级会变高，一般用于配合绝对定位。  
+</code></pre></li>
+<li><p>固定定位    </p>
+<p>  实现了模式转化，具有行内块的特点；脱离了标准流，不会占据标准流的位置；位移参照物为body。  </p>
+</li>
+<li><p>绝对定位  </p>
+<pre><code>实现了模式转化，具有行内块的特点；脱离了标准流，不会占据标准流的位置；  
+位移参照物为最近的具有定位属性的父盒子。
+</code></pre></li>
+<li><p>显示层级  </p>
+<pre><code>定位 &gt;  浮动  &gt;  标准流
+</code></pre></li>
 </ul>
-<h2 id="关于css-div布局"><a href="#关于css-div布局" class="headerlink" title="关于css+div布局"></a>关于css+div布局</h2><p>静态页面布局的一般步骤：  </p>
+<h2 id="关于css-div布局"><a href="#关于css-div布局" class="headerlink" title="关于css+div布局"></a>关于css+div布局</h2><p>静态页面布局的一般步骤：</p>
 <ul>
 <li>1.将网页先拆分纵向分布的大盒子  </li>
 <li>2.再对大盒子进行逐级拆分  </li>
@@ -578,7 +604,7 @@ margin:0 auto
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">61</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -600,7 +626,7 @@ margin:0 auto
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
