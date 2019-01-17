@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="json," />
+  <meta name="keywords" content="ES6," />
 
 
 
@@ -81,25 +81,22 @@
 
 
 
-<meta name="description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
-<meta name="keywords" content="json">
+<meta name="description" content="这一篇是关于ES6中生成器函数 和 Promise对象的相关总结和理解…">
+<meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python之json基础">
-<meta property="og:url" content="http://yoursite.com/2018/07/19/python之json数据解析/index.html">
+<meta property="og:title" content="ES6入门读书总结(五)">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/ES6总结(五)/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
+<meta property="og:description" content="这一篇是关于ES6中生成器函数 和 Promise对象的相关总结和理解…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.imgur.com/gFu4n1P.png">
-<meta property="og:image" content="https://i.imgur.com/3zOg7fE.png">
-<meta property="og:image" content="https://i.imgur.com/foRbCB5.png">
-<meta property="og:image" content="https://i.imgur.com/N5ids9K.png">
-<meta property="og:image" content="https://i.imgur.com/b06PiXX.png">
-<meta property="og:image" content="https://i.imgur.com/bBO2Wo7.png">
-<meta property="og:updated_time" content="2018-09-01T16:07:40.743Z">
+<meta property="og:image" content="https://i.imgur.com/ZwwcK9s.png">
+<meta property="og:image" content="https://i.imgur.com/s3F9ZdG.png">
+<meta property="og:image" content="https://i.imgur.com/Dvfa1e9.png">
+<meta property="og:updated_time" content="2019-01-17T13:41:30.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python之json基础">
-<meta name="twitter:description" content="当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。">
-<meta name="twitter:image" content="https://i.imgur.com/gFu4n1P.png">
+<meta name="twitter:title" content="ES6入门读书总结(五)">
+<meta name="twitter:description" content="这一篇是关于ES6中生成器函数 和 Promise对象的相关总结和理解…">
+<meta name="twitter:image" content="https://i.imgur.com/ZwwcK9s.png">
 
 
 
@@ -129,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/19/python之json数据解析/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/ES6总结(五)/"/>
 
 
 
 
 
-  <title>python之json基础 | AppleGuard的博客</title>
+  <title>ES6入门读书总结(五) | AppleGuard的博客</title>
   
 
 
@@ -272,7 +269,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/19/python之json数据解析/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/17/ES6总结(五)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -289,7 +286,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">python之json基础</h1>
+          <h1 class="post-title" itemprop="name headline">ES6入门读书总结(五)</h1>
         
 
         <div class="post-meta">
@@ -301,8 +298,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-19T13:27:17+08:00">
-                2018-07-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T10:53:33+08:00">
+                2019-01-17
               </time>
             
 
@@ -324,8 +321,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫</span>
+                  <a href="/categories/前端学习/" itemprop="url" rel="index">
+                    <span itemprop="name">前端学习</span>
                   </a>
                 </span>
 
@@ -361,25 +358,129 @@
       
 
       
-        <p>当我们爬取异步加载的网页从上面获取的往往是json类型的文件，通常我们需要对这类数据进行处理后才能使用，下面就来说说python中对json数据的基本处理方法。<br><a id="more"></a>  </p>
-<h2 id="什么是JSON"><a href="#什么是JSON" class="headerlink" title="什么是JSON"></a>什么是JSON</h2><p>JSON 指的是 JavaScript 对象表示法（JavaScript Object Notation）；是一种轻量级的文本数据交换格式；适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。  </p>
-<p>简单来说json就是javascript中的对象和数组，所以这两种结构就是对象和数组两种结构，通过这两种结构可以表示各种复杂的结构：  </p>
+        <p>这一篇是关于ES6中生成器函数 和 Promise对象的相关总结和理解…<br><a id="more"></a></p>
+<h1 id="ECMAScript-6-语法总结"><a href="#ECMAScript-6-语法总结" class="headerlink" title="ECMAScript 6 语法总结"></a>ECMAScript 6 语法总结</h1><h2 id="Generator函数的定义"><a href="#Generator函数的定义" class="headerlink" title="Generator函数的定义"></a>Generator函数的定义</h2><p><strong>书中的说法是:</strong><br>Generator 函数有多种理解角度。语法上，首先可以把它理解成，Generator 函数是一个状态机，封装了多个内部状态。执行 Generator 函数会返回一个遍历器对象,也就是说，Generator 函数除了状态机，还是一个遍历器对象生成函数。返回的遍历器对象，可以依次遍历 Generator 函数内部的每一个状态。</p>
+<p><strong>我的理解:</strong><br>生成器函数可以理解为: 函数内部是由多个小函数组成的, 使用yield关键字将函数内部 分割成多个块区域; 并且当函数执行时, 遇到yield就会停止, 并且将yield 后面的表达式结果输出(当然外部要调用next()方法); 下次再调用next()方法时, 就从上一个停止的地方开始执行(这意味着函数有有记忆功能); 如果下面没有再遇到yield的话 就像普通函数执行完. 函数的返回值是一个可迭代对象(遍历器对象); 我喜欢叫可迭代对象, 或者说可遍历对象…</p>
+<h2 id="说一说可迭代对象-iterator-的next-方法"><a href="#说一说可迭代对象-iterator-的next-方法" class="headerlink" title="说一说可迭代对象(iterator)的next()方法"></a>说一说可迭代对象(iterator)的next()方法</h2><pre><code>function CreateIterator(iterator) {
+
+// 定义一个初始下标用来判断
+let nextIndex = 0;
+
+// 返回对象: 包含的next方法, 
+return {
+    next: function () {
+        // 返回一个对象: value是当前对象下标对应的值, done是是否遍历完成
+        return nextIndex &lt; iterator.length ?
+                // i++ 先参数运算在 自增1 
+                {value: iterator[nextIndex++], done: false} :
+                {value: undefined, done: true};
+        }
+    }
+
+}
+
+// 实例化一个遍历器
+let iter1 = CreateIterator([1,2,3,4,5]);
+console.log(iter1); // 一个具有next方法的对象
+console.log(iter1.next().value); // 1
+console.log(iter1.next().value); // 2
+console.log(iter1.next().value); // 3
+console.log(iter1.next().value); // 4
+console.log(iter1.next().value); // 5
+console.log(iter1.next().value); // undefined
+</code></pre><h2 id="生成器函数的使用"><a href="#生成器函数的使用" class="headerlink" title="生成器函数的使用"></a>生成器函数的使用</h2><pre><code>generator生成器函数的使用:
+function *fn() {
+
+    代码1; 
+    yield; 
+    代码2;
+}
+
+普通函数: 执行到底
+生成器函数: 遇到yield会暂停,交出执行权,下次执行从上次的停止的位置继续
+生成器函数返回值为: 生成器对象
+生成器对象.next()方法才能执行 函数体中的代码
+
+// 可以解决函数回调嵌套的问题; 解决耗时操作
+function *func() {
+    // 请求数据.
+    // yield ajax() 
+    // 处理数据
+} 
+
+// generator函数本质上 分割成多个小函数来执行... yield关键字前后
+// 遇到yield就暂停; 没有就往下执行...
+// yield 起到了 暂停函数执行的作用
+</code></pre><h2 id="关于yield关键字的理解"><a href="#关于yield关键字的理解" class="headerlink" title="关于yield关键字的理解"></a>关于yield关键字的理解</h2><h4 id="yield传值"><a href="#yield传值" class="headerlink" title="yield传值"></a>yield传值</h4><p><img src="https://i.imgur.com/ZwwcK9s.png" alt=""></p>
+<h4 id="yield输出值"><a href="#yield输出值" class="headerlink" title="yield输出值"></a>yield输出值</h4><p><img src="https://i.imgur.com/s3F9ZdG.png" alt=""></p>
+<p>举个栗子:</p>
+<pre><code>let output = [];
+
+function *g2(x, y) {
+
+    let sum = x+y;
+    yield sum; // sum是第一个输出结果
+
+    let agv = sum / 2;
+    yield agv; // agv 是第二个输出的结果
+
+    return {&quot;和&quot;: sum, &quot;平均数&quot;: agv}; // 最后一个结果
+}
+
+let gg2 = g2(100, 20);
+
+console.log(gg2.next().value);  // 120
+console.log(gg2.next().value);  // 60
+console.log(gg2.next().value);  // { &apos;和&apos;: 120, &apos;平均数&apos;: 60 }
+</code></pre><h2 id="Promise对象"><a href="#Promise对象" class="headerlink" title="Promise对象"></a>Promise对象</h2><p>这里只介绍一下使用的方法, 暂时理解的还不算透彻,后面会单独写一篇文章来说的…</p>
+<p><strong>Promise对象 ==&gt; 主要是用来消除异步操作; 用同步的方式书写异步代码</strong></p>
+<p>同步异步:</p>
+<pre><code>// 异步: 操作之间没关系; 可以同时进行多个操作; 并发执行 &amp;&amp; 代码相对复杂
+
+// 同步: 同时只能做一个操作; 后面的操作需要等待        &amp;&amp; 代码相对简单
+</code></pre><p>promise的使用:</p>
+<pre><code>let p = new Promise(function(resolve, reject) {
+    // 异步代码
+    // resolve 成功了
+    // reject 失败了
+    $.ajax({
+        type: &quot;method&quot;,
+        url: &quot;url&quot;,
+        data: &quot;data&quot;,
+        dataType: &quot;dataType&quot;,
+        success: function (response) {
+            resolve(response); // 成功的处理函数
+        },
+        error: function (obj){
+            reject(obj); // 失败的处理函数
+        }
+    });
+})
+// 然后调用promise对象.then()方法; 传两个函数
+p.then(function (结果1) {
+    console.log(&apos;成功&apos;);
+},function (结果2) {
+    console.log(&apos;失败&apos;);
+});
+</code></pre><p><strong>promise的应用</strong> </p>
 <blockquote>
-<pre><code>1.对象：对象在js中表示为{ }括起来的内容，数据结构为 { key：value, key：value, ... }的键值对的结构，
-在面向对象的语言中，key为对象的属性，value为对应的属性值，所以很容易理解，取值方法为 对象.key 获取属性值，这个属性值的类型可以是数字、字符串、数组、对象这几种。
-</code></pre></blockquote>
-<blockquote>
-<pre><code>2.数组：数组在js中是中括号[ ]括起来的内容，数据结构为 [&quot;Python&quot;, &quot;javascript&quot;, &quot;C++&quot;, ...]，取值方式和所有语言中一样，使用索引获取，
-字段值的类型可以是 数字、字符串、数组、对象几种。
-</code></pre></blockquote>
-<h2 id="JSON模块"><a href="#JSON模块" class="headerlink" title="JSON模块"></a>JSON模块</h2><p>Python中提供了json模块，总共有四个方法：dumps、dump、loads、load，用于字符串 和 python数据类型间进行转换。<br><strong>1.json.loads()</strong><br>对数据进行解码，把Json格式字符串 解码 转换成Python对象 。<br><img src="https://i.imgur.com/gFu4n1P.png" alt=""></p>
-<p>实例：<br><img src="https://i.imgur.com/3zOg7fE.png" alt=""></p>
-<p><strong>2.json.dumps()</strong><br>对数据进行编码，返回一个str对象，把一个Python对象编码转换成Json字符串。如果直接将dict类型的数据写入json文件中会发生报错，因此在将数据写入时需要用到该函数。<br><img src="https://i.imgur.com/foRbCB5.png" alt=""></p>
-<p>实例：<br><img src="https://i.imgur.com/N5ids9K.png" alt=""></p>
-<p><strong>3.json.dump()</strong><br>json.dump()用于将dict类型的数据转成str，并写入到json文件中  </p>
-<p><img src="https://i.imgur.com/b06PiXX.png" alt=""></p>
-<p><strong>4.json.load()</strong><br>json.load()直接从json文件中读取数据，并将str转为dict类型</p>
-<p>实例：<br><img src="https://i.imgur.com/bBO2Wo7.png" alt=""></p>
+<p>如读取文件的操作, 如果是传统的ajax回调来实现, 则需要嵌套三层ajax请求才能完成三个文件的读取…<br>promise.all().then() 主要用于一次性读取操作…批量的;<br>如果是带有逻辑异步操作, 则使用生成器函数 + promise对象的方式来实现… let output = yield $.ajax({url: “test/arr.txt”, dataType: “json”})的方式; 这个以后单独说</p>
+</blockquote>
+<pre><code>Promise.all([
+    $.ajax({url: &quot;test/arr.txt&quot;, dataType: &quot;json&quot;}),
+    $.ajax({url: &quot;test/json.txt&quot;, dataType: &quot;json&quot;}),
+    $.ajax({url: &quot;test/str.txt&quot;, dataType: &quot;json&quot;}),
+]).then( success =&gt; {
+    // 异步任务请求成功; 返回的success就是成功的结果
+    let [arr, json, str] = success;
+    alert(&apos;异步任务请求成功...&apos;)
+    console.log(arr, &apos;\n&apos;,  json, &apos;\n&apos;, str);
+},error =&gt; {
+    // 异步任务失败; 
+    console.log(&apos;fail to read file&apos;);
+})
+</code></pre><p>返回结果:</p>
+<p><img src="https://i.imgur.com/Dvfa1e9.png" alt=""></p>
 
       
     </div>
@@ -397,7 +498,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/json/" rel="tag"># json</a>
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
           
         </div>
       
@@ -410,8 +511,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/18/Ajax数据的爬取/" rel="next" title="Ajax数据的爬取">
-                <i class="fa fa-chevron-left"></i> Ajax数据的爬取
+              <a href="/2019/01/14/js中的正则/" rel="next" title="js中的正则">
+                <i class="fa fa-chevron-left"></i> js中的正则
               </a>
             
           </div>
@@ -419,10 +520,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/24/破解验证码识别/" rel="prev" title="破解验证码识别">
-                破解验证码识别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -611,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是JSON"><span class="nav-number">1.</span> <span class="nav-text">什么是JSON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSON模块"><span class="nav-number">2.</span> <span class="nav-text">JSON模块</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Generator函数的定义"><span class="nav-number">1.1.</span> <span class="nav-text">Generator函数的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说一说可迭代对象-iterator-的next-方法"><span class="nav-number">1.2.</span> <span class="nav-text">说一说可迭代对象(iterator)的next()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成器函数的使用"><span class="nav-number">1.3.</span> <span class="nav-text">生成器函数的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于yield关键字的理解"><span class="nav-number">1.4.</span> <span class="nav-text">关于yield关键字的理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#yield传值"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">yield传值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yield输出值"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">yield输出值</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise对象"><span class="nav-number">1.5.</span> <span class="nav-text">Promise对象</span></a></li></ol></li></ol></div>
             
 
           </div>
