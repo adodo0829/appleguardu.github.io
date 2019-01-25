@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念">
+<meta name="description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念; 顺便提一下class关键字">
 <meta name="keywords" content="ES6">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ES6入门读书总结(四)">
 <meta property="og:url" content="http://yoursite.com/2019/01/10/ES6总结(四)/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念">
+<meta property="og:description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念; 顺便提一下class关键字">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-10T13:10:51.568Z">
+<meta property="og:updated_time" content="2019-01-18T01:13:07.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6入门读书总结(四)">
-<meta name="twitter:description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念">
+<meta name="twitter:description" content="这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念; 顺便提一下class关键字">
 
 
 
@@ -354,7 +354,7 @@
       
 
       
-        <p>这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念<br><a id="more"></a></p>
+        <p>这一篇是关于ES6中新增的两种数据结构Set和Map…用来存放多个数据的…这里总结比较浅,主要事掌握概念; 顺便提一下class关键字<br><a id="more"></a></p>
 <h1 id="ECMAScript-6-语法总结"><a href="#ECMAScript-6-语法总结" class="headerlink" title="ECMAScript 6 语法总结"></a>ECMAScript 6 语法总结</h1><h2 id="Set结构"><a href="#Set结构" class="headerlink" title="Set结构"></a>Set结构</h2><blockquote>
 <p>Set数据结构: 可以理解为没有重复成员的一个类似数组的对象; 就叫集合吧<br>结构形式: {1, 2, 3, 4}</p>
 </blockquote>
@@ -398,7 +398,105 @@
 <pre><code>可以使用扩展运算符...Map 可以实现与 数组,对象,json对象的互转
 </code></pre><h2 id="for…of"><a href="#for…of" class="headerlink" title="for…of"></a>for…of</h2><p>for…of是ES6新增的语法;用来遍历具有Iterator 接口的对象; 这种对象有next()方法,\<br>可以对自身进行遍历,每一次调用便返回对应的值…</p>
 <p>for…of循环可以使用的范围包括数组、Set 和 Map 结构、某些类似数组的对象（比如arguments对象、DOM NodeList 对象）、<br>Generator 对象，以及字符串。</p>
+<h2 id="class关键字-类"><a href="#class关键字-类" class="headerlink" title="class关键字: 类"></a>class关键字: 类</h2><ul>
+<li><p>ES5中的类实现</p>
+<pre><code>// ES5中对象实例化的方法: 通过构造函数实例化
+function Func(x, y) {
+    this.x = x;
+    this.y = y;
+}
+// 给构造函数的原型添加属性
+Func.prototype.toString = function() {
+    // 把对象转为字符串
+    return &apos;(&apos; + this.x + &apos;,&apos; + this.y + &apos;)&apos;;
+}
+// 实例化一个对象
+var f = new Func(1,100);
+console.log(f.toString());
+</code></pre></li>
+<li><p>ES6的类实现</p>
+<pre><code>// ES6中 通class来定义类; 其实就是构造函数的改写,是js的语法更像后台语言
+class Func1 {
+    // 构造实例对象的方法; 相当于初始化
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
 
+    // 添加类方法: toString()方法
+    toString() {
+        return &apos;(&apos; + this.x + &apos;,&apos; + this.y + &apos;)&apos;;
+    }
+}
+
+// 类: 就是一个函数, 本身为一个构造函数; 也是通过new来实例化一个对象
+console.log(typeof Func1);
+console.log(Func1 === Func1.prototype.constructor); 
+let f1 = new Func1();
+console.log(f1.__proto__.constructor); // 省略了__proto__
+
+// 类的方法都定义在prototype对象上
+</code></pre></li>
+<li><p>ES6中的继承</p>
+<pre><code>// ES6面向对象写法: class 替换 构造函数
+
+class User {
+    // 构造器, 初始化
+    constructor(name, pass) {
+        this.name = name;
+        this.pass = pass;
+    }
+    // 添加方法和属性
+    showName() {
+        console.log(this.name);
+    }
+
+    showPass() {
+        console.log(this.pass);
+    }
+
+}
+
+// 在继承 和 封装上的优势;  扩展性强...;  不用从0开始;; 可以使用前人造好的轮子
+// 继承超类的属性和方法
+    class VipUser extends User {
+        // 子类的初始化
+        constructor(level, ...args) {
+            // 相当于调用父类的constructor(name, pass)
+            super(...args); 
+            // super作为函数调用时，代表父类的构造函数
+            // super作为对象时，在普通方法中，指向父类的原型对象；在静态方法中，指向父类。
+            this.level = level;
+        }
+        // 方法
+        showLevel() {
+            console.log(this.level);
+        }
+    }
+    let vip = new VipUser(77, &apos;huhua&apos;, &apos;123&apos;); // 实例化
+    vip.showLevel();
+    vip.showName();
+    vip.showPass();
+
+    // 面向对象中类的应用实例
+    // 比如一个组件: 就是一个 class 继承一个组件
+    // JSX: == babel;  browser.js
+</code></pre></li>
+</ul>
+<h2 id="json简写模式"><a href="#json简写模式" class="headerlink" title="json简写模式"></a>json简写模式</h2><pre><code>// 1.JSON对象: 两个方法
+
+let json = {&quot;name&quot;: &apos;哈哈&apos;, &quot;sex&quot;: &quot;女&quot;}; // json对象键值必须是双引号
+let str1 = &apos;http://www.baidu.com?data=&apos; + encodeURIComponent(JSON.stringify(json)) ; // JSON对象转为json字符串
+console.log(str1);
+
+let str2 = JSON.parse(&apos;{&quot;a&quot;: 12, &quot;b&quot;: &quot;hello world&quot;}&apos;);
+console.log(str2); // JSON字符串 转为 对象
+console.log(str2.a);
+
+// 2.JSON简写
+// 简写:  如果key值和value是一样的; 直接写一个就可以了...
+// 可以省略一个funcion; 即 success: function(obj) {}  ==&gt; 可以写成 success(obj){}
+</code></pre>
       
     </div>
     
@@ -521,7 +619,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -543,7 +641,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -629,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set结构"><span class="nav-number">1.1.</span> <span class="nav-text">Set结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map结构"><span class="nav-number">1.2.</span> <span class="nav-text">Map结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for…of"><span class="nav-number">1.3.</span> <span class="nav-text">for…of</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ECMAScript-6-语法总结"><span class="nav-number">1.</span> <span class="nav-text">ECMAScript 6 语法总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Set结构"><span class="nav-number">1.1.</span> <span class="nav-text">Set结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map结构"><span class="nav-number">1.2.</span> <span class="nav-text">Map结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for…of"><span class="nav-number">1.3.</span> <span class="nav-text">for…of</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#class关键字-类"><span class="nav-number">1.4.</span> <span class="nav-text">class关键字: 类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#json简写模式"><span class="nav-number">1.5.</span> <span class="nav-text">json简写模式</span></a></li></ol></li></ol></div>
             
 
           </div>

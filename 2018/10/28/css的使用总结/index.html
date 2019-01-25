@@ -85,11 +85,11 @@
 <meta name="keywords" content="css">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css基础性总结">
-<meta property="og:url" content="http://yoursite.com/2018/10/28/关于css的一些总结/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/10/28/css的使用总结/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="关于css阶段性的学习总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-13T13:54:09.120Z">
+<meta property="og:updated_time" content="2019-01-22T05:09:33.120Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css基础性总结">
 <meta name="twitter:description" content="关于css阶段性的学习总结…">
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/28/关于css的一些总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/10/28/css的使用总结/"/>
 
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/28/关于css的一些总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/28/css的使用总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -466,21 +466,25 @@ margin:0 auto
 <p>思路:<br>    // 根元素字体大小设置:  设置css样式中根元素字体大小 1rem = 100px; // 一般我们会默认为100px,方便计算<br>    // 这样网页中的其他元素以根元素字体为参照物(100px)来写<br>    // 比如图片宽60px, 就是0.6rem; </p>
 <pre><code>// 但是我们要实现自适应: 
 // 推理过程: 即实现元素的大小随着视口宽度vm变化而变化 =&gt; 根元素字体大小随vm变化而变化(线性关系)
-// 所以我们要将根元素字体大小转为视口宽度:  相当于我要把设计稿按比例贴到设备上去
+// 所以我们要将根元素字体大小转为视口宽度:  相当于我要把设计稿按比例投放到设备上去
 
 // 公式:
 // 根元素字体实际大小(可以理解为假设设计稿根元素100px)/设计稿大小 = 根元素视口大小/设备视口大小(100vm)  
 // (当然这是在设计稿尺寸:设备尺寸 = 1:1的时候)
 
-// 如果实际上设计稿:设备尺寸 = 2:1; 意味着我需要将设计稿缩小到1/2才能贴合到设备上完全展现; 
+// 如果实际上设计稿:设备尺寸 = 2:1; 意味着我需要将设计稿缩小到1/2才能投放到设备上完全展现; 
 // 但是我的根元素实际大小和视口大小为定值(100px; 100vm);
 // 所以只有将设计稿尺寸缩小一倍; 那个根元素的视口大小就要 乘以2...
 // 如果是3倍; 根元素视口大小则 x3...
 </code></pre><h2 id="less使用总结"><a href="#less使用总结" class="headerlink" title="less使用总结"></a>less使用总结</h2><pre><code>1.将重复使用的样式放在变量中 @变量: 常用属性1
 2.&amp;符号: 类似js中的this, 表示当前选择器下那个父级对象
-3.类的继承性, 可以直接在一个类中写另一个类名, 表示继承其所有属性
+3.混入写法, 可以直接在一个类中写另一个类名, 表示继承其所有属性;
 4.嵌套写法: 一般在写less文件时, 遵循嵌套规则, 先写父级元素, 也不要着急去写样式, 
     再把一层层的子元素先列出来, 再按照设计图去一次添加属性,这样代码思维会比较流畅...
+</code></pre><h2 id="sass使用"><a href="#sass使用" class="headerlink" title="sass使用"></a>sass使用</h2><pre><code>1.定义变量: $变量名: 样式值;
+2.嵌套: 同上
+3.混入写法: @mixin  混入名(变量...) {设置属性和值}; 引用混入: @include 变量
+4.导入: @import &apos;路径&apos;; 同上
 </code></pre>
       
     </div>
@@ -604,7 +608,7 @@ margin:0 auto
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -626,7 +630,7 @@ margin:0 auto
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -712,7 +716,7 @@ margin:0 auto
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#css选择器"><span class="nav-number">1.</span> <span class="nav-text">css选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css的三大特性"><span class="nav-number">2.</span> <span class="nav-text">css的三大特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css中的元素的显示模式"><span class="nav-number">3.</span> <span class="nav-text">css中的元素的显示模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css中常用的样式属性"><span class="nav-number">4.</span> <span class="nav-text">css中常用的样式属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子模型"><span class="nav-number">5.</span> <span class="nav-text">盒子模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于浮动"><span class="nav-number">6.</span> <span class="nav-text">关于浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于定位"><span class="nav-number">7.</span> <span class="nav-text">关于定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于css-div布局"><span class="nav-number">8.</span> <span class="nav-text">关于css+div布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端的自适应布局"><span class="nav-number">9.</span> <span class="nav-text">移动端的自适应布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less使用总结"><span class="nav-number">10.</span> <span class="nav-text">less使用总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#css选择器"><span class="nav-number">1.</span> <span class="nav-text">css选择器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css的三大特性"><span class="nav-number">2.</span> <span class="nav-text">css的三大特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css中的元素的显示模式"><span class="nav-number">3.</span> <span class="nav-text">css中的元素的显示模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css中常用的样式属性"><span class="nav-number">4.</span> <span class="nav-text">css中常用的样式属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盒子模型"><span class="nav-number">5.</span> <span class="nav-text">盒子模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于浮动"><span class="nav-number">6.</span> <span class="nav-text">关于浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于定位"><span class="nav-number">7.</span> <span class="nav-text">关于定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于css-div布局"><span class="nav-number">8.</span> <span class="nav-text">关于css+div布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端的自适应布局"><span class="nav-number">9.</span> <span class="nav-text">移动端的自适应布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#less使用总结"><span class="nav-number">10.</span> <span class="nav-text">less使用总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sass使用"><span class="nav-number">11.</span> <span class="nav-text">sass使用</span></a></li></ol></div>
             
 
           </div>

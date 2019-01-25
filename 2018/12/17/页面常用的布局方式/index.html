@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="在日常开发中经常遇到布局的问题，下面我总结几种常用的css布局方案,直接用代码展示">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-08T15:30:40.410Z">
+<meta property="og:updated_time" content="2019-01-24T13:18:44.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用布局方式">
 <meta name="twitter:description" content="在日常开发中经常遇到布局的问题，下面我总结几种常用的css布局方案,直接用代码展示">
@@ -477,7 +477,7 @@
     flex: 1;
 }
 </code></pre></li>
-<li><p>等分布局</p>
+<li><p>等分布局(百分比)</p>
 <pre><code>.parent {
     height: 300px;
     /* margin-left: -10px; */
@@ -644,6 +644,58 @@
             不过它计算的永远是主轴方向剩下的大小, 比如有元素定了宽高,它只能按比例分配余下尺寸
 </code></pre></li>
 </ul>
+<h2 id="bootstrap中的栅格布局"><a href="#bootstrap中的栅格布局" class="headerlink" title="bootstrap中的栅格布局"></a>bootstrap中的栅格布局</h2><ul>
+<li><p>响应式</p>
+<pre><code>/* 响应式布局 =&gt; 媒体查询 */
+/* 向上兼容, 向下覆盖 */
+/* 对屏幕的宽度或者高度进行获取同时判断，根据判断结果重置样式 */
+body {
+    background: #000;
+}
+/* max-width: 当屏幕宽度&lt;=这个值; 以里面的修改的样式为主 */ 
+/* 当以max为参照时: 从大写到小 */
+
+/* min-width: 当屏幕宽度&gt;=这个值时; 以里面修改的样式为主 */
+/* 当以min为参照时: 从小写到大 */
+
+@media screen and (min-width: 768px) {
+    body {
+        background: #00f;
+    }   
+}
+@media screen and (min-width: 992px) {
+    body {
+    background: #0f0;
+    }
+} 
+@media screen and (min-width: 1200px) {
+    body {
+    background: #f00;
+    }
+} 
+
+响应式基本使用: 
+    1.容器: container:不同宽度容器对应不同宽度  和 container-fluid: 全屏等宽
+    2.row类写在容器里, 下面对应着column类; 一行对应一整块块内容;每一列是一个单独的盒子 
+    3.col-xs; sm; md; lg 分别对应着 极小,小,中,大屏的宽度条件
+    4.col-xs-数字: 对应了该元素所占据容器的宽度的  数字/12 
+    5.xs,sm,md,lg 满足向上兼容,向下覆盖的规则; 只能影响比他大的宽度
+    &lt;!-- class=&quot;col-xs-12 col-sm-6 col-md-4 col-lg-3&quot; 省去写媒体查询,从小往大
+    6.工具使用
+    不同屏幕下的显示隐藏: hidden-xs, hidden-sm: 表示在992以下的屏幕隐藏
+
+// 基本思路:
+分析项目原型图: 看设计稿有哪些结构可以使用 bootstrap 框架中的组件来完成...
+    拆分设计稿; 去框架中找对应的结构组件
+a. 需求分析: DOM结构在不同屏幕(尺寸)下的展示样式; 
+    按条件去设计结构; 给row分配栅格的时候注意每一列的比例分配,注意什么屏下需要隐藏,或者样式改变
+b. 套用框架的时候注意,我们要对其进行修改, 包括样式和结构; 
+    修改结构的时候,为了不改动原有结构, 有时候需要添加自定义的类名等等...
+    修改样式的时候, 我们需要找到直接起作用的元素; 参照源码逐一修改
+c. 使用框架的插件组件
+    注意依赖jquery, 并且要初始化....
+</code></pre></li>
+</ul>
 
       
     </div>
@@ -767,7 +819,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -789,7 +841,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -875,7 +927,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面布局"><span class="nav-number">1.</span> <span class="nav-text">页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#居中布局"><span class="nav-number">1.1.</span> <span class="nav-text">居中布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多列布局"><span class="nav-number">1.2.</span> <span class="nav-text">多列布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex弹性布局"><span class="nav-number">1.3.</span> <span class="nav-text">flex弹性布局</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#页面布局"><span class="nav-number">1.</span> <span class="nav-text">页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#居中布局"><span class="nav-number">1.1.</span> <span class="nav-text">居中布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多列布局"><span class="nav-number">1.2.</span> <span class="nav-text">多列布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#flex弹性布局"><span class="nav-number">1.3.</span> <span class="nav-text">flex弹性布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bootstrap中的栅格布局"><span class="nav-number">1.4.</span> <span class="nav-text">bootstrap中的栅格布局</span></a></li></ol></li></ol></div>
             
 
           </div>

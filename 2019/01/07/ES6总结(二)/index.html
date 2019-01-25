@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-09T12:07:04.633Z">
+<meta property="og:updated_time" content="2019-01-18T01:25:50.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ES6入门读书总结(二)">
 <meta name="twitter:description" content="第二篇是关于ES6中数据类型(字符串,数值,数组,对象)部分方法的扩展, 还有扩展运算符;我这里只总结了一些较为常用的方法扩展…">
@@ -461,6 +461,39 @@ console.log(Math.trunc(3.1));
             // keys()是对键名的遍历:   对应索引
             // values()是对键值的遍历: 对应值
             // entries()是对键值对的遍历: 索引+值
+
+4.数组扩展方法 [a, b, c]
+    map映射, reduce汇总, filter过滤, forEach迭代
+
+    1. map: 一个映射一个 
+    // [100, 59, 22] =&gt; [及格, 不及格, 不及格]
+
+    let score = [100, 59, 22];
+    let res = score.map( item =&gt; item&gt;60? &apos;及格&apos;:&apos;不及格&apos; );console.log(res);
+
+    2. reduce: 一堆变成一个
+
+    // temp为中间结果; 如果不设置,则为第一个下标为0的数
+    let res1 = score.reduce(function(temp, item, index, arr) {
+        if (index != arr.length - 1) {
+            return item + temp;
+        } else {
+            return (temp + item) / arr.length;
+        }
+    }); 
+    console.log(res1);
+
+    3.filter: 保留我想要的结果
+    let res2 = score.filter( item =&gt; item%11!=0);
+    console.log(res2);
+
+    4.forEach: 只是操作一下每一项; 返回值为undefined
+    let arr = [1,2,3,4]
+    arr.forEach(function (item, index, arr) {
+        // 这里可以用外部变量接受 这里面操作的值
+        console.log(index +&apos;:&apos;+ item);
+    });
+    console.log(res3); // undefined
 </code></pre><h2 id="对象的扩展"><a href="#对象的扩展" class="headerlink" title="对象的扩展"></a>对象的扩展</h2><p>这里主要介绍一下对象的多种遍历方法;其他内容在扩展运算符…中总结.</p>
 <pre><code>1.for...in
     for...in循环遍历对象自身的和继承的可枚举属性（不含 Symbol 属性）。
@@ -653,7 +686,7 @@ console.log(Math.trunc(3.1));
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">63</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -675,7 +708,7 @@ console.log(Math.trunc(3.1));
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
