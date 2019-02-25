@@ -89,12 +89,13 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="写在前面:文章主要是对平时在node开发中常用的一些方法做的一个总结笔记…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="f:/就业28期资料/node阶段/第二天笔记/day02.assets/1550425235122.png">
-<meta property="og:updated_time" content="2019-02-24T07:26:35.787Z">
+<meta property="og:image" content="https://i.imgur.com/CDUk8wg.png">
+<meta property="og:image" content="https://i.imgur.com/Co8znBP.png">
+<meta property="og:updated_time" content="2019-02-25T13:54:01.924Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Node相关总结">
 <meta name="twitter:description" content="写在前面:文章主要是对平时在node开发中常用的一些方法做的一个总结笔记…">
-<meta name="twitter:image" content="f:/就业28期资料/node阶段/第二天笔记/day02.assets/1550425235122.png">
+<meta name="twitter:image" content="https://i.imgur.com/CDUk8wg.png">
 
 
 
@@ -400,7 +401,7 @@ PATH.join(\_\_dirname, 文件夹名, 文件名) ==&gt; \_\_dirname/文件夹/文
 <p>举个栗子:<br>    假如有一个img标签: <code>&lt;img src=&quot;../images/xx.png&quot;&gt;</code><br>    假设我在html文件所在文件目录test开启本地服务,端口3000, 这个路径就是<code>http://127.0.0.1:3000/test/images/xx.png</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">接下来, 我们要去写处理请求的逻辑js代码, 这里就直接写部分示例代码了</span><br><span class="line"><span class="keyword">let</span> server = HTTP.creatServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (req.url == <span class="string">'/images/xx.png'</span>) &#123;</span><br><span class="line">        <span class="comment">// 读取文件返回</span></span><br><span class="line">        FS.readFile(PATH.join(__dirname, req.url), (error, data) =&gt; &#123;</span><br><span class="line">            <span class="keyword">if</span> (error) &#123;<span class="keyword">throw</span> error&#125;</span><br><span class="line">            <span class="keyword">else</span> &#123; res.end(data) &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 这样便实现了静态资源从本地服务器向 页面返回数据了..., 当然后面右封装好的框架来处理这些url请求</span></span><br></pre></td></tr></table></figure>
 <h2 id="Node处理get和post请求"><a href="#Node处理get和post请求" class="headerlink" title="Node处理get和post请求"></a>Node处理get和post请求</h2><p>首先来看看http协议中完整的url路径:​</p>
-<p>​    <img src="F:\就业28期资料\node阶段\第二天笔记\day02.assets\1550425235122.png" alt=""></p>
+<p><img src="https://i.imgur.com/CDUk8wg.png" alt="">​</p>
 <ul>
 <li>get请求的参数是直接在url路径中显示。</li>
 <li>get的请求参数在path资源路径的后面添加，以?表示参数的开始，以key=value表示参数的键值对，多个参数以&amp;符号分割</li>
@@ -458,8 +459,8 @@ req.on(&apos;end&apos;, () =&gt; {
     1. 静态资源路由, 返回静态文件
     2. 动态路由, 处理对应的业务逻辑
         比如: 登陆 /login; 注册/register等...
-</code></pre><h5 id="处理路由"><a href="#处理路由" class="headerlink" title="处理路由"></a>处理路由</h5><p>​    处理过程:<br>​            1.获取url请求参数<br>            2.逻辑处理, 即数据库的增删改查操作<br>            3.响应请求</p>
-<h2 id="Express框架开发流程"><a href="#Express框架开发流程" class="headerlink" title="Express框架开发流程"></a>Express框架开发流程</h2><p>为什么使用express?<br>    原生Node处理静态资源和路由比较繁琐,逻辑性不直观等;express框架封装原生node的处理方式,我们可以直接调用API即可…使用Express可以快速搭建出一个web项目…<br>    在Express中, 一切都是中间件…<br>    中间件?<br>        是一个函数: 如(req,res,next)=&gt;{ req:请求对象  res:响应对象  next:下一个中间件 }</p>
+</code></pre><h5 id="处理路由"><a href="#处理路由" class="headerlink" title="处理路由"></a>处理路由</h5><p>​    处理过程:<br>​         1.获取url请求参数<br>           2.逻辑处理, 即数据库的增删改查操作<br>           3.响应请求</p>
+<h2 id="Express框架开发流程"><a href="#Express框架开发流程" class="headerlink" title="Express框架开发流程"></a>Express框架开发流程</h2><p>为什么使用express?<br>    原生Node处理静态资源和路由比较繁琐,逻辑性不直观等;express框架封装原生node的处理方式,我们可以直接调用API即可…使用Express可以快速搭建出一个web项目…<br>    在Express中, 一切都是中间件…中间件?<br>        是一个函数: 如(req,res,next)=&gt;{ req:请求对象  res:响应对象  next:下一个中间件 }</p>
 <p>Express使用: 举个简单的例子, 详细的还是去查官方文档</p>
 <pre><code>1. 静态资源托管
 app.use(&apos;/views&apos;, express.static(__dirname + &apos;/views&apos;));
@@ -485,6 +486,79 @@ app.use(&apos;路由路径&apos;, 路由处理模块);
     1.post参数:
         Express中，必须使用body-parser模块。使用后，将可以用req.body得到参数。
         如果表单中含有文件上传，那么还是需要使用formidable模块
+</code></pre><h2 id="nodejs下操作MongoDB数据库"><a href="#nodejs下操作MongoDB数据库" class="headerlink" title="nodejs下操作MongoDB数据库"></a>nodejs下操作MongoDB数据库</h2><pre><code>1.安装并导入第三方包mongoose
+2.调用相关API
+    // 连接数据库 connect(&apos;数据库uri&apos;)
+    // 创建模型Model(表)
+        let Model = mongoose.model(&apos;表名&apos;, {字段: 数据类型})
+
+    // 新增
+    Model.create(条件: 对象||数组, err =&gt; {xxoo})
+
+    // 删除
+    Model.deleteOne(条件: 数据对象, err =&gt; {xxoo})  // 满足条件的第一个
+    Model.deleteMany(数据对象, err =&gt; {xxoo}) // 满足条件的所有数据
+
+    // 修改
+    Model.update(原对象, 新对象, err回调)
+    Model.updateMany(原对象, 新对象, err回调)
+
+    // 查询: 
+    // 参数1: 条件; 参数2:回调函数 (err, docs) =&gt; { 查询结果docs是一个数组}
+    find(条件: 对象, (err, docs) =&gt; {xxoo})
+</code></pre><h2 id="node-js下的-MVC模式开发流程"><a href="#node-js下的-MVC模式开发流程" class="headerlink" title="node.js下的 MVC模式开发流程"></a>node.js下的 MVC模式开发流程</h2><p>流程图:</p>
+<p><img src="https://i.imgur.com/Co8znBP.png" alt=""></p>
+<p>1.项目MVC架构设计(确定每一个文件的职责)</p>
+<pre><code>1.app.js
+    * 服务器入口文件
+
+2.router
+    * 负责路由分发
+
+3.C层
+    * 负责处理业务逻辑(负责V与C的沟通)
+
+4.M层
+    * 负责管理数据（增删改查数据库 mongoose中的model）
+
+5.resource:静态资源
+    V层：html静态资源
+    images:图片静态资源
+</code></pre><p>2.准备工作：（安装项目中用到的模块）</p>
+<pre><code>1.初始化npm： `cnpm init -y`
+2.安装：  `cnpm i 模块名 --save`
+
+    * 第三方模块
+        * express
+        * mongoose
+        * jquery
+        * bootstrap
+        * art-template
+    * express中间件
+        * body-parser
+</code></pre><p>3.使用express搭建服务器入口文件</p>
+<pre><code>* 1.导入express
+* 2.创建服务器app
+* 3.配置中间件
+* 4.开启服务器
+</code></pre><p>4.搭建router：设计接口文档</p>
+<pre><code>路由分发...
+</code></pre><p>5.搭建C层：负责真正处理业务逻辑</p>
+<pre><code>// 静态资源中间件: 返回静态资源...
+
+// 执行路由中间件
+    1. 路由处理   路由: 即标识资源的部分 URL
+        收到view层的页面资源请求后, 分发路由, 交给路由模块去干活
+        只需要注意: 请求类型和路径, 调用哪个接口...
+
+    2. 路由模块去提交路由 ==&gt; 对应的接口
+
+    3. 接口收到请求参数, 开始干活, 编写业务处理逻辑, 调用model层操作数据库的方法, 
+        将获取到的数据进行修饰处理, 作为响应结果
+</code></pre><p>6.搭建M层：mongoose</p>
+<pre><code>处理数据源, 与数据库打交道 
+接受参数(对应数据库各个字段): 
+做增删改查处理逻辑操作...
 </code></pre>
       
     </div>
@@ -712,7 +786,7 @@ app.use(&apos;路由路径&apos;, 路由处理模块);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#node一些知识点总结"><span class="nav-number">1.</span> <span class="nav-text">node一些知识点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#npm包管理工具"><span class="nav-number">1.1.</span> <span class="nav-text">npm包管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node中的模块"><span class="nav-number">1.2.</span> <span class="nav-text">Node中的模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内置模块"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">内置模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fs文件模块-负责文件读写"><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">fs文件模块: 负责文件读写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http模块-用来搭建服务器"><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">http模块: 用来搭建服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#path模块-一般用来合并文件路径"><span class="nav-number">1.2.0.1.3.</span> <span class="nav-text">path模块: 一般用来合并文件路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url模块-用来解析请求的url"><span class="nav-number">1.2.0.1.4.</span> <span class="nav-text">url模块: 用来解析请求的url</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方模块"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">第三方模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义模块"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">自定义模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web中静态资源请求"><span class="nav-number">1.3.</span> <span class="nav-text">Web中静态资源请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node处理get和post请求"><span class="nav-number">1.4.</span> <span class="nav-text">Node处理get和post请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get请求处理-这里要用到一个url模块"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">get请求处理: 这里要用到一个url模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post请求的处理"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">post请求的处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node服务端的开发流程介绍"><span class="nav-number">1.5.</span> <span class="nav-text">Node服务端的开发流程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端的工作流程"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">服务端的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搭建服务器"><span class="nav-number">1.5.0.1.1.</span> <span class="nav-text">搭建服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计路由-gt-类似于接口文档"><span class="nav-number">1.5.0.1.2.</span> <span class="nav-text">设计路由 ==&gt; 类似于接口文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理路由"><span class="nav-number">1.5.0.1.3.</span> <span class="nav-text">处理路由</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express框架开发流程"><span class="nav-number">1.6.</span> <span class="nav-text">Express框架开发流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#node一些知识点总结"><span class="nav-number">1.</span> <span class="nav-text">node一些知识点总结</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#npm包管理工具"><span class="nav-number">1.1.</span> <span class="nav-text">npm包管理工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node中的模块"><span class="nav-number">1.2.</span> <span class="nav-text">Node中的模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内置模块"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">内置模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fs文件模块-负责文件读写"><span class="nav-number">1.2.0.1.1.</span> <span class="nav-text">fs文件模块: 负责文件读写</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http模块-用来搭建服务器"><span class="nav-number">1.2.0.1.2.</span> <span class="nav-text">http模块: 用来搭建服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#path模块-一般用来合并文件路径"><span class="nav-number">1.2.0.1.3.</span> <span class="nav-text">path模块: 一般用来合并文件路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#url模块-用来解析请求的url"><span class="nav-number">1.2.0.1.4.</span> <span class="nav-text">url模块: 用来解析请求的url</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三方模块"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">第三方模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义模块"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">自定义模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web中静态资源请求"><span class="nav-number">1.3.</span> <span class="nav-text">Web中静态资源请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node处理get和post请求"><span class="nav-number">1.4.</span> <span class="nav-text">Node处理get和post请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#get请求处理-这里要用到一个url模块"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">get请求处理: 这里要用到一个url模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post请求的处理"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">post请求的处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node服务端的开发流程介绍"><span class="nav-number">1.5.</span> <span class="nav-text">Node服务端的开发流程介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端的工作流程"><span class="nav-number">1.5.0.1.</span> <span class="nav-text">服务端的工作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#搭建服务器"><span class="nav-number">1.5.0.1.1.</span> <span class="nav-text">搭建服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计路由-gt-类似于接口文档"><span class="nav-number">1.5.0.1.2.</span> <span class="nav-text">设计路由 ==&gt; 类似于接口文档</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#处理路由"><span class="nav-number">1.5.0.1.3.</span> <span class="nav-text">处理路由</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Express框架开发流程"><span class="nav-number">1.6.</span> <span class="nav-text">Express框架开发流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs下操作MongoDB数据库"><span class="nav-number">1.7.</span> <span class="nav-text">nodejs下操作MongoDB数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-js下的-MVC模式开发流程"><span class="nav-number">1.8.</span> <span class="nav-text">node.js下的 MVC模式开发流程</span></a></li></ol></li></ol></div>
             
 
           </div>
