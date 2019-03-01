@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-28T02:59:25.692Z</updated>
+  <updated>2019-03-01T04:39:19.321Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>前端开发之功能点总结</title>
+    <title>前端开发之功能点方案总结</title>
     <link href="http://yoursite.com/2019/02/28/%E5%8A%9F%E8%83%BD%E7%82%B9%E6%80%BB%E7%BB%93%E7%AF%87/"/>
     <id>http://yoursite.com/2019/02/28/功能点总结篇/</id>
     <published>2019-02-28T00:43:40.000Z</published>
-    <updated>2019-02-28T02:59:25.692Z</updated>
+    <updated>2019-03-01T04:39:19.321Z</updated>
     
     <content type="html"><![CDATA[<p>写在前面:<br>本文章主要记录了在面对开发中一些基本功能需求时,所用到的一些技术方案总结…<br><a id="more"></a></p>]]></content>
     
@@ -43,13 +43,13 @@
     <link href="http://yoursite.com/2019/02/27/%E7%AE%80%E6%B4%81%E7%9A%84js%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2019/02/27/简洁的js方法/</id>
     <published>2019-02-27T00:43:40.000Z</published>
-    <updated>2019-02-28T02:52:08.785Z</updated>
+    <updated>2019-03-01T04:39:23.969Z</updated>
     
-    <content type="html"><![CDATA[<p>写在前面:<br>本文章主要记录在日常开发中所用到的一些简洁的JS方法;能够快速实现一些我们想要处理的需求,方便以后遇到此类问题能够快速拿出解决方案…<br><a id="more"></a></p><ul><li><p>1.快速生成序列化数组</p><pre><code>// 返回一个 [0-9]的数组Array.from( new Array(10), (item, index) =&gt; index) </code></pre></li></ul>]]></content>
+    <content type="html"><![CDATA[<p>写在前面:<br>本文章主要记录在日常开发中所用到的一些简洁的JS方法;极简的语法实现一个功能,可能有点偏向函数式编程的味道;参考GitHub上的一个项目: 30 second of code方便以后遇到此类问题能够快速拿出解决方案…<br><a id="more"></a></p><ul><li><p>1.快速生成序列化数组</p><pre><code>// 返回一个 [0-9]的数组// 参数1: 类数组或数组; 参数2: map函数; 返回值: map的处理结果Array.from( new Array(10), (item, index) =&gt; index) // 上述也可以传一个对象: {length: 10}</code></pre></li></ul>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;写在前面:&lt;br&gt;本文章主要记录在日常开发中所用到的一些简洁的JS方法;能够快速实现一些我们想要处理的需求,方便以后遇到此类问题能够快速拿出解决方案…&lt;br&gt;
+      &lt;p&gt;写在前面:&lt;br&gt;本文章主要记录在日常开发中所用到的一些简洁的JS方法;极简的语法实现一个功能,可能有点偏向函数式编程的味道;参考GitHub上的一个项目: 30 second of code方便以后遇到此类问题能够快速拿出解决方案…&lt;br&gt;
     
     </summary>
     
