@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="AppleGuard的博客">
 <meta property="og:description" content="写在前面:本文章主要记录了在面对开发中一些基本功能需求时,所用到的一些技术方案总结…">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-01T04:39:19.321Z">
+<meta property="og:updated_time" content="2019-03-06T04:17:42.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端开发之功能点方案总结">
 <meta name="twitter:description" content="写在前面:本文章主要记录了在面对开发中一些基本功能需求时,所用到的一些技术方案总结…">
@@ -355,6 +355,27 @@
 
       
         <p>写在前面:<br>本文章主要记录了在面对开发中一些基本功能需求时,所用到的一些技术方案总结…<br><a id="more"></a></p>
+<h2 id="防抖和节流"><a href="#防抖和节流" class="headerlink" title="防抖和节流"></a>防抖和节流</h2><p>防抖: 避免同一时间在一定时间内多次触发; 在触发后隔一段时间后若没有再次触发,才去调用事件函数</p>
+<p>节流: 顾名思义: 节约流量; 就是事件函数隔一段事件才触发一次;在这段事件你就算手速再快,他也只执行一次</p>
+<p>原理: 都是利用闭包 保存一个开关值 ==&gt; 在事件触发的时候判断一下</p>
+<ul>
+<li><p>防抖代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">shake</span>(<span class="params">func, time = <span class="number">1000</span></span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 存定时器的timerID</span></span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span>; </span><br><span class="line">   </span><br><span class="line">    <span class="comment">// 这里面才是事件要触发的函数; </span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'这个是持续触发...'</span>);</span><br><span class="line">        clearTimeout(timer)</span><br><span class="line">        <span class="comment">// 执行定时器函数; 在还未执行时,清除定时器</span></span><br><span class="line">        timer = setTimeout(func, time)</span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理数据的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deal</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'hello 函数防抖. 这个是防抖触发...'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 事件的回调函数: 一个函数的引用</span></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'scroll'</span>, shake(deal, <span class="number">2000</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>节流代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 2.函数节流: 每隔一段时间去执行一次原本需要无时不刻地在执行的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">func, time = <span class="number">1000</span></span>) </span>&#123;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">// 定义一个开关</span></span><br><span class="line">   <span class="keyword">let</span> canExecute = <span class="literal">true</span>;</span><br><span class="line">  </span><br><span class="line">   <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (!canExecute) &#123;</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 处理函数执行</span></span><br><span class="line">       <span class="comment">// 关闭开关</span></span><br><span class="line">       canExecute = <span class="literal">false</span>;</span><br><span class="line">       setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">           <span class="comment">// 在func所在的活动对象下调用它</span></span><br><span class="line">            <span class="comment">// func.apply(this, arguments);</span></span><br><span class="line">           func();</span><br><span class="line">           <span class="comment">// 打开开关</span></span><br><span class="line">           canExecute = <span class="literal">true</span>;</span><br><span class="line">       &#125;, time)</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'hello 我是函数节流, 隔一段时间才会执行'</span>);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'scroll'</span>, throttle(handle))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>应用场景</p>
+<ul>
+<li>输入框异常判断, 输入时的判断(节流)</li>
+<li>滚动一段距离才刷新(节流)</li>
+<li>防止多次点击发送多个请求(防抖)</li>
+</ul>
+</li>
+</ul>
+<p>​        </p>
 
       
     </div>
@@ -449,8 +470,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -567,6 +597,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#防抖和节流"><span class="nav-number">1.</span> <span class="nav-text">防抖和节流</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
