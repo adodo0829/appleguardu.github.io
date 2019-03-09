@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="隐式转化," />
+  <meta name="keywords" content="vue," />
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="本文主要总结了js中数据类型的隐式转换…">
-<meta name="keywords" content="隐式转化">
+<meta name="description" content="写在前面:当我们买了一本新书, 我们最先开始看的一般都不是内容, 而是去把目录过一遍,看一下有多少章节呀; 同理,学习一项新技术时,我觉得一般要先去了解一下这个技术整体架构内容, 需要有一种大局观, 然后是去了解了各个章节直接的关联关系后,再去逐步深入学习…下面整一下 我的Vue学习路线和计划, 详细内容会在学习之后针对每个章节做一些总结">
+<meta name="keywords" content="vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="js中隐式转换">
-<meta property="og:url" content="http://yoursite.com/2018/11/26/js中的隐式转换/index.html">
+<meta property="og:title" content="Vue学习路线">
+<meta property="og:url" content="http://yoursite.com/2019/03/09/Vue学习路线/index.html">
 <meta property="og:site_name" content="AppleGuard的博客">
-<meta property="og:description" content="本文主要总结了js中数据类型的隐式转换…">
+<meta property="og:description" content="写在前面:当我们买了一本新书, 我们最先开始看的一般都不是内容, 而是去把目录过一遍,看一下有多少章节呀; 同理,学习一项新技术时,我觉得一般要先去了解一下这个技术整体架构内容, 需要有一种大局观, 然后是去了解了各个章节直接的关联关系后,再去逐步深入学习…下面整一下 我的Vue学习路线和计划, 详细内容会在学习之后针对每个章节做一些总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-26T06:17:55.561Z">
+<meta property="og:image" content="https://i.imgur.com/8sRsyOs.png">
+<meta property="og:updated_time" content="2019-03-09T08:30:28.825Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="js中隐式转换">
-<meta name="twitter:description" content="本文主要总结了js中数据类型的隐式转换…">
+<meta name="twitter:title" content="Vue学习路线">
+<meta name="twitter:description" content="写在前面:当我们买了一本新书, 我们最先开始看的一般都不是内容, 而是去把目录过一遍,看一下有多少章节呀; 同理,学习一项新技术时,我觉得一般要先去了解一下这个技术整体架构内容, 需要有一种大局观, 然后是去了解了各个章节直接的关联关系后,再去逐步深入学习…下面整一下 我的Vue学习路线和计划, 详细内容会在学习之后针对每个章节做一些总结">
+<meta name="twitter:image" content="https://i.imgur.com/8sRsyOs.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/11/26/js中的隐式转换/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/09/Vue学习路线/"/>
 
 
 
 
 
-  <title>js中隐式转换 | AppleGuard的博客</title>
+  <title>Vue学习路线 | AppleGuard的博客</title>
   
 
 
@@ -265,7 +267,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/26/js中的隐式转换/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/09/Vue学习路线/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="huhua">
@@ -282,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">js中隐式转换</h1>
+          <h1 class="post-title" itemprop="name headline">Vue学习路线</h1>
         
 
         <div class="post-meta">
@@ -294,8 +296,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-26T10:53:33+08:00">
-                2018-11-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-09T15:37:41+08:00">
+                2019-03-09
               </time>
             
 
@@ -317,8 +319,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端学习/" itemprop="url" rel="index">
-                    <span itemprop="name">前端学习</span>
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
                   </a>
                 </span>
 
@@ -354,81 +356,57 @@
       
 
       
-        <p>本文主要总结了js中数据类型的隐式转换…<br><a id="more"></a>  </p>
-<h1 id="隐式类型转换"><a href="#隐式类型转换" class="headerlink" title="隐式类型转换"></a>隐式类型转换</h1><p>当运算符两边数据类型不一样的时候，编译器会自动将数据类型转换成一致之后再计算. </p>
-<p>有如下几种转换情况:  </p>
-<pre><code>1.其他数据类型转number: 算术运算符（+ - * /  %） 自增自减  关系运算符（&gt; &gt;= &lt; &lt;= == === != !==）
+        <p>写在前面:<br>当我们买了一本新书, 我们最先开始看的一般都不是内容, 而是去把目录过一遍,看一下有多少章节呀; 同理,学习一项新技术时,我觉得一般要先去了解一下这个技术整体架构内容, 需要有一种大局观, 然后是去了解了各个章节直接的关联关系后,再去逐步深入学习…<br>下面整一下 我的Vue学习路线和计划, 详细内容会在学习之后针对每个章节做一些总结<br><a id="more"></a></p>
+<h2 id="基础语法学习"><a href="#基础语法学习" class="headerlink" title="基础语法学习"></a>基础语法学习</h2><p>首先, 过一下官方文档,去看看Vue有哪些内容组成,然后列一个由浅入深的学习计划</p>
+<ul>
+<li><p>基本的指令</p>
+<pre><code>像 v-指令名,这些是首先去需要掌握的, 条件,循环,属性绑定, 事件绑定, 修饰符等
+</code></pre></li>
+<li><p>Vue实例的创建</p>
+<pre><code>记住Vue实例的创建流程
+Vue实例的一些重要且常用的属性和方法
+    data, methods, computed, watch等...深入理解 + 实操
+实例属性: 以$开头访问的属性
+</code></pre></li>
+<li><p>Vue实例的生命周期</p>
+<pre><code>记住八大生命周期钩子(回调函数): 干了什么事..
+vue实例在各个阶段的回调函数: 总结一下在这期间可以做什么事, 比如
+    beforecreate: 可以在这加个loading事件
+    created：做一些初始化，可以访问data
+    mounted：在这发起后端请求，拿回数据，配合路由钩子做一些事情
+    updated: 数据更新后做一些事
+    beforeDestory： 你确认删除XX吗？ 
+    destoryed ：当前组件已被删除，清空相关内容
+</code></pre></li>
+</ul>
+<h2 id="组件的学习-重点"><a href="#组件的学习-重点" class="headerlink" title="组件的学习(重点)"></a>组件的学习(重点)</h2><p>Vue组件作为独立的可重用ui元素, 需要掌握好。要知道页面的实现: 是先进行拆分成多个组件, 然后再拼凑组件的一个过程. 考虑到后期的可扩展和移植性, 组件一定要独立</p>
+<ul>
+<li><p>组件的基本使用</p>
+<pre><code>比如如何创建,注册,添加方法,属性等...
+</code></pre></li>
+<li><p>组件通信传值(重要)</p>
+<pre><code>如何通过 prop 和 event 在它们之间发生交互。
+</code></pre><ul>
+<li>数据单向流</li>
+<li>父子组件</li>
+<li>兄弟组件</li>
+<li>跨级组件</li>
+</ul>
+</li>
+</ul>
+<h2 id="单页面应用程序-SPA"><a href="#单页面应用程序-SPA" class="headerlink" title="单页面应用程序(SPA)"></a>单页面应用程序(SPA)</h2><p>单页面应用程序（SPA）架构通过单个网页实现传统多页面网站一样的功能，而且不会在每次用户触发导航时重新加载和重建页面;</p>
+<h4 id="学会Vue-Router"><a href="#学会Vue-Router" class="headerlink" title="学会Vue Router"></a>学会Vue Router</h4><pre><code>Vue Router 是一个用于构建 SPA 的工具:
+将“页面”构建为 Vue 组件之后，就可以使用 Vue Router 将每个“页面”映射到一个唯一的路径
 
-2.其他数据类型转string：字符串连接符 +
+router-link-to
+router-view
+路由设置, 动态路由, 二级路由(嵌套)
+</code></pre><h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2><p>随着应用程序变得越来越大，项目变得越来越复杂，SPA 页面中会有很多组件，管理全局状态变得异常困难，而且随着 prop 和 event 监听器的增加，组件变得越来越臃肿</p>
+<h4 id="学会Vuex"><a href="#学会Vuex" class="headerlink" title="学会Vuex"></a>学会Vuex</h4><p>基于Flux思想: 数据单向流动思想，它可以将数据保存在可预测且稳定的中央存储中;<br>我直接放个阮老师的图:<br><img src="https://i.imgur.com/8sRsyOs.png" alt=""></p>
+<h2 id="脚手架Vue-cli"><a href="#脚手架Vue-cli" class="headerlink" title="脚手架Vue-cli"></a>脚手架Vue-cli</h2><p>   能够快速搭建开发环境,设置一些配置</p>
+<h2 id="Webpack"><a href="#Webpack" class="headerlink" title="Webpack"></a>Webpack</h2><p>   模块打包器<br>   代码构建工具:  能够实现按需求定制 来配置文件</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>以上就是我学习vue的一套计划了…</p>
 
-3.其他数据类型转boolean：逻辑非 ！
-</code></pre><p>这里以比较运算符<strong>==</strong>为例, 介绍会发生隐式转换的情况:</p>
-<pre><code>1. 全等运算符： ===
-//严格匹配：不会类型转换，必须要数据类型与值完全一致
-console.log ( &quot;1&quot; === 1 );//fase
-
-2.相等运算符： ==
-// 非严格匹配：会类型转换，但是有前提条件,一起有五种情况
-
-    //2.1 x和y都是null或undefined :
-    /*规则：没有隐式类型转换，无条件返回true*/
-    console.log ( null == undefined );//true
-    console.log ( null == null );//true
-    console.log ( undefined == undefined );//true
-
-    //2.2 x或y是NaN : NaN与任何数字都不等
-    /*规则：没有隐式类型转换，无条件返回false*/
-    console.log ( NaN == NaN );//false
-
-    //2.3 x和y都是string，boolean，number
-    /*规则：有隐式类型转换，会将不是number类型的数据转成number */
-    console.log ( 1 == true );//true    (1) 1 == Number(true)
-    console.log ( 1 == &quot;true&quot; );//false   (1) 1 == Number(&apos;true&apos;)
-    console.log ( 1 == ! &quot;true&quot; );//false  (1) 1 == !Boolean(&apos;true&apos;)  (2) 1 == !true  (3) 1 == false  (4)1 == Number(false)
-    console.log ( 0 == ! &quot;true&quot; );//true
-    另外:
-        console.log ( Number ( undefined ) );//NaN
-        console.log ( Number ( null ) );//0
-
-    //2.4 x或y是复杂数据类型 : 会先获取复杂数据类型的原始值之后再左比较
-    /*复杂数据类型的原始值： 先调用valueOf方法，然后调用toString方法
-            * valueOf:一般默认返回自身
-        数组的toString：默认会调用join方法拼接每个元素并且返回拼接后的字符串
-    */
-
-    console.log ( [].toString () );//空字符串
-    console.log ( {}.toString () );//[object Object]
-
-    console.log ( [ 1, 2, 3 ].valueOf().toString());//‘1，2，3’
-
-    console.log ( [ 1, 2, 3 ] == &quot;1,2,3&quot; );//  (1)[1,2,3].toString() == &apos;1,2,3&apos;  (2)&apos;1,2,3&apos; == &apos;1,2,3&apos;
-    console.log({} == &apos;[object Object]&apos;);//true
-
-    //2.5 x和y都是复杂数据类型 : 只比较地址，如果地址一致则返回true，否则返回false
-
-    var arr1 = [10,20,30];
-    var arr2 = [10,20,30];
-    var arr3 = arr1;//将arr1的地址拷贝给arr3
-
-    console.log ( arr1 == arr2 );//虽然arr1与arr2中的数据是一样，但是它们两个不同的地址
-    console.log ( arr3 == arr1 );//true  两者地址是一样
-
-    console.log ( [] == [] );//false
-    console.log ( {} == {} );//false
-</code></pre><p>几个隐式转换的实例:</p>
-<pre><code>// e:x和y都是复杂数据类型，比较地址
-console.log ( [] ==  [] );//false
-// [] 与右边逻辑非表达式结果比较
-//(1) [] == !Boolean([])   (2) [] == !true  (3)[] == false  (4) [].toString() == false  (5)&apos;&apos; == false   (6)Number(&apos;0&apos;) == Number(false)
-console.log ( [] == ! [] );//true
-
-console.log ( {} ==  {} );//false
-// {} 与右边逻辑非表达式结果比较
-//(1){} == !{} (2){} == !true  (3){} == false  (4){}.toString() == false  (5)&apos;[object Object]&apos; == false  (6)Number(&apos;[object Object]&apos;) == false
-console.log ( {} == ! {} );//false
-
-// 八种情况转boolean得到false: 0 -0 NaN undefined null &apos;&apos; false document.all()
-</code></pre>
       
     </div>
     
@@ -445,7 +423,7 @@ console.log ( {} == ! {} );//false
       
         <div class="post-tags">
           
-            <a href="/tags/隐式转化/" rel="tag"># 隐式转化</a>
+            <a href="/tags/vue/" rel="tag"># vue</a>
           
         </div>
       
@@ -458,8 +436,8 @@ console.log ( {} == ! {} );//false
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/11/24/js中原型的理解/" rel="next" title="关于js中原型的理解">
-                <i class="fa fa-chevron-left"></i> 关于js中原型的理解
+              <a href="/2019/03/03/Promise/" rel="next" title="再探Promise">
+                <i class="fa fa-chevron-left"></i> 再探Promise
               </a>
             
           </div>
@@ -468,8 +446,8 @@ console.log ( {} == ! {} );//false
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/27/js基础思维导图/" rel="prev" title="js基础思维导图">
-                js基础思维导图 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/09/js下的设计模式一/" rel="prev" title="js设计模式:简单工厂和单例">
+                js设计模式:简单工厂和单例 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -659,7 +637,7 @@ console.log ( {} == ! {} );//false
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#隐式类型转换"><span class="nav-number">1.</span> <span class="nav-text">隐式类型转换</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础语法学习"><span class="nav-number">1.</span> <span class="nav-text">基础语法学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组件的学习-重点"><span class="nav-number">2.</span> <span class="nav-text">组件的学习(重点)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单页面应用程序-SPA"><span class="nav-number">3.</span> <span class="nav-text">单页面应用程序(SPA)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学会Vue-Router"><span class="nav-number">3.0.1.</span> <span class="nav-text">学会Vue Router</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#状态管理"><span class="nav-number">4.</span> <span class="nav-text">状态管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#学会Vuex"><span class="nav-number">4.0.1.</span> <span class="nav-text">学会Vuex</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚手架Vue-cli"><span class="nav-number">5.</span> <span class="nav-text">脚手架Vue-cli</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Webpack"><span class="nav-number">6.</span> <span class="nav-text">Webpack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">7.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
             
 
           </div>
